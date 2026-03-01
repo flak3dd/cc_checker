@@ -1,0 +1,4 @@
+{
+  "setup_script": "npm install && pip install playwright",
+  "copy_files": ["creds.txt", "cards.txt"]
+}
