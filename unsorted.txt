@@ -1,6 +1,0 @@
-
-5163699000494592|09/27|287|Mal Lindsay|4 Mortimer Street |Wonthaggi|Victoria|3995|AU|419563646|mal@tsconstructions.com.au|121.215.215.236|35|Mozilla/5.0 (iPhone; CPU iPhone OS 16_1_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Mobile/15E148 Safari/604.1
-5269013300514484|03/27|349|Meagan Thompson|90 Kent Rd |North Ryde|New South Wales|2113|AU|0404923477|meaganjd1@hotmail.com|60.227.158.45|28.0|Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36
-5229807151166115|08/26|687|Donna Hawkins|11 Dagostino Road |Byford|Western Australia|6122|AU|0428523109|pdhawks@primus.com.au|147.69.91.150|131|Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2 Safari/605.1.15
-5163232008509862|08/26|140|SHAUN KEATING|26B Oakover Way |Gosnells|Western Australia|6110|AU|0408946960|shaunmke@outlook.com|121.200.38.29|28.0|Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0
-5268797472173936|06/27|898| Matthew D Burrows|10 Henderson Street |New Lambton|New South Wales|2305|AU|0457333303|matthewburrows3@gmail.com|2001:8003:3c8b:1f00:f8f9:9ddb:26ab:dacf|40|Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36

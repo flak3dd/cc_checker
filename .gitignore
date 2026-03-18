@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.venv/
+__pycache__/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Expo
+CCCheckerApp/.expo/
+CCCheckerApp/dist/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Build
+*.tsbuildinfo
+
+# Sensitive data
+cards.txt
+results.txt
+screenshots/
+widget_data.json
+
+# Old files
+.zenflow/
