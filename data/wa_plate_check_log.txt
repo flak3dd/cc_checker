@@ -1,0 +1,22 @@
+
+--- Batch started 2026-03-20T00:57:37.637Z ---
+[1] 1KTZ305 → PERM ERROR: page.fill: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('input[placeholder*="Licence Number"], input[placeholder*="licence"], input[name*="licence"], input[id*="licence"]')
+
+[2] 1MDM825 → PERM ERROR: page.fill: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('input[placeholder*="Licence Number"], input[placeholder*="licence"], input[name*="licence"], input[id*="licence"]')
+
+
+--- Batch started 2026-03-20T01:00:47.515Z ---
+
+--- Batch started 2026-03-20T01:01:47.934Z ---
+
+--- Batch started 2026-03-20T01:02:24.776Z ---
+[1] 1QQL209 → PERM ERROR: page.fill: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('input[placeholder*="Licence Number"], input[placeholder*="licence"], input[name*="licence"], input[id*="licence"]')
+
+
+--- Batch started 2026-03-20T01:04:36.397Z ---
