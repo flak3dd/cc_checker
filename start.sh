@@ -9,9 +9,9 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}🚀 Starting CC Checker System...${NC}"
 
-# 1. Start FastAPI Backend
-echo -e "${GREEN}📡 Starting Backend (FastAPI)...${NC}"
-python3 -m uvicorn api.main:app --host 0.0.0.0 --port 8000 &
+# 1. Start Node.js TypeScript Backend
+echo -e "${GREEN}📡 Starting Backend (TypeScript/Express)...${NC}"
+npx tsx backend/server.ts --port 8000 &
 BACKEND_PID=$!
 
 # 2. Start Expo Frontend

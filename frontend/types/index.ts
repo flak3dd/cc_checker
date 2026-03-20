@@ -1,5 +1,5 @@
 // Card and processing types
-export type CardStatus = 'SUCCESS' | 'FAIL' | 'ERROR_PREPAYMENT' | 'PROCESSING';
+export type CardStatus = 'SUCCESS' | 'PASS' | 'FAIL' | 'ERROR_PREPAYMENT' | 'PROCESSING';
 export type ProcessingState = 'idle' | 'running' | 'paused' | 'error';
 
 export interface ProcessingStatus {
@@ -41,4 +41,20 @@ export interface PlateCheckStatus {
 
 export interface PlateCheckResponse {
   results: string[];
+}
+
+export interface WaCheckoutStatus {
+  is_running: boolean;
+  hits_to_process: number;
+  pending_payment?: {
+    plate: string;
+    timestamp: number;
+  } | null;
+}
+
+// CarFacts Types
+export interface CarfactsStatus {
+  is_running: boolean;
+  results_count: number;
+  pending_plates: number;
 }

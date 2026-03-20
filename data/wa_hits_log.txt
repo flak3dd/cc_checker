@@ -1,0 +1,507 @@
+[05:22:02] === WA Rego Checker Session Started ===
+[05:22:41] === WA Rego Checker Session Started ===
+[05:22:50] === WA Rego Checker Session Started ===
+[05:23:02] === WA Rego Checker Session Started ===
+[14:18:02] === WA Rego Checker Session Started ===
+[14:18:13] === WA Rego Checker Session Started ===
+[14:18:14] Checking 1GLX157 (Attempt 1, Hits 0)
+[14:18:21]  → [HIT] 1GLX157 - Record found!
+[14:18:29] Checking 1CFI920 (Attempt 2, Hits 1)
+[14:18:40] Checking 1MVH427 (Attempt 3, Hits 1)
+[14:18:50] Checking 1AVJ784 (Attempt 4, Hits 1)
+[14:19:03] Checking 1UGM776 (Attempt 5, Hits 1)
+[14:19:16] Checking 1TLJ625 (Attempt 6, Hits 1)
+[14:19:22]  → [HIT] 1TLJ625 - Record found!
+[14:19:29] Checking 1PRW646 (Attempt 7, Hits 2)
+[14:19:40] Checking 1AHQ113 (Attempt 8, Hits 2)
+[14:19:52] Checking 1XQE080 (Attempt 9, Hits 2)
+[14:20:01] Checking 1FKB067 (Attempt 10, Hits 2)
+[14:20:07] ... processed 10 plates, current: 1FKB067
+[14:20:10] Checking 1RCA518 (Attempt 11, Hits 2)
+[14:20:19] Checking 1PAL655 (Attempt 12, Hits 2)
+[14:20:31] Checking 1QHI101 (Attempt 13, Hits 2)
+[14:20:44] Checking 1TNK150 (Attempt 14, Hits 2)
+[14:20:49]  → [HIT] 1TNK150 - Record found!
+[14:20:56] Checking 1XXD742 (Attempt 15, Hits 3)
+[14:21:07] Checking 1GRA248 (Attempt 16, Hits 3)
+[14:21:12]  → [HIT] 1GRA248 - Record found!
+[14:21:19] Checking 1JJF236 (Attempt 17, Hits 4)
+[14:21:30] Checking 1LNS840 (Attempt 18, Hits 4)
+[14:21:40] Checking 1JMX285 (Attempt 19, Hits 4)
+[14:21:51] Checking 1AUC892 (Attempt 20, Hits 4)
+[14:21:56] ... processed 10 plates, current: 1AUC892
+[14:22:00] Checking 1YIK884 (Attempt 21, Hits 4)
+[14:43:59] === WA Rego Checker Session Started ===
+[14:43:59] Checking 1UHT480 (Attempt 1, Hits 0)
+[14:44:13] Checking 1YFP278 (Attempt 2, Hits 0)
+[14:44:24] Checking 1NUQ188 (Attempt 3, Hits 0)
+[14:44:34] Checking 1IDP594 (Attempt 4, Hits 0)
+[14:44:46] Checking 1NZD446 (Attempt 5, Hits 0)
+[14:44:57] Checking 1OON891 (Attempt 6, Hits 0)
+[14:45:06] Checking 1SAD369 (Attempt 7, Hits 0)
+[14:45:19] Checking 1XWW537 (Attempt 8, Hits 0)
+[14:45:29] Checking 1CXN559 (Attempt 9, Hits 0)
+[14:45:40] Checking 1IZN703 (Attempt 10, Hits 0)
+[14:45:46] ... processed 10 plates, current: 1IZN703
+[14:45:52] Checking 1KFJ616 (Attempt 11, Hits 0)
+[14:46:02] Checking 1BRR814 (Attempt 12, Hits 0)
+[14:46:13] Checking 1PGK027 (Attempt 13, Hits 0)
+[14:46:23] Checking 1SYE497 (Attempt 14, Hits 0)
+[14:46:34] Checking 1JJE445 (Attempt 15, Hits 0)
+[14:46:44] Checking 1TBS771 (Attempt 16, Hits 0)
+[14:46:50]  → [HIT] 1TBS771 - Record found!
+[14:46:50]  → [ACTION] Payment required for 1TBS771. Attempting background checkout...
+[14:47:00]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[14:47:05] Checking 1EHH939 (Attempt 17, Hits 1)
+[14:47:14] Checking 1SUP739 (Attempt 18, Hits 1)
+[14:47:24] Checking 1GYD280 (Attempt 19, Hits 1)
+[14:47:35] Checking 1IGE128 (Attempt 20, Hits 1)
+[14:47:41]  → [HIT] 1IGE128 - Record found!
+[14:47:41]  → [ACTION] Payment required for 1IGE128. Attempting background checkout...
+[14:47:51]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[14:47:58] Checking 1SBI435 (Attempt 21, Hits 2)
+[14:48:07] Checking 1WKB015 (Attempt 22, Hits 2)
+[14:48:21] Checking 1PKK378 (Attempt 23, Hits 2)
+[14:48:34] Checking 1LVJ113 (Attempt 24, Hits 2)
+[14:48:45] Checking 1TVK066 (Attempt 25, Hits 2)
+[14:48:54] === WA Rego Checker Session Started ===
+[14:48:54] Checking 1HDR538 (Attempt 26, Hits 2)
+[14:48:55] Checking 1SKN984 (Attempt 1, Hits 0)
+[14:49:07] Checking 1EFJ526 (Attempt 27, Hits 2)
+[14:49:08] Checking 1COM726 (Attempt 2, Hits 0)
+[14:49:17] Checking 1XCW874 (Attempt 28, Hits 2)
+[14:49:22] Checking 1JEK701 (Attempt 3, Hits 0)
+[14:49:28] Checking 1KPF637 (Attempt 29, Hits 2)
+[14:49:34] Checking 1RCW297 (Attempt 4, Hits 0)
+[14:49:38] Checking 1JFJ850 (Attempt 30, Hits 2)
+[14:49:44] ... processed 10 plates, current: 1JFJ850
+[14:49:44] Checking 1IWX000 (Attempt 5, Hits 0)
+[14:49:49] Checking 1ZJD063 (Attempt 31, Hits 2)
+[14:49:56] Checking 1HYP576 (Attempt 6, Hits 0)
+[14:50:01] Checking 1PCS143 (Attempt 32, Hits 2)
+[14:50:09] Checking 1AZJ414 (Attempt 7, Hits 0)
+[14:50:12] Checking 1OUM042 (Attempt 33, Hits 2)
+[14:50:22] Checking 1TDP075 (Attempt 8, Hits 0)
+[14:50:26] Checking 1UKU657 (Attempt 34, Hits 2)
+[14:50:32] Checking 1ZGZ039 (Attempt 9, Hits 0)
+[14:50:37] Checking 1SMG619 (Attempt 35, Hits 2)
+[14:50:41] Checking 1ZNS772 (Attempt 10, Hits 0)
+[14:50:47] ... processed 10 plates, current: 1ZNS772
+[14:50:50] Checking 1XLR054 (Attempt 36, Hits 2)
+[14:50:53] Checking 1ODR080 (Attempt 11, Hits 0)
+[14:51:01] Checking 1UJP507 (Attempt 37, Hits 2)
+[14:51:03] Checking 1NAJ417 (Attempt 12, Hits 0)
+[14:51:10] Checking 1XOP666 (Attempt 38, Hits 2)
+[14:51:14] Checking 1XWZ696 (Attempt 13, Hits 0)
+[14:51:22] Checking 1LJS219 (Attempt 39, Hits 2)
+[14:51:26] Checking 1PCO256 (Attempt 14, Hits 0)
+[14:51:35] Checking 1MJQ743 (Attempt 40, Hits 2)
+[14:51:36] Checking 1MKX482 (Attempt 15, Hits 0)
+[14:51:41] ... processed 10 plates, current: 1MJQ743
+[14:51:45] Checking 1WVT794 (Attempt 41, Hits 2)
+[14:51:48] Checking 1KWY398 (Attempt 16, Hits 0)
+[14:51:58] Checking 1IMI367 (Attempt 42, Hits 2)
+[14:51:59] Checking 1FGD417 (Attempt 17, Hits 0)
+[14:52:04]  → [HIT] 1IMI367 - Record found!
+[14:52:04]  → [ACTION] Payment required for 1IMI367. Attempting background checkout...
+[14:52:10] Checking 1GAH192 (Attempt 18, Hits 0)
+[14:52:14]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[14:52:18] Checking 1JOM9061OVD090 (Attempt 43, Hits 3)
+[14:52:22] Checking 1GVF144 (Attempt 19, Hits 0)
+[14:52:29] Checking 1YEY489 (Attempt 44, Hits 3)
+[14:52:35] Checking 1ARO382 (Attempt 20, Hits 0)
+[14:52:41] ... processed 10 plates, current: 1ARO382
+[14:52:41] Checking 1TAK113 (Attempt 45, Hits 3)
+[14:52:47] Checking 1YJO813 (Attempt 21, Hits 0)
+[14:52:53] Checking 1EBL131 (Attempt 46, Hits 3)
+[14:52:59] Checking 1UCP054 (Attempt 22, Hits 0)
+[14:53:07] Checking 1GDW194 (Attempt 47, Hits 3)
+[14:53:13] Checking 1DCB971 (Attempt 23, Hits 0)
+[14:53:18] Checking 1BPP871 (Attempt 48, Hits 3)
+[14:53:22] Checking 1FIW377 (Attempt 24, Hits 0)
+[14:53:27] Checking 1MFE125 (Attempt 49, Hits 3)
+[14:53:33] Checking 1CAW301 (Attempt 25, Hits 0)
+[14:53:41] Checking 1AQE701 (Attempt 50, Hits 3)
+[14:53:43] Checking 1LOE655 (Attempt 26, Hits 0)
+[14:53:47] ... processed 10 plates, current: 1AQE701
+[14:53:52] Checking 1JHF982 (Attempt 51, Hits 3)
+[14:53:55] Checking 1GRY822 (Attempt 27, Hits 0)
+[14:54:03] Checking 1CUB691 (Attempt 52, Hits 3)
+[14:54:05] Checking 1GJW414 (Attempt 28, Hits 0)
+[14:54:15] Checking 1WQX285 (Attempt 53, Hits 3)
+[14:54:17] Checking 1NTC859 (Attempt 29, Hits 0)
+[14:54:27] Checking 1BZR893 (Attempt 30, Hits 0)
+[14:54:29] Checking 1XGX982 (Attempt 54, Hits 3)
+[14:54:32] ... processed 10 plates, current: 1BZR893
+[14:54:40] Checking 1TIF107 (Attempt 31, Hits 0)
+[14:54:42] Checking 1DNI410 (Attempt 55, Hits 3)
+[14:54:50] Checking 1JAF969 (Attempt 32, Hits 0)
+[14:54:52] Checking 1MDR763 (Attempt 56, Hits 3)
+[14:55:01] Checking 1ASB962 (Attempt 33, Hits 0)
+[14:55:03] Checking 1BND551 (Attempt 57, Hits 3)
+[14:55:13] Checking 1CIO552 (Attempt 34, Hits 0)
+[14:55:13] Checking 1WHA587 (Attempt 58, Hits 3)
+[14:55:24] Checking 1CHP366 (Attempt 35, Hits 0)
+[14:55:25] Checking 1FCM487 (Attempt 59, Hits 3)
+[14:55:31]  → [HIT] 1FCM487 - Record found!
+[14:55:31]  → [ACTION] Payment required for 1FCM487. Attempting background checkout...
+[14:55:37] Checking 1TIP268 (Attempt 36, Hits 0)
+[14:55:41]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[14:55:45] Checking 1AUH894 (Attempt 60, Hits 4)
+[14:55:49] Checking 1UID950 (Attempt 37, Hits 0)
+[14:55:51] ... processed 10 plates, current: 1AUH894
+[14:55:58] Checking 1XTO277 (Attempt 61, Hits 4)
+[14:56:03] Checking 1ZMV826 (Attempt 38, Hits 0)
+[14:56:11] Checking 1TBY396 (Attempt 62, Hits 4)
+[14:56:14] Checking 1LZG338 (Attempt 39, Hits 0)
+[14:56:21] Checking 1AWM593 (Attempt 63, Hits 4)
+[14:56:27] Checking 1KJL471 (Attempt 40, Hits 0)
+[14:56:33] ... processed 10 plates, current: 1KJL471
+[14:56:33] Checking 1GZA994 (Attempt 64, Hits 4)
+[14:56:38] Checking 1NNX614 (Attempt 41, Hits 0)
+[14:56:39]  → [HIT] 1GZA994 - Record found!
+[14:56:39]  → [ACTION] Payment required for 1GZA994. Attempting background checkout...
+[14:56:49]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[14:56:51] Checking 1QGS444 (Attempt 42, Hits 0)
+[14:56:56] Checking 1UJT533 (Attempt 65, Hits 5)
+[14:57:03] Checking 1XAF348 (Attempt 43, Hits 0)
+[14:57:09] Checking 1QPQ425 (Attempt 66, Hits 5)
+[14:57:12] Checking 1MTL677 (Attempt 44, Hits 0)
+[14:57:19] Checking 1JHZ686 (Attempt 67, Hits 5)
+[14:57:24] Checking 1QCE255 (Attempt 45, Hits 0)
+[14:57:30] Checking 1IRD147 (Attempt 68, Hits 5)
+[14:57:35] Checking 1YJO270 (Attempt 46, Hits 0)
+[14:57:36]  → [HIT] 1IRD147 - Record found!
+[14:57:36]  → [ACTION] Payment required for 1IRD147. Attempting background checkout...
+[14:57:46] Checking 1LOB116 (Attempt 47, Hits 0)
+[14:57:46]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[14:57:52] Checking 1SIQ083 (Attempt 69, Hits 6)
+[14:57:56] Checking 1EOB197 (Attempt 48, Hits 0)
+[14:58:01] Checking 1ICL044 (Attempt 70, Hits 6)
+[14:58:07] ... processed 10 plates, current: 1ICL044
+[14:58:08] Checking 1KGQ887 (Attempt 49, Hits 0)
+[14:58:11] Checking 1QCB485 (Attempt 71, Hits 6)
+[14:58:17] Checking 1LVS535 (Attempt 50, Hits 0)
+[14:58:23] ... processed 10 plates, current: 1LVS535
+[14:58:24] Checking 1CRJ163 (Attempt 72, Hits 6)
+[14:58:30] Checking 1LYF532 (Attempt 51, Hits 0)
+[14:58:37] Checking 1MZT025 (Attempt 73, Hits 6)
+[14:58:42] Checking 1MAO423 (Attempt 52, Hits 0)
+[14:58:49] Checking 1RTU997 (Attempt 74, Hits 6)
+[14:58:55] Checking 1IZZ211 (Attempt 53, Hits 0)
+[14:59:02] Checking 1BZJ209 (Attempt 75, Hits 6)
+[14:59:08] Checking 1IYV672 (Attempt 54, Hits 0)
+[14:59:13] Checking 1FLC633 (Attempt 76, Hits 6)
+[14:59:18] Checking 1TXN403 (Attempt 55, Hits 0)
+[14:59:23] Checking 1OGQ978 (Attempt 77, Hits 6)
+[14:59:27] Checking 1NSD900 (Attempt 56, Hits 0)
+[14:59:33] Checking 1KXN806 (Attempt 78, Hits 6)
+[14:59:40] Checking 1IGV941 (Attempt 57, Hits 0)
+[14:59:44] Checking 1OBF246 (Attempt 79, Hits 6)
+[14:59:50] Checking 1EOE131 (Attempt 58, Hits 0)
+[14:59:55] Checking 1AWD099 (Attempt 80, Hits 6)
+[15:00:00] Checking 1WXV042 (Attempt 59, Hits 0)
+[15:00:01]  → [HIT] 1AWD099 - Record found!
+[15:00:01]  → [ACTION] Payment required for 1AWD099. Attempting background checkout...
+[15:00:11] Checking 1NDT292 (Attempt 60, Hits 0)
+[15:00:11]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[15:00:15] Checking 1DBM394 (Attempt 81, Hits 7)
+[15:00:16] ... processed 10 plates, current: 1NDT292
+[15:00:20] Checking 1IBX532 (Attempt 61, Hits 0)
+[15:00:25] Checking 1TQT228 (Attempt 82, Hits 7)
+[15:00:32] Checking 1DQJ748 (Attempt 62, Hits 0)
+[15:00:35] Checking 1HEG723 (Attempt 83, Hits 7)
+[15:00:41] Checking 1MJR886 (Attempt 63, Hits 0)
+[15:00:46] Checking 1KPR873 (Attempt 84, Hits 7)
+[15:00:55] Checking 1DBW857 (Attempt 64, Hits 0)
+[15:00:56] Checking 1OXF813 (Attempt 85, Hits 7)
+[15:01:08] Checking 1HXY256 (Attempt 65, Hits 0)
+[15:01:10] Checking 1ANQ443 (Attempt 86, Hits 7)
+[15:01:20] Checking 1FLU673 (Attempt 66, Hits 0)
+[15:01:22] Checking 1QME977 (Attempt 87, Hits 7)
+[15:01:30] Checking 1ZQG713 (Attempt 67, Hits 0)
+[15:01:34] Checking 1EGF090 (Attempt 88, Hits 7)
+[15:01:41] Checking 1BNB897 (Attempt 68, Hits 0)
+[15:01:45] Checking 1OLV377 (Attempt 89, Hits 7)
+[15:01:50] Checking 1ZZE865 (Attempt 69, Hits 0)
+[15:01:55] Checking 1YQF805 (Attempt 90, Hits 7)
+[15:01:59] Checking 1LJI938 (Attempt 70, Hits 0)
+[15:02:00] ... processed 10 plates, current: 1YQF805
+[15:02:04] Checking 1AAA000 (Attempt 91, Hits 7)
+[15:02:05] ... processed 10 plates, current: 1LJI938
+[15:02:09] Checking 1AAA000 (Attempt 71, Hits 0)
+[15:02:15] Checking 1AAA001 (Attempt 92, Hits 7)
+[15:02:21] Checking 1AAA001 (Attempt 72, Hits 0)
+[15:02:25] Checking 1AAA002 (Attempt 93, Hits 7)
+[15:02:32] Checking 1AAA002 (Attempt 73, Hits 0)
+[15:02:37] Checking 1AAA003 (Attempt 94, Hits 7)
+[15:02:44] Checking 1AAA003 (Attempt 74, Hits 0)
+[15:02:48] Checking 1AAA004 (Attempt 95, Hits 7)
+[15:02:53] Checking 1AAA004 (Attempt 75, Hits 0)
+[15:02:57] Checking 1AAA005 (Attempt 96, Hits 7)
+[15:03:02] Checking 1AAA005 (Attempt 76, Hits 0)
+[15:03:07] Checking 1AAA006 (Attempt 97, Hits 7)
+[15:03:12] Checking 1AAA006 (Attempt 77, Hits 0)
+[15:03:17] Checking 1AAA007 (Attempt 98, Hits 7)
+[15:03:23] Checking 1AAA007 (Attempt 78, Hits 0)
+[15:03:27] Checking 1AAA008 (Attempt 99, Hits 7)
+[15:03:33] Checking 1AAA008 (Attempt 79, Hits 0)
+[15:03:39] Checking 1AAA009 (Attempt 100, Hits 7)
+[15:03:43] Checking 1AAA009 (Attempt 80, Hits 0)
+[15:03:45] ... processed 10 plates, current: 1AAA009
+[15:03:48] ... processed 10 plates, current: 1AAA009
+[15:03:52] Checking 1AAA010 (Attempt 101, Hits 7)
+[15:03:56] Checking 1AAA010 (Attempt 81, Hits 0)
+[15:04:05] Checking 1AAA011 (Attempt 102, Hits 7)
+[15:04:06] Checking 1AAA011 (Attempt 82, Hits 0)
+[15:04:17] Checking 1AAA012 (Attempt 83, Hits 0)
+[15:04:18] Checking 1AAA012 (Attempt 103, Hits 7)
+[15:04:28] Checking 1AAA013 (Attempt 84, Hits 0)
+[15:04:31] Checking 1AAA013 (Attempt 104, Hits 7)
+[15:04:40] Checking 1AAA014 (Attempt 85, Hits 0)
+[15:04:43] Checking 1AAA014 (Attempt 105, Hits 7)
+[15:04:52] Checking 1AAA015 (Attempt 86, Hits 0)
+[15:04:55] Checking 1AAA015 (Attempt 106, Hits 7)
+[15:05:02] Checking 1AAA016 (Attempt 87, Hits 0)
+[15:05:05] Checking 1AAA016 (Attempt 107, Hits 7)
+[15:05:14] Checking 1AAA017 (Attempt 88, Hits 0)
+[15:05:18] Checking 1AAA017 (Attempt 108, Hits 7)
+[15:05:26] Checking 1AAA018 (Attempt 89, Hits 0)
+[15:05:32] Checking 1AAA018 (Attempt 109, Hits 7)
+[15:05:38] Checking 1AAA019 (Attempt 90, Hits 0)
+[15:05:44] Checking 1AAA019 (Attempt 110, Hits 7)
+[15:05:44] ... processed 10 plates, current: 1AAA019
+[15:05:50] ... processed 10 plates, current: 1AAA019
+[15:05:51] Checking 1AAA020 (Attempt 91, Hits 0)
+[15:05:56] Checking 1AAA020 (Attempt 111, Hits 7)
+[15:06:04] Checking 1AAA021 (Attempt 92, Hits 0)
+[15:06:08] Checking 1AAA021 (Attempt 112, Hits 7)
+[15:06:16] Checking 1AAA022 (Attempt 93, Hits 0)
+[15:06:20] Checking 1AAA022 (Attempt 113, Hits 7)
+[15:06:27] Checking 1AAA023 (Attempt 94, Hits 0)
+[15:06:32] Checking 1AAA023 (Attempt 114, Hits 7)
+[15:06:40] Checking 1AAA024 (Attempt 95, Hits 0)
+[15:06:41] Checking 1AAA024 (Attempt 115, Hits 7)
+[15:06:52] Checking 1AAA025 (Attempt 96, Hits 0)
+[15:06:54] Checking 1AAA025 (Attempt 116, Hits 7)
+[15:07:05] Checking 1AAA026 (Attempt 97, Hits 0)
+[15:07:07] Checking 1AAA026 (Attempt 117, Hits 7)
+[15:07:17] Checking 1AAA027 (Attempt 98, Hits 0)
+[15:07:21] Checking 1AAA027 (Attempt 118, Hits 7)
+[15:07:26] Checking 1AAA028 (Attempt 99, Hits 0)
+[15:07:32] Checking 1AAA028 (Attempt 119, Hits 7)
+[15:07:40] Checking 1AAA029 (Attempt 100, Hits 0)
+[15:07:41] Checking 1AAA029 (Attempt 120, Hits 7)
+[15:07:46] ... processed 10 plates, current: 1AAA029
+[15:07:46] ... processed 10 plates, current: 1AAA029
+[15:07:51] Checking 1AAA030 (Attempt 121, Hits 7)
+[15:07:51] Checking 1AAA030 (Attempt 101, Hits 0)
+[15:08:00] Checking 1AAA031 (Attempt 122, Hits 7)
+[15:08:04] Checking 1AAA031 (Attempt 102, Hits 0)
+[15:08:13] Checking 1AAA032 (Attempt 123, Hits 7)
+[15:08:16] Checking 1AAA032 (Attempt 103, Hits 0)
+[15:08:24] Checking 1AAA033 (Attempt 124, Hits 7)
+[15:08:27] Checking 1AAA033 (Attempt 104, Hits 0)
+[15:08:34] Checking 1AAA034 (Attempt 125, Hits 7)
+[15:08:38] Checking 1AAA034 (Attempt 105, Hits 0)
+[15:08:44] Checking 1AAA035 (Attempt 126, Hits 7)
+[15:08:48] Checking 1AAA035 (Attempt 106, Hits 0)
+[15:08:54] Checking 1AAA036 (Attempt 127, Hits 7)
+[15:09:00] Checking 1AAA036 (Attempt 107, Hits 0)
+[15:09:05] Checking 1AAA037 (Attempt 128, Hits 7)
+[15:09:13] Checking 1AAA037 (Attempt 108, Hits 0)
+[15:09:18] Checking 1AAA038 (Attempt 129, Hits 7)
+[15:09:24] Checking 1AAA038 (Attempt 109, Hits 0)
+[15:09:28] Checking 1AAA039 (Attempt 130, Hits 7)
+[15:09:32] Checking 1AAA039 (Attempt 110, Hits 0)
+[15:09:34] ... processed 10 plates, current: 1AAA039
+[15:09:38] Checking 1AAA040 (Attempt 131, Hits 7)
+[15:09:38] ... processed 10 plates, current: 1AAA039
+[15:09:44] Checking 1AAA040 (Attempt 111, Hits 0)
+[15:09:48] Checking 1AAA041 (Attempt 132, Hits 7)
+[15:09:54] Checking 1AAA041 (Attempt 112, Hits 0)
+[15:09:59] Checking 1AAA042 (Attempt 133, Hits 7)
+[15:10:06] Checking 1AAA042 (Attempt 113, Hits 0)
+[15:10:11] Checking 1AAA043 (Attempt 134, Hits 7)
+[15:10:19] Checking 1AAA043 (Attempt 114, Hits 0)
+[15:10:21] Checking 1AAA044 (Attempt 135, Hits 7)
+[15:10:28] Checking 1AAA044 (Attempt 115, Hits 0)
+[15:10:32] Checking 1AAA045 (Attempt 136, Hits 7)
+[15:10:40] Checking 1AAA045 (Attempt 116, Hits 0)
+[15:10:42] Checking 1AAA046 (Attempt 137, Hits 7)
+[15:10:49] Checking 1AAA046 (Attempt 117, Hits 0)
+[15:10:53] Checking 1AAA047 (Attempt 138, Hits 7)
+[15:11:02] Checking 1AAA047 (Attempt 118, Hits 0)
+[15:11:05] Checking 1AAA048 (Attempt 139, Hits 7)
+[15:11:16] Checking 1AAA048 (Attempt 119, Hits 0)
+[15:11:17] Checking 1AAA049 (Attempt 140, Hits 7)
+[15:11:22] ... processed 10 plates, current: 1AAA049
+[15:11:25] Checking 1AAA049 (Attempt 120, Hits 0)
+[15:11:29] Checking 1AAA050 (Attempt 141, Hits 7)
+[15:11:30] ... processed 10 plates, current: 1AAA049
+[15:11:36] Checking 1AAA050 (Attempt 121, Hits 0)
+[15:11:38] Checking 1AAA051 (Attempt 142, Hits 7)
+[15:11:46] Checking 1AAA051 (Attempt 122, Hits 0)
+[15:11:51] Checking 1AAA052 (Attempt 143, Hits 7)
+[15:11:55] Checking 1AAA052 (Attempt 123, Hits 0)
+[15:12:02] Checking 1AAA053 (Attempt 144, Hits 7)
+[15:12:07] Checking 1AAA053 (Attempt 124, Hits 0)
+[15:12:14] Checking 1AAA054 (Attempt 145, Hits 7)
+[15:12:16] Checking 1AAA054 (Attempt 125, Hits 0)
+[15:12:27] Checking 1AAA055 (Attempt 146, Hits 7)
+[15:12:28] Checking 1AAA055 (Attempt 126, Hits 0)
+[15:12:36] Checking 1AAA056 (Attempt 147, Hits 7)
+[15:12:39] Checking 1AAA056 (Attempt 127, Hits 0)
+[15:12:48] Checking 1AAA057 (Attempt 128, Hits 0)
+[15:12:50] Checking 1AAA057 (Attempt 148, Hits 7)
+[15:12:57] Checking 1AAA058 (Attempt 129, Hits 0)
+[15:13:03] Checking 1AAA058 (Attempt 149, Hits 7)
+[15:13:11] Checking 1AAA059 (Attempt 130, Hits 0)
+[15:13:14] Checking 1AAA059 (Attempt 150, Hits 7)
+[15:13:16] ... processed 10 plates, current: 1AAA059
+[15:13:19] ... processed 10 plates, current: 1AAA059
+[15:13:23] Checking 1AAA060 (Attempt 151, Hits 7)
+[15:13:23] Checking 1AAA060 (Attempt 131, Hits 0)
+[15:13:32] Checking 1AAA061 (Attempt 152, Hits 7)
+[15:13:35] Checking 1AAA061 (Attempt 132, Hits 0)
+[15:13:44] Checking 1AAA062 (Attempt 153, Hits 7)
+[15:13:48] Checking 1AAA062 (Attempt 133, Hits 0)
+[15:13:56] Checking 1AAA063 (Attempt 154, Hits 7)
+[15:14:00] Checking 1AAA063 (Attempt 134, Hits 0)
+[15:14:09] Checking 1AAA064 (Attempt 155, Hits 7)
+[15:14:13] Checking 1AAA064 (Attempt 135, Hits 0)
+[15:14:19] Checking 1AAA065 (Attempt 156, Hits 7)
+[15:14:24] Checking 1AAA065 (Attempt 136, Hits 0)
+[15:14:29] Checking 1AAA066 (Attempt 157, Hits 7)
+[15:14:35] Checking 1AAA066 (Attempt 137, Hits 0)
+[15:14:40] Checking 1AAA067 (Attempt 158, Hits 7)
+[15:14:48] Checking 1AAA067 (Attempt 138, Hits 0)
+[15:14:52] Checking 1AAA068 (Attempt 159, Hits 7)
+[15:15:01] Checking 1AAA068 (Attempt 139, Hits 0)
+[15:15:05] Checking 1AAA069 (Attempt 160, Hits 7)
+[15:15:11] ... processed 10 plates, current: 1AAA069
+[15:15:12] Checking 1AAA069 (Attempt 140, Hits 0)
+[15:15:18] Checking 1AAA070 (Attempt 161, Hits 7)
+[15:15:18] ... processed 10 plates, current: 1AAA069
+[15:15:23] Checking 1AAA070 (Attempt 141, Hits 0)
+[15:15:30] Checking 1AAA071 (Attempt 162, Hits 7)
+[15:15:36] Checking 1AAA071 (Attempt 142, Hits 0)
+[15:15:44] Checking 1AAA072 (Attempt 163, Hits 7)
+[15:15:48] Checking 1AAA072 (Attempt 143, Hits 0)
+[15:15:56] Checking 1AAA073 (Attempt 164, Hits 7)
+[15:15:59] Checking 1AAA073 (Attempt 144, Hits 0)
+[15:16:07] Checking 1AAA074 (Attempt 165, Hits 7)
+[15:16:13] Checking 1AAA074 (Attempt 145, Hits 0)
+[15:16:17] Checking 1AAA075 (Attempt 166, Hits 7)
+[15:16:23] Checking 1AAA075 (Attempt 146, Hits 0)
+[15:16:28] Checking 1AAA076 (Attempt 167, Hits 7)
+[15:16:37] Checking 1AAA076 (Attempt 147, Hits 0)
+[15:16:41] Checking 1AAA077 (Attempt 168, Hits 7)
+[15:16:50] Checking 1AAA078 (Attempt 169, Hits 7)
+[15:16:50] Checking 1AAA077 (Attempt 148, Hits 0)
+[15:17:01] Checking 1AAA079 (Attempt 170, Hits 7)
+[15:17:01] Checking 1AAA078 (Attempt 149, Hits 0)
+[15:17:07] ... processed 10 plates, current: 1AAA079
+[15:17:10] Checking 1AAA080 (Attempt 171, Hits 7)
+[15:17:14] Checking 1AAA079 (Attempt 150, Hits 0)
+[15:17:21] Checking 1AAA081 (Attempt 172, Hits 7)
+[15:17:21] ... processed 10 plates, current: 1AAA079
+[15:17:28] Checking 1AAA080 (Attempt 151, Hits 0)
+[15:17:33] Checking 1AAA082 (Attempt 173, Hits 7)
+[15:17:38] Checking 1AAA081 (Attempt 152, Hits 0)
+[15:17:45] Checking 1AAA083 (Attempt 174, Hits 7)
+[15:17:48] Checking 1AAA082 (Attempt 153, Hits 0)
+[15:17:57] Checking 1AAA084 (Attempt 175, Hits 7)
+[15:18:00] Checking 1AAA083 (Attempt 154, Hits 0)
+[15:18:06] Checking 1AAA085 (Attempt 176, Hits 7)
+[15:18:09] Checking 1AAA084 (Attempt 155, Hits 0)
+[15:18:14] Checking 1AAA086 (Attempt 177, Hits 7)
+[15:18:19] Checking 1AAA085 (Attempt 156, Hits 0)
+[15:18:28] Checking 1AAA087 (Attempt 178, Hits 7)
+[15:18:30] Checking 1AAA086 (Attempt 157, Hits 0)
+[15:18:37] Checking 1AAA088 (Attempt 179, Hits 7)
+[15:18:40] Checking 1AAA087 (Attempt 158, Hits 0)
+[15:18:49] Checking 1AAA089 (Attempt 180, Hits 7)
+[15:18:50] Checking 1AAA088 (Attempt 159, Hits 0)
+[15:18:55] ... processed 10 plates, current: 1AAA089
+[15:18:58] Checking 1AAA090 (Attempt 181, Hits 7)
+[15:19:04] Checking 1AAA089 (Attempt 160, Hits 0)
+[15:19:10] ... processed 10 plates, current: 1AAA089
+[15:19:10] Checking 1AAA091 (Attempt 182, Hits 7)
+[15:19:17] Checking 1AAA090 (Attempt 161, Hits 0)
+[15:19:20] Checking 1AAA092 (Attempt 183, Hits 7)
+[15:19:28] Checking 1AAA091 (Attempt 162, Hits 0)
+[15:19:33] Checking 1AAA093 (Attempt 184, Hits 7)
+[15:19:39] Checking 1AAA092 (Attempt 163, Hits 0)
+[15:19:45] Checking 1AAA094 (Attempt 185, Hits 7)
+[15:19:50] Checking 1AAA093 (Attempt 164, Hits 0)
+[15:19:57] Checking 1AAA095 (Attempt 186, Hits 7)
+[15:20:00] Checking 1AAA094 (Attempt 165, Hits 0)
+[15:20:07] Checking 1AAA096 (Attempt 187, Hits 7)
+[15:20:14] Checking 1AAA095 (Attempt 166, Hits 0)
+[15:20:18] Checking 1AAA097 (Attempt 188, Hits 7)
+[15:20:27] Checking 1AAA096 (Attempt 167, Hits 0)
+[15:20:28] Checking 1AAA098 (Attempt 189, Hits 7)
+[15:20:37] Checking 1AAA097 (Attempt 168, Hits 0)
+[15:20:41] Checking 1AAA099 (Attempt 190, Hits 7)
+[15:20:47] ... processed 10 plates, current: 1AAA099
+[15:20:49] Checking 1AAA098 (Attempt 169, Hits 0)
+[15:20:54] Checking 1AAA100 (Attempt 191, Hits 7)
+[15:20:58] Checking 1AAA099 (Attempt 170, Hits 0)
+[15:21:04] ... processed 10 plates, current: 1AAA099
+[15:21:05] Checking 1AAA101 (Attempt 192, Hits 7)
+[15:21:09] Checking 1AAA100 (Attempt 171, Hits 0)
+[15:21:17] Checking 1AAA102 (Attempt 193, Hits 7)
+[15:21:20] Checking 1AAA101 (Attempt 172, Hits 0)
+[15:21:23]  → [HIT] 1AAA102 - Record found!
+[15:21:23]  → [ACTION] Payment required for 1AAA102. Attempting background checkout...
+[15:21:31] Checking 1AAA102 (Attempt 173, Hits 0)
+[15:21:33]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[15:21:37] Checking 1AAA103 (Attempt 194, Hits 8)
+[15:21:37]  → [HIT] 1AAA102 - Record found!
+[15:21:37]  → [ACTION] Payment required for 1AAA102. Attempting background checkout...
+[15:21:45] Checking 1AAA104 (Attempt 195, Hits 8)
+[15:21:47]  → [ERROR] Checkout flow failed: page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Pay"), button:has-text("Proceed")') to be visible[22m
+
+[15:21:50] Checking 1AAA103 (Attempt 174, Hits 1)
+[15:21:58] Checking 1AAA105 (Attempt 196, Hits 8)
+[15:22:03] Checking 1AAA104 (Attempt 175, Hits 1)
+[15:22:08] Checking 1AAA106 (Attempt 197, Hits 8)
+[15:22:15] Checking 1AAA105 (Attempt 176, Hits 1)
+[15:22:18] Checking 1AAA107 (Attempt 198, Hits 8)
+[15:22:28] Checking 1AAA108 (Attempt 199, Hits 8)
+[15:22:28] Checking 1AAA106 (Attempt 177, Hits 1)
+[15:22:37] Checking 1AAA107 (Attempt 178, Hits 1)
+[15:22:39] Checking 1AAA109 (Attempt 200, Hits 8)
+[15:22:45] ... processed 10 plates, current: 1AAA109
+[15:22:47] Checking 1AAA108 (Attempt 179, Hits 1)
+[15:22:49] Checking 1AAA110 (Attempt 201, Hits 8)
+[15:22:56] Checking 1AAA109 (Attempt 180, Hits 1)
+[15:22:58] Checking 1AAA111 (Attempt 202, Hits 8)
+[15:23:02] ... processed 10 plates, current: 1AAA109

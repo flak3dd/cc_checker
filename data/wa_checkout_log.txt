@@ -1,0 +1,16 @@
+[14:47:07] === WA Interactive Checkout Started ===
+[14:47:07] Starting Checkout: 1TBS771
+[14:47:24]  → [CRASH] 1TBS771: page.waitForSelector: Timeout 15000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Proceed to confirmation"), input[value*="Proceed to confirmation"]') to be visible[22m
+
+[14:47:29] No hits to process. Waiting...
+[14:47:30] === Session Finished ===
+[14:49:17] === WA Interactive Checkout Started ===
+[14:49:18] Starting Checkout: 1IGE128
+[14:50:13]  → [CRASH] 1IGE128: page.click: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Proceed to payment"), input[value*="Proceed to payment"]')[22m
+
+[14:50:18] No hits to process. Waiting...
+[14:50:18] === Session Finished ===

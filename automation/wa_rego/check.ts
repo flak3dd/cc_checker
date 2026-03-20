@@ -1,7 +1,8 @@
-import { chromium, ConsoleMessage, Page, Browser } from 'playwright';
+import { ConsoleMessage, Page, Browser } from 'playwright';
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
+import { launchStealthBrowser } from '../shared/browser';
 
 export {};
 
@@ -13,6 +14,8 @@ const hitsDir = path.join(rootDir, 'screenshots/hits');
 const debugDir = path.join(rootDir, 'logs/debug');
 const progressDir = path.join(rootDir, 'data/progress');
 const logFile = path.join(dataDir, 'wa_hits_log.txt');
+const waHitsFile = path.join(dataDir, 'wa_hits.json');
+const waHitsTxt = path.join(dataDir, 'wa_hits.txt');
 const cardsPath = path.join(dataDir, 'cards.txt');
 const platesFile = path.join(dataDir, 'plates.txt');
 const progressFile = path.join(progressDir, 'wa_current_index.txt');
@@ -117,11 +120,7 @@ function getNextPlate() {
 // --- Main Loop ---
 (async () => {
   logger('=== WA Rego Checker Session Started ===');
-  const browser = await chromium.launch({ headless: true });
-  const context = await browser.new_context({
-    viewport: { width: 1280, height: 800 },
-    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
-  });
+  const { browser, context } = await launchStealthBrowser();
   const page = await context.newPage();
 
   page.on('pageerror', err => logger(`[PAGE ERROR] ${err.message}`));
@@ -147,14 +146,32 @@ function getNextPlate() {
 
       const pageText = (await page.innerText('body')).toLowerCase();
       
-      const isMiss = pageText.includes('cannot find') || pageText.includes('invalid') || pageText.includes('not found');
-      const isHit = (pageText.includes('account number') || pageText.includes('expiry') || pageText.includes('registration')) && !isMiss;
+      const isMiss = pageText.includes('cannot find') || pageText.includes('invalid') || pageText.includes('not found') || pageText.includes('no payments currently required');
+      const isHit = pageText.includes('your account details') && !isMiss;
 
       if (isHit) {
         hitsFound++;
         logger(` → [HIT] ${plate} - Record found!`);
         
-        const needsPayment = pageText.includes('payment due') || pageText.includes('outstanding') || pageText.includes('pay now');
+        const hitData = {
+          plate,
+          timestamp: new Date().toISOString(),
+          details: pageText.includes('payment due') ? 'Payment Due' : 'Account Found',
+          screenshot: `hit_${plate}.png`
+        };
+
+        // Append to JSON list
+        let currentHits = [];
+        if (fs.existsSync(waHitsFile)) {
+          try { currentHits = JSON.parse(fs.readFileSync(waHitsFile, 'utf8')); } catch {}
+        }
+        currentHits.push(hitData);
+        fs.writeFileSync(waHitsFile, JSON.stringify(currentHits, null, 2));
+        
+        // Also keep TXT for backward compatibility if needed by other scripts
+        fs.appendFileSync(waHitsTxt, plate + '\n');
+        
+        const needsPayment = pageText.includes('payment due') || pageText.includes('outstanding') || pageText.includes('pay now') || pageText.includes('proceed to confirmation');
         if (needsPayment) {
           logger(` → [ACTION] Payment required for ${plate}. Attempting background checkout...`);
           

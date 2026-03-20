@@ -1,151 +1,133 @@
-import React, { useState } from 'react';
-import { ScrollView, StyleSheet, View, RefreshControl } from 'react-native';
-import { useResultsQuery } from '@/hooks/useQueries';
-import { Text, ActivityIndicator, Chip, Button, Snackbar } from 'react-native-paper';
+import React, { useState, useMemo } from 'react';
+import { ScrollView, StyleSheet, View, RefreshControl, Linking, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  useResultsQuery,
+  useWaRegoHitsQuery,
+  useWaCheckoutResultsQuery,
+} from '@/hooks/useQueries';
+import {
+  Text,
+  ActivityIndicator,
+  Chip,
+  Button,
+  Snackbar,
+  SegmentedButtons,
+} from 'react-native-paper';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { CardResult, CardStatus } from '@/types';
 import { api } from '@/services/api';
 import { useQueryClient } from '@tanstack/react-query';
+import { useActionHandler } from '@/hooks/useActionHandler';
+import { colors, spacing, radii } from '@/constants/theme';
+
+const API_BASE_URL = 'http://localhost:8000';
+
+const STATUS_COLORS: Record<string, string> = {
+  SUCCESS: colors.success,
+  PASS: colors.primary,
+  FAIL: colors.danger,
+  FAILED: colors.danger,
+  ERROR_PREPAYMENT: colors.warning,
+};
+
+function getStatusColor(status: string): string {
+  return STATUS_COLORS[status] ?? colors.textMuted;
+}
 
 export default function ResultsScreen() {
+  const [tab, setTab] = useState('cc');
   const [filterStatus, setFilterStatus] = useState<CardStatus | 'ALL'>('ALL');
-  const [isClearing, setIsClearing] = useState(false);
-  const [rerunningIndex, setRerunningIndex] = useState<number | null>(null);
-  const [snackMessage, setSnackMessage] = useState('');
-  const [showSnack, setShowSnack] = useState(false);
-
-  const { data: resultsData, isLoading, refetch } = useResultsQuery();
   const queryClient = useQueryClient();
+  const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
+
+  const { data: resultsData, isLoading: ccLoading, refetch: refetchCC } = useResultsQuery();
+  const { data: waHits, isLoading: waHitsLoading, refetch: refetchWaHits } = useWaRegoHitsQuery();
+  const { data: waCheckoutResults, isLoading: waCheckoutLoading, refetch: refetchWaCheckout } = useWaCheckoutResultsQuery();
 
   const handleRefresh = () => {
-    refetch();
+    if (tab === 'cc') refetchCC();
+    else {
+      refetchWaHits();
+      refetchWaCheckout();
+    }
   };
 
   const handleClearResults = () => {
-    // Simple confirm for web
-    if (typeof window !== 'undefined' && !window.confirm('Clear all results?')) return;
-    performClear();
-  };
+    const label = tab === 'cc' ? 'CC' : 'WA';
+    const doClear = () => {
+      execute(
+        async () => {
+          if (tab === 'cc') {
+            await api.clearResults();
+            queryClient.invalidateQueries({ queryKey: ['results'] });
+          } else {
+            await api.clearPlateResults();
+            await api.clearWaCheckoutLogs();
+            queryClient.invalidateQueries({ queryKey: ['waRegoHits'] });
+            queryClient.invalidateQueries({ queryKey: ['waCheckoutResults'] });
+          }
+        },
+        'Results cleared',
+        'Failed to clear results',
+      );
+    };
 
-  const performClear = async () => {
-    setIsClearing(true);
-    try {
-      await api.clearResults();
-      setSnackMessage('✓ Results cleared');
-      setShowSnack(true);
-      queryClient.invalidateQueries({ queryKey: ['results'] });
-      queryClient.invalidateQueries({ queryKey: ['analytics'] });
-      queryClient.invalidateQueries({ queryKey: ['status'] });
-    } catch {
-      setSnackMessage('✗ Failed to clear results');
-      setShowSnack(true);
-    } finally {
-      setIsClearing(false);
-    }
-  };
-
-  const handleRerun = async (run: CardResult[], runIndex: number) => {
-    const cards = run.map(({ card_number, mm, yy, cvv }) => ({ card_number, mm, yy, cvv }));
-    setRerunningIndex(runIndex);
-    try {
-      const result = await api.rerunCards(cards);
-      setSnackMessage(`✓ Re-queued ${result.count} cards`);
-      setShowSnack(true);
-      queryClient.invalidateQueries({ queryKey: ['status'] });
-    } catch {
-      setSnackMessage('✗ Failed to re-queue cards');
-      setShowSnack(true);
-    } finally {
-      setRerunningIndex(null);
-    }
-  };
-
-  const getStatusColor = (status: CardStatus) => {
-    switch (status) {
-      case 'SUCCESS':
-        return '#10B981';
-      case 'FAIL':
-        return '#EF4444';
-      case 'ERROR_PREPAYMENT':
-        return '#F59E0B';
-      default:
-        return '#6B7280';
-    }
-  };
-
-  const filterRun = (run: CardResult[]) => {
-    if (filterStatus === 'ALL') return run;
-    return run.filter((r) => r.status === filterStatus);
-  };
-
-  if (isLoading && !resultsData) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#3B82F6" />
-        <Text variant="bodyLarge" style={styles.loadingText}>
-          Loading results...
-        </Text>
-      </View>
+    Alert.alert(
+      'Clear Results',
+      `Clear all ${label} results?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Clear', style: 'destructive', onPress: doClear },
+      ],
     );
-  }
+  };
 
-  const runs = resultsData?.runs || [];
+  const handleRerun = (run: CardResult[], runIndex: number) => {
+    const cards = run.map(({ card_number, mm, yy, cvv }) => ({ card_number, mm, yy, cvv }));
+    execute(
+      () => api.rerunCards(cards),
+      `Re-queued ${cards.length} cards`,
+      'Failed to re-queue cards',
+      () => queryClient.invalidateQueries({ queryKey: ['status'] }),
+    );
+  };
 
-  return (
-    <>
-      <ScrollView
-        style={styles.container}
-        showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleRefresh} />}
-      >
-        <View style={styles.header}>
-          <View style={styles.headerRow}>
-            <View>
-              <Text variant="headlineMedium" style={styles.title}>
-                Results
-              </Text>
-              <Text variant="bodySmall" style={styles.subtitle}>
-                {resultsData?.total || 0} cards across {runs.length} runs
-              </Text>
-            </View>
-            <Button
-              icon="delete-outline"
-              mode="outlined"
-              onPress={handleClearResults}
-              loading={isClearing}
-              disabled={isClearing || runs.length === 0}
-              textColor="#EF4444"
-              style={styles.clearButton}
-            >
-              Clear
-            </Button>
-          </View>
-        </View>
+  const openScreenshot = (path?: string) => {
+    if (!path) return;
+    const url = `${API_BASE_URL}/screenshots/hits/${path}`;
+    Linking.openURL(url);
+  };
 
-        <View style={styles.filterContainer}>
-          <Chip
-            selected={filterStatus === 'ALL'}
-            onPress={() => setFilterStatus('ALL')}
-            style={[styles.filterChip, filterStatus === 'ALL' && styles.filterChipActive]}
-            selectedColor={filterStatus === 'ALL' ? 'white' : '#3B82F6'}
-          >
-            All
-          </Chip>
-          <Chip
-            selected={filterStatus === 'SUCCESS'}
-            onPress={() => setFilterStatus('SUCCESS')}
-            style={[styles.filterChip, filterStatus === 'SUCCESS' && styles.filterChipActive]}
-            selectedColor={filterStatus === 'SUCCESS' ? 'white' : '#10B981'}
-          >
-            Success
-          </Chip>
-          <Chip
-            selected={filterStatus === 'FAIL'}
-            onPress={() => setFilterStatus('FAIL')}
-            style={[styles.filterChip, filterStatus === 'FAIL' && styles.filterChipActive]}
-            selectedColor={filterStatus === 'FAIL' ? 'white' : '#EF4444'}
-          >
-            Failed
-          </Chip>
+  // ─── CC Results ────────────────────────────
+  const renderCCResults = () => {
+    const runs = resultsData?.runs || [];
+
+    const filterRun = (run: CardResult[]) =>
+      filterStatus === 'ALL' ? run : run.filter((r) => r.status === filterStatus);
+
+    if (ccLoading && !resultsData) return <ActivityIndicator style={{ marginTop: 40 }} color={colors.primary} />;
+
+    return (
+      <View>
+        {/* Filter Chips */}
+        <View style={styles.filterRow}>
+          {(['ALL', 'SUCCESS', 'FAIL'] as const).map((key) => {
+            const active = filterStatus === key;
+            const chipColor = key === 'ALL' ? colors.primary : key === 'SUCCESS' ? colors.success : colors.danger;
+            return (
+              <Chip
+                key={key}
+                selected={active}
+                onPress={() => setFilterStatus(key)}
+                style={[styles.filterChip, active && { backgroundColor: `${chipColor}25`, borderColor: chipColor }]}
+                textStyle={[styles.filterChipText, active && { color: chipColor }]}
+                selectedColor={chipColor}
+              >
+                {key === 'ALL' ? 'All' : key === 'SUCCESS' ? 'Pass' : 'Fail'}
+              </Chip>
+            );
+          })}
         </View>
 
         {runs.length > 0 ? (
@@ -157,47 +139,34 @@ export default function ResultsScreen() {
 
             return (
               <View key={`run-${runIndex}`} style={styles.runContainer}>
+                {/* Run Header */}
                 <View style={styles.runHeader}>
-                  <Text variant="titleSmall" style={styles.runTitle}>
-                    Run #{runs.length - runIndex}
-                  </Text>
-                  <View style={styles.runHeaderRight}>
-                    <Text variant="labelSmall" style={styles.runStats}>
-                      {run.length} cards • {successCount}✓ {failCount}✗
+                  <Text style={styles.runTitle}>Run #{runs.length - runIndex}</Text>
+                  <View style={styles.runMeta}>
+                    <Text style={styles.runStats}>
+                      {run.length} cards · {successCount}✓ {failCount}✗
                     </Text>
                     <Button
                       icon="refresh"
                       mode="text"
                       compact
                       onPress={() => handleRerun(run, runIndex)}
-                      loading={rerunningIndex === runIndex}
-                      disabled={rerunningIndex !== null}
-                      textColor="#3B82F6"
-                      style={styles.rerunButton}
+                      disabled={actionLoading}
+                      textColor={colors.primary}
                       labelStyle={styles.rerunLabel}
                     >
                       Re-run
                     </Button>
                   </View>
                 </View>
+                {/* Card Rows */}
                 <View style={styles.cardsList}>
                   {filtered.map((result, i) => (
                     <View key={`${result.card_number}-${i}`} style={styles.cardRow}>
-                      <Text style={styles.cardNumber}>
-                        {result.card_number}
-                      </Text>
-                      <Text style={styles.cardExpiry}>
-                        {result.mm}/{result.yy}
-                      </Text>
-                      <Text style={styles.cardCvv}>
-                        {result.cvv}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.cardStatus,
-                          { color: getStatusColor(result.status) },
-                        ]}
-                      >
+                      <Text style={styles.cardNumber}>{result.card_number}</Text>
+                      <Text style={styles.cardExpiry}>{result.mm}/{result.yy}</Text>
+                      <Text style={styles.cardCvv}>{result.cvv}</Text>
+                      <Text style={[styles.cardStatus, { color: getStatusColor(result.status) }]}>
                         {result.status}
                       </Text>
                     </View>
@@ -208,162 +177,329 @@ export default function ResultsScreen() {
           })
         ) : (
           <View style={styles.emptyState}>
-            <Text variant="bodyLarge" style={styles.emptyText}>
-              No results found
-            </Text>
+            <MaterialIcons name="credit-card-off" size={40} color={colors.textMuted} />
+            <Text style={styles.emptyText}>No CC results found</Text>
           </View>
         )}
+      </View>
+    );
+  };
 
-        <View style={styles.spacer} />
+  // ─── WA Results ────────────────────────────
+  const renderWAResults = () => {
+    if (waHitsLoading || waCheckoutLoading)
+      return <ActivityIndicator style={{ marginTop: 40 }} color={colors.primary} />;
+
+    const combinedCheckout = [...(waCheckoutResults || [])].reverse();
+    const combinedHits = [...(waHits || [])].reverse();
+
+    return (
+      <View>
+        {/* Checkout Outcomes */}
+        <Text style={styles.sectionTitle}>Checkout Outcomes</Text>
+        {combinedCheckout.length > 0 ? (
+          combinedCheckout.map((res: any, i: number) => (
+            <View key={`checkout-${i}`} style={styles.waItem}>
+              <View style={[styles.waIcon, { backgroundColor: `${getStatusColor(res.status)}20` }]}>
+                <MaterialIcons
+                  name={res.status === 'SUCCESS' ? 'check-circle' : 'cancel'}
+                  size={20}
+                  color={getStatusColor(res.status)}
+                />
+              </View>
+              <View style={styles.waInfo}>
+                <Text style={styles.waPlate}>{res.plate}</Text>
+                <Text style={styles.waTimestamp}>
+                  {new Date(res.timestamp).toLocaleTimeString()} · {res.status}
+                </Text>
+              </View>
+              <Button compact icon="image" onPress={() => openScreenshot(res.screenshot)} textColor={colors.textSecondary}>
+                View
+              </Button>
+            </View>
+          ))
+        ) : (
+          <Text style={styles.emptyInner}>No checkout results yet</Text>
+        )}
+
+        {/* Discovery Hits */}
+        <Text style={[styles.sectionTitle, { marginTop: spacing.xl }]}>Discovery Hits</Text>
+        {combinedHits.length > 0 ? (
+          combinedHits.map((hit: any, i: number) => (
+            <View key={`hit-${i}`} style={styles.waItem}>
+              <View style={[styles.waIcon, { backgroundColor: colors.infoMuted }]}>
+                <MaterialIcons name="directions-car" size={20} color={colors.info} />
+              </View>
+              <View style={styles.waInfo}>
+                <Text style={styles.waPlate}>{hit.plate}</Text>
+                <Text style={styles.waTimestamp}>
+                  {new Date(hit.timestamp).toLocaleTimeString()} · {hit.details}
+                </Text>
+              </View>
+              <Button compact icon="image" onPress={() => openScreenshot(hit.screenshot)} textColor={colors.textSecondary}>
+                Hit
+              </Button>
+            </View>
+          ))
+        ) : (
+          <Text style={styles.emptyInner}>No rego hits found yet</Text>
+        )}
+      </View>
+    );
+  };
+
+  return (
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={ccLoading || waHitsLoading}
+            onRefresh={handleRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
+      >
+        {/* Header */}
+        <View style={styles.headerRow}>
+          <View>
+            <Text style={styles.headerTitle}>Results</Text>
+            <Text style={styles.headerSub}>
+              {tab === 'cc'
+                ? `${resultsData?.total || 0} cards processed`
+                : `${waHits?.length || 0} hits found`}
+            </Text>
+          </View>
+          <Button
+            icon="delete-outline"
+            mode="outlined"
+            onPress={handleClearResults}
+            disabled={actionLoading}
+            textColor={colors.danger}
+            style={styles.clearBtn}
+            labelStyle={{ fontSize: 12 }}
+          >
+            Clear
+          </Button>
+        </View>
+
+        {/* Tab Selector */}
+        <SegmentedButtons
+          value={tab}
+          onValueChange={setTab}
+          buttons={[
+            { value: 'cc', label: 'CC Checker', icon: 'credit-card' },
+            { value: 'wa', label: 'WA Rego', icon: 'car' },
+          ]}
+          style={styles.segmented}
+          theme={{
+            colors: {
+              secondaryContainer: colors.primaryMuted,
+              onSecondaryContainer: colors.primary,
+              onSurface: colors.textSecondary,
+              outline: colors.border,
+            },
+          }}
+        />
+
+        {tab === 'cc' ? renderCCResults() : renderWAResults()}
+        <View style={{ height: 40 }} />
       </ScrollView>
 
-      <Snackbar
-        visible={showSnack}
-        onDismiss={() => setShowSnack(false)}
-        duration={3000}
-        style={styles.snackbar}
-      >
+      <Snackbar visible={showSnack} onDismiss={dismissSnack} duration={3000} style={styles.snackbar}>
         {snackMessage}
       </Snackbar>
-    </>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
-    paddingHorizontal: 16,
-    paddingTop: 16,
+    backgroundColor: colors.background,
   },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F9FAFB',
-  },
-  loadingText: {
-    marginTop: 12,
-    color: '#6B7280',
-  },
-  header: {
-    marginBottom: 16,
+  scrollContent: {
+    padding: spacing.lg,
   },
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
+    marginBottom: spacing.lg,
+    marginTop: spacing.sm,
   },
-  title: {
-    color: '#111827',
-    fontWeight: '700',
-    marginBottom: 4,
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.textPrimary,
+    letterSpacing: -0.5,
   },
-  subtitle: {
-    color: '#6B7280',
+  headerSub: {
+    color: colors.textMuted,
+    fontSize: 12,
+    marginTop: spacing.xs,
   },
-  clearButton: {
-    borderColor: '#FCA5A5',
+  clearBtn: {
+    borderColor: colors.border,
+    borderRadius: radii.sm,
   },
-  filterContainer: {
+  segmented: {
+    marginBottom: spacing.xl,
+  },
+  // ── Filters ──
+  filterRow: {
     flexDirection: 'row',
-    gap: 8,
-    marginBottom: 16,
+    gap: spacing.sm,
+    marginBottom: spacing.lg,
   },
   filterChip: {
-    backgroundColor: '#FFFFFF',
-    borderColor: '#E5E7EB',
+    backgroundColor: colors.surface,
+    borderColor: colors.border,
     borderWidth: 1,
   },
-  filterChipActive: {
-    backgroundColor: '#3B82F6',
-    borderColor: '#3B82F6',
+  filterChipText: {
+    color: colors.textSecondary,
+    fontSize: 12,
+    fontWeight: '600',
   },
+  // ── CC Run ──
   runContainer: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    marginBottom: 12,
+    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
+    marginBottom: spacing.md,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: colors.border,
     overflow: 'hidden',
   },
   runHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    backgroundColor: '#F9FAFB',
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+    backgroundColor: colors.surfaceElevated,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: colors.border,
   },
   runTitle: {
-    color: '#111827',
-    fontWeight: '600',
+    color: colors.textPrimary,
+    fontWeight: '700',
+    fontSize: 14,
   },
-  runHeaderRight: {
+  runMeta: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: spacing.sm,
   },
   runStats: {
-    color: '#6B7280',
-  },
-  rerunButton: {
-    marginVertical: -4,
+    color: colors.textMuted,
+    fontSize: 11,
   },
   rerunLabel: {
-    fontSize: 12,
+    fontSize: 11,
   },
   cardsList: {
-    paddingHorizontal: 14,
-    paddingVertical: 6,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.sm,
   },
   cardRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 6,
+    paddingVertical: spacing.sm,
     borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
-    gap: 12,
+    borderBottomColor: colors.surfaceElevated,
+    gap: spacing.md,
   },
   cardNumber: {
     flex: 1,
     fontFamily: 'monospace',
-    fontSize: 13,
-    color: '#111827',
+    fontSize: 12,
+    color: colors.textPrimary,
   },
   cardExpiry: {
     fontFamily: 'monospace',
-    fontSize: 13,
-    color: '#6B7280',
+    fontSize: 12,
+    color: colors.textSecondary,
     width: 45,
   },
   cardCvv: {
     fontFamily: 'monospace',
-    fontSize: 13,
-    color: '#6B7280',
+    fontSize: 12,
+    color: colors.textSecondary,
     width: 30,
   },
   cardStatus: {
     fontFamily: 'monospace',
-    fontSize: 12,
-    fontWeight: '600',
+    fontSize: 11,
+    fontWeight: '700',
     width: 60,
     textAlign: 'right',
   },
+  // ── WA Results ──
+  sectionTitle: {
+    fontWeight: '700',
+    fontSize: 14,
+    color: colors.textPrimary,
+    marginBottom: spacing.md,
+    letterSpacing: 0.3,
+  },
+  waItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.surface,
+    borderRadius: radii.md,
+    padding: spacing.md,
+    marginBottom: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
+    gap: spacing.md,
+  },
+  waIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: radii.sm,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  waInfo: {
+    flex: 1,
+  },
+  waPlate: {
+    color: colors.textPrimary,
+    fontWeight: '700',
+    fontSize: 14,
+    fontFamily: 'monospace',
+  },
+  waTimestamp: {
+    color: colors.textMuted,
+    fontSize: 11,
+    marginTop: 2,
+  },
+  // ── Empty ──
   emptyState: {
     alignItems: 'center',
-    paddingVertical: 40,
+    paddingVertical: 48,
+    gap: spacing.md,
   },
   emptyText: {
-    color: '#6B7280',
+    color: colors.textMuted,
+    fontSize: 14,
   },
-  spacer: {
-    height: 24,
+  emptyInner: {
+    color: colors.textMuted,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    paddingVertical: spacing.md,
+    fontSize: 13,
   },
   snackbar: {
-    position: 'absolute',
-    bottom: 0,
+    backgroundColor: colors.surfaceElevated,
   },
 });

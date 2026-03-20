@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, StyleSheet, View, RefreshControl } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { usePlateCheckStatusQuery, usePlateCheckResultsQuery } from '@/hooks/useQueries';
-import { Text, ActivityIndicator, Button, Snackbar, Card, Badge, Divider } from 'react-native-paper';
+import { Text, ActivityIndicator, Button, Snackbar, Badge, Divider } from 'react-native-paper';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { api } from '@/services/api';
 import { LiveLogPanel } from '@/components/LiveLogPanel';
+import { useActionHandler } from '@/hooks/useActionHandler';
+import { colors, spacing, radii } from '@/constants/theme';
 
 export default function PlateCheckScreen() {
   const { data: status, isLoading: statusLoading, refetch: refetchStatus } = usePlateCheckStatusQuery();
   const { data: resultsData, isLoading: resultsLoading, refetch: refetchResults } = usePlateCheckResultsQuery();
-
-  const [isControlLoading, setIsControlLoading] = useState(false);
-  const [snackMessage, setSnackMessage] = useState('');
-  const [showSnack, setShowSnack] = useState(false);
+  const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
 
   const isLoading = statusLoading || resultsLoading;
 
@@ -20,341 +21,329 @@ export default function PlateCheckScreen() {
     refetchResults();
   };
 
-  const handleStart = async () => {
-    setIsControlLoading(true);
-    try {
-      const res = await api.startPlateCheck();
-      if (res.success) {
-        setSnackMessage('✓ Plate check started');
-      } else {
-        setSnackMessage(`✗ ${res.message}`);
-      }
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to connect to server');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
-
-  const handleStop = async () => {
-    setIsControlLoading(true);
-    try {
-      const res = await api.stopPlateCheck();
-      if (res.success) {
-        setSnackMessage('✓ Plate check stopped');
-      } else {
-        setSnackMessage(`✗ ${res.message}`);
-      }
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to connect to server');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
-
-  const handleClear = async () => {
-    setIsControlLoading(true);
-    try {
-      const res = await api.clearPlateResults();
-      if (res.success) {
-        setSnackMessage('✓ Logs cleared');
-      }
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to clear logs');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
-
-  const handleGenerate = async () => {
-    setIsControlLoading(true);
-    try {
-      const res = await api.generatePlates(100);
-      if (res.success) {
-        setSnackMessage(`✓ Generated ${res.count} plates into queue`);
-      }
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to generate plates');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
-
   const renderResultItem = (item: string) => {
     const isHit = item.includes('[HIT');
     const isFail = item.includes('[FAIL');
-    
+    const badgeColor = isHit ? colors.success : isFail ? colors.danger : colors.textMuted;
+    const badgeLabel = isHit ? 'HIT' : isFail ? 'FAIL' : 'LOG';
+
     return (
-      <Card style={styles.resultCard}>
-        <Card.Content style={styles.resultContent}>
-          <View style={styles.resultHeader}>
-            <Badge 
-              style={[
-                styles.badge, 
-                isHit ? styles.hitBadge : isFail ? styles.failBadge : styles.missBadge
-              ]}
-            >
-              {isHit ? 'HIT' : isFail ? 'FAIL' : 'LOG'}
-            </Badge>
-            <Text variant="bodySmall" style={styles.resultTimestamp}>
-              {item.split(' - ').pop()}
-            </Text>
-          </View>
-          <Text variant="bodyMedium" style={styles.resultText}>
-            {item}
-          </Text>
-        </Card.Content>
-      </Card>
+      <View style={styles.resultItem}>
+        <View style={styles.resultHeader}>
+          <Badge style={[styles.badge, { backgroundColor: badgeColor }]}>{badgeLabel}</Badge>
+          <Text style={styles.resultTimestamp}>{item.split(' - ').pop()}</Text>
+        </View>
+        <Text style={[styles.resultText, isHit && { color: colors.success }]}>{item}</Text>
+      </View>
     );
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       <ScrollView
         style={styles.container}
-        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleRefresh} />}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoading}
+            onRefresh={handleRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
       >
+        {/* Header */}
         <View style={styles.header}>
-          <Text variant="headlineMedium" style={styles.title}>
-            Plate Checker
-          </Text>
-          <Text variant="bodySmall" style={styles.subtitle}>
-            WA Government Plate Rotation
-          </Text>
+          <Text style={styles.title}>Plate Checker</Text>
+          <Text style={styles.subtitle}>WA GOVERNMENT PLATE ROTATION</Text>
         </View>
 
-        {/* Status Card */}
-        <Card style={styles.statusCard}>
-          <Card.Content>
-            <View style={styles.statusRow}>
-              <View>
-                <Text variant="labelLarge" style={styles.label}>STATUS</Text>
-                <Text variant="titleLarge" style={[styles.statusText, status?.is_running ? styles.running : styles.stopped]}>
-                  {status?.is_running ? '🟢 RUNNING' : '🔴 STOPPED'}
+        {/* Status Panel */}
+        <View style={styles.statusPanel}>
+          <View style={styles.statusTop}>
+            <View>
+              <Text style={styles.statusLabel}>STATUS</Text>
+              <View style={styles.statusIndicator}>
+                <View style={[styles.dot, { backgroundColor: status?.is_running ? colors.success : colors.danger }]} />
+                <Text style={[styles.statusValue, { color: status?.is_running ? colors.success : colors.danger }]}>
+                  {status?.is_running ? 'RUNNING' : 'STOPPED'}
                 </Text>
               </View>
-              <View style={styles.statBox}>
-                <Text variant="labelLarge" style={styles.label}>HITS</Text>
-                <Text variant="headlineSmall" style={styles.statValue}>{status?.hits_count || 0}</Text>
-              </View>
             </View>
-            
-            <View style={styles.progressInfo}>
-              <Text variant="bodySmall">Total Attempts: {status?.total_lines || 0}</Text>
-              <Text variant="bodySmall">Pending in Queue: {status?.pending_count || 0}</Text>
+            <View style={styles.statRight}>
+              <Text style={styles.statusLabel}>HITS</Text>
+              <Text style={styles.bigStat}>{status?.hits_count || 0}</Text>
             </View>
+          </View>
 
-            <Divider style={styles.divider} />
+          <View style={styles.progressRow}>
+            <Text style={styles.progressText}>Total Attempts: {status?.total_lines || 0}</Text>
+            <Text style={styles.progressText}>Pending: {status?.pending_count || 0}</Text>
+          </View>
 
-            <View style={styles.buttonRow}>
-              <Button
-                mode="contained"
-                onPress={handleStart}
-                disabled={status?.is_running || isControlLoading}
-                loading={isControlLoading && !status?.is_running}
-                style={[styles.button, styles.startButton]}
-              >
-                Start Rotation
-              </Button>
-              <Button
-                mode="contained"
-                onPress={handleStop}
-                disabled={!status?.is_running || isControlLoading}
-                loading={isControlLoading && status?.is_running}
-                style={[styles.button, styles.stopButton]}
-              >
-                Stop
-              </Button>
-            </View>
-          </Card.Content>
-        </Card>
+          <View style={styles.divider} />
 
+          <View style={styles.buttonRow}>
+            <Button
+              mode="contained"
+              onPress={() => execute(() => api.startPlateCheck(), 'Plate check started', 'Failed to start', handleRefresh)}
+              disabled={status?.is_running || actionLoading}
+              loading={actionLoading && !status?.is_running}
+              style={[styles.button, { backgroundColor: colors.success }]}
+              labelStyle={styles.btnLabel}
+            >
+              Start Rotation
+            </Button>
+            <Button
+              mode="contained"
+              onPress={() => execute(() => api.stopPlateCheck(), 'Plate check stopped', 'Failed to stop', handleRefresh)}
+              disabled={!status?.is_running || actionLoading}
+              loading={actionLoading && !!status?.is_running}
+              style={[styles.button, { backgroundColor: colors.danger }]}
+              labelStyle={styles.btnLabel}
+            >
+              Stop
+            </Button>
+          </View>
+        </View>
+
+        {/* Live Log */}
         <LiveLogPanel file="wa" title="Live Rotation Stream" height={200} />
 
-        <View style={styles.resultsHeader}>
-          <Text variant="titleMedium">Recent Activity</Text>
-          <View style={{ flexDirection: 'row', gap: 4 }}>
-            <Button compact onPress={handleGenerate} icon="auto-fix">Auto-gen</Button>
-            <Button compact onPress={handleRefresh} icon="refresh">Refresh</Button>
-            <Button compact onPress={handleClear} textColor="#EF4444" icon="delete-outline">Clear</Button>
+        {/* Activity Header */}
+        <View style={styles.activityHeader}>
+          <Text style={styles.activityTitle}>Recent Activity</Text>
+          <View style={styles.activityActions}>
+            <Button
+              compact
+              onPress={() => execute(() => api.generatePlates(100), 'Plates generated', 'Failed to generate', handleRefresh)}
+              icon="auto-fix"
+              textColor={colors.primary}
+              labelStyle={styles.actionLabel}
+            >
+              Gen
+            </Button>
+            <Button compact onPress={handleRefresh} icon="refresh" textColor={colors.textSecondary} labelStyle={styles.actionLabel}>
+              Refresh
+            </Button>
+            <Button
+              compact
+              onPress={() => execute(() => api.clearPlateResults(), 'Logs cleared', 'Failed to clear', handleRefresh)}
+              textColor={colors.danger}
+              icon="delete-outline"
+              labelStyle={styles.actionLabel}
+            >
+              Clear
+            </Button>
           </View>
         </View>
 
         {status?.is_running && (
-          <View style={styles.runningIndicator}>
-            <ActivityIndicator animating={true} color="#10B981" size="small" />
-            <Text variant="bodySmall" style={styles.runningLabel}>Monitoring live rotation...</Text>
+          <View style={styles.runningBanner}>
+            <ActivityIndicator animating color={colors.success} size="small" />
+            <Text style={styles.runningText}>Monitoring live rotation...</Text>
           </View>
         )}
 
         {resultsData?.results.map((item, index) => (
-          <React.Fragment key={index}>
-            {renderResultItem(item)}
-          </React.Fragment>
+          <React.Fragment key={index}>{renderResultItem(item)}</React.Fragment>
         ))}
 
         {resultsData?.results.length === 0 && (
           <View style={styles.emptyState}>
-            <Text variant="bodyMedium" style={{ color: '#9CA3AF' }}>No logs found yet.</Text>
+            <MaterialIcons name="search-off" size={40} color={colors.textMuted} />
+            <Text style={styles.emptyText}>No logs found yet.</Text>
           </View>
         )}
 
         <View style={{ height: 40 }} />
       </ScrollView>
 
-      <Snackbar
-        visible={showSnack}
-        onDismiss={() => setShowSnack(false)}
-        duration={3000}
-      >
+      <Snackbar visible={showSnack} onDismiss={dismissSnack} duration={3000} style={styles.snackbar}>
         {snackMessage}
       </Snackbar>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F9FAFB',
-    padding: 16,
+    backgroundColor: colors.background,
+  },
+  scrollContent: {
+    padding: spacing.lg,
   },
   header: {
-    marginBottom: 20,
-    marginTop: 8,
+    marginBottom: spacing.xl,
+    marginTop: spacing.sm,
   },
   title: {
-    fontWeight: 'bold',
-    color: '#111827',
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.textPrimary,
+    letterSpacing: -0.5,
   },
   subtitle: {
-    color: '#6B7280',
+    color: colors.textMuted,
+    fontSize: 11,
+    fontWeight: '600',
+    letterSpacing: 2,
+    marginTop: spacing.xs,
   },
-  statusCard: {
-    backgroundColor: '#FFF',
-    borderRadius: 12,
-    marginBottom: 24,
-    elevation: 2,
+  // ── Status Panel ──
+  statusPanel: {
+    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
+    padding: spacing.lg,
+    borderWidth: 1,
+    borderColor: colors.border,
+    marginBottom: spacing.lg,
   },
-  statusRow: {
+  statusTop: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  label: {
-    color: '#6B7280',
-    letterSpacing: 1,
+  statusLabel: {
+    color: colors.textMuted,
     fontSize: 10,
+    fontWeight: '700',
+    letterSpacing: 1.2,
   },
-  statusText: {
-    fontWeight: 'bold',
-    marginTop: 4,
+  statusIndicator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginTop: spacing.xs,
   },
-  running: {
-    color: '#10B981',
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
   },
-  stopped: {
-    color: '#EF4444',
+  statusValue: {
+    fontSize: 18,
+    fontWeight: '800',
   },
-  statBox: {
+  statRight: {
     alignItems: 'flex-end',
   },
-  statValue: {
-    fontWeight: 'bold',
-    color: '#111827',
+  bigStat: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: colors.textPrimary,
+    fontVariant: ['tabular-nums'],
+    marginTop: spacing.xs,
   },
-  progressInfo: {
-    marginTop: 12,
+  progressRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: spacing.md,
+  },
+  progressText: {
+    color: colors.textSecondary,
+    fontSize: 12,
   },
   divider: {
-    marginVertical: 16,
+    height: 1,
+    backgroundColor: colors.border,
+    marginVertical: spacing.lg,
   },
   buttonRow: {
     flexDirection: 'row',
-    gap: 12,
+    gap: spacing.md,
   },
   button: {
     flex: 1,
-    borderRadius: 8,
+    borderRadius: radii.sm,
   },
-  startButton: {
-    backgroundColor: '#10B981',
+  btnLabel: {
+    fontSize: 13,
+    fontWeight: '700',
   },
-  stopButton: {
-    backgroundColor: '#EF4444',
-  },
-  resultsHeader: {
+  // ── Activity ──
+  activityHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    marginTop: spacing.xl,
+    marginBottom: spacing.md,
   },
-  resultCard: {
-    marginBottom: 8,
-    backgroundColor: '#FFF',
-    borderRadius: 8,
+  activityTitle: {
+    color: colors.textPrimary,
+    fontWeight: '700',
+    fontSize: 14,
   },
-  resultContent: {
-    paddingVertical: 12,
+  activityActions: {
+    flexDirection: 'row',
+    gap: 0,
+  },
+  actionLabel: {
+    fontSize: 11,
+  },
+  runningBanner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: colors.successMuted,
+    padding: spacing.md,
+    borderRadius: radii.md,
+    marginBottom: spacing.md,
+    gap: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.success,
+  },
+  runningText: {
+    color: colors.success,
+    fontWeight: '600',
+    fontSize: 12,
+  },
+  // ── Result Items ──
+  resultItem: {
+    backgroundColor: colors.surface,
+    borderRadius: radii.md,
+    padding: spacing.md,
+    marginBottom: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   resultHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 6,
+    marginBottom: spacing.sm,
   },
   badge: {
     borderRadius: 4,
-  },
-  hitBadge: {
-    backgroundColor: '#10B981',
-  },
-  failBadge: {
-    backgroundColor: '#EF4444',
-  },
-  missBadge: {
-    backgroundColor: '#6B7280',
+    fontSize: 10,
+    fontWeight: '700',
   },
   resultTimestamp: {
-    color: '#9CA3AF',
+    color: colors.textMuted,
     fontSize: 10,
   },
   resultText: {
     fontFamily: 'monospace',
-    fontSize: 12,
-    color: '#374151',
+    fontSize: 11,
+    color: colors.textSecondary,
+    lineHeight: 16,
   },
+  // ── Empty ──
   emptyState: {
-    padding: 40,
+    padding: 48,
     alignItems: 'center',
+    gap: spacing.md,
   },
-  runningIndicator: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ECFDF5',
-    padding: 8,
-    borderRadius: 8,
-    marginBottom: 12,
-    gap: 8,
-    borderWidth: 1,
-    borderColor: '#10B981',
+  emptyText: {
+    color: colors.textMuted,
+    fontSize: 14,
   },
-  runningLabel: {
-    color: '#047857',
-    fontWeight: '500',
+  snackbar: {
+    backgroundColor: colors.surfaceElevated,
   },
 });

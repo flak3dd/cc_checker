@@ -1,0 +1,56 @@
+[
+  {
+    "plate": "1TBS771",
+    "timestamp": "2026-03-20T14:46:50.078Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1TBS771.png"
+  },
+  {
+    "plate": "1IGE128",
+    "timestamp": "2026-03-20T14:47:41.364Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1IGE128.png"
+  },
+  {
+    "plate": "1IMI367",
+    "timestamp": "2026-03-20T14:52:04.520Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1IMI367.png"
+  },
+  {
+    "plate": "1FCM487",
+    "timestamp": "2026-03-20T14:55:31.229Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1FCM487.png"
+  },
+  {
+    "plate": "1GZA994",
+    "timestamp": "2026-03-20T14:56:39.552Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1GZA994.png"
+  },
+  {
+    "plate": "1IRD147",
+    "timestamp": "2026-03-20T14:57:36.577Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1IRD147.png"
+  },
+  {
+    "plate": "1AWD099",
+    "timestamp": "2026-03-20T15:00:01.809Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1AWD099.png"
+  },
+  {
+    "plate": "1AAA102",
+    "timestamp": "2026-03-20T15:21:23.623Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1AAA102.png"
+  },
+  {
+    "plate": "1AAA102",
+    "timestamp": "2026-03-20T15:21:37.464Z",
+    "details": "Payment Due",
+    "screenshot": "hit_1AAA102.png"
+  }
+]

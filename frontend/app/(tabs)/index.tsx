@@ -1,356 +1,369 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { ScrollView, StyleSheet, View, RefreshControl } from 'react-native';
-import { useStatusQuery, useAnalyticsQuery, usePlateCheckStatusQuery } from '@/hooks/useQueries';
-import { StatusCard } from '@/components/StatusCard';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import {
+  useStatusQuery,
+  useAnalyticsQuery,
+  useWaCheckoutStatusQuery,
+  useCarfactsStatusQuery,
+  useResultsQuery,
+  useWaCheckoutResultsQuery,
+  useCarfactsResultsQuery,
+} from '@/hooks/useQueries';
+import { StatusIsland } from '@/components/StatusIsland';
+import { HeroStats } from '@/components/HeroStats';
+import { ControlPanel } from '@/components/ControlPanel';
 import { LiveLogPanel } from '@/components/LiveLogPanel';
-import { Text, ActivityIndicator, Button, Snackbar, Card, Avatar } from 'react-native-paper';
+import { ResultsTable } from '@/components/ResultsTable';
+import { FilePickerButton } from '@/components/FilePickerButton';
+import { CardSelectionModal } from '@/components/CardSelectionModal';
+import { Text, Button, Snackbar } from 'react-native-paper';
 import { api } from '@/services/api';
+import { useActionHandler } from '@/hooks/useActionHandler';
+import { colors, spacing, radii } from '@/constants/theme';
 
 export default function DashboardScreen() {
   const { data: status, isLoading: statusLoading, refetch: refetchStatus } = useStatusQuery();
-  const { data: plateStatus, isLoading: plateLoading, refetch: refetchPlate } = usePlateCheckStatusQuery();
-  const {
-    data: analytics,
-    isLoading: analyticsLoading,
-    refetch: refetchAnalytics,
-    error: analyticsError,
-  } = useAnalyticsQuery();
+  const { data: checkoutStatus, isLoading: checkoutLoading, refetch: refetchCheckout } = useWaCheckoutStatusQuery();
+  const { data: analytics, isLoading: analyticsLoading, refetch: refetchAnalytics } = useAnalyticsQuery();
+  const { data: carfactsStatus, isLoading: carfactsLoading, refetch: refetchCarfacts } = useCarfactsStatusQuery();
+  const { data: ccResults } = useResultsQuery();
+  const { data: waCheckoutResults } = useWaCheckoutResultsQuery();
+  const { data: carfactsResults } = useCarfactsResultsQuery();
 
-  const [isControlLoading, setIsControlLoading] = useState(false);
-  const [snackMessage, setSnackMessage] = useState('');
-  const [showSnack, setShowSnack] = useState(false);
+  const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
+  const [showCardModal, setShowCardModal] = useState(false);
 
-  const isLoading = statusLoading || analyticsLoading || plateLoading;
+  const isRefreshing = statusLoading || analyticsLoading || checkoutLoading || carfactsLoading;
+
+  useEffect(() => {
+    setShowCardModal(!!checkoutStatus?.pending_payment);
+  }, [checkoutStatus?.pending_payment]);
 
   const handleRefresh = () => {
     refetchStatus();
     refetchAnalytics();
-    refetchPlate();
+    refetchCheckout();
+    refetchCarfacts();
   };
 
-  const handleStartCC = async () => {
-    setIsControlLoading(true);
-    try {
-      await api.startProcessing();
-      setSnackMessage('✓ CC Checker started');
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to start CC Checker');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
+  // ─── Derived Data ──────────────────────────
+  const ccRunning = !!status?.is_running;
+  const coRunning = !!checkoutStatus?.is_running;
+  const cfRunning = !!carfactsStatus?.is_running;
+  const activeCount = [ccRunning, coRunning, cfRunning].filter(Boolean).length;
 
-  const handleStopCC = async () => {
-    setIsControlLoading(true);
-    try {
-      await api.stopProcessing();
-      setSnackMessage('✓ CC Checker stopped');
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to stop CC Checker');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
+  const activeLabels = useMemo(() => {
+    const labels: string[] = [];
+    if (ccRunning) labels.push('CC');
+    if (coRunning) labels.push('Checkout');
+    if (cfRunning) labels.push('CarFacts');
+    return labels;
+  }, [ccRunning, coRunning, cfRunning]);
 
-  const handleStartPlate = async () => {
-    setIsControlLoading(true);
-    try {
-      await api.startPlateCheck();
-      setSnackMessage('✓ WA Rego automation started');
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to start WA Rego check');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
+  const heroStats = useMemo(() => [
+    { value: status?.total_processed || 0, label: 'LIVE CARDS · PPSR', color: colors.primary },
+    { value: status?.remaining_cards || 0, label: 'QUEUED · PPSR', color: colors.textPrimary },
+    { value: checkoutStatus?.hits_to_process || 0, label: 'LIVE · WA REGO', color: colors.accent },
+    { value: carfactsStatus?.results_count || 0, label: 'CHECKED · CARFACTS', color: colors.warning },
+  ], [status, checkoutStatus, carfactsStatus]);
 
-  const handleStopPlate = async () => {
-    setIsControlLoading(true);
-    try {
-      await api.stopPlateCheck();
-      setSnackMessage('✓ WA Rego automation stopped');
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to stop WA Rego check');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
+  // ─── Results Data ───────────────────────
+  const ccResultRows = useMemo(() => {
+    const flat = ccResults?.runs.flat() || [];
+    return [...flat].reverse().map((r, i) => ({
+      id: `cc-${r.card_number}-${i}`,
+      primary: `•••• ${r.card_number.slice(-4)}`,
+      secondary: `${r.mm}/${r.yy} · CVV ${r.cvv}`,
+      status: r.status,
+      statusColor: r.status === 'SUCCESS' ? colors.success
+        : r.status === 'PASS' ? colors.primary
+        : r.status === 'FAIL' ? colors.danger
+        : colors.warning,
+      timestamp: r.timestamp ? new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : undefined,
+    }));
+  }, [ccResults]);
 
-  const handleClearAll = async () => {
-    setIsControlLoading(true);
-    try {
-      await api.clearResults();
-      await api.clearPlateResults();
-      setSnackMessage('✓ All logs cleared');
-      setShowSnack(true);
-      handleRefresh();
-    } catch {
-      setSnackMessage('✗ Failed to clear logs');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-    }
-  };
+  const waResultRows = useMemo(() => {
+    const checkouts = [...(waCheckoutResults || [])].reverse();
+    return checkouts.map((r: any, i: number) => ({
+      id: `co-${i}`,
+      primary: r.plate,
+      secondary: `Card ...${r.card_last4 || '????'} · ${r.mm || '??'}/${r.yy || '??'}`,
+      status: r.status || 'UNKNOWN',
+      statusColor: r.status === 'SUCCESS' ? colors.success
+        : r.status === 'FAILED' ? colors.danger
+        : colors.warning,
+      timestamp: r.timestamp ? new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : undefined,
+    }));
+  }, [waCheckoutResults]);
 
-  const onFileChange = async (e: any, target: 'cc' | 'wa_rego') => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const cfResultRows = useMemo(() => {
+    const results = [...(carfactsResults || [])].reverse();
+    return results.map((r: any, i: number) => ({
+      id: `cf-${i}`,
+      primary: r.plate,
+      secondary: r.card_last4 ? `Card ...${r.card_last4}` : (r.details || r.error || 'Report check'),
+      status: r.status || 'UNKNOWN',
+      statusColor: r.status === 'SUCCESS' ? colors.success
+        : r.status === 'FAILED' ? colors.danger
+        : r.status === 'NO_REPORT' ? colors.textMuted
+        : r.status === 'CRASH' ? colors.danger
+        : colors.warning,
+      timestamp: r.timestamp ? new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : undefined,
+    }));
+  }, [carfactsResults]);
 
-    setIsControlLoading(true);
-    try {
-      const res = await api.uploadFile(file, target);
-      setSnackMessage(`✓ Uploaded ${res.count} items to ${target === 'cc' ? 'CC Checker' : 'WA Rego'}`);
-      setShowSnack(true);
-      handleRefresh();
-    } catch (err) {
-      setSnackMessage('✗ Upload failed');
-      setShowSnack(true);
-    } finally {
-      setIsControlLoading(false);
-      // Reset input
-      e.target.value = '';
-    }
+  const handleFilePicked = async (uri: string, name: string) => {
+    await execute(
+      () => api.uploadFile(uri, 'cc', name),
+      'Cards uploaded',
+      'Upload failed',
+      handleRefresh,
+    );
   };
 
   return (
-    <>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
       <ScrollView
         style={styles.container}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleRefresh} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={handleRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
       >
+        {/* ─── Header ──────────────────────────── */}
         <View style={styles.header}>
-          <Text variant="headlineMedium" style={styles.title}>
-            Universal Dashboard
-          </Text>
-          <Text variant="bodySmall" style={styles.subtitle}>
-            WA Rego • PPSR • CC Checker
+          <Text style={styles.title}>COMMAND{'\n'}CENTER</Text>
+        </View>
+
+        {/* ─── Status Island ───────────────────── */}
+        <StatusIsland activeCount={activeCount} labels={activeLabels} />
+
+        {/* ─── Hero Stats Bento Grid ───────────── */}
+        <HeroStats stats={heroStats} />
+
+        {/* ─── Upload Section ───────────────────── */}
+        <Text style={styles.sectionLabel}>UPLOAD DATA</Text>
+        <View style={styles.uploadSection}>
+          <FilePickerButton
+            label="Upload Cards (.txt)"
+            icon="credit-card"
+            disabled={actionLoading}
+            onFilePicked={handleFilePicked}
+          />
+          <Text style={styles.helpHint}>
+            Format: CC|MM|YY|CVV per line
           </Text>
         </View>
 
-        {/* WA Rego & PPSR Section */}
-        <Card style={styles.statusSectionCard}>
-          <Card.Title 
-            title="WA Rego & PPSR" 
-            subtitle={plateStatus?.is_running ? "Active" : "Idle"}
-            left={(props) => <Avatar.Icon {...props} icon="car-search" backgroundColor={plateStatus?.is_running ? "#10B981" : "#6B7280"} />}
-          />
-          <Card.Content>
-            <View style={styles.statsRow}>
-              <View style={styles.statItem}>
-                <Text variant="titleLarge" style={styles.statValue}>{plateStatus?.hits_count || 0}</Text>
-                <Text variant="labelSmall" style={styles.statLabel}>HITS</Text>
-              </View>
-              <View style={styles.statItem}>
-                <Text variant="titleLarge" style={styles.statValue}>{plateStatus?.pending_count || 0}</Text>
-                <Text variant="labelSmall" style={styles.statLabel}>QUEUED</Text>
-              </View>
-            </View>
-            <View style={styles.buttonRow}>
-              <Button 
-                mode="contained" 
-                onPress={handleStartPlate} 
-                disabled={plateStatus?.is_running || isControlLoading}
-                style={[styles.actionBtn, styles.startBtn]}
-                icon="play"
-              >
-                Start
-              </Button>
-              <Button 
-                mode="contained" 
-                onPress={handleStopPlate} 
-                disabled={!plateStatus?.is_running || isControlLoading}
-                style={[styles.actionBtn, styles.stopBtn]}
-                icon="stop"
-              >
-                Stop
-              </Button>
-            </View>
-            <View style={styles.uploadRow}>
-              <Button
-                mode="outlined"
-                icon="upload"
-                onPress={() => (document.getElementById('upload-rego') as any)?.click()}
-                disabled={isControlLoading}
-                style={styles.uploadBtn}
-              >
-                Upload Plates
-              </Button>
-              <input
-                id="upload-rego"
-                type="file"
-                style={{ display: 'none' }}
-                onChange={(e) => onFileChange(e, 'wa_rego')}
-                accept=".txt"
-              />
-            </View>
-            <LiveLogPanel file="wa" title="Live WA Activity" height={140} />
-          </Card.Content>
-        </Card>
+        {/* ─── Section Label ───────────────────── */}
+        <Text style={[styles.sectionLabel, { marginTop: spacing.xl }]}>CONTROLS</Text>
 
-        {/* CC Checker Section */}
-        <Card style={styles.statusSectionCard}>
-          <Card.Title 
-            title="CC Checker" 
-            subtitle={status?.is_running ? "Active" : "Idle"}
-            left={(props) => <Avatar.Icon {...props} icon="credit-card-search" backgroundColor={status?.is_running ? "#3B82F6" : "#6B7280"} />}
-          />
-          <Card.Content>
-            <View style={styles.statsRow}>
-              <View style={styles.statItem}>
-                <Text variant="titleLarge" style={styles.statValue}>{status?.total_processed || 0}</Text>
-                <Text variant="labelSmall" style={styles.statLabel}>PROCESSED</Text>
-              </View>
-              <View style={styles.statItem}>
-                <Text variant="titleLarge" style={styles.statValue}>{status?.remaining_cards || 0}</Text>
-                <Text variant="labelSmall" style={styles.statLabel}>REMAINING</Text>
-              </View>
-            </View>
-            <View style={styles.buttonRow}>
-              <Button 
-                mode="contained" 
-                onPress={handleStartCC} 
-                disabled={status?.is_running || isControlLoading}
-                style={[styles.actionBtn, styles.startBtn]}
-                icon="play"
-              >
-                Start
-              </Button>
-              <Button 
-                mode="contained" 
-                onPress={handleStopCC} 
-                disabled={!status?.is_running || isControlLoading}
-                style={[styles.actionBtn, styles.stopBtn]}
-                icon="stop"
-              >
-                Stop
-              </Button>
-            </View>
-            <View style={styles.uploadRow}>
-              <Button
-                mode="outlined"
-                icon="upload"
-                onPress={() => (document.getElementById('upload-cc') as any)?.click()}
-                disabled={isControlLoading}
-                style={styles.uploadBtn}
-              >
-                Upload Cards
-              </Button>
-              <input
-                id="upload-cc"
-                type="file"
-                style={{ display: 'none' }}
-                onChange={(e) => onFileChange(e, 'cc')}
-                accept=".txt"
-              />
-            </View>
-            <LiveLogPanel file="cc" title="Live CC Activity" height={140} />
-          </Card.Content>
-        </Card>
-
-        <Button
-          icon="delete-sweep"
-          mode="outlined"
-          onPress={handleClearAll}
-          style={styles.globalClearBtn}
-          textColor="#EF4444"
+        {/* ─── CC Checker Panel ────────────────── */}
+        <ControlPanel
+          title="CC / PPSR Checker"
+          icon="credit-score"
+          accentColor={colors.info}
+          isRunning={ccRunning}
+          isLoading={actionLoading}
+          onStart={() => execute(() => api.startProcessing(), 'CC Checker started', 'Failed to start', handleRefresh)}
+          onStop={() => execute(() => api.stopProcessing(), 'CC Checker stopped', 'Failed to stop', handleRefresh)}
         >
-          Clear All Data & Logs
-        </Button>
+          <Text style={styles.helpHint}>Validates cards via PPSR payment gateway. Uses cards from upload.</Text>
+        </ControlPanel>
 
+        <ResultsTable title="PPSR Results" rows={ccResultRows} maxRows={5} emptyText="No cards checked yet" />
+
+        {/* ─── CarFacts Panel ───────────────────── */}
+        <ControlPanel
+          title="CarFacts Report"
+          icon="fact-check"
+          accentColor={colors.warning}
+          isRunning={cfRunning}
+          isLoading={actionLoading}
+          onStart={() => execute(() => api.startCarfacts(), 'CarFacts started', 'Failed to start', handleRefresh)}
+          onStop={() => execute(() => api.stopCarfacts(), 'CarFacts stopped', 'Failed to stop', handleRefresh)}
+          startDisabled={(carfactsStatus?.pending_plates || 0) === 0}
+        >
+          <Text style={styles.helpHint}>
+            Purchases CarFacts vehicle reports using PASS/SUCCESS cards. Uses plates from upload.
+          </Text>
+        </ControlPanel>
+
+        <ResultsTable title="CarFacts Results" rows={cfResultRows} maxRows={5} emptyText="No reports yet" />
+
+        {/* ─── WA Checkout Panel ───────────────── */}
+        <ControlPanel
+          title="WA Checkout"
+          icon="shopping-cart-checkout"
+          accentColor={colors.accent}
+          isRunning={coRunning}
+          isLoading={actionLoading}
+          onStart={() => execute(() => api.startWaCheckout(), 'Checkout started', 'Failed to start', handleRefresh)}
+          onStop={() => execute(() => api.stopWaCheckout(), 'Checkout stopped', 'Failed to stop', handleRefresh)}
+          startDisabled={checkoutStatus?.hits_to_process === 0}
+        >
+          {checkoutStatus?.pending_payment ? (
+            <Button
+              mode="contained"
+              onPress={() => setShowCardModal(true)}
+              icon="credit-card-plus"
+              style={styles.urgentBtn}
+              labelStyle={styles.compactLabel}
+            >
+              Select Card — {checkoutStatus.pending_payment.plate}
+            </Button>
+          ) : (
+            <Text style={styles.helpHint}>
+              Automates WA rego payments for discovered hits. Prompts for card selection.
+            </Text>
+          )}
+        </ControlPanel>
+
+        <ResultsTable title="WA Rego Results" rows={waResultRows} maxRows={5} emptyText="No hits or checkouts yet" />
+
+        {/* ─── Live Activity Terminal ──────────── */}
+        <Text style={[styles.sectionLabel, { marginTop: spacing.xl }]}>LIVE ACTIVITY</Text>
+        <LiveLogPanel file="cc" title="CC Checker" height={150} />
+        <LiveLogPanel file="carfacts" title="CarFacts" height={150} />
+        <LiveLogPanel file="wa-checkout" title="WA Checkout" height={150} />
+
+        {/* ─── Footer Actions ──────────────────── */}
+        <View style={styles.footerRow}>
+          <Button
+            icon="delete-sweep"
+            mode="text"
+            compact
+            onPress={() =>
+              execute(
+                async () => {
+                  await api.clearResults();
+                  await api.clearPlateResults();
+                  await api.clearWaCheckoutLogs();
+                  await api.clearCarfactsLogs();
+                },
+                'All data cleared',
+                'Failed to clear',
+                handleRefresh,
+              )
+            }
+            textColor={colors.textMuted}
+            labelStyle={styles.footerLabel}
+          >
+            Clear All
+          </Button>
+        </View>
       </ScrollView>
+
+      {checkoutStatus?.pending_payment && (
+        <CardSelectionModal
+          visible={showCardModal}
+          plate={checkoutStatus.pending_payment.plate}
+          onSelect={(card) =>
+            execute(
+              () => api.selectCard(card),
+              'Card selected',
+              'Failed to select card',
+              () => {
+                setShowCardModal(false);
+                handleRefresh();
+              },
+            )
+          }
+          onDismiss={() => setShowCardModal(false)}
+        />
+      )}
 
       <Snackbar
         visible={showSnack}
-        onDismiss={() => setShowSnack(false)}
+        onDismiss={dismissSnack}
         duration={3000}
+        style={styles.snackbar}
       >
         {snackMessage}
       </Snackbar>
-    </>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   container: {
     flex: 1,
-    backgroundColor: '#F3F4F6',
-    padding: 16,
+  },
+  scrollContent: {
+    padding: spacing.lg,
+    paddingBottom: spacing['4xl'],
   },
   header: {
-    marginBottom: 20,
-    marginTop: 8,
+    marginBottom: spacing.xl,
+    marginTop: spacing.sm,
   },
   title: {
+    fontSize: 36,
+    fontWeight: '900',
+    color: colors.textPrimary,
+    letterSpacing: -1,
+    lineHeight: 40,
+  },
+  sectionLabel: {
+    color: colors.textMuted,
+    fontSize: 10,
     fontWeight: '800',
-    color: '#111827',
+    letterSpacing: 2.5,
+    marginBottom: spacing.md,
   },
-  subtitle: {
-    color: '#6B7280',
-    letterSpacing: 1,
-  },
-  statusSectionCard: {
-    marginBottom: 16,
-    borderRadius: 16,
-    backgroundColor: '#FFFFFF',
-    elevation: 2,
-  },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    paddingVertical: 12,
-    backgroundColor: '#F9FAFB',
-    borderRadius: 12,
-    marginBottom: 16,
-  },
-  statItem: {
-    alignItems: 'center',
-  },
-  statValue: {
-    fontWeight: '700',
-    color: '#111827',
-  },
-  statLabel: {
-    color: '#9CA3AF',
-    marginTop: 2,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  actionBtn: {
-    flex: 1,
-    borderRadius: 8,
-  },
-  uploadRow: {
-    marginTop: 12,
-  },
-  uploadBtn: {
-    borderRadius: 8,
-    borderColor: '#3B82F6',
-  },
-  startBtn: {
-    backgroundColor: '#10B981',
-  },
-  stopBtn: {
-    backgroundColor: '#EF4444',
-  },
-  globalClearBtn: {
-    marginTop: 8,
-    marginBottom: 40,
-    borderColor: '#EF4444',
+  uploadSection: {
+    backgroundColor: colors.surface,
+    borderRadius: radii.md,
     borderWidth: 1,
+    borderColor: colors.border,
+    padding: spacing.md,
+    marginBottom: spacing.md,
+  },
+
+  helpHint: {
+    color: colors.textMuted,
+    fontSize: 10,
+    marginTop: spacing.sm,
+    lineHeight: 14,
+  },
+  compactBtn: {
+    borderColor: colors.border,
+    borderRadius: radii.sm,
+  },
+  compactLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  urgentBtn: {
+    backgroundColor: colors.danger,
+    borderRadius: radii.sm,
+  },
+  footerRow: {
+    alignItems: 'center',
+    marginTop: spacing['2xl'],
+    paddingTop: spacing.lg,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
+  footerLabel: {
+    fontSize: 12,
+    letterSpacing: 0.5,
+  },
+  snackbar: {
+    backgroundColor: colors.surfaceElevated,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
 });

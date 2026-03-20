@@ -1,4 +1,4 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
@@ -6,77 +6,93 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { PaperProvider } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 import { Asset } from 'expo-asset';
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useMemo } from 'react';
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { paperTheme, colors } from '@/constants/theme';
 import { SplashAnimation } from '@/components/SplashAnimation';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
+
+/** React Navigation theme derived from our Paper theme */
+const navTheme = {
+  dark: true,
+  colors: {
+    primary: colors.primary,
+    background: colors.background,
+    card: colors.surface,
+    text: colors.textPrimary,
+    border: colors.border,
+    notification: colors.danger,
+  },
+  fonts: {
+    regular: { fontFamily: 'System', fontWeight: '400' as const },
+    medium: { fontFamily: 'System', fontWeight: '500' as const },
+    bold: { fontFamily: 'System', fontWeight: '700' as const },
+    heavy: { fontFamily: 'System', fontWeight: '800' as const },
+  },
+};
 
 export const unstable_settings = {
   anchor: '(tabs)',
 };
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [appIsReady, setAppIsReady] = useState(false);
   const [animationFinished, setAnimationFinished] = useState(false);
 
   useEffect(() => {
     async function prepare() {
       try {
-        console.log('App: Preparing...');
-        // Pre-load images/assets
-        await Asset.loadAsync([
-          require('@/assets/images/icon.png'),
-        ]);
-        
-        // Wait a bit for other things
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await Asset.loadAsync([require('@/assets/images/icon.png')]);
+        await new Promise((resolve) => setTimeout(resolve, 500));
       } catch (e) {
         console.warn(e);
       } finally {
-        console.log('App: Ready');
-        // Tell the application to render
         setAppIsReady(true);
       }
     }
-
     prepare();
   }, []);
 
   const onAnimationFinish = useCallback(() => {
-    console.log('App: Animation finished');
     setAnimationFinished(true);
   }, []);
 
   useEffect(() => {
     if (appIsReady) {
-      console.log('App: Hiding native splash');
-      // Hide the native splash screen as soon as our custom animation is ready to take over
       SplashScreen.hideAsync();
     }
   }, [appIsReady]);
 
-  if (!appIsReady) {
-    return null;
-  }
+  if (!appIsReady) return null;
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PaperProvider>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          {!animationFinished && (
-            <SplashAnimation onFinish={onAnimationFinish} />
-          )}
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      <PaperProvider theme={paperTheme}>
+        <ThemeProvider value={navTheme}>
+          {!animationFinished && <SplashAnimation onFinish={onAnimationFinish} />}
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: colors.background },
+              animation: 'fade',
+            }}
+          >
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen
+              name="modal"
+              options={{
+                presentation: 'modal',
+                headerShown: true,
+                headerTitle: 'Settings',
+                headerStyle: { backgroundColor: colors.surface },
+                headerTintColor: colors.textPrimary,
+              }}
+            />
           </Stack>
-          <StatusBar style="auto" />
+          <StatusBar style="light" />
         </ThemeProvider>
       </PaperProvider>
     </QueryClientProvider>
