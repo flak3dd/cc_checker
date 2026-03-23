@@ -1,0 +1,14 @@
+# Frontend (deployed separately or via Expo)
+frontend/
+# Automation scripts (run locally, not on Vercel)
+automation/
+# Data files (ephemeral on Vercel)
+data/
+# Screenshots (ephemeral on Vercel)
+screenshots/
+logs/
+# Local scripts
+start.sh
+automate.sh
+# Large dependencies
+node_modules/

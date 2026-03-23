@@ -7,20 +7,21 @@ import {
   useWaCheckoutStatusQuery,
   useCarfactsStatusQuery,
   useResultsQuery,
-  useWaCheckoutResultsQuery,
-  useCarfactsResultsQuery,
 } from '@/hooks/useQueries';
 import { StatusIsland } from '@/components/StatusIsland';
 import { HeroStats } from '@/components/HeroStats';
 import { ControlPanel } from '@/components/ControlPanel';
 import { LiveLogPanel } from '@/components/LiveLogPanel';
-import { ResultsTable } from '@/components/ResultsTable';
 import { FilePickerButton } from '@/components/FilePickerButton';
 import { CardSelectionModal } from '@/components/CardSelectionModal';
-import { Text, Button, Snackbar } from 'react-native-paper';
+import { AnimatedCard } from '@/components/AnimatedCard';
+import { AnimatedPressable } from '@/components/AnimatedPressable';
+import { impactHeavy } from '@/utils/haptics';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Text, Button, Snackbar, SegmentedButtons } from 'react-native-paper';
 import { api } from '@/services/api';
 import { useActionHandler } from '@/hooks/useActionHandler';
-import { colors, spacing, radii } from '@/constants/theme';
+import { colors, spacing, radii, fontSize, shadows } from '@/constants/theme';
 
 export default function DashboardScreen() {
   const { data: status, isLoading: statusLoading, refetch: refetchStatus } = useStatusQuery();
@@ -28,17 +29,25 @@ export default function DashboardScreen() {
   const { data: analytics, isLoading: analyticsLoading, refetch: refetchAnalytics } = useAnalyticsQuery();
   const { data: carfactsStatus, isLoading: carfactsLoading, refetch: refetchCarfacts } = useCarfactsStatusQuery();
   const { data: ccResults } = useResultsQuery();
-  const { data: waCheckoutResults } = useWaCheckoutResultsQuery();
-  const { data: carfactsResults } = useCarfactsResultsQuery();
 
   const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
   const [showCardModal, setShowCardModal] = useState(false);
+  const [checkoutTerm, setCheckoutTerm] = useState<string>('12');
 
   const isRefreshing = statusLoading || analyticsLoading || checkoutLoading || carfactsLoading;
 
   useEffect(() => {
     setShowCardModal(!!checkoutStatus?.pending_payment);
   }, [checkoutStatus?.pending_payment]);
+
+  useEffect(() => {
+    api.getCheckoutTerm().then(({ term }) => setCheckoutTerm(String(term))).catch(() => {});
+  }, []);
+
+  const handleTermChange = (value: string) => {
+    setCheckoutTerm(value);
+    api.setCheckoutTerm(Number(value) as 3 | 6 | 12).catch(() => {});
+  };
 
   const handleRefresh = () => {
     refetchStatus();
@@ -47,7 +56,6 @@ export default function DashboardScreen() {
     refetchCarfacts();
   };
 
-  // ─── Derived Data ──────────────────────────
   const ccRunning = !!status?.is_running;
   const coRunning = !!checkoutStatus?.is_running;
   const cfRunning = !!carfactsStatus?.is_running;
@@ -61,58 +69,25 @@ export default function DashboardScreen() {
     return labels;
   }, [ccRunning, coRunning, cfRunning]);
 
-  const heroStats = useMemo(() => [
-    { value: status?.total_processed || 0, label: 'LIVE CARDS · PPSR', color: colors.primary },
-    { value: status?.remaining_cards || 0, label: 'QUEUED · PPSR', color: colors.textPrimary },
-    { value: checkoutStatus?.hits_to_process || 0, label: 'LIVE · WA REGO', color: colors.accent },
-    { value: carfactsStatus?.results_count || 0, label: 'CHECKED · CARFACTS', color: colors.warning },
-  ], [status, checkoutStatus, carfactsStatus]);
-
-  // ─── Results Data ───────────────────────
-  const ccResultRows = useMemo(() => {
+  const { passCount, failCount, totalChecked, successRate } = useMemo(() => {
     const flat = ccResults?.runs.flat() || [];
-    return [...flat].reverse().map((r, i) => ({
-      id: `cc-${r.card_number}-${i}`,
-      primary: `•••• ${r.card_number.slice(-4)}`,
-      secondary: `${r.mm}/${r.yy} · CVV ${r.cvv}`,
-      status: r.status,
-      statusColor: r.status === 'SUCCESS' ? colors.success
-        : r.status === 'PASS' ? colors.primary
-        : r.status === 'FAIL' ? colors.danger
-        : colors.warning,
-      timestamp: r.timestamp ? new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : undefined,
-    }));
+    const passes = flat.filter(r => r.status === 'SUCCESS' || r.status === 'PASS' || r.status === 'UNKNOWN').length;
+    const fails = flat.length - passes;
+    const total = flat.length;
+    const rate = total > 0 ? Math.round((passes / total) * 100) : 0;
+    return { passCount: passes, failCount: fails, totalChecked: total, successRate: rate };
   }, [ccResults]);
 
-  const waResultRows = useMemo(() => {
-    const checkouts = [...(waCheckoutResults || [])].reverse();
-    return checkouts.map((r: any, i: number) => ({
-      id: `co-${i}`,
-      primary: r.plate,
-      secondary: `Card ...${r.card_last4 || '????'} · ${r.mm || '??'}/${r.yy || '??'}`,
-      status: r.status || 'UNKNOWN',
-      statusColor: r.status === 'SUCCESS' ? colors.success
-        : r.status === 'FAILED' ? colors.danger
-        : colors.warning,
-      timestamp: r.timestamp ? new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : undefined,
-    }));
-  }, [waCheckoutResults]);
-
-  const cfResultRows = useMemo(() => {
-    const results = [...(carfactsResults || [])].reverse();
-    return results.map((r: any, i: number) => ({
-      id: `cf-${i}`,
-      primary: r.plate,
-      secondary: r.card_last4 ? `Card ...${r.card_last4}` : (r.details || r.error || 'Report check'),
-      status: r.status || 'UNKNOWN',
-      statusColor: r.status === 'SUCCESS' ? colors.success
-        : r.status === 'FAILED' ? colors.danger
-        : r.status === 'NO_REPORT' ? colors.textMuted
-        : r.status === 'CRASH' ? colors.danger
-        : colors.warning,
-      timestamp: r.timestamp ? new Date(r.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : undefined,
-    }));
-  }, [carfactsResults]);
+  const heroData = useMemo(() => ({
+    passCount,
+    failCount,
+    successRate,
+    queueCount: status?.remaining_cards || 0,
+    totalChecked,
+    waPlates: checkoutStatus?.hits_to_process || 0,
+    cfReports: carfactsStatus?.results_count || 0,
+    cfPending: carfactsStatus?.pending_plates || 0,
+  }), [passCount, failCount, successRate, totalChecked, status, checkoutStatus, carfactsStatus]);
 
   const handleFilePicked = async (uri: string, name: string) => {
     await execute(
@@ -138,128 +113,158 @@ export default function DashboardScreen() {
           />
         }
       >
-        {/* ─── Header ──────────────────────────── */}
-        <View style={styles.header}>
-          <Text style={styles.title}>COMMAND{'\n'}CENTER</Text>
-        </View>
+        {/* ─── Header ─────────────────────────── */}
+        <AnimatedCard index={0}>
+          <View style={styles.header}>
+            <Text style={styles.eyebrow}>AUTOMATION SUITE</Text>
+            <Text style={styles.title}>Card{'\n'}Checker</Text>
+          </View>
+        </AnimatedCard>
 
-        {/* ─── Status Island ───────────────────── */}
-        <StatusIsland activeCount={activeCount} labels={activeLabels} />
+        <AnimatedCard index={1}>
+          <StatusIsland activeCount={activeCount} labels={activeLabels} />
+        </AnimatedCard>
 
-        {/* ─── Hero Stats Bento Grid ───────────── */}
-        <HeroStats stats={heroStats} />
+        <AnimatedCard index={2}>
+          <HeroStats {...heroData} />
+        </AnimatedCard>
 
-        {/* ─── Upload Section ───────────────────── */}
-        <Text style={styles.sectionLabel}>UPLOAD DATA</Text>
-        <View style={styles.uploadSection}>
-          <FilePickerButton
-            label="Upload Cards (.txt)"
-            icon="credit-card"
-            disabled={actionLoading}
-            onFilePicked={handleFilePicked}
-          />
-          <Text style={styles.helpHint}>
-            Format: CC|MM|YY|CVV per line
-          </Text>
-        </View>
+        {/* ─── Upload ──────────────────────────── */}
+        <AnimatedCard index={3}>
+          <View style={styles.sectionHeader}>
+            <View style={styles.sectionDot} />
+            <Text style={styles.sectionLabel}>UPLOAD DATA</Text>
+          </View>
+          <View style={styles.uploadSection}>
+            <FilePickerButton
+              label="Upload Cards (.txt)"
+              icon="upload-file"
+              disabled={actionLoading}
+              onFilePicked={handleFilePicked}
+            />
+            <Text style={styles.helpHint}>Format: CC|MM|YY|CVV — one card per line</Text>
+          </View>
+        </AnimatedCard>
 
-        {/* ─── Section Label ───────────────────── */}
-        <Text style={[styles.sectionLabel, { marginTop: spacing.xl }]}>CONTROLS</Text>
+        {/* ─── Controls ────────────────────────── */}
+        <AnimatedCard index={4}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.info }]} />
+            <Text style={styles.sectionLabel}>CONTROLS</Text>
+          </View>
+        </AnimatedCard>
 
-        {/* ─── CC Checker Panel ────────────────── */}
-        <ControlPanel
-          title="CC / PPSR Checker"
-          icon="credit-score"
-          accentColor={colors.info}
-          isRunning={ccRunning}
-          isLoading={actionLoading}
-          onStart={() => execute(() => api.startProcessing(), 'CC Checker started', 'Failed to start', handleRefresh)}
-          onStop={() => execute(() => api.stopProcessing(), 'CC Checker stopped', 'Failed to stop', handleRefresh)}
-        >
-          <Text style={styles.helpHint}>Validates cards via PPSR payment gateway. Uses cards from upload.</Text>
-        </ControlPanel>
-
-        <ResultsTable title="PPSR Results" rows={ccResultRows} maxRows={5} emptyText="No cards checked yet" />
-
-        {/* ─── CarFacts Panel ───────────────────── */}
-        <ControlPanel
-          title="CarFacts Report"
-          icon="fact-check"
-          accentColor={colors.warning}
-          isRunning={cfRunning}
-          isLoading={actionLoading}
-          onStart={() => execute(() => api.startCarfacts(), 'CarFacts started', 'Failed to start', handleRefresh)}
-          onStop={() => execute(() => api.stopCarfacts(), 'CarFacts stopped', 'Failed to stop', handleRefresh)}
-          startDisabled={(carfactsStatus?.pending_plates || 0) === 0}
-        >
-          <Text style={styles.helpHint}>
-            Purchases CarFacts vehicle reports using PASS/SUCCESS cards. Uses plates from upload.
-          </Text>
-        </ControlPanel>
-
-        <ResultsTable title="CarFacts Results" rows={cfResultRows} maxRows={5} emptyText="No reports yet" />
-
-        {/* ─── WA Checkout Panel ───────────────── */}
-        <ControlPanel
-          title="WA Checkout"
-          icon="shopping-cart-checkout"
-          accentColor={colors.accent}
-          isRunning={coRunning}
-          isLoading={actionLoading}
-          onStart={() => execute(() => api.startWaCheckout(), 'Checkout started', 'Failed to start', handleRefresh)}
-          onStop={() => execute(() => api.stopWaCheckout(), 'Checkout stopped', 'Failed to stop', handleRefresh)}
-          startDisabled={checkoutStatus?.hits_to_process === 0}
-        >
-          {checkoutStatus?.pending_payment ? (
-            <Button
-              mode="contained"
-              onPress={() => setShowCardModal(true)}
-              icon="credit-card-plus"
-              style={styles.urgentBtn}
-              labelStyle={styles.compactLabel}
-            >
-              Select Card — {checkoutStatus.pending_payment.plate}
-            </Button>
-          ) : (
-            <Text style={styles.helpHint}>
-              Automates WA rego payments for discovered hits. Prompts for card selection.
-            </Text>
-          )}
-        </ControlPanel>
-
-        <ResultsTable title="WA Rego Results" rows={waResultRows} maxRows={5} emptyText="No hits or checkouts yet" />
-
-        {/* ─── Live Activity Terminal ──────────── */}
-        <Text style={[styles.sectionLabel, { marginTop: spacing.xl }]}>LIVE ACTIVITY</Text>
-        <LiveLogPanel file="cc" title="CC Checker" height={150} />
-        <LiveLogPanel file="carfacts" title="CarFacts" height={150} />
-        <LiveLogPanel file="wa-checkout" title="WA Checkout" height={150} />
-
-        {/* ─── Footer Actions ──────────────────── */}
-        <View style={styles.footerRow}>
-          <Button
-            icon="delete-sweep"
-            mode="text"
-            compact
-            onPress={() =>
-              execute(
-                async () => {
-                  await api.clearResults();
-                  await api.clearPlateResults();
-                  await api.clearWaCheckoutLogs();
-                  await api.clearCarfactsLogs();
-                },
-                'All data cleared',
-                'Failed to clear',
-                handleRefresh,
-              )
-            }
-            textColor={colors.textMuted}
-            labelStyle={styles.footerLabel}
+        <AnimatedCard index={5}>
+          <ControlPanel
+            title="CC / PPSR Checker"
+            icon="credit-score"
+            accentColor={colors.info}
+            isRunning={ccRunning}
+            onStart={() => execute(() => api.startProcessing(), 'CC Checker started', 'Failed to start', handleRefresh)}
+            onStop={() => execute(() => api.stopProcessing(), 'CC Checker stopped', 'Failed to stop', handleRefresh)}
           >
-            Clear All
-          </Button>
-        </View>
+            <Text style={styles.helpHint}>Validates cards via PPSR payment gateway</Text>
+          </ControlPanel>
+        </AnimatedCard>
+
+        <AnimatedCard index={6}>
+          <ControlPanel
+            title="CarFacts Report"
+            icon="fact-check"
+            accentColor={colors.warning}
+            isRunning={cfRunning}
+            onStart={() => execute(() => api.startCarfacts(), 'CarFacts started', 'Failed to start', handleRefresh)}
+            onStop={() => execute(() => api.stopCarfacts(), 'CarFacts stopped', 'Failed to stop', handleRefresh)}
+            startDisabled={false}
+          >
+            <Text style={styles.helpHint}>Purchases CarFacts reports using PASS cards</Text>
+          </ControlPanel>
+        </AnimatedCard>
+
+        <AnimatedCard index={7}>
+          <ControlPanel
+            title="WA Checkout"
+            icon="shopping-cart-checkout"
+            accentColor={colors.accent}
+            isRunning={coRunning}
+            onStart={() => execute(() => api.startWaCheckout(), 'Checkout started', 'Failed to start', handleRefresh)}
+            onStop={() => execute(() => api.stopWaCheckout(), 'Checkout stopped', 'Failed to stop', handleRefresh)}
+            startDisabled={checkoutStatus?.hits_to_process === 0}
+          >
+            <View style={styles.termRow}>
+              <Text style={styles.termLabel}>TERM</Text>
+              <SegmentedButtons
+                value={checkoutTerm}
+                onValueChange={handleTermChange}
+                density="small"
+                style={styles.termButtons}
+                buttons={[
+                  { value: '3', label: '3 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                  { value: '6', label: '6 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                  { value: '12', label: '12 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                ]}
+              />
+            </View>
+
+            {checkoutStatus?.pending_payment ? (
+              <Button
+                mode="contained"
+                onPress={() => setShowCardModal(true)}
+                icon="credit-card-plus"
+                style={styles.urgentBtn}
+                labelStyle={styles.compactLabel}
+              >
+                Select Card — {checkoutStatus.pending_payment.plate}
+              </Button>
+            ) : (
+              <Text style={styles.helpHint}>Automates WA rego payments · {checkoutTerm} month term</Text>
+            )}
+          </ControlPanel>
+        </AnimatedCard>
+
+        {/* ─── Live Activity ───────────────────── */}
+        <AnimatedCard index={8}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.success }]} />
+            <Text style={styles.sectionLabel}>LIVE ACTIVITY</Text>
+          </View>
+        </AnimatedCard>
+
+        <AnimatedCard index={9}>
+          <LiveLogPanel file="cc" title="CC Checker" height={150} />
+        </AnimatedCard>
+        <AnimatedCard index={10}>
+          <LiveLogPanel file="carfacts" title="CarFacts" height={150} />
+        </AnimatedCard>
+        <AnimatedCard index={11}>
+          <LiveLogPanel file="wa-checkout" title="WA Checkout" height={150} />
+        </AnimatedCard>
+
+        {/* ─── Footer ──────────────────────────── */}
+        <AnimatedCard index={12}>
+          <View style={styles.footerRow}>
+            <AnimatedPressable
+              onPress={() => {
+                impactHeavy();
+                execute(
+                  async () => {
+                    await api.clearResults();
+                    await api.clearPlateResults();
+                    await api.clearWaCheckoutLogs();
+                    await api.clearCarfactsLogs();
+                  },
+                  'All data cleared',
+                  'Failed to clear',
+                  handleRefresh,
+                );
+              }}
+              style={styles.clearAllBtn}
+            >
+              <MaterialIcons name="delete-sweep" size={16} color={colors.danger} />
+              <Text style={styles.clearAllText}>CLEAR ALL DATA</Text>
+            </AnimatedPressable>
+          </View>
+        </AnimatedCard>
       </ScrollView>
 
       {checkoutStatus?.pending_payment && (
@@ -271,22 +276,14 @@ export default function DashboardScreen() {
               () => api.selectCard(card),
               'Card selected',
               'Failed to select card',
-              () => {
-                setShowCardModal(false);
-                handleRefresh();
-              },
+              () => { setShowCardModal(false); handleRefresh(); },
             )
           }
           onDismiss={() => setShowCardModal(false)}
         />
       )}
 
-      <Snackbar
-        visible={showSnack}
-        onDismiss={dismissSnack}
-        duration={3000}
-        style={styles.snackbar}
-      >
+      <Snackbar visible={showSnack} onDismiss={dismissSnack} duration={3000} style={styles.snackbar}>
         {snackMessage}
       </Snackbar>
     </SafeAreaView>
@@ -294,76 +291,111 @@ export default function DashboardScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  container: {
-    flex: 1,
-  },
-  scrollContent: {
-    padding: spacing.lg,
-    paddingBottom: spacing['4xl'],
-  },
-  header: {
-    marginBottom: spacing.xl,
-    marginTop: spacing.sm,
+  safeArea: { flex: 1, backgroundColor: colors.background },
+  container: { flex: 1 },
+  scrollContent: { padding: spacing.xl, paddingBottom: spacing['5xl'] },
+  header: { marginBottom: spacing['3xl'], marginTop: spacing.md },
+  eyebrow: {
+    color: colors.primary,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 4,
+    fontFamily: 'monospace',
+    marginBottom: spacing.sm,
   },
   title: {
-    fontSize: 36,
+    fontSize: fontSize['5xl'],
     fontWeight: '900',
     color: colors.textPrimary,
-    letterSpacing: -1,
-    lineHeight: 40,
+    letterSpacing: -1.5,
+    lineHeight: 46,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.lg,
+  },
+  sectionDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: colors.primary,
   },
   sectionLabel: {
     color: colors.textMuted,
-    fontSize: 10,
+    fontSize: fontSize.xs,
     fontWeight: '800',
-    letterSpacing: 2.5,
-    marginBottom: spacing.md,
+    letterSpacing: 3,
+    fontFamily: 'monospace',
   },
   uploadSection: {
-    backgroundColor: colors.surface,
-    borderRadius: radii.md,
-    borderWidth: 1,
-    borderColor: colors.border,
-    padding: spacing.md,
-    marginBottom: spacing.md,
+    marginBottom: spacing.lg,
   },
-
   helpHint: {
     color: colors.textMuted,
-    fontSize: 10,
+    fontSize: fontSize.xs,
     marginTop: spacing.sm,
     lineHeight: 14,
+    paddingLeft: spacing.xs,
+    fontFamily: 'monospace',
+    letterSpacing: 0.5,
   },
-  compactBtn: {
+  termRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.lg,
+    marginBottom: spacing.lg,
+  },
+  termLabel: {
+    color: colors.textMuted,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 2,
+    fontFamily: 'monospace',
+  },
+  termButtons: {
+    flex: 1,
+  },
+  termBtn: {
     borderColor: colors.border,
-    borderRadius: radii.sm,
+    backgroundColor: colors.surfaceElevated,
   },
-  compactLabel: {
-    fontSize: 12,
-    fontWeight: '600',
+  termBtnLabel: {
+    fontSize: fontSize.base,
+    fontWeight: '700',
   },
-  urgentBtn: {
-    backgroundColor: colors.danger,
-    borderRadius: radii.sm,
-  },
+  compactLabel: { fontSize: fontSize.md, fontWeight: '600' },
+  urgentBtn: { backgroundColor: colors.danger, borderRadius: radii.md },
   footerRow: {
     alignItems: 'center',
-    marginTop: spacing['2xl'],
-    paddingTop: spacing.lg,
+    marginTop: spacing['3xl'],
+    paddingTop: spacing.xl,
     borderTopWidth: 1,
     borderTopColor: colors.border,
   },
-  footerLabel: {
-    fontSize: 12,
-    letterSpacing: 0.5,
+  clearAllBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.xl,
+    borderRadius: radii.md,
+    backgroundColor: colors.dangerMuted,
+    borderWidth: 1,
+    borderColor: colors.danger + '20',
+  },
+  clearAllText: {
+    color: colors.danger,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 2,
+    fontFamily: 'monospace',
   },
   snackbar: {
     backgroundColor: colors.surfaceElevated,
     borderWidth: 1,
     borderColor: colors.border,
+    borderRadius: radii.lg,
   },
 });

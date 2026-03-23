@@ -1,4 +1,4 @@
-import { ConsoleMessage, Page, Browser } from 'playwright';
+import { Page, Browser, BrowserContext } from 'playwright';
 import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,6 +7,8 @@ import { launchStealthBrowser } from '../shared/browser';
 export {};
 
 // --- Configuration & Paths ---
+const NUM_WORKERS = 5;
+
 const currentDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(currentDir, '../../');
 const dataDir = path.join(rootDir, 'data');
@@ -47,45 +49,13 @@ async function gotoWithRetry(page: Page, url: string, retries = 3) {
   }
 }
 
-async function fillCardDetails(page: Page, card: string[]) {
-  const [cc, mm, yy, cvv] = card;
-  const selectors = {
-    cc: ['input[name*="cardNumber"]', '#cardNumber', 'input[name*="card"]'],
-    mm: ['select[name*="expiryMonth"]', 'input[name*="expiryMonth"]', '#expiryMonth'],
-    yy: ['select[name*="expiryYear"]', 'input[name*="expiryYear"]', '#expiryYear'],
-    cvv: ['input[name*="cvn"]', 'input[name*="cvv"]', '#cvv', '#cvn'],
-    name: ['input[name*="cardholder"]', 'input[name*="name"]', '#nameOnCard']
-  };
-
-  const fill = async (name: string, list: string[], val: string) => {
-    for (const sel of list) {
-      try {
-        const el = await page.$(sel);
-        if (el && await el.isVisible()) {
-          if (sel.startsWith('select')) {
-            await page.selectOption(sel, { label: val.padStart(2, '0') }).catch(() => page.selectOption(sel, { value: val }));
-          } else {
-            await el.fill(val);
-          }
-          return true;
-        }
-      } catch {}
-    }
-    return false;
-  };
-
-  await fill('Name', selectors.name, 'Valued Customer');
-  await fill('CC', selectors.cc, cc);
-  await fill('MM', selectors.mm, mm);
-  await fill('YY', selectors.yy, yy);
-  await fill('CVV', selectors.cvv, cvv);
-}
-
-// --- Generator ---
+// --- Plate Source (thread-safe via in-memory lock) ---
 let currentIndex = 0;
 if (fs.existsSync(progressFile)) {
   currentIndex = parseInt(fs.readFileSync(progressFile, 'utf8').trim() || '0');
 }
+
+let lock = false;
 
 function genSequentialPlate() {
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -105,118 +75,119 @@ function genSequentialPlate() {
   return plate;
 }
 
-function getNextPlate() {
-  if (fs.existsSync(platesFile)) {
-    const lines = fs.readFileSync(platesFile, 'utf8').trim().split('\n').filter(l => l.trim());
-    if (lines.length > 0) {
-      const plate = lines[0].trim();
-      fs.writeFileSync(platesFile, lines.slice(1).join('\n'));
-      return plate;
-    }
+async function getNextPlate(): Promise<string | null> {
+  while (lock) {
+    await new Promise(resolve => setTimeout(resolve, 10));
   }
-  return genSequentialPlate();
+  lock = true;
+  try {
+    if (fs.existsSync(platesFile)) {
+      const content = fs.readFileSync(platesFile, 'utf8').trim();
+      const lines = content.split('\n').filter(l => l.trim());
+      if (lines.length > 0) {
+        const plate = lines[0].trim();
+        fs.writeFileSync(platesFile, lines.slice(1).join('\n'));
+        return plate;
+      }
+    }
+    return genSequentialPlate();
+  } finally {
+    lock = false;
+  }
 }
 
-// --- Main Loop ---
-(async () => {
-  logger('=== WA Rego Checker Session Started ===');
-  const { browser, context } = await launchStealthBrowser();
+function recordHit(plate: string, details: string) {
+  const hitData = {
+    plate,
+    timestamp: new Date().toISOString(),
+    details,
+    screenshot: `hit_${plate}.png`,
+  };
+
+  let currentHits: any[] = [];
+  if (fs.existsSync(waHitsFile)) {
+    try { currentHits = JSON.parse(fs.readFileSync(waHitsFile, 'utf8')); } catch {}
+  }
+  currentHits.push(hitData);
+  fs.writeFileSync(waHitsFile, JSON.stringify(currentHits, null, 2));
+  fs.appendFileSync(waHitsTxt, plate + '\n');
+}
+
+// --- Worker ---
+async function worker(id: number, context: BrowserContext, hitsRef: { count: number }) {
   const page = await context.newPage();
+  page.on('pageerror', err => logger(`[W${id}][PAGE ERROR] ${err.message}`));
 
-  page.on('pageerror', err => logger(`[PAGE ERROR] ${err.message}`));
+  let localAttempts = 0;
 
-  let hitsFound = 0;
-  let attempts = 0;
+  while (hitsRef.count < 50) {
+    const plate = await getNextPlate();
+    if (!plate) {
+      logger(`[W${id}] No more plates, stopping.`);
+      break;
+    }
 
-  while (hitsFound < 20) {
-    attempts++;
-    const plate = getNextPlate();
-    logger(`Checking ${plate} (Attempt ${attempts}, Hits ${hitsFound})`);
+    localAttempts++;
+    logger(`[W${id}] Checking ${plate} (attempt ${localAttempts}, total hits ${hitsRef.count})`);
 
     try {
       await gotoWithRetry(page, 'https://online.transport.wa.gov.au/webExternal/accountlookup/');
-      await page.waitForLoadState('networkidle', { timeout: 10000 });
+      await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
 
       const plateInput = await page.waitForSelector('input[name="plateTextField"]', { timeout: 10000 });
       await page.fill('input[name="mdlNumberTextField"]', '');
       await plateInput.fill(plate);
-      
+
       await page.click('button:has-text("Search"), input[type="submit"][value*="Search"]');
       await page.waitForTimeout(5000);
 
       const pageText = (await page.innerText('body')).toLowerCase();
-      
-      const isMiss = pageText.includes('cannot find') || pageText.includes('invalid') || pageText.includes('not found') || pageText.includes('no payments currently required');
+
+      const isMiss = pageText.includes('cannot find') || pageText.includes('invalid') ||
+                     pageText.includes('not found') || pageText.includes('no payments currently required');
       const isHit = pageText.includes('your account details') && !isMiss;
 
       if (isHit) {
-        hitsFound++;
-        logger(` → [HIT] ${plate} - Record found!`);
-        
-        const hitData = {
-          plate,
-          timestamp: new Date().toISOString(),
-          details: pageText.includes('payment due') ? 'Payment Due' : 'Account Found',
-          screenshot: `hit_${plate}.png`
-        };
-
-        // Append to JSON list
-        let currentHits = [];
-        if (fs.existsSync(waHitsFile)) {
-          try { currentHits = JSON.parse(fs.readFileSync(waHitsFile, 'utf8')); } catch {}
-        }
-        currentHits.push(hitData);
-        fs.writeFileSync(waHitsFile, JSON.stringify(currentHits, null, 2));
-        
-        // Also keep TXT for backward compatibility if needed by other scripts
-        fs.appendFileSync(waHitsTxt, plate + '\n');
-        
-        const needsPayment = pageText.includes('payment due') || pageText.includes('outstanding') || pageText.includes('pay now') || pageText.includes('proceed to confirmation');
-        if (needsPayment) {
-          logger(` → [ACTION] Payment required for ${plate}. Attempting background checkout...`);
-          
-          if (fs.existsSync(cardsPath)) {
-            const lines = fs.readFileSync(cardsPath, 'utf8').trim().split('\n');
-            if (lines.length > 0) {
-              const card = lines[0].split('|');
-              fs.writeFileSync(cardsPath, lines.slice(1).join('\n'));
-              
-              try {
-                const payBtn = await page.waitForSelector('button:has-text("Pay"), button:has-text("Proceed")', { timeout: 10000 });
-                await payBtn.click();
-                await page.waitForLoadState('networkidle');
-                
-                await fillCardDetails(page, card);
-                await page.click('button[type="submit"], #payButton');
-                await page.waitForTimeout(10000);
-                
-                const result = (await page.innerText('body')).toLowerCase();
-                const success = result.includes('successful') || result.includes('thank you');
-                logger(` → [PAYMENT] ${success ? 'SUCCESS' : 'FAILED'} for ${plate} using card ${card[0].slice(-4)}`);
-                
-                if (!success) fs.appendFileSync(cardsPath, `\n${card.join('|')}`); // Re-queue if failed
-                await page.screenshot({ path: path.join(hitsDir, `paid_${plate}_${success ? 'ok' : 'fail'}.png`) });
-              } catch (e: any) {
-                logger(` → [ERROR] Checkout flow failed: ${e.message}`);
-                fs.appendFileSync(cardsPath, `\n${card.join('|')}`);
-              }
-            }
-          }
-        }
-        
-        await page.screenshot({ path: path.join(hitsDir, `hit_${plate}.png`), fullPage: true });
+        hitsRef.count++;
+        const details = pageText.includes('payment due') ? 'Payment Due' : 'Account Found';
+        logger(` → [W${id}][HIT] ${plate} - ${details}! (total hits: ${hitsRef.count})`);
+        recordHit(plate, details);
+        await page.screenshot({ path: path.join(hitsDir, `hit_${plate}.png`), fullPage: true }).catch(() => {});
       } else {
-        if (attempts % 10 === 0) logger(`... processed 10 plates, current: ${plate}`);
+        if (localAttempts % 10 === 0) {
+          logger(`[W${id}] ... processed ${localAttempts} plates`);
+        }
       }
-
     } catch (e: any) {
-      logger(` → [CRASH] Error on ${plate}: ${e.message}`);
-      await page.screenshot({ path: path.join(debugDir, `crash_${plate}.png`) });
+      logger(`[W${id}][CRASH] ${plate}: ${e.message}`);
+      await page.screenshot({ path: path.join(debugDir, `crash_${plate}.png`) }).catch(() => {});
     }
 
-    await page.waitForTimeout(3000 + Math.random() * 5000);
+    // Stagger delay per worker to avoid rate limiting
+    await page.waitForTimeout(2000 + Math.random() * 4000);
   }
 
+  await page.close();
+  logger(`[W${id}] Worker finished. ${localAttempts} plates checked.`);
+}
+
+// --- Main ---
+(async () => {
+  logger(`=== WA Rego Checker Started (${NUM_WORKERS} workers) ===`);
+
+  const { browser, context } = await launchStealthBrowser();
+  const hitsRef = { count: 0 };
+
+  // Launch all workers in parallel
+  const workers = Array.from({ length: NUM_WORKERS }, (_, i) =>
+    worker(i + 1, context, hitsRef)
+  );
+
+  await Promise.all(workers);
+
+  // Save final progress
+  fs.writeFileSync(progressFile, currentIndex.toString());
+
   await browser.close();
-  logger('=== Session Finished ===');
+  logger(`=== Session Finished — ${hitsRef.count} hits from ${currentIndex} plates ===`);
 })();

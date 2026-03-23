@@ -9,6 +9,15 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}🚀 Starting CC Checker System...${NC}"
 
+# 0. Kill any orphan automation processes from previous runs
+echo -e "${GREEN}🧹 Cleaning up orphan processes...${NC}"
+pkill -f "tsx.*automation/" 2>/dev/null
+pkill -f "tsx.*check" 2>/dev/null
+pkill -f "tsx.*checkout" 2>/dev/null
+pkill -f "tsx.*carfacts" 2>/dev/null
+# Clean stale state files
+rm -f data/wa_pending_payment.json data/wa_selected_card.json 2>/dev/null
+
 # 1. Start Node.js TypeScript Backend
 echo -e "${GREEN}📡 Starting Backend (TypeScript/Express)...${NC}"
 npx tsx backend/server.ts --port 8000 &

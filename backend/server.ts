@@ -23,6 +23,7 @@ const WA_HITS_FILE = path.join(DATA_DIR, 'wa_hits.txt');
 const WA_CHECKOUT_RESULTS_JSON = path.join(DATA_DIR, 'wa_checkout_results.json');
 const WA_PENDING_PAYMENT_FILE = path.join(DATA_DIR, 'wa_pending_payment.json');
 const WA_SELECTED_CARD_FILE = path.join(DATA_DIR, 'wa_selected_card.json');
+const WA_CHECKOUT_TERM_FILE = path.join(DATA_DIR, 'wa_checkout_term.json');
 const CARFACTS_LOG = path.join(DATA_DIR, 'carfacts_log.txt');
 const CARFACTS_RESULTS_JSON = path.join(DATA_DIR, 'carfacts_results.json');
 
@@ -36,11 +37,18 @@ app.use(express.json());
 app.use(morgan('dev'));
 app.use('/screenshots', express.static(SCREENSHOTS_DIR));
 
-// Process Management
+// Process Management — all null on startup, nothing auto-starts
 let ccCheckProcess: ChildProcess | null = null;
 let plateCheckProcess: ChildProcess | null = null;
 let plateCheckoutProcess: ChildProcess | null = null;
 let carfactsProcess: ChildProcess | null = null;
+
+// Clean up any stale state files from previous runs on startup
+const STALE_FILES = [
+  path.join(DATA_DIR, 'wa_pending_payment.json'),
+  path.join(DATA_DIR, 'wa_selected_card.json'),
+];
+STALE_FILES.forEach(f => { try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch {} });
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -349,7 +357,32 @@ app.post('/api/plate-check/generate', (req: Request, res: Response) => {
 app.get('/api/plate-check/status', (req: Request, res: Response) => {
   const isRunning = isProcessAlive(plateCheckProcess);
   if (!isRunning && plateCheckProcess) plateCheckProcess = null;
-  res.json({ is_running: isRunning });
+
+  let hitsCount = 0;
+  if (fs.existsSync(WA_HITS_JSON)) {
+    try { hitsCount = JSON.parse(fs.readFileSync(WA_HITS_JSON, 'utf-8')).length; } catch {}
+  }
+  const pendingCount = fs.existsSync(PLATES_FILE)
+    ? fs.readFileSync(PLATES_FILE, 'utf-8').split('\n').filter(l => l.trim()).length
+    : 0;
+
+  res.json({
+    is_running: isRunning,
+    hits_count: hitsCount,
+    total_lines: hitsCount + pendingCount,
+    pending_count: pendingCount,
+  });
+});
+
+app.get('/api/plate-check/results', (req: Request, res: Response) => {
+  if (!fs.existsSync(LOG_FILE)) return res.json({ results: [] });
+  try {
+    const content = fs.readFileSync(LOG_FILE, 'utf-8');
+    const lines = content.split('\n').filter(l => l.trim()).slice(-100);
+    res.json({ results: lines });
+  } catch {
+    res.json({ results: [] });
+  }
 });
 
 // --- Plate Checkout Endpoints ---
@@ -407,6 +440,23 @@ app.get('/api/wa-rego/checkout-results', (req: Request, res: Response) => {
   } catch {
     res.json([]);
   }
+});
+
+app.post('/api/wa-checkout/set-term', (req: Request, res: Response) => {
+  const { term } = req.body;
+  if (![3, 6, 12].includes(term)) {
+    return res.status(400).json({ success: false, message: 'Term must be 3, 6, or 12' });
+  }
+  fs.writeFileSync(WA_CHECKOUT_TERM_FILE, JSON.stringify({ term }));
+  res.json({ success: true, message: `Term set to ${term} months` });
+});
+
+app.get('/api/wa-checkout/term', (req: Request, res: Response) => {
+  let term = 12;
+  if (fs.existsSync(WA_CHECKOUT_TERM_FILE)) {
+    try { term = JSON.parse(fs.readFileSync(WA_CHECKOUT_TERM_FILE, 'utf-8')).term; } catch {}
+  }
+  res.json({ term });
 });
 
 app.get('/api/wa-checkout/status', (req: Request, res: Response) => {
@@ -501,6 +551,6 @@ app.post('/api/carfacts/clear', (req: Request, res: Response) => {
   res.json({ success: true, message: 'CarFacts logs and results cleared' });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(PORT as number, '0.0.0.0', () => {
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
 });

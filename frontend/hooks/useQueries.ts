@@ -2,12 +2,19 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from '@/services/api';
 import { ProcessingStatus, AnalyticsData, ResultsResponse, PlateCheckStatus, PlateCheckResponse, WaCheckoutStatus, CarfactsStatus } from '@/types';
 
+/** Common retry config for device resilience */
+const DEVICE_QUERY_OPTS = {
+  retry: 2,
+  retryDelay: (attempt: number) => Math.min(1000 * 2 ** attempt, 10000),
+} as const;
+
 export const useStatusQuery = () =>
   useQuery<ProcessingStatus>({
     queryKey: ['status'],
     queryFn: () => api.getStatus(),
-    refetchInterval: 2000, // Poll every 2 seconds
-    staleTime: 1000,
+    refetchInterval: 3000,
+    staleTime: 1500,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useResultsQuery = () =>
@@ -15,6 +22,7 @@ export const useResultsQuery = () =>
     queryKey: ['results'],
     queryFn: () => api.getResults(),
     staleTime: 10000,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useAnalyticsQuery = () =>
@@ -23,6 +31,7 @@ export const useAnalyticsQuery = () =>
     queryFn: () => api.getAnalytics(),
     refetchInterval: 5000,
     staleTime: 2000,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const usePlateCheckStatusQuery = () =>
@@ -31,6 +40,7 @@ export const usePlateCheckStatusQuery = () =>
     queryFn: () => api.getPlateCheckStatus(),
     refetchInterval: 3000,
     staleTime: 1500,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const usePlateCheckResultsQuery = () =>
@@ -39,14 +49,16 @@ export const usePlateCheckResultsQuery = () =>
     queryFn: () => api.getPlateCheckResults(),
     refetchInterval: 5000,
     staleTime: 2500,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useLogTailQuery = (file: 'wa' | 'results' | 'cc' | 'wa-checkout' | 'carfacts' = 'wa') =>
   useQuery<{ lines: string[] }>({
     queryKey: ['logTail', file],
     queryFn: () => api.getLogTail(file),
-    refetchInterval: 1500,
-    staleTime: 500,
+    refetchInterval: 2000,
+    staleTime: 1000,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useWaCheckoutStatusQuery = () =>
@@ -55,6 +67,7 @@ export const useWaCheckoutStatusQuery = () =>
     queryFn: () => api.getWaCheckoutStatus(),
     refetchInterval: 3000,
     staleTime: 1500,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useWaRegoHitsQuery = () =>
@@ -62,6 +75,7 @@ export const useWaRegoHitsQuery = () =>
     queryKey: ['waRegoHits'],
     queryFn: () => api.getWaRegoHits(),
     refetchInterval: 5000,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useWaCheckoutResultsQuery = () =>
@@ -69,6 +83,7 @@ export const useWaCheckoutResultsQuery = () =>
     queryKey: ['waCheckoutResults'],
     queryFn: () => api.getWaCheckoutResults(),
     refetchInterval: 5000,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useCarfactsStatusQuery = () =>
@@ -77,6 +92,7 @@ export const useCarfactsStatusQuery = () =>
     queryFn: () => api.getCarfactsStatus(),
     refetchInterval: 3000,
     staleTime: 1500,
+    ...DEVICE_QUERY_OPTS,
   });
 
 export const useCarfactsResultsQuery = () =>
@@ -84,4 +100,5 @@ export const useCarfactsResultsQuery = () =>
     queryKey: ['carfactsResults'],
     queryFn: () => api.getCarfactsResults(),
     refetchInterval: 5000,
+    ...DEVICE_QUERY_OPTS,
   });

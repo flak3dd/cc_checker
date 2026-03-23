@@ -1,0 +1,16 @@
+[
+  {
+    "plate": "1FOH224",
+    "timestamp": "2026-03-20T16:25:37.434Z",
+    "status": "CRASH",
+    "error": "locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByPlaceholder(/vin|rego|registration|vehicle/i).or(getByLabel(/registration|vin/i)).or(locator('input[type=\"text\"]:visible')) to be visible\u001b[22m\n",
+    "screenshot": "carfacts_crash_1FOH224.png"
+  },
+  {
+    "plate": "1TUD604",
+    "timestamp": "2026-03-20T17:30:00.356Z",
+    "status": "CRASH",
+    "error": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#vin1').or(getByPlaceholder(/vin|rego|registration/i)).or(locator('input[name=\"Vin\"]')) to be visible\u001b[22m\n",
+    "screenshot": "carfacts_crash_1TUD604.png"
+  }
+]

@@ -1,6 +1,8 @@
 /**
- * Design token system — Cyberpunk HUD Control Panel
- * Strong Cyan primary on Carbon Black, high-density ops aesthetic.
+ * Design token system — Cyberpunk HUD v3
+ * Deep blacks canvas (#000000 / #0A0A0F), neon accents (cyan, green, amber, crimson).
+ * Generous padding (16-20pt), rounded corners (16-20pt), monospaced tactical labels.
+ * Breathing room between sections (24-32pt).
  */
 
 import { Platform } from 'react-native';
@@ -9,58 +11,73 @@ import type { MD3Theme } from 'react-native-paper';
 
 // ─── Color Tokens ───────────────────────────────────────────────
 export const colors = {
-  // Primary
+  // Primary — Cyan
   primary: '#00CCCC',
   primaryDim: '#008F8F',
-  primaryGlow: 'rgba(0, 204, 204, 0.12)',
+  primaryGlow: 'rgba(0, 204, 204, 0.14)',
   primaryMuted: 'rgba(0, 204, 204, 0.08)',
+  primaryBright: '#33FFFF',
 
-  // Backgrounds
-  background: '#08080D',
-  surface: '#101018',
-  surfaceElevated: '#181822',
-  surfaceHighlight: '#20202C',
+  // Backgrounds — Deep blacks
+  background: '#000000',
+  surface: '#0A0A0F',
+  surfaceElevated: '#111118',
+  surfaceHighlight: '#1A1A24',
+  surfaceHover: '#222230',
 
   // Borders
-  border: '#1E1E2E',
-  borderActive: '#2A2A40',
+  border: '#1A1A28',
+  borderActive: '#2A2A42',
   borderFocus: '#00CCCC',
+  borderSubtle: '#0F0F18',
 
   // Text
-  textPrimary: '#E8E8F0',
-  textSecondary: '#7A7A90',
-  textMuted: '#44445A',
-  textInverse: '#08080D',
+  textPrimary: '#EAEAF2',
+  textSecondary: '#8888A0',
+  textMuted: '#505068',
+  textInverse: '#000000',
 
-  // Semantic
+  // Semantic — Neon accents
   success: '#00E676',
   successDim: '#00A854',
-  successMuted: 'rgba(0, 230, 118, 0.12)',
+  successMuted: 'rgba(0, 230, 118, 0.10)',
+  successGlow: 'rgba(0, 230, 118, 0.25)',
   danger: '#FF3B5C',
   dangerDim: '#CC2F4A',
-  dangerMuted: 'rgba(255, 59, 92, 0.12)',
+  dangerMuted: 'rgba(255, 59, 92, 0.10)',
+  dangerGlow: 'rgba(255, 59, 92, 0.25)',
   warning: '#FFB020',
-  warningMuted: 'rgba(255, 176, 32, 0.12)',
+  warningDim: '#CC8D1A',
+  warningMuted: 'rgba(255, 176, 32, 0.10)',
+  warningGlow: 'rgba(255, 176, 32, 0.25)',
   info: '#4D8AFF',
-  infoMuted: 'rgba(77, 138, 255, 0.12)',
+  infoDim: '#3D6ECC',
+  infoMuted: 'rgba(77, 138, 255, 0.10)',
+  infoGlow: 'rgba(77, 138, 255, 0.25)',
   accent: '#9B6DFF',
   accentDim: '#7B4FDB',
-  accentMuted: 'rgba(155, 109, 255, 0.12)',
+  accentMuted: 'rgba(155, 109, 255, 0.10)',
+  accentGlow: 'rgba(155, 109, 255, 0.25)',
 
   // Terminal
-  terminalBg: '#0A0A10',
+  terminalBg: '#050508',
   terminalText: '#00E676',
   terminalDim: '#3A6A4A',
   terminalHighlight: '#FFB020',
   terminalError: '#FF3B5C',
+  terminalCursor: '#00CCCC',
 
-  // Misc
-  overlay: 'rgba(0, 0, 0, 0.7)',
-  shimmer: 'rgba(255, 255, 255, 0.02)',
+  // Glass & Overlay
+  overlay: 'rgba(0, 0, 0, 0.80)',
+  shimmer: 'rgba(255, 255, 255, 0.03)',
+  glassLight: 'rgba(255, 255, 255, 0.03)',
+  glassBorder: 'rgba(255, 255, 255, 0.05)',
+  glassThin: 'rgba(255, 255, 255, 0.02)',
 } as const;
 
-// ─── Spacing ────────────────────────────────────────────────────
+// ─── Spacing (generous: 16-20pt cards, 24-32pt sections) ───────
 export const spacing = {
+  '2xs': 2,
   xs: 4,
   sm: 8,
   md: 12,
@@ -69,20 +86,101 @@ export const spacing = {
   '2xl': 24,
   '3xl': 32,
   '4xl': 40,
+  '5xl': 56,
 } as const;
 
-// ─── Radius ─────────────────────────────────────────────────────
+// ─── Radius (16-20pt for cards) ─────────────────────────────────
 export const radii = {
-  sm: 6,
-  md: 10,
-  lg: 14,
-  xl: 18,
+  xs: 4,
+  sm: 8,
+  md: 12,
+  lg: 16,
+  xl: 20,
+  '2xl': 24,
   full: 999,
 } as const;
 
-// ─── Typography ─────────────────────────────────────────────────
+// ─── Typography Scale ───────────────────────────────────────────
+export const fontSize = {
+  '2xs': 8,
+  xs: 9,
+  sm: 10,
+  base: 11,
+  md: 12,
+  lg: 14,
+  xl: 16,
+  '2xl': 20,
+  '3xl': 24,
+  '4xl': 32,
+  '5xl': 40,
+  display: 48,
+} as const;
+
+// ─── Shadows ────────────────────────────────────────────────────
+export const shadows = {
+  sm: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  md: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  lg: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 16,
+    elevation: 8,
+  },
+  glow: (color: string, radius = 12) =>
+    Platform.select({
+      ios: {
+        shadowColor: color,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.5,
+        shadowRadius: radius,
+      },
+      default: { elevation: Math.min(Math.round(radius / 2), 12) },
+    }) as any,
+  borderGlow: (color: string) => ({
+    borderColor: color + '40',
+    borderWidth: 1,
+    ...Platform.select({
+      ios: {
+        shadowColor: color,
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+      },
+      android: { elevation: 4 },
+    }),
+  }),
+} as const;
+
+// ─── Animation Presets ──────────────────────────────────────────
+export const motion = {
+  /** Default spring for UI transitions */
+  spring: { damping: 14, stiffness: 120, mass: 0.8 },
+  /** Snappy spring for buttons */
+  springSnap: { damping: 18, stiffness: 200, mass: 0.6 },
+  /** Gentle spring for cards */
+  springGentle: { damping: 12, stiffness: 80, mass: 1 },
+  /** Stagger delay per item (ms) */
+  staggerDelay: 50,
+  /** Press scale */
+  pressScale: 0.96,
+} as const;
+
+// ─── Fonts ──────────────────────────────────────────────────────
 export const Fonts = Platform.select({
-  ios: { sans: 'system-ui', mono: 'ui-monospace' },
+  ios: { sans: 'System', mono: 'Menlo' },
   default: { sans: 'normal', mono: 'monospace' },
   web: {
     sans: "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
@@ -94,7 +192,7 @@ export const Fonts = Platform.select({
 export const paperTheme: MD3Theme = {
   ...MD3DarkTheme,
   dark: true,
-  roundness: radii.md,
+  roundness: radii.lg,
   colors: {
     ...MD3DarkTheme.colors,
     primary: colors.primary,
@@ -133,7 +231,7 @@ export const paperTheme: MD3Theme = {
       level2: colors.surfaceElevated,
       level3: colors.surfaceHighlight,
       level4: colors.surfaceHighlight,
-      level5: colors.surfaceHighlight,
+      level5: colors.surfaceHover,
     },
   },
 };

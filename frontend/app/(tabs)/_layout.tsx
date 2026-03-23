@@ -1,11 +1,11 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { colors, spacing } from '@/constants/theme';
+import { colors, spacing, radii, shadows } from '@/constants/theme';
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
@@ -19,7 +19,10 @@ export default function TabLayout() {
         tabBarButton: HapticTab,
         tabBarStyle: [
           styles.tabBar,
-          { paddingBottom: Math.max(insets.bottom, spacing.sm), height: 56 + Math.max(insets.bottom, spacing.sm) },
+          {
+            paddingBottom: Math.max(insets.bottom, spacing.sm),
+            height: 60 + Math.max(insets.bottom, spacing.sm),
+          },
         ],
         tabBarLabelStyle: styles.tabLabel,
         tabBarItemStyle: styles.tabItem,
@@ -29,21 +32,33 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Dashboard',
-          tabBarIcon: ({ color }) => <IconSymbol size={22} name="chart.bar.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <View style={focused ? styles.activeIconWrap : undefined}>
+              <IconSymbol size={22} name="chart.bar.fill" color={color} />
+            </View>
+          ),
         }}
       />
       <Tabs.Screen
         name="results"
         options={{
           title: 'Results',
-          tabBarIcon: ({ color }) => <IconSymbol size={22} name="list.bullet.rectangle.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <View style={focused ? styles.activeIconWrap : undefined}>
+              <IconSymbol size={22} name="list.bullet.rectangle.fill" color={color} />
+            </View>
+          ),
         }}
       />
       <Tabs.Screen
         name="plate-check"
         options={{
           title: 'Plates',
-          tabBarIcon: ({ color }) => <IconSymbol size={22} name="car.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <View style={focused ? styles.activeIconWrap : undefined}>
+              <IconSymbol size={22} name="car.fill" color={color} />
+            </View>
+          ),
         }}
       />
     </Tabs>
@@ -60,11 +75,17 @@ const styles = StyleSheet.create({
     shadowOpacity: 0,
   },
   tabLabel: {
-    fontSize: 10,
-    fontWeight: '700',
-    letterSpacing: 0.5,
+    fontSize: 9,
+    fontWeight: '800',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
   },
   tabItem: {
     paddingVertical: spacing.xs,
+  },
+  activeIconWrap: {
+    backgroundColor: colors.primaryMuted,
+    borderRadius: radii.sm,
+    padding: 4,
   },
 });

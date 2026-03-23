@@ -1,5 +1,5 @@
 // Card and processing types
-export type CardStatus = 'SUCCESS' | 'PASS' | 'FAIL' | 'ERROR_PREPAYMENT' | 'PROCESSING';
+export type CardStatus = 'SUCCESS' | 'PASS' | 'UNKNOWN' | 'FAIL' | 'ERROR_PREPAYMENT' | 'PROCESSING';
 export type ProcessingState = 'idle' | 'running' | 'paused' | 'error';
 
 export interface ProcessingStatus {

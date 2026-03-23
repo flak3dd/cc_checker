@@ -1,7 +1,12 @@
 {
+  "scripts": {
+    "dev": "bash start.sh",
+    "vercel-build": "echo 'API-only deployment'"
+  },
   "dependencies": {
     "body-parser": "^2.2.2",
     "cors": "^2.8.6",
+    "expo": "^55.0.8",
     "express": "^5.2.1",
     "morgan": "^1.10.1",
     "multer": "^2.1.1",
@@ -15,6 +20,7 @@
     "@types/morgan": "^1.9.10",
     "@types/multer": "^2.1.0",
     "@types/node": "^25.5.0",
+    "@vercel/node": "^5.6.18",
     "tsx": "^4.21.0"
   }
 }

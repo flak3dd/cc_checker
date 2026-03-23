@@ -17,6 +17,8 @@
       }
     },
     "android": {
+      "package": "com.cccheckerapp.android",
+      "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#08080D",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -52,11 +54,19 @@
         {
           "iCloudContainerEnvironment": "Production"
         }
-      ]
+      ],
+      "expo-asset",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": false
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7e9ace6d-7581-46bc-99b8-72e1813162ce"
+      }
     }
   }
 }

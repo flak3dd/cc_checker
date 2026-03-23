@@ -1,42 +1,53 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ScrollView, StyleSheet, View, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { usePlateCheckStatusQuery, usePlateCheckResultsQuery } from '@/hooks/useQueries';
-import { Text, ActivityIndicator, Button, Snackbar, Badge, Divider } from 'react-native-paper';
+import { usePlateCheckStatusQuery, usePlateCheckResultsQuery, useWaRegoHitsQuery } from '@/hooks/useQueries';
+import { Text, Snackbar } from 'react-native-paper';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { api } from '@/services/api';
+import { api, API_BASE_URL } from '@/services/api';
+import { ControlPanel } from '@/components/ControlPanel';
 import { LiveLogPanel } from '@/components/LiveLogPanel';
+import { ResultsTable } from '@/components/ResultsTable';
+import { AnimatedCard } from '@/components/AnimatedCard';
+import { AnimatedPressable } from '@/components/AnimatedPressable';
 import { useActionHandler } from '@/hooks/useActionHandler';
-import { colors, spacing, radii } from '@/constants/theme';
+import { colors, spacing, radii, fontSize, shadows } from '@/constants/theme';
 
 export default function PlateCheckScreen() {
   const { data: status, isLoading: statusLoading, refetch: refetchStatus } = usePlateCheckStatusQuery();
   const { data: resultsData, isLoading: resultsLoading, refetch: refetchResults } = usePlateCheckResultsQuery();
+  const { data: waHits, isLoading: hitsLoading, refetch: refetchHits } = useWaRegoHitsQuery();
   const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
 
-  const isLoading = statusLoading || resultsLoading;
+  const isLoading = statusLoading || resultsLoading || hitsLoading;
+  const isRunning = !!status?.is_running;
 
   const handleRefresh = () => {
     refetchStatus();
     refetchResults();
+    refetchHits();
   };
 
-  const renderResultItem = (item: string) => {
-    const isHit = item.includes('[HIT');
-    const isFail = item.includes('[FAIL');
-    const badgeColor = isHit ? colors.success : isFail ? colors.danger : colors.textMuted;
-    const badgeLabel = isHit ? 'HIT' : isFail ? 'FAIL' : 'LOG';
-
-    return (
-      <View style={styles.resultItem}>
-        <View style={styles.resultHeader}>
-          <Badge style={[styles.badge, { backgroundColor: badgeColor }]}>{badgeLabel}</Badge>
-          <Text style={styles.resultTimestamp}>{item.split(' - ').pop()}</Text>
-        </View>
-        <Text style={[styles.resultText, isHit && { color: colors.success }]}>{item}</Text>
-      </View>
-    );
-  };
+  // Build WA hits rows with screenshot URLs
+  const hitRows = useMemo(() => {
+    if (!waHits || waHits.length === 0) return [];
+    return [...waHits].reverse().map((hit: any, i: number) => {
+      const screenshotUrl = hit.screenshot
+        ? `${API_BASE_URL}/screenshots/hits/${hit.screenshot}`
+        : undefined;
+      return {
+        id: `hit-${i}`,
+        primary: hit.plate,
+        secondary: hit.details || 'Account Found',
+        status: 'HIT' as string,
+        statusColor: colors.success,
+        timestamp: hit.timestamp
+          ? new Date(hit.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+          : undefined,
+        imageUrl: screenshotUrl,
+      };
+    });
+  }, [waHits]);
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -45,119 +56,154 @@ export default function PlateCheckScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl
-            refreshing={isLoading}
-            onRefresh={handleRefresh}
-            tintColor={colors.primary}
-            colors={[colors.primary]}
-          />
+          <RefreshControl refreshing={isLoading} onRefresh={handleRefresh}
+            tintColor={colors.primary} colors={[colors.primary]} />
         }
       >
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.title}>Plate Checker</Text>
-          <Text style={styles.subtitle}>WA GOVERNMENT PLATE ROTATION</Text>
-        </View>
+        {/* ─── Header ─────────────────────────── */}
+        <AnimatedCard index={0}>
+          <View style={styles.header}>
+            <Text style={styles.eyebrow}>WA GOVERNMENT</Text>
+            <Text style={styles.title}>Plate Checker</Text>
+          </View>
+        </AnimatedCard>
 
-        {/* Status Panel */}
-        <View style={styles.statusPanel}>
-          <View style={styles.statusTop}>
-            <View>
-              <Text style={styles.statusLabel}>STATUS</Text>
-              <View style={styles.statusIndicator}>
-                <View style={[styles.dot, { backgroundColor: status?.is_running ? colors.success : colors.danger }]} />
-                <Text style={[styles.statusValue, { color: status?.is_running ? colors.success : colors.danger }]}>
-                  {status?.is_running ? 'RUNNING' : 'STOPPED'}
-                </Text>
-              </View>
+        {/* ─── Stats Grid ─────────────────────── */}
+        <AnimatedCard index={1}>
+          <View style={styles.statsGrid}>
+            <View style={styles.statCell}>
+              <Text style={[styles.statValue, { color: colors.success }]}>{status?.hits_count || 0}</Text>
+              <Text style={styles.statLabel}>HITS</Text>
             </View>
-            <View style={styles.statRight}>
-              <Text style={styles.statusLabel}>HITS</Text>
-              <Text style={styles.bigStat}>{status?.hits_count || 0}</Text>
+            <View style={styles.statCell}>
+              <Text style={styles.statValue}>{status?.total_lines || 0}</Text>
+              <Text style={styles.statLabel}>ATTEMPTS</Text>
+            </View>
+            <View style={styles.statCell}>
+              <Text style={[styles.statValue, { color: colors.warning }]}>{status?.pending_count || 0}</Text>
+              <Text style={styles.statLabel}>PENDING</Text>
             </View>
           </View>
+        </AnimatedCard>
 
-          <View style={styles.progressRow}>
-            <Text style={styles.progressText}>Total Attempts: {status?.total_lines || 0}</Text>
-            <Text style={styles.progressText}>Pending: {status?.pending_count || 0}</Text>
+        {/* ─── Control ────────────────────────── */}
+        <AnimatedCard index={2}>
+          <View style={styles.sectionHeader}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.success }]} />
+            <Text style={styles.sectionLabel}>CONTROL</Text>
           </View>
+        </AnimatedCard>
 
-          <View style={styles.divider} />
+        <AnimatedCard index={3}>
+          <ControlPanel
+            title="Plate Rotation"
+            icon="directions-car"
+            accentColor={colors.success}
+            isRunning={isRunning}
+            onStart={() => execute(() => api.startPlateCheck(), 'Plate check started', 'Failed to start', handleRefresh)}
+            onStop={() => execute(() => api.stopPlateCheck(), 'Plate check stopped', 'Failed to stop', handleRefresh)}
+          >
+            <Text style={styles.helpHint}>Rotates through WA plate numbers checking registration status</Text>
+          </ControlPanel>
+        </AnimatedCard>
 
-          <View style={styles.buttonRow}>
-            <Button
-              mode="contained"
-              onPress={() => execute(() => api.startPlateCheck(), 'Plate check started', 'Failed to start', handleRefresh)}
-              disabled={status?.is_running || actionLoading}
-              loading={actionLoading && !status?.is_running}
-              style={[styles.button, { backgroundColor: colors.success }]}
-              labelStyle={styles.btnLabel}
+        {/* ─── Actions ────────────────────────── */}
+        <AnimatedCard index={4}>
+          <View style={styles.actionsRow}>
+            <AnimatedPressable
+              onPress={() => execute(() => api.generatePlates(100), 'Generated 100 plates', 'Failed to generate', handleRefresh)}
+              style={styles.actionBtn}
             >
-              Start Rotation
-            </Button>
-            <Button
-              mode="contained"
-              onPress={() => execute(() => api.stopPlateCheck(), 'Plate check stopped', 'Failed to stop', handleRefresh)}
-              disabled={!status?.is_running || actionLoading}
-              loading={actionLoading && !!status?.is_running}
-              style={[styles.button, { backgroundColor: colors.danger }]}
-              labelStyle={styles.btnLabel}
-            >
-              Stop
-            </Button>
-          </View>
-        </View>
-
-        {/* Live Log */}
-        <LiveLogPanel file="wa" title="Live Rotation Stream" height={200} />
-
-        {/* Activity Header */}
-        <View style={styles.activityHeader}>
-          <Text style={styles.activityTitle}>Recent Activity</Text>
-          <View style={styles.activityActions}>
-            <Button
-              compact
-              onPress={() => execute(() => api.generatePlates(100), 'Plates generated', 'Failed to generate', handleRefresh)}
-              icon="auto-fix"
-              textColor={colors.primary}
-              labelStyle={styles.actionLabel}
-            >
-              Gen
-            </Button>
-            <Button compact onPress={handleRefresh} icon="refresh" textColor={colors.textSecondary} labelStyle={styles.actionLabel}>
-              Refresh
-            </Button>
-            <Button
-              compact
+              <MaterialIcons name="auto-fix-high" size={14} color={colors.primary} />
+              <Text style={styles.actionBtnText}>GENERATE 100</Text>
+            </AnimatedPressable>
+            <AnimatedPressable
               onPress={() => execute(() => api.clearPlateResults(), 'Logs cleared', 'Failed to clear', handleRefresh)}
-              textColor={colors.danger}
-              icon="delete-outline"
-              labelStyle={styles.actionLabel}
+              style={[styles.actionBtn, styles.actionBtnDanger]}
             >
-              Clear
-            </Button>
+              <MaterialIcons name="delete-outline" size={14} color={colors.danger} />
+              <Text style={[styles.actionBtnText, { color: colors.danger }]}>CLEAR LOGS</Text>
+            </AnimatedPressable>
           </View>
-        </View>
+        </AnimatedCard>
 
-        {status?.is_running && (
-          <View style={styles.runningBanner}>
-            <ActivityIndicator animating color={colors.success} size="small" />
-            <Text style={styles.runningText}>Monitoring live rotation...</Text>
+        {/* ─── WA Hits with Screenshots ─────── */}
+        <AnimatedCard index={5}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.success }]} />
+            <Text style={styles.sectionLabel}>WA HITS</Text>
           </View>
+        </AnimatedCard>
+        <AnimatedCard index={6}>
+          <ResultsTable
+            title="PLATES · HITS"
+            rows={hitRows}
+            maxRows={10}
+            emptyText="No hits yet"
+            accentColor={colors.success}
+          />
+        </AnimatedCard>
+
+        {/* ─── Live Log ───────────────────────── */}
+        <AnimatedCard index={7}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.primary }]} />
+            <Text style={styles.sectionLabel}>LIVE STREAM</Text>
+          </View>
+          <LiveLogPanel file="wa" title="Plate Rotation" height={240} />
+        </AnimatedCard>
+
+        {/* ─── Recent Activity ────────────────── */}
+        <AnimatedCard index={8}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.textMuted }]} />
+            <Text style={styles.sectionLabel}>RECENT ACTIVITY</Text>
+          </View>
+        </AnimatedCard>
+
+        {isRunning && (
+          <AnimatedCard index={9}>
+            <View style={styles.runningBanner}>
+              <View style={styles.runningDot} />
+              <Text style={styles.runningText}>Monitoring live rotation...</Text>
+            </View>
+          </AnimatedCard>
         )}
 
-        {resultsData?.results.map((item, index) => (
-          <React.Fragment key={index}>{renderResultItem(item)}</React.Fragment>
-        ))}
+        {resultsData?.results && resultsData.results.length > 0 ? (
+          resultsData.results.slice(-20).reverse().map((item: string, index: number) => {
+            const isHit = item.includes('[HIT');
+            const isFail = item.includes('[FAIL');
+            const itemColor = isHit ? colors.success : isFail ? colors.danger : colors.textSecondary;
+            const badgeLabel = isHit ? 'HIT' : isFail ? 'MISS' : 'LOG';
 
-        {resultsData?.results.length === 0 && (
-          <View style={styles.emptyState}>
-            <MaterialIcons name="search-off" size={40} color={colors.textMuted} />
-            <Text style={styles.emptyText}>No logs found yet.</Text>
-          </View>
+            return (
+              <AnimatedCard key={index} index={10 + index}>
+                <View style={styles.resultItem}>
+                  <View style={[styles.resultDot, { backgroundColor: itemColor }]} />
+                  <View style={styles.resultContent}>
+                    <Text style={[styles.resultText, { color: itemColor }]} numberOfLines={2}>
+                      {item}
+                    </Text>
+                  </View>
+                  <View style={[styles.badge, { backgroundColor: itemColor + '15' }]}>
+                    <Text style={[styles.badgeText, { color: itemColor }]}>{badgeLabel}</Text>
+                  </View>
+                </View>
+              </AnimatedCard>
+            );
+          })
+        ) : (
+          <AnimatedCard index={10}>
+            <View style={styles.emptyState}>
+              <MaterialIcons name="search-off" size={36} color={colors.textMuted} />
+              <Text style={styles.emptyText}>No activity yet</Text>
+              <Text style={styles.emptyHint}>Start a plate rotation to see results</Text>
+            </View>
+          </AnimatedCard>
         )}
 
-        <View style={{ height: 40 }} />
+        <View style={{ height: spacing['5xl'] }} />
       </ScrollView>
 
       <Snackbar visible={showSnack} onDismiss={dismissSnack} duration={3000} style={styles.snackbar}>
@@ -168,182 +214,194 @@ export default function PlateCheckScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollContent: {
-    padding: spacing.lg,
-  },
-  header: {
-    marginBottom: spacing.xl,
-    marginTop: spacing.sm,
+  safeArea: { flex: 1, backgroundColor: colors.background },
+  container: { flex: 1 },
+  scrollContent: { padding: spacing.xl },
+  header: { marginBottom: spacing['2xl'], marginTop: spacing.md },
+  eyebrow: {
+    color: colors.primary,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 4,
+    fontFamily: 'monospace',
+    marginBottom: spacing.sm,
   },
   title: {
-    fontSize: 28,
+    fontSize: fontSize['3xl'],
     fontWeight: '800',
     color: colors.textPrimary,
     letterSpacing: -0.5,
   },
-  subtitle: {
-    color: colors.textMuted,
-    fontSize: 11,
-    fontWeight: '600',
-    letterSpacing: 2,
-    marginTop: spacing.xs,
-  },
-  // ── Status Panel ──
-  statusPanel: {
-    backgroundColor: colors.surface,
+  // Stats
+  statsGrid: {
+    flexDirection: 'row',
+    gap: 1,
+    backgroundColor: colors.borderSubtle,
     borderRadius: radii.lg,
-    padding: spacing.lg,
+    overflow: 'hidden',
+    marginBottom: spacing['2xl'],
     borderWidth: 1,
     borderColor: colors.border,
-    marginBottom: spacing.lg,
   },
-  statusTop: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  statCell: {
+    flex: 1,
+    backgroundColor: colors.surface,
+    paddingVertical: spacing['2xl'],
     alignItems: 'center',
   },
-  statusLabel: {
-    color: colors.textMuted,
-    fontSize: 10,
-    fontWeight: '700',
-    letterSpacing: 1.2,
-  },
-  statusIndicator: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    marginTop: spacing.xs,
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-  },
-  statusValue: {
-    fontSize: 18,
-    fontWeight: '800',
-  },
-  statRight: {
-    alignItems: 'flex-end',
-  },
-  bigStat: {
-    fontSize: 28,
+  statValue: {
+    fontSize: fontSize['4xl'],
     fontWeight: '800',
     color: colors.textPrimary,
     fontVariant: ['tabular-nums'],
-    marginTop: spacing.xs,
+    fontFamily: 'monospace',
+    letterSpacing: -1,
   },
-  progressRow: {
+  statLabel: {
+    fontSize: fontSize['2xs'],
+    fontWeight: '800',
+    color: colors.textMuted,
+    letterSpacing: 2,
+    fontFamily: 'monospace',
+    marginTop: spacing.sm,
+  },
+  // Sections
+  sectionHeader: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: spacing.md,
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.lg,
   },
-  progressText: {
-    color: colors.textSecondary,
-    fontSize: 12,
+  sectionDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
   },
-  divider: {
-    height: 1,
-    backgroundColor: colors.border,
-    marginVertical: spacing.lg,
+  sectionLabel: {
+    color: colors.textMuted,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 3,
+    fontFamily: 'monospace',
   },
-  buttonRow: {
+  helpHint: {
+    color: colors.textMuted,
+    fontSize: fontSize.xs,
+    lineHeight: 14,
+    fontFamily: 'monospace',
+    letterSpacing: 0.5,
+  },
+  // Actions
+  actionsRow: {
     flexDirection: 'row',
     gap: spacing.md,
-  },
-  button: {
-    flex: 1,
-    borderRadius: radii.sm,
-  },
-  btnLabel: {
-    fontSize: 13,
-    fontWeight: '700',
-  },
-  // ── Activity ──
-  activityHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: spacing.xl,
+    marginTop: spacing.sm,
     marginBottom: spacing.md,
   },
-  activityTitle: {
-    color: colors.textPrimary,
-    fontWeight: '700',
-    fontSize: 14,
-  },
-  activityActions: {
+  actionBtn: {
+    flex: 1,
     flexDirection: 'row',
-    gap: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.sm,
+    paddingVertical: spacing.md,
+    borderRadius: radii.md,
+    borderWidth: 1,
+    borderColor: colors.primary + '25',
+    backgroundColor: colors.primaryMuted,
   },
-  actionLabel: {
-    fontSize: 11,
+  actionBtnDanger: {
+    borderColor: colors.danger + '25',
+    backgroundColor: colors.dangerMuted,
   },
+  actionBtnText: {
+    color: colors.primary,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 1.5,
+    fontFamily: 'monospace',
+  },
+  // Running Banner
   runningBanner: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.successMuted,
-    padding: spacing.md,
-    borderRadius: radii.md,
-    marginBottom: spacing.md,
-    gap: spacing.sm,
+    padding: spacing.lg,
+    borderRadius: radii.lg,
+    marginBottom: spacing.lg,
+    gap: spacing.md,
     borderWidth: 1,
-    borderColor: colors.success,
+    borderColor: colors.success + '20',
+  },
+  runningDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.success,
   },
   runningText: {
     color: colors.success,
-    fontWeight: '600',
-    fontSize: 12,
+    fontWeight: '700',
+    fontSize: fontSize.md,
+    fontFamily: 'monospace',
+    letterSpacing: 0.5,
   },
-  // ── Result Items ──
+  // Results
   resultItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: colors.surface,
     borderRadius: radii.md,
-    padding: spacing.md,
+    padding: spacing.lg,
     marginBottom: spacing.sm,
     borderWidth: 1,
     borderColor: colors.border,
+    gap: spacing.md,
   },
-  resultHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: spacing.sm,
+  resultDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
   },
-  badge: {
-    borderRadius: 4,
-    fontSize: 10,
-    fontWeight: '700',
-  },
-  resultTimestamp: {
-    color: colors.textMuted,
-    fontSize: 10,
+  resultContent: {
+    flex: 1,
   },
   resultText: {
     fontFamily: 'monospace',
-    fontSize: 11,
-    color: colors.textSecondary,
+    fontSize: fontSize.sm,
     lineHeight: 16,
   },
-  // ── Empty ──
+  badge: {
+    borderRadius: radii.sm,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: 2,
+  },
+  badgeText: {
+    fontSize: fontSize['2xs'],
+    fontWeight: '800',
+    fontFamily: 'monospace',
+    letterSpacing: 1,
+  },
+  // Empty
   emptyState: {
-    padding: 48,
+    padding: spacing['5xl'],
     alignItems: 'center',
     gap: spacing.md,
   },
   emptyText: {
     color: colors.textMuted,
-    fontSize: 14,
+    fontSize: fontSize.xl,
+    fontWeight: '700',
+  },
+  emptyHint: {
+    color: colors.textMuted,
+    fontSize: fontSize.base,
+    fontFamily: 'monospace',
   },
   snackbar: {
     backgroundColor: colors.surfaceElevated,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radii.lg,
   },
 });

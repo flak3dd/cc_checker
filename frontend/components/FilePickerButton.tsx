@@ -1,8 +1,10 @@
 import React, { useCallback } from 'react';
-import { Platform, Alert } from 'react-native';
-import { Button } from 'react-native-paper';
+import { View, StyleSheet, Alert } from 'react-native';
+import { Text } from 'react-native-paper';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import * as DocumentPicker from 'expo-document-picker';
-import { colors, radii } from '@/constants/theme';
+import { AnimatedPressable } from '@/components/AnimatedPressable';
+import { colors, radii, spacing, fontSize } from '@/constants/theme';
 
 interface FilePickerButtonProps {
   label: string;
@@ -11,13 +13,9 @@ interface FilePickerButtonProps {
   onFilePicked: (uri: string, name: string, mimeType?: string) => void;
 }
 
-/**
- * Cross-platform file picker button.
- * Uses expo-document-picker on native, falls back to HTML input on web.
- */
 export const FilePickerButton: React.FC<FilePickerButtonProps> = ({
   label,
-  icon = 'upload',
+  icon = 'upload-file',
   disabled,
   onFilePicked,
 }) => {
@@ -27,39 +25,67 @@ export const FilePickerButton: React.FC<FilePickerButtonProps> = ({
         type: 'text/plain',
         copyToCacheDirectory: true,
       });
-
       if (!result.canceled && result.assets && result.assets.length > 0) {
         const asset = result.assets[0];
         onFilePicked(asset.uri, asset.name, asset.mimeType ?? undefined);
       }
-    } catch (err) {
+    } catch {
       Alert.alert('Error', 'Failed to pick file');
     }
   }, [onFilePicked]);
 
   return (
-    <Button
-      mode="outlined"
-      icon={icon}
-      compact
+    <AnimatedPressable
       onPress={handlePick}
       disabled={disabled}
-      style={styles.btn}
-      textColor={colors.textSecondary}
-      labelStyle={styles.label}
+      style={[styles.container, disabled && styles.disabled]}
     >
-      {label}
-    </Button>
+      <View style={styles.iconWrap}>
+        <MaterialIcons name={icon as any} size={22} color={disabled ? colors.textMuted : colors.primary} />
+      </View>
+      <View>
+        <Text style={[styles.label, disabled && { color: colors.textMuted }]}>{label}</Text>
+        <Text style={styles.hint}>Tap to browse files</Text>
+      </View>
+    </AnimatedPressable>
   );
 };
 
-const styles = {
-  btn: {
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.lg,
+    paddingVertical: spacing.xl,
+    paddingHorizontal: spacing.xl,
+    borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: radii.sm,
+    borderRadius: radii.lg,
+    borderStyle: 'dashed',
+    backgroundColor: colors.primaryMuted,
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  iconWrap: {
+    width: 40,
+    height: 40,
+    borderRadius: radii.md,
+    backgroundColor: colors.primaryGlow,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   label: {
-    fontSize: 12,
-    fontWeight: '600' as const,
+    color: colors.primary,
+    fontSize: fontSize.lg,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
-};
+  hint: {
+    color: colors.textMuted,
+    fontSize: fontSize.xs,
+    marginTop: 2,
+    fontFamily: 'monospace',
+    letterSpacing: 0.5,
+  },
+});

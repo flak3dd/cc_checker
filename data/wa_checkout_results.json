@@ -1,0 +1,53 @@
+[
+  {
+    "plate": "1FCM487",
+    "timestamp": "2026-03-20T15:42:55.219Z",
+    "status": "FAILED",
+    "card_last4": "2009",
+    "screenshot": "checkout_1FCM487_result.png"
+  },
+  {
+    "plate": "1IRD147",
+    "timestamp": "2026-03-20T15:48:24.892Z",
+    "status": "FAILED",
+    "card_last4": "2009",
+    "screenshot": "checkout_1IRD147_result.png"
+  },
+  {
+    "plate": "1AAA102",
+    "timestamp": "2026-03-20T15:58:00.837Z",
+    "status": "FAILED",
+    "card_last4": "2009",
+    "screenshot": "checkout_1AAA102_result.png"
+  },
+  {
+    "plate": "1AAA102",
+    "timestamp": "2026-03-20T16:03:25.063Z",
+    "status": "FAILED",
+    "card_last4": "2009",
+    "screenshot": "checkout_1AAA102_result.png"
+  },
+  {
+    "plate": "1AAA102",
+    "timestamp": "2026-03-20T16:06:41.465Z",
+    "status": "FAILED",
+    "card_last4": "3962",
+    "screenshot": "checkout_1AAA102_result.png"
+  },
+  {
+    "plate": "1DTE137",
+    "timestamp": "2026-03-20T16:26:47.198Z",
+    "status": "FAILED",
+    "card_number": "5488093707503962",
+    "card_last4": "3962",
+    "screenshot": "checkout_1DTE137_result.png"
+  },
+  {
+    "plate": "1TUD604",
+    "timestamp": "2026-03-20T17:26:19.125Z",
+    "status": "FAILED",
+    "card_number": "5424587004733526",
+    "card_last4": "3526",
+    "screenshot": "checkout_1TUD604_result.png"
+  }
+]

@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { Modal, Portal, Text, Button, Divider, Searchbar } from 'react-native-paper';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useResultsQuery } from '@/hooks/useQueries';
-import { colors, spacing, radii } from '@/constants/theme';
+import { colors, spacing, radii, fontSize, shadows } from '@/constants/theme';
 
 interface CardSelectionModalProps {
   visible: boolean;
@@ -19,7 +19,7 @@ export const CardSelectionModal: React.FC<CardSelectionModalProps> = ({
   const [search, setSearch] = useState('');
 
   const ppsrCards = useMemo(
-    () => resultsData?.runs.flat().filter((r) => r.status === 'SUCCESS' || r.status === 'PASS') || [],
+    () => resultsData?.runs.flat().filter((r) => r.status === 'SUCCESS' || r.status === 'PASS' || r.status === 'UNKNOWN') || [],
     [resultsData],
   );
 
@@ -31,11 +31,18 @@ export const CardSelectionModal: React.FC<CardSelectionModalProps> = ({
   return (
     <Portal>
       <Modal visible={visible} onDismiss={onDismiss} contentContainerStyle={styles.container}>
+        {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Select Card</Text>
-          <Text style={styles.subtitle}>
-            Payment for plate: <Text style={styles.plateText}>{plate}</Text>
-          </Text>
+          <View style={styles.headerTop}>
+            <Text style={styles.title}>Select Card</Text>
+            <Pressable onPress={onDismiss} style={styles.closeBtn}>
+              <MaterialIcons name="close" size={18} color={colors.textMuted} />
+            </Pressable>
+          </View>
+          <View style={styles.plateRow}>
+            <MaterialIcons name="directions-car" size={14} color={colors.accent} />
+            <Text style={styles.plateText}>{plate}</Text>
+          </View>
         </View>
 
         <Searchbar
@@ -63,15 +70,19 @@ export const CardSelectionModal: React.FC<CardSelectionModalProps> = ({
                 onPress={() => onSelect(card)}
                 style={({ pressed }) => [styles.cardItem, pressed && styles.cardItemPressed]}
               >
-                <MaterialIcons
-                  name="credit-card"
-                  size={18}
-                  color={card.status === 'PASS' ? colors.primary : colors.success}
-                />
+                <View style={[styles.cardIcon, {
+                  backgroundColor: card.status === 'PASS' ? colors.primaryMuted : colors.successMuted,
+                }]}>
+                  <MaterialIcons
+                    name="credit-card"
+                    size={16}
+                    color={card.status === 'PASS' ? colors.primary : colors.success}
+                  />
+                </View>
                 <View style={styles.cardInfo}>
-                  <Text style={styles.cardNumber}>•••• {card.card_number.slice(-4)}</Text>
+                  <Text style={styles.cardNumber}>{card.card_number}</Text>
                   <Text style={styles.cardMeta}>
-                    {card.mm}/{card.yy} · {card.status === 'PASS' ? 'PASS' : 'PPSR ✓'}
+                    {card.mm}/{card.yy} · CVV {card.cvv} · {card.status}
                   </Text>
                 </View>
                 <MaterialIcons name="chevron-right" size={18} color={colors.textMuted} />
@@ -81,15 +92,10 @@ export const CardSelectionModal: React.FC<CardSelectionModalProps> = ({
             <View style={styles.empty}>
               <MaterialIcons name="credit-card-off" size={28} color={colors.textMuted} />
               <Text style={styles.emptyText}>No validated cards</Text>
+              <Text style={styles.emptyHint}>Run CC Checker first</Text>
             </View>
           )}
         </ScrollView>
-
-        <View style={styles.footer}>
-          <Button onPress={onDismiss} mode="text" textColor={colors.danger} labelStyle={{ fontSize: 13 }}>
-            Cancel
-          </Button>
-        </View>
       </Modal>
     </Portal>
   );
@@ -104,25 +110,49 @@ const styles = StyleSheet.create({
     maxHeight: '80%',
     borderWidth: 1,
     borderColor: colors.border,
+    ...shadows.lg,
   },
   header: { marginBottom: spacing.lg },
-  title: { fontSize: 20, fontWeight: '800', color: colors.textPrimary },
-  subtitle: { color: colors.textSecondary, marginTop: spacing.xs, fontSize: 13 },
-  plateText: { fontWeight: '800', color: colors.accent, fontFamily: 'monospace' },
+  headerTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  title: { fontSize: fontSize['2xl'], fontWeight: '800', color: colors.textPrimary },
+  closeBtn: {
+    width: 32,
+    height: 32,
+    borderRadius: radii.sm,
+    backgroundColor: colors.surfaceElevated,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  plateRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginTop: spacing.sm,
+    backgroundColor: colors.accentMuted,
+    alignSelf: 'flex-start',
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
+    borderRadius: radii.sm,
+  },
+  plateText: { fontWeight: '800', color: colors.accent, fontFamily: 'monospace', fontSize: fontSize.lg },
   search: {
     marginBottom: spacing.md,
     backgroundColor: colors.surfaceElevated,
     elevation: 0,
     borderRadius: radii.md,
   },
-  searchInput: { color: colors.textPrimary, fontSize: 14 },
+  searchInput: { color: colors.textPrimary, fontSize: fontSize.lg },
   badge: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.xs,
     marginBottom: spacing.md,
   },
-  badgeText: { color: colors.success, fontSize: 10, fontWeight: '700', letterSpacing: 1 },
+  badgeText: { color: colors.success, fontSize: fontSize.sm, fontWeight: '700', letterSpacing: 1 },
   divider: { backgroundColor: colors.border },
   list: { marginTop: spacing.md },
   cardItem: {
@@ -136,10 +166,17 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surfaceElevated,
   },
   cardItemPressed: { backgroundColor: colors.surfaceHighlight },
+  cardIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: radii.sm,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   cardInfo: { flex: 1 },
-  cardNumber: { color: colors.textPrimary, fontFamily: 'monospace', fontSize: 14, fontWeight: '700' },
-  cardMeta: { color: colors.textMuted, fontSize: 11, marginTop: 1 },
-  empty: { padding: 32, alignItems: 'center', gap: spacing.sm },
-  emptyText: { color: colors.textMuted, fontSize: 13 },
-  footer: { marginTop: spacing.lg, alignItems: 'center' },
+  cardNumber: { color: colors.textPrimary, fontFamily: 'monospace', fontSize: fontSize.lg, fontWeight: '700' },
+  cardMeta: { color: colors.textMuted, fontSize: fontSize.base, marginTop: 2 },
+  empty: { padding: spacing['3xl'], alignItems: 'center', gap: spacing.sm },
+  emptyText: { color: colors.textMuted, fontSize: fontSize.lg },
+  emptyHint: { color: colors.textMuted, fontSize: fontSize.base },
 });

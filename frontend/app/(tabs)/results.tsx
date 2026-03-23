@@ -1,252 +1,117 @@
-import React, { useState, useMemo } from 'react';
-import { ScrollView, StyleSheet, View, RefreshControl, Linking, Alert } from 'react-native';
+import React, { useMemo } from 'react';
+import { ScrollView, StyleSheet, View, RefreshControl, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   useResultsQuery,
   useWaRegoHitsQuery,
   useWaCheckoutResultsQuery,
+  useCarfactsResultsQuery,
 } from '@/hooks/useQueries';
-import {
-  Text,
-  ActivityIndicator,
-  Chip,
-  Button,
-  Snackbar,
-  SegmentedButtons,
-} from 'react-native-paper';
+import { Text, Snackbar } from 'react-native-paper';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { CardResult, CardStatus } from '@/types';
-import { api } from '@/services/api';
+import { api, API_BASE_URL } from '@/services/api';
 import { useQueryClient } from '@tanstack/react-query';
 import { useActionHandler } from '@/hooks/useActionHandler';
-import { colors, spacing, radii } from '@/constants/theme';
+import { ResultsTable } from '@/components/ResultsTable';
+import { AnimatedCard } from '@/components/AnimatedCard';
+import { AnimatedPressable } from '@/components/AnimatedPressable';
+import { impactHeavy } from '@/utils/haptics';
+import { colors, spacing, radii, fontSize, shadows } from '@/constants/theme';
 
-const API_BASE_URL = 'http://localhost:8000';
-
-const STATUS_COLORS: Record<string, string> = {
-  SUCCESS: colors.success,
-  PASS: colors.primary,
-  FAIL: colors.danger,
-  FAILED: colors.danger,
-  ERROR_PREPAYMENT: colors.warning,
-};
-
-function getStatusColor(status: string): string {
-  return STATUS_COLORS[status] ?? colors.textMuted;
-}
+const isPass = (s: string) => s === 'SUCCESS' || s === 'PASS' || s === 'UNKNOWN';
 
 export default function ResultsScreen() {
-  const [tab, setTab] = useState('cc');
-  const [filterStatus, setFilterStatus] = useState<CardStatus | 'ALL'>('ALL');
   const queryClient = useQueryClient();
   const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
 
-  const { data: resultsData, isLoading: ccLoading, refetch: refetchCC } = useResultsQuery();
-  const { data: waHits, isLoading: waHitsLoading, refetch: refetchWaHits } = useWaRegoHitsQuery();
-  const { data: waCheckoutResults, isLoading: waCheckoutLoading, refetch: refetchWaCheckout } = useWaCheckoutResultsQuery();
+  const { data: ccResults, isLoading: ccLoading, refetch: refetchCC } = useResultsQuery();
+  const { data: waHits, isLoading: waHitsLoading, refetch: refetchWAHits } = useWaRegoHitsQuery();
+  const { data: waCheckoutResults, isLoading: waLoading, refetch: refetchWA } = useWaCheckoutResultsQuery();
+  const { data: carfactsResults, isLoading: cfLoading, refetch: refetchCF } = useCarfactsResultsQuery();
 
-  const handleRefresh = () => {
-    if (tab === 'cc') refetchCC();
-    else {
-      refetchWaHits();
-      refetchWaCheckout();
-    }
-  };
+  const isRefreshing = ccLoading || waHitsLoading || waLoading || cfLoading;
 
-  const handleClearResults = () => {
-    const label = tab === 'cc' ? 'CC' : 'WA';
-    const doClear = () => {
-      execute(
-        async () => {
-          if (tab === 'cc') {
-            await api.clearResults();
-            queryClient.invalidateQueries({ queryKey: ['results'] });
-          } else {
-            await api.clearPlateResults();
-            await api.clearWaCheckoutLogs();
-            queryClient.invalidateQueries({ queryKey: ['waRegoHits'] });
-            queryClient.invalidateQueries({ queryKey: ['waCheckoutResults'] });
-          }
+  const handleRefresh = () => { refetchCC(); refetchWAHits(); refetchWA(); refetchCF(); };
+
+  const handleClearAll = () => {
+    Alert.alert('Clear All Results', 'Clear results from all checkers?', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Clear All',
+        style: 'destructive',
+        onPress: () => {
+          impactHeavy();
+          execute(
+            async () => {
+              await api.clearResults();
+              await api.clearWaCheckoutLogs();
+              await api.clearCarfactsLogs();
+              queryClient.invalidateQueries({ queryKey: ['results'] });
+              queryClient.invalidateQueries({ queryKey: ['waCheckoutResults'] });
+              queryClient.invalidateQueries({ queryKey: ['carfactsResults'] });
+            },
+            'All results cleared',
+            'Failed to clear',
+          );
         },
-        'Results cleared',
-        'Failed to clear results',
-      );
-    };
+      },
+    ]);
+  };
 
-    Alert.alert(
-      'Clear Results',
-      `Clear all ${label} results?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Clear', style: 'destructive', onPress: doClear },
-      ],
+  const fmt = (ts?: string) =>
+    ts ? new Date(ts).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : undefined;
+
+  const toRow = (id: string, primary: string, secondary: string, status: string, statusColor: string, timestamp?: string, imageUrl?: string) =>
+    ({ id, primary, secondary, status, statusColor, timestamp, imageUrl });
+
+  // ─── PPSR
+  const ccAllRows = useMemo(() => {
+    const flat = ccResults?.runs.flat() || [];
+    return [...flat].reverse().map((r, i) =>
+      toRow(`cc-${i}`, r.card_number, `${r.mm}/${r.yy} · CVV ${r.cvv}`, r.status,
+        isPass(r.status) ? colors.success : colors.danger, fmt(r.timestamp))
     );
-  };
+  }, [ccResults]);
+  const ccPassRows = useMemo(() => ccAllRows.filter(r => isPass(r.status)), [ccAllRows]);
+  const ccFailRows = useMemo(() => ccAllRows.filter(r => !isPass(r.status)), [ccAllRows]);
 
-  const handleRerun = (run: CardResult[], runIndex: number) => {
-    const cards = run.map(({ card_number, mm, yy, cvv }) => ({ card_number, mm, yy, cvv }));
-    execute(
-      () => api.rerunCards(cards),
-      `Re-queued ${cards.length} cards`,
-      'Failed to re-queue cards',
-      () => queryClient.invalidateQueries({ queryKey: ['status'] }),
+  // ─── WA Plate Hits (with screenshots)
+  const waHitRows = useMemo(() => {
+    const hits = [...(waHits || [])].reverse();
+    return hits.map((r: any, i: number) => {
+      const screenshotUrl = r.screenshot ? `${API_BASE_URL}/screenshots/hits/${r.screenshot}` : undefined;
+      return toRow(`hit-${i}`, r.plate, r.details || 'Account Found',
+        'HIT', colors.success, fmt(r.timestamp), screenshotUrl);
+    });
+  }, [waHits]);
+
+  // ─── WA Checkout
+  const waAllRows = useMemo(() => {
+    const checkouts = [...(waCheckoutResults || [])].reverse();
+    return checkouts.map((r: any, i: number) => {
+      const screenshotUrl = r.screenshot ? `${API_BASE_URL}/screenshots/hits/${r.screenshot}` : undefined;
+      return toRow(`co-${i}`, r.plate, r.card_number || `...${r.card_last4 || '????'}`,
+        r.status || 'UNKNOWN', r.status === 'SUCCESS' ? colors.success : colors.danger, fmt(r.timestamp), screenshotUrl);
+    });
+  }, [waCheckoutResults]);
+  const waPassRows = useMemo(() => waAllRows.filter(r => r.status === 'SUCCESS'), [waAllRows]);
+  const waFailRows = useMemo(() => waAllRows.filter(r => r.status !== 'SUCCESS'), [waAllRows]);
+
+  // ─── CarFacts
+  const cfAllRows = useMemo(() => {
+    const results = [...(carfactsResults || [])].reverse();
+    return results.map((r: any, i: number) =>
+      toRow(`cf-${i}`, r.plate, r.card_number || (r.card_last4 ? `...${r.card_last4}` : (r.details || r.error || 'Check')),
+        r.status || 'UNKNOWN', r.status === 'SUCCESS' ? colors.success : colors.danger, fmt(r.timestamp))
     );
-  };
+  }, [carfactsResults]);
+  const cfPassRows = useMemo(() => cfAllRows.filter(r => r.status === 'SUCCESS'), [cfAllRows]);
+  const cfFailRows = useMemo(() => cfAllRows.filter(r => r.status !== 'SUCCESS'), [cfAllRows]);
 
-  const openScreenshot = (path?: string) => {
-    if (!path) return;
-    const url = `${API_BASE_URL}/screenshots/hits/${path}`;
-    Linking.openURL(url);
-  };
-
-  // ─── CC Results ────────────────────────────
-  const renderCCResults = () => {
-    const runs = resultsData?.runs || [];
-
-    const filterRun = (run: CardResult[]) =>
-      filterStatus === 'ALL' ? run : run.filter((r) => r.status === filterStatus);
-
-    if (ccLoading && !resultsData) return <ActivityIndicator style={{ marginTop: 40 }} color={colors.primary} />;
-
-    return (
-      <View>
-        {/* Filter Chips */}
-        <View style={styles.filterRow}>
-          {(['ALL', 'SUCCESS', 'FAIL'] as const).map((key) => {
-            const active = filterStatus === key;
-            const chipColor = key === 'ALL' ? colors.primary : key === 'SUCCESS' ? colors.success : colors.danger;
-            return (
-              <Chip
-                key={key}
-                selected={active}
-                onPress={() => setFilterStatus(key)}
-                style={[styles.filterChip, active && { backgroundColor: `${chipColor}25`, borderColor: chipColor }]}
-                textStyle={[styles.filterChipText, active && { color: chipColor }]}
-                selectedColor={chipColor}
-              >
-                {key === 'ALL' ? 'All' : key === 'SUCCESS' ? 'Pass' : 'Fail'}
-              </Chip>
-            );
-          })}
-        </View>
-
-        {runs.length > 0 ? (
-          runs.map((run, runIndex) => {
-            const filtered = filterRun(run);
-            if (filtered.length === 0) return null;
-            const successCount = run.filter((r) => r.status === 'SUCCESS').length;
-            const failCount = run.length - successCount;
-
-            return (
-              <View key={`run-${runIndex}`} style={styles.runContainer}>
-                {/* Run Header */}
-                <View style={styles.runHeader}>
-                  <Text style={styles.runTitle}>Run #{runs.length - runIndex}</Text>
-                  <View style={styles.runMeta}>
-                    <Text style={styles.runStats}>
-                      {run.length} cards · {successCount}✓ {failCount}✗
-                    </Text>
-                    <Button
-                      icon="refresh"
-                      mode="text"
-                      compact
-                      onPress={() => handleRerun(run, runIndex)}
-                      disabled={actionLoading}
-                      textColor={colors.primary}
-                      labelStyle={styles.rerunLabel}
-                    >
-                      Re-run
-                    </Button>
-                  </View>
-                </View>
-                {/* Card Rows */}
-                <View style={styles.cardsList}>
-                  {filtered.map((result, i) => (
-                    <View key={`${result.card_number}-${i}`} style={styles.cardRow}>
-                      <Text style={styles.cardNumber}>{result.card_number}</Text>
-                      <Text style={styles.cardExpiry}>{result.mm}/{result.yy}</Text>
-                      <Text style={styles.cardCvv}>{result.cvv}</Text>
-                      <Text style={[styles.cardStatus, { color: getStatusColor(result.status) }]}>
-                        {result.status}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              </View>
-            );
-          })
-        ) : (
-          <View style={styles.emptyState}>
-            <MaterialIcons name="credit-card-off" size={40} color={colors.textMuted} />
-            <Text style={styles.emptyText}>No CC results found</Text>
-          </View>
-        )}
-      </View>
-    );
-  };
-
-  // ─── WA Results ────────────────────────────
-  const renderWAResults = () => {
-    if (waHitsLoading || waCheckoutLoading)
-      return <ActivityIndicator style={{ marginTop: 40 }} color={colors.primary} />;
-
-    const combinedCheckout = [...(waCheckoutResults || [])].reverse();
-    const combinedHits = [...(waHits || [])].reverse();
-
-    return (
-      <View>
-        {/* Checkout Outcomes */}
-        <Text style={styles.sectionTitle}>Checkout Outcomes</Text>
-        {combinedCheckout.length > 0 ? (
-          combinedCheckout.map((res: any, i: number) => (
-            <View key={`checkout-${i}`} style={styles.waItem}>
-              <View style={[styles.waIcon, { backgroundColor: `${getStatusColor(res.status)}20` }]}>
-                <MaterialIcons
-                  name={res.status === 'SUCCESS' ? 'check-circle' : 'cancel'}
-                  size={20}
-                  color={getStatusColor(res.status)}
-                />
-              </View>
-              <View style={styles.waInfo}>
-                <Text style={styles.waPlate}>{res.plate}</Text>
-                <Text style={styles.waTimestamp}>
-                  {new Date(res.timestamp).toLocaleTimeString()} · {res.status}
-                </Text>
-              </View>
-              <Button compact icon="image" onPress={() => openScreenshot(res.screenshot)} textColor={colors.textSecondary}>
-                View
-              </Button>
-            </View>
-          ))
-        ) : (
-          <Text style={styles.emptyInner}>No checkout results yet</Text>
-        )}
-
-        {/* Discovery Hits */}
-        <Text style={[styles.sectionTitle, { marginTop: spacing.xl }]}>Discovery Hits</Text>
-        {combinedHits.length > 0 ? (
-          combinedHits.map((hit: any, i: number) => (
-            <View key={`hit-${i}`} style={styles.waItem}>
-              <View style={[styles.waIcon, { backgroundColor: colors.infoMuted }]}>
-                <MaterialIcons name="directions-car" size={20} color={colors.info} />
-              </View>
-              <View style={styles.waInfo}>
-                <Text style={styles.waPlate}>{hit.plate}</Text>
-                <Text style={styles.waTimestamp}>
-                  {new Date(hit.timestamp).toLocaleTimeString()} · {hit.details}
-                </Text>
-              </View>
-              <Button compact icon="image" onPress={() => openScreenshot(hit.screenshot)} textColor={colors.textSecondary}>
-                Hit
-              </Button>
-            </View>
-          ))
-        ) : (
-          <Text style={styles.emptyInner}>No rego hits found yet</Text>
-        )}
-      </View>
-    );
-  };
+  // ─── Summary
+  const totalResults = ccAllRows.length + waHitRows.length + waAllRows.length + cfAllRows.length;
+  const totalPass = ccPassRows.length + waHitRows.length + waPassRows.length + cfPassRows.length;
+  const totalFail = ccFailRows.length + waFailRows.length + cfFailRows.length;
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -255,58 +120,122 @@ export default function ResultsScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl
-            refreshing={ccLoading || waHitsLoading}
-            onRefresh={handleRefresh}
-            tintColor={colors.primary}
-            colors={[colors.primary]}
-          />
+          <RefreshControl refreshing={isRefreshing} onRefresh={handleRefresh}
+            tintColor={colors.primary} colors={[colors.primary]} />
         }
       >
-        {/* Header */}
-        <View style={styles.headerRow}>
-          <View>
-            <Text style={styles.headerTitle}>Results</Text>
-            <Text style={styles.headerSub}>
-              {tab === 'cc'
-                ? `${resultsData?.total || 0} cards processed`
-                : `${waHits?.length || 0} hits found`}
-            </Text>
+        {/* ─── Header ─────────────────────────── */}
+        <AnimatedCard index={0}>
+          <View style={styles.headerRow}>
+            <View>
+              <Text style={styles.eyebrow}>DATA LOG</Text>
+              <Text style={styles.headerTitle}>Results</Text>
+            </View>
+            <AnimatedPressable
+              onPress={handleClearAll}
+              disabled={actionLoading}
+              style={styles.clearBtn}
+            >
+              <MaterialIcons name="delete-outline" size={16} color={colors.danger} />
+              <Text style={styles.clearBtnText}>CLEAR</Text>
+            </AnimatedPressable>
           </View>
-          <Button
-            icon="delete-outline"
-            mode="outlined"
-            onPress={handleClearResults}
-            disabled={actionLoading}
-            textColor={colors.danger}
-            style={styles.clearBtn}
-            labelStyle={{ fontSize: 12 }}
-          >
-            Clear
-          </Button>
-        </View>
+        </AnimatedCard>
 
-        {/* Tab Selector */}
-        <SegmentedButtons
-          value={tab}
-          onValueChange={setTab}
-          buttons={[
-            { value: 'cc', label: 'CC Checker', icon: 'credit-card' },
-            { value: 'wa', label: 'WA Rego', icon: 'car' },
-          ]}
-          style={styles.segmented}
-          theme={{
-            colors: {
-              secondaryContainer: colors.primaryMuted,
-              onSecondaryContainer: colors.primary,
-              onSurface: colors.textSecondary,
-              outline: colors.border,
-            },
-          }}
-        />
+        {/* ─── Summary Cards ─────────────────── */}
+        <AnimatedCard index={1}>
+          <View style={styles.summaryRow}>
+            <View style={styles.summaryCard}>
+              <Text style={styles.summaryValue}>{totalResults}</Text>
+              <Text style={styles.summaryLabel}>TOTAL</Text>
+            </View>
+            <View style={[styles.summaryCard, { borderTopColor: colors.success }]}>
+              <Text style={[styles.summaryValue, { color: colors.success }]}>{totalPass}</Text>
+              <Text style={styles.summaryLabel}>PASS</Text>
+            </View>
+            <View style={[styles.summaryCard, { borderTopColor: colors.danger }]}>
+              <Text style={[styles.summaryValue, { color: colors.danger }]}>{totalFail}</Text>
+              <Text style={styles.summaryLabel}>FAIL</Text>
+            </View>
+          </View>
+        </AnimatedCard>
 
-        {tab === 'cc' ? renderCCResults() : renderWAResults()}
-        <View style={{ height: 40 }} />
+        {/* ─── Per-source breakdown ──────────── */}
+        <AnimatedCard index={2}>
+          <View style={styles.breakdownRow}>
+            <View style={styles.breakdownItem}>
+              <MaterialIcons name="credit-score" size={12} color={colors.info} />
+              <Text style={styles.breakdownText}>{ccAllRows.length} PPSR</Text>
+            </View>
+            <View style={styles.breakdownItem}>
+              <MaterialIcons name="gps-fixed" size={12} color={colors.success} />
+              <Text style={styles.breakdownText}>{waHitRows.length} HITS</Text>
+            </View>
+            <View style={styles.breakdownItem}>
+              <MaterialIcons name="shopping-cart" size={12} color={colors.accent} />
+              <Text style={styles.breakdownText}>{waAllRows.length} WA</Text>
+            </View>
+            <View style={styles.breakdownItem}>
+              <MaterialIcons name="fact-check" size={12} color={colors.warning} />
+              <Text style={styles.breakdownText}>{cfAllRows.length} CF</Text>
+            </View>
+          </View>
+        </AnimatedCard>
+
+        {/* ─── PPSR Section ────────────────────── */}
+        <AnimatedCard index={3}>
+          <View style={styles.sectionHeader}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.info }]} />
+            <Text style={styles.sectionLabel}>PPSR / CC CHECKER</Text>
+          </View>
+        </AnimatedCard>
+        <AnimatedCard index={4}>
+          <ResultsTable title="PPSR · PASS" rows={ccPassRows} maxRows={5} emptyText="No passes yet" />
+        </AnimatedCard>
+        <AnimatedCard index={5}>
+          <ResultsTable title="PPSR · FAIL" rows={ccFailRows} maxRows={5} emptyText="No fails yet" />
+        </AnimatedCard>
+
+        {/* ─── WA Plate Hits Section ────────────── */}
+        <AnimatedCard index={6}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.success }]} />
+            <Text style={styles.sectionLabel}>WA PLATE HITS</Text>
+          </View>
+        </AnimatedCard>
+        <AnimatedCard index={7}>
+          <ResultsTable title="PLATES · HITS" rows={waHitRows} maxRows={10} emptyText="No hits yet" accentColor={colors.success} />
+        </AnimatedCard>
+
+        {/* ─── WA Checkout Section ─────────────── */}
+        <AnimatedCard index={8}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.accent }]} />
+            <Text style={styles.sectionLabel}>WA CHECKOUT</Text>
+          </View>
+        </AnimatedCard>
+        <AnimatedCard index={9}>
+          <ResultsTable title="WA CHECKOUT · PASS" rows={waPassRows} maxRows={5} emptyText="No passes yet" />
+        </AnimatedCard>
+        <AnimatedCard index={10}>
+          <ResultsTable title="WA CHECKOUT · FAIL" rows={waFailRows} maxRows={5} emptyText="No fails yet" />
+        </AnimatedCard>
+
+        {/* ─── CarFacts Section ────────────────── */}
+        <AnimatedCard index={11}>
+          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
+            <View style={[styles.sectionDot, { backgroundColor: colors.warning }]} />
+            <Text style={styles.sectionLabel}>CARFACTS</Text>
+          </View>
+        </AnimatedCard>
+        <AnimatedCard index={12}>
+          <ResultsTable title="CARFACTS · PASS" rows={cfPassRows} maxRows={5} emptyText="No passes yet" />
+        </AnimatedCard>
+        <AnimatedCard index={13}>
+          <ResultsTable title="CARFACTS · FAIL" rows={cfFailRows} maxRows={5} emptyText="No fails yet" />
+        </AnimatedCard>
+
+        <View style={{ height: spacing['5xl'] }} />
       </ScrollView>
 
       <Snackbar visible={showSnack} onDismiss={dismissSnack} duration={3000} style={styles.snackbar}>
@@ -317,189 +246,120 @@ export default function ResultsScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
-  scrollContent: {
-    padding: spacing.lg,
-  },
+  safeArea: { flex: 1, backgroundColor: colors.background },
+  container: { flex: 1 },
+  scrollContent: { padding: spacing.xl },
   headerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: spacing.lg,
-    marginTop: spacing.sm,
+    marginBottom: spacing['2xl'],
+    marginTop: spacing.md,
   },
-  headerTitle: {
-    fontSize: 28,
+  eyebrow: {
+    color: colors.primary,
+    fontSize: fontSize.xs,
     fontWeight: '800',
-    color: colors.textPrimary,
-    letterSpacing: -0.5,
+    letterSpacing: 4,
+    fontFamily: 'monospace',
+    marginBottom: spacing.sm,
   },
-  headerSub: {
-    color: colors.textMuted,
-    fontSize: 12,
-    marginTop: spacing.xs,
-  },
+  headerTitle: { fontSize: fontSize['3xl'], fontWeight: '800', color: colors.textPrimary, letterSpacing: -0.5 },
   clearBtn: {
-    borderColor: colors.border,
-    borderRadius: radii.sm,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    borderRadius: radii.md,
+    borderWidth: 1,
+    borderColor: colors.danger + '25',
+    backgroundColor: colors.dangerMuted,
   },
-  segmented: {
-    marginBottom: spacing.xl,
+  clearBtnText: {
+    color: colors.danger,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 1.5,
+    fontFamily: 'monospace',
   },
-  // ── Filters ──
-  filterRow: {
+  // Summary
+  summaryRow: {
     flexDirection: 'row',
     gap: spacing.sm,
     marginBottom: spacing.lg,
   },
-  filterChip: {
-    backgroundColor: colors.surface,
-    borderColor: colors.border,
-    borderWidth: 1,
-  },
-  filterChipText: {
-    color: colors.textSecondary,
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  // ── CC Run ──
-  runContainer: {
+  summaryCard: {
+    flex: 1,
     backgroundColor: colors.surface,
     borderRadius: radii.lg,
-    marginBottom: spacing.md,
     borderWidth: 1,
     borderColor: colors.border,
-    overflow: 'hidden',
-  },
-  runHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    borderTopWidth: 3,
+    borderTopColor: colors.primary,
+    paddingVertical: spacing.xl,
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    backgroundColor: colors.surfaceElevated,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    alignItems: 'center',
   },
-  runTitle: {
+  summaryValue: {
+    fontSize: fontSize['2xl'],
+    fontWeight: '800',
     color: colors.textPrimary,
-    fontWeight: '700',
-    fontSize: 14,
+    fontVariant: ['tabular-nums'],
+    fontFamily: 'monospace',
   },
-  runMeta: {
+  summaryLabel: {
+    fontSize: fontSize['2xs'],
+    fontWeight: '800',
+    color: colors.textMuted,
+    letterSpacing: 2,
+    fontFamily: 'monospace',
+    marginTop: spacing.xs,
+  },
+  // Breakdown
+  breakdownRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: spacing['2xl'],
+    marginBottom: spacing['2xl'],
+    paddingVertical: spacing.md,
+  },
+  breakdownItem: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
   },
-  runStats: {
-    color: colors.textMuted,
-    fontSize: 11,
+  breakdownText: {
+    color: colors.textSecondary,
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    fontVariant: ['tabular-nums'],
+    fontFamily: 'monospace',
   },
-  rerunLabel: {
-    fontSize: 11,
-  },
-  cardsList: {
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
-  },
-  cardRow: {
+  // Sections
+  sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: spacing.sm,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.surfaceElevated,
-    gap: spacing.md,
-  },
-  cardNumber: {
-    flex: 1,
-    fontFamily: 'monospace',
-    fontSize: 12,
-    color: colors.textPrimary,
-  },
-  cardExpiry: {
-    fontFamily: 'monospace',
-    fontSize: 12,
-    color: colors.textSecondary,
-    width: 45,
-  },
-  cardCvv: {
-    fontFamily: 'monospace',
-    fontSize: 12,
-    color: colors.textSecondary,
-    width: 30,
-  },
-  cardStatus: {
-    fontFamily: 'monospace',
-    fontSize: 11,
-    fontWeight: '700',
-    width: 60,
-    textAlign: 'right',
-  },
-  // ── WA Results ──
-  sectionTitle: {
-    fontWeight: '700',
-    fontSize: 14,
-    color: colors.textPrimary,
+    gap: spacing.sm,
     marginBottom: spacing.md,
-    letterSpacing: 0.3,
   },
-  waItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderRadius: radii.md,
-    padding: spacing.md,
-    marginBottom: spacing.sm,
-    borderWidth: 1,
-    borderColor: colors.border,
-    gap: spacing.md,
+  sectionDot: {
+    width: 5,
+    height: 5,
+    borderRadius: 3,
+    backgroundColor: colors.primary,
   },
-  waIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: radii.sm,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  waInfo: {
-    flex: 1,
-  },
-  waPlate: {
-    color: colors.textPrimary,
-    fontWeight: '700',
-    fontSize: 14,
+  sectionLabel: {
+    color: colors.textMuted,
+    fontSize: fontSize.xs,
+    fontWeight: '800',
+    letterSpacing: 3,
     fontFamily: 'monospace',
-  },
-  waTimestamp: {
-    color: colors.textMuted,
-    fontSize: 11,
-    marginTop: 2,
-  },
-  // ── Empty ──
-  emptyState: {
-    alignItems: 'center',
-    paddingVertical: 48,
-    gap: spacing.md,
-  },
-  emptyText: {
-    color: colors.textMuted,
-    fontSize: 14,
-  },
-  emptyInner: {
-    color: colors.textMuted,
-    fontStyle: 'italic',
-    textAlign: 'center',
-    paddingVertical: spacing.md,
-    fontSize: 13,
   },
   snackbar: {
     backgroundColor: colors.surfaceElevated,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radii.lg,
   },
 });

@@ -2,16 +2,40 @@ import { Platform } from 'react-native';
 import axios from 'axios';
 import { ProcessingStatus, CardResult, AnalyticsData, ResultsResponse, PlateCheckStatus, PlateCheckResponse, WaCheckoutStatus, CarfactsStatus } from '@/types';
 
-// Use 10.0.2.2 for Android emulator to access host's localhost
-const API_BASE_URL = Platform.select({
-  android: 'http://10.0.2.2:8000',
-  default: 'http://localhost:8000',
-});
+import Constants from 'expo-constants';
+
+// Production API URL — set this to your Vercel deployment URL.
+// Leave empty to use local dev server auto-detection.
+const PRODUCTION_API_URL = process.env.EXPO_PUBLIC_API_URL || '';
+
+// Resolve API host: use production URL if set, otherwise auto-detect LAN IP
+function getApiBaseUrl(): string {
+  // If a production URL is configured, always use it
+  if (PRODUCTION_API_URL) return PRODUCTION_API_URL;
+
+  // Expo provides the dev server hostname which is the machine's LAN IP
+  const debuggerHost = Constants.expoConfig?.hostUri ?? Constants.manifest2?.extra?.expoGo?.debuggerHost;
+  const lanIp = debuggerHost?.split(':')[0];
+
+  if (Platform.OS === 'web') return 'http://localhost:8000';
+  if (lanIp) return `http://${lanIp}:8000`;
+  if (Platform.OS === 'android') return 'http://10.0.2.2:8000';
+  return 'http://localhost:8000';
+}
+
+export const API_BASE_URL = getApiBaseUrl();
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: 15000, // Generous timeout for device over LAN
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
 });
+
+// Log connection target on startup (visible in Expo Go console)
+console.log(`[API] Target: ${API_BASE_URL}`);
 
 export const api = {
   // GET current processing status
@@ -141,6 +165,16 @@ export const api = {
 
   getWaCheckoutResults: async (): Promise<any[]> => {
     const { data } = await apiClient.get<any[]>('/api/wa-rego/checkout-results');
+    return data;
+  },
+
+  setCheckoutTerm: async (term: 3 | 6 | 12): Promise<{ success: boolean; message: string }> => {
+    const { data } = await apiClient.post('/api/wa-checkout/set-term', { term });
+    return data;
+  },
+
+  getCheckoutTerm: async (): Promise<{ term: number }> => {
+    const { data } = await apiClient.get('/api/wa-checkout/term');
     return data;
   },
 

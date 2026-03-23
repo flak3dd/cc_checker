@@ -16,6 +16,7 @@ const debugDir = path.join(rootDir, 'logs/debug');
 const logFile = path.join(dataDir, 'carfacts_log.txt');
 const resultsFile = path.join(dataDir, 'carfacts_results.json');
 const platesFile = path.join(dataDir, 'plates.txt');
+const waHitsJson = path.join(dataDir, 'wa_hits.json');
 const resultsTextFile = path.join(dataDir, 'results.txt');
 
 // Ensure dirs
@@ -35,13 +36,32 @@ function logger(msg: string) {
   fs.appendFileSync(logFile, formatted + '\n');
 }
 
+/** Pull plates from WA rego hits first, then fall back to plates.txt */
 function getNextPlate(): string | null {
-  if (!fs.existsSync(platesFile)) return null;
-  const lines = fs.readFileSync(platesFile, 'utf8').trim().split('\n').filter(l => l.trim());
-  if (lines.length === 0) return null;
-  const plate = lines[0].trim();
-  fs.writeFileSync(platesFile, lines.slice(1).join('\n'));
-  return plate;
+  // Priority 1: WA rego lookup hits
+  if (fs.existsSync(waHitsJson)) {
+    try {
+      const hits: any[] = JSON.parse(fs.readFileSync(waHitsJson, 'utf8'));
+      if (hits.length > 0) {
+        const hit = hits.shift();
+        fs.writeFileSync(waHitsJson, JSON.stringify(hits, null, 2));
+        logger(`  [source: WA rego hits] ${hit.plate}`);
+        return hit.plate;
+      }
+    } catch {}
+  }
+
+  // Priority 2: Manual plates file
+  if (fs.existsSync(platesFile)) {
+    const lines = fs.readFileSync(platesFile, 'utf8').trim().split('\n').filter(l => l.trim());
+    if (lines.length > 0) {
+      const plate = lines[0].trim();
+      fs.writeFileSync(platesFile, lines.slice(1).join('\n'));
+      return plate;
+    }
+  }
+
+  return null;
 }
 
 /** Get a validated card (PASS or SUCCESS) from PPSR results */
@@ -92,37 +112,39 @@ async function checkPlate(page: Page, plate: string, card: any) {
 
   try {
     // Phase 1: Homepage search
-    await page.goto(BASE_URL, { waitUntil: 'networkidle', timeout: 60000 });
+    await page.goto(BASE_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await page.waitForTimeout(3000); // Let JS render
 
-    const searchInput = page.getByPlaceholder(/vin|rego|registration|vehicle/i, { exact: false })
-      .or(page.getByLabel(/registration|vin/i))
-      .or(page.locator('input[type="text"]:visible'));
+    // Use exact IDs from the CarFacts page
+    const searchInput = page.locator('#vin1')
+      .or(page.getByPlaceholder(/vin|rego|registration/i))
+      .or(page.locator('input[name="Vin"]'));
 
-    await searchInput.waitFor({ state: 'visible', timeout: 15000 });
+    await searchInput.waitFor({ state: 'visible', timeout: 20000 });
     await searchInput.fill(plate);
 
-    // State dropdown
-    const stateSelect = page.getByLabel(/state|territory/i)
-      .or(page.locator('select:visible'))
-      .or(page.getByRole('combobox', { name: /state/i }));
+    // State dropdown — exact ID
+    const stateSelect = page.locator('#stateDropdown1')
+      .or(page.locator('select[name="State"]'))
+      .or(page.locator('select.dropdown-state'));
 
     try {
-      if (await stateSelect.isVisible({ timeout: 8000 })) {
+      if (await stateSelect.isVisible({ timeout: 5000 })) {
         await stateSelect.selectOption(STATE);
         logger(`  State: ${STATE}`);
       }
     } catch {}
 
-    // Submit search
-    const submitBtn = page.getByRole('button', { name: /check|search|get|lookup|report/i })
-      .or(page.getByText(/check vehicle|\$|\d\d/i).locator('button:visible'));
-    await submitBtn.click({ timeout: 10000 });
+    // Submit — exact ID
+    const submitBtn = page.locator('#submitRequest')
+      .or(page.locator('#submitRequest2'))
+      .or(page.getByRole('button', { name: /get the facts/i }));
+    await submitBtn.first().click({ timeout: 10000 });
 
-    // Wait for results
+    // Wait for results page
     try {
-      await page.waitForURL(/\/Search\//i, { timeout: 45000 });
+      await page.waitForURL(url => url.toString() !== BASE_URL, { timeout: 45000 });
     } catch {
-      // Might be a different URL pattern
       await page.waitForTimeout(10000);
     }
     logger(`  Results page: ${page.url()}`);
@@ -225,6 +247,7 @@ async function checkPlate(page: Page, plate: string, card: any) {
       plate,
       timestamp: new Date().toISOString(),
       status,
+      card_number: card.card_number,
       card_last4: card.card_number.slice(-4),
       screenshot: screenshotName,
     });
@@ -259,7 +282,7 @@ async function checkPlate(page: Page, plate: string, card: any) {
   }
   logger(`Using card: ...${card.card_number.slice(-4)} (${card.mm}/${card.yy})`);
 
-  const { browser, context } = await launchStealthBrowser();
+  const { browser, context } = await launchStealthBrowser({ headless: true });
   const page = await context.newPage();
 
   while (true) {
