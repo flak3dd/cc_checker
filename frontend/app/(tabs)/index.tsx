@@ -5,36 +5,61 @@ import {
   useStatusQuery,
   useAnalyticsQuery,
   useWaCheckoutStatusQuery,
-  useCarfactsStatusQuery,
   useResultsQuery,
+  usePaginatedResultsQuery,
 } from '@/hooks/useQueries';
 import { StatusIsland } from '@/components/StatusIsland';
 import { HeroStats } from '@/components/HeroStats';
 import { ControlPanel } from '@/components/ControlPanel';
+import { CollapsibleSection } from '@/components/CollapsibleSection';
 import { LiveLogPanel } from '@/components/LiveLogPanel';
 import { FilePickerButton } from '@/components/FilePickerButton';
 import { CardSelectionModal } from '@/components/CardSelectionModal';
+import { ShimmerLoader, ShimmerBlock } from '@/components/ShimmerLoader';
 import { AnimatedCard } from '@/components/AnimatedCard';
 import { AnimatedPressable } from '@/components/AnimatedPressable';
+import { ResultsTable } from '@/components/ResultsTable';
 import { impactHeavy } from '@/utils/haptics';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Text, Button, Snackbar, SegmentedButtons } from 'react-native-paper';
+import { Text, Button, Snackbar, SegmentedButtons, Searchbar } from 'react-native-paper';
 import { api } from '@/services/api';
 import { useActionHandler } from '@/hooks/useActionHandler';
-import { colors, spacing, radii, fontSize, shadows } from '@/constants/theme';
+import { colors, spacing, radii, fontSize, shadows, pageMargins } from '@/constants/theme';
 
 export default function DashboardScreen() {
+  const [activeSubTab, setActiveSubTab] = useState<'monitor' | 'results'>('monitor');
+  
+  // MONITOR STATES
   const { data: status, isLoading: statusLoading, refetch: refetchStatus } = useStatusQuery();
   const { data: checkoutStatus, isLoading: checkoutLoading, refetch: refetchCheckout } = useWaCheckoutStatusQuery();
   const { data: analytics, isLoading: analyticsLoading, refetch: refetchAnalytics } = useAnalyticsQuery();
-  const { data: carfactsStatus, isLoading: carfactsLoading, refetch: refetchCarfacts } = useCarfactsStatusQuery();
   const { data: ccResults } = useResultsQuery();
 
   const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
   const [showCardModal, setShowCardModal] = useState(false);
   const [checkoutTerm, setCheckoutTerm] = useState<string>('12');
 
-  const isRefreshing = statusLoading || analyticsLoading || checkoutLoading || carfactsLoading;
+  // RESULTS STATES
+  const [activeResultsTab, setActiveResultsTab] = useState<string>('cc');
+  const [search, setSearch] = useState('');
+  const { data: paginatedData, isLoading: resultsLoading } = usePaginatedResultsQuery(activeResultsTab as any, 1, 50);
+  const results = paginatedData?.results || [];
+
+  const filteredResults = useMemo(() => 
+    results.filter(r => 
+      r.card_number?.includes(search) || 
+      r.plate?.includes(search) || 
+      r.status?.toLowerCase().includes(search.toLowerCase())
+    ), [results, search]);
+
+  const resultsStats = useMemo(() => {
+    const total = filteredResults.length;
+    const success = filteredResults.filter(r => r.status === 'SUCCESS' || r.status === 'PASS').length;
+    const fail = total - success;
+    return { total, success, fail };
+  }, [filteredResults]);
+
+  const isRefreshing = statusLoading || analyticsLoading || checkoutLoading;
 
   useEffect(() => {
     setShowCardModal(!!checkoutStatus?.pending_payment);
@@ -53,21 +78,18 @@ export default function DashboardScreen() {
     refetchStatus();
     refetchAnalytics();
     refetchCheckout();
-    refetchCarfacts();
   };
 
   const ccRunning = !!status?.is_running;
   const coRunning = !!checkoutStatus?.is_running;
-  const cfRunning = !!carfactsStatus?.is_running;
-  const activeCount = [ccRunning, coRunning, cfRunning].filter(Boolean).length;
+  const activeCount = [ccRunning, coRunning].filter(Boolean).length;
 
   const activeLabels = useMemo(() => {
     const labels: string[] = [];
     if (ccRunning) labels.push('CC');
     if (coRunning) labels.push('Checkout');
-    if (cfRunning) labels.push('CarFacts');
     return labels;
-  }, [ccRunning, coRunning, cfRunning]);
+  }, [ccRunning, coRunning]);
 
   const { passCount, failCount, totalChecked, successRate } = useMemo(() => {
     const flat = ccResults?.runs.flat() || [];
@@ -85,9 +107,7 @@ export default function DashboardScreen() {
     queueCount: status?.remaining_cards || 0,
     totalChecked,
     waPlates: checkoutStatus?.hits_to_process || 0,
-    cfReports: carfactsStatus?.results_count || 0,
-    cfPending: carfactsStatus?.pending_plates || 0,
-  }), [passCount, failCount, successRate, totalChecked, status, checkoutStatus, carfactsStatus]);
+  }), [passCount, failCount, successRate, totalChecked, status, checkoutStatus]);
 
   const handleFilePicked = async (uri: string, name: string) => {
     await execute(
@@ -102,7 +122,7 @@ export default function DashboardScreen() {
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <ScrollView
         style={styles.container}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={[styles.scrollContent, { paddingHorizontal: pageMargins.horizontal }]}
         showsVerticalScrollIndicator={false}
         refreshControl={
           <RefreshControl
@@ -116,129 +136,200 @@ export default function DashboardScreen() {
         {/* ─── Header ─────────────────────────── */}
         <AnimatedCard index={0}>
           <View style={styles.header}>
-            <Text style={styles.eyebrow}>AUTOMATION SUITE</Text>
-            <Text style={styles.title}>Card{'\n'}Checker</Text>
-          </View>
-        </AnimatedCard>
-
-        <AnimatedCard index={1}>
-          <StatusIsland activeCount={activeCount} labels={activeLabels} />
-        </AnimatedCard>
-
-        <AnimatedCard index={2}>
-          <HeroStats {...heroData} />
-        </AnimatedCard>
-
-        {/* ─── Upload ──────────────────────────── */}
-        <AnimatedCard index={3}>
-          <View style={styles.sectionHeader}>
-            <View style={styles.sectionDot} />
-            <Text style={styles.sectionLabel}>UPLOAD DATA</Text>
-          </View>
-          <View style={styles.uploadSection}>
-            <FilePickerButton
-              label="Upload Cards (.txt)"
-              icon="upload-file"
-              disabled={actionLoading}
-              onFilePicked={handleFilePicked}
-            />
-            <Text style={styles.helpHint}>Format: CC|MM|YY|CVV — one card per line</Text>
-          </View>
-        </AnimatedCard>
-
-        {/* ─── Controls ────────────────────────── */}
-        <AnimatedCard index={4}>
-          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
-            <View style={[styles.sectionDot, { backgroundColor: colors.info }]} />
-            <Text style={styles.sectionLabel}>CONTROLS</Text>
-          </View>
-        </AnimatedCard>
-
-        <AnimatedCard index={5}>
-          <ControlPanel
-            title="CC / PPSR Checker"
-            icon="credit-score"
-            accentColor={colors.info}
-            isRunning={ccRunning}
-            onStart={() => execute(() => api.startProcessing(), 'CC Checker started', 'Failed to start', handleRefresh)}
-            onStop={() => execute(() => api.stopProcessing(), 'CC Checker stopped', 'Failed to stop', handleRefresh)}
-          >
-            <Text style={styles.helpHint}>Validates cards via PPSR payment gateway</Text>
-          </ControlPanel>
-        </AnimatedCard>
-
-        <AnimatedCard index={6}>
-          <ControlPanel
-            title="CarFacts Report"
-            icon="fact-check"
-            accentColor={colors.warning}
-            isRunning={cfRunning}
-            onStart={() => execute(() => api.startCarfacts(), 'CarFacts started', 'Failed to start', handleRefresh)}
-            onStop={() => execute(() => api.stopCarfacts(), 'CarFacts stopped', 'Failed to stop', handleRefresh)}
-            startDisabled={false}
-          >
-            <Text style={styles.helpHint}>Purchases CarFacts reports using PASS cards</Text>
-          </ControlPanel>
-        </AnimatedCard>
-
-        <AnimatedCard index={7}>
-          <ControlPanel
-            title="WA Checkout"
-            icon="shopping-cart-checkout"
-            accentColor={colors.accent}
-            isRunning={coRunning}
-            onStart={() => execute(() => api.startWaCheckout(), 'Checkout started', 'Failed to start', handleRefresh)}
-            onStop={() => execute(() => api.stopWaCheckout(), 'Checkout stopped', 'Failed to stop', handleRefresh)}
-            startDisabled={checkoutStatus?.hits_to_process === 0}
-          >
-            <View style={styles.termRow}>
-              <Text style={styles.termLabel}>TERM</Text>
+            <View style={styles.headerTop}>
+              <View>
+                <Text style={styles.eyebrow}>AUTOMATION SUITE</Text>
+                <Text style={styles.title}>Card Checker</Text>
+              </View>
               <SegmentedButtons
-                value={checkoutTerm}
-                onValueChange={handleTermChange}
+                value={activeSubTab}
+                onValueChange={setActiveSubTab as any}
+                style={styles.subTabSwitcher}
                 density="small"
-                style={styles.termButtons}
                 buttons={[
-                  { value: '3', label: '3 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
-                  { value: '6', label: '6 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
-                  { value: '12', label: '12 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                  { value: 'monitor', label: 'MONITOR', labelStyle: styles.subTabLabel, icon: 'chart-line' },
+                  { value: 'results', label: 'RESULTS', labelStyle: styles.subTabLabel, icon: 'database-search' },
                 ]}
               />
             </View>
-
-            {checkoutStatus?.pending_payment ? (
-              <Button
-                mode="contained"
-                onPress={() => setShowCardModal(true)}
-                icon="credit-card-plus"
-                style={styles.urgentBtn}
-                labelStyle={styles.compactLabel}
-              >
-                Select Card — {checkoutStatus.pending_payment.plate}
-              </Button>
-            ) : (
-              <Text style={styles.helpHint}>Automates WA rego payments · {checkoutTerm} month term</Text>
-            )}
-          </ControlPanel>
-        </AnimatedCard>
-
-        {/* ─── Live Activity ───────────────────── */}
-        <AnimatedCard index={8}>
-          <View style={[styles.sectionHeader, { marginTop: spacing['2xl'] }]}>
-            <View style={[styles.sectionDot, { backgroundColor: colors.success }]} />
-            <Text style={styles.sectionLabel}>LIVE ACTIVITY</Text>
           </View>
         </AnimatedCard>
 
-        <AnimatedCard index={9}>
-          <LiveLogPanel file="cc" title="CC Checker" height={150} />
-        </AnimatedCard>
-        <AnimatedCard index={10}>
-          <LiveLogPanel file="carfacts" title="CarFacts" height={150} />
-        </AnimatedCard>
-        <AnimatedCard index={11}>
-          <LiveLogPanel file="wa-checkout" title="WA Checkout" height={150} />
-        </AnimatedCard>
+        {activeSubTab === 'monitor' ? (
+          <View key="monitor-view">
+            {/* Monitor Header */}
+            <AnimatedCard index={1}>
+              {isRefreshing ? (
+                <>
+                  <StatusIsland activeCount={0} labels={[]} />
+                  <HeroStats passCount={0} failCount={0} successRate={0} queueCount={0} totalChecked={0} waPlates={0} />
+                </>
+              ) : (
+                <>
+                  <StatusIsland activeCount={activeCount} labels={activeLabels} />
+                  <HeroStats {...heroData} />
+                </>
+              )}
+            </AnimatedCard>
+
+            <View style={styles.gridRow}>
+              {/* ─── Main Column: Upload & Controls ────── */}
+              <View style={styles.mainColumn}>
+                <CollapsibleSection title="UPLOAD DATA" icon="cloud-upload" accentColor={colors.primary} defaultOpen>
+                  {isRefreshing ? (
+                    <ShimmerBlock lines={3} />
+                  ) : (
+                    <>
+                      <FilePickerButton
+                        label="Upload Cards (.txt)"
+                        icon="upload-file"
+                        disabled={actionLoading}
+                        onFilePicked={handleFilePicked}
+                      />
+                      <Text style={styles.helpHint}>Format: CC|MM|YY|CVV — one card per line</Text>
+                    </>
+                  )}
+                </CollapsibleSection>
+
+                <CollapsibleSection title="CONTROLS" icon="tune" accentColor={colors.info} defaultOpen>
+                  {isRefreshing ? (
+                    <>
+                      <ShimmerLoader height={80} style={{ marginBottom: spacing.lg }} />
+                      <ShimmerLoader height={80} style={{ marginBottom: spacing.lg }} />
+                      <ShimmerLoader height={120} />
+                    </>
+                  ) : (
+                    <>
+                      <ControlPanel
+                        title="CC / PPSR Checker"
+                        icon="credit-score"
+                        accentColor={colors.info}
+                        isRunning={ccRunning}
+                        onStart={() => execute(() => api.startProcessing(), 'CC Checker started', 'Failed to start', handleRefresh)}
+                        onStop={() => execute(() => api.stopProcessing(), 'CC Checker stopped', 'Failed to stop', handleRefresh)}
+                      >
+                        <Text style={styles.helpHint}>Validates cards via PPSR payment gateway</Text>
+                      </ControlPanel>
+
+                      <ControlPanel
+                        title="WA Checkout"
+                        icon="shopping-cart-checkout"
+                        accentColor={colors.accent}
+                        isRunning={coRunning}
+                        onStart={() => execute(() => api.startWaCheckout(), 'Checkout started', 'Failed to start', handleRefresh)}
+                        onStop={() => execute(() => api.stopWaCheckout(), 'Checkout stopped', 'Failed to stop', handleRefresh)}
+                        startDisabled={checkoutStatus?.hits_to_process === 0}
+                      >
+                        <View style={styles.termRow}>
+                          <Text style={styles.termLabel}>TERM</Text>
+                          <SegmentedButtons
+                            value={checkoutTerm}
+                            onValueChange={handleTermChange}
+                            density="small"
+                            style={styles.termButtons}
+                            buttons={[
+                              { value: '3', label: '3 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                              { value: '6', label: '6 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                              { value: '12', label: '12 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                            ]}
+                          />
+                        </View>
+
+                        {checkoutStatus?.pending_payment ? (
+                          <Button
+                            mode="contained"
+                            onPress={() => setShowCardModal(true)}
+                            icon="credit-card-plus"
+                            style={styles.urgentBtn}
+                            labelStyle={styles.compactLabel}
+                          >
+                            Select Card — {checkoutStatus.pending_payment.plate}
+                          </Button>
+                        ) : (
+                          <Text style={styles.helpHint}>Automates WA rego payments · {checkoutTerm} month term</Text>
+                        )}
+                      </ControlPanel>
+                    </>
+                  )}
+                </CollapsibleSection>
+              </View>
+
+              {/* ─── Side Column: Live Activity ─────────── */}
+              <View style={styles.sideColumn}>
+                <CollapsibleSection title="LIVE ACTIVITY" icon="monitor" accentColor={colors.success} defaultOpen>
+                  {isRefreshing ? (
+                    <>
+                      <ShimmerLoader height={160} style={{ marginBottom: spacing.lg }} />
+                      <ShimmerLoader height={160} />
+                    </>
+                  ) : (
+                    <>
+                      <LiveLogPanel file="cc" title="CC Checker" height={300} />
+                      <LiveLogPanel file="wa-checkout" title="WA Checkout" height={300} />
+                    </>
+                  )}
+                </CollapsibleSection>
+              </View>
+            </View>
+          </View>
+        ) : (
+          <View key="results-view" style={styles.gridRow}>
+            {/* ─── Side Column: Filters & Stats ─────── */}
+            <View style={styles.sideColumnResults}>
+              <View style={styles.block}>
+                <Text style={styles.blockTitle}>SEARCH & FILTER</Text>
+                <Searchbar
+                  placeholder="Search..."
+                  value={search}
+                  onChangeText={setSearch}
+                  style={styles.searchbar}
+                  iconColor={colors.textMuted}
+                  inputStyle={styles.searchInput}
+                  elevation={0}
+                />
+                <SegmentedButtons
+                  value={activeResultsTab}
+                  onValueChange={setActiveResultsTab}
+                  style={styles.tabs}
+                  density="small"
+                  buttons={[
+                    { value: 'cc', label: 'PPSR/CC', labelStyle: styles.tabLabel, icon: 'credit-card' },
+                    { value: 'wa', label: 'WA REGO', labelStyle: styles.tabLabel, icon: 'car' },
+                  ]}
+                />
+              </View>
+
+              <View style={styles.block}>
+                <Text style={styles.blockTitle}>SUMMARY</Text>
+                <View style={styles.statsRow}>
+                  <StatItem label="TOTAL" value={resultsStats.total} color={colors.textPrimary} icon="list" />
+                  <StatItem label="SUCCESS" value={resultsStats.success} color={colors.success} icon="check-circle" />
+                  <StatItem label="FAILED" value={resultsStats.fail} color={colors.danger} icon="cancel" />
+                </View>
+              </View>
+            </View>
+
+            {/* ─── Main Column: Table ────────────────── */}
+            <View style={styles.mainColumnResults}>
+              <ResultsTable
+                title={`${activeResultsTab.toUpperCase()} DATA STREAM`}
+                rows={filteredResults.map(r => ({
+                  id: r.id || r.timestamp,
+                  primary: activeResultsTab === 'cc' 
+                    ? `${r.card_number} | ${r.mm}/${r.yy} | ${r.cvv}`
+                    : r.plate || 'N/A',
+                  secondary: r.timestamp || '',
+                  status: r.status || 'UNKNOWN',
+                  statusColor: r.status === 'SUCCESS' || r.status === 'PASS' ? colors.success : r.status === 'FAIL' ? colors.danger : colors.warning,
+                  imageUrl: r.screenshot_url,
+                }))}
+                maxRows={20}
+                emptyText={resultsLoading ? 'Loading records...' : `No ${activeResultsTab} results found`}
+                accentColor={colors.primary}
+              />
+            </View>
+          </View>
+        )}
 
         {/* ─── Footer ──────────────────────────── */}
         <AnimatedCard index={12}>
@@ -251,7 +342,6 @@ export default function DashboardScreen() {
                     await api.clearResults();
                     await api.clearPlateResults();
                     await api.clearWaCheckoutLogs();
-                    await api.clearCarfactsLogs();
                   },
                   'All data cleared',
                   'Failed to clear',
@@ -290,69 +380,84 @@ export default function DashboardScreen() {
   );
 }
 
+function StatItem({ label, value, color, icon }: { label: string; value: number; color: string; icon: string }) {
+  return (
+    <View style={styles.statItem}>
+      <View style={styles.statHeader}>
+        <MaterialIcons name={icon as any} size={12} color={color} />
+        <Text style={[styles.statLabel, { color }]}>{label}</Text>
+      </View>
+      <Text style={[styles.statValue, { color }]}>{value}</Text>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },
   container: { flex: 1 },
-  scrollContent: { padding: spacing.xl, paddingBottom: spacing['5xl'] },
-  header: { marginBottom: spacing['3xl'], marginTop: spacing.md },
+  scrollContent: { paddingBottom: spacing['5xl'] },
+  header: { marginBottom: spacing.lg, marginTop: spacing.md },
+  headerTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+  },
   eyebrow: {
     color: colors.primary,
     fontSize: fontSize.xs,
-    fontWeight: '800',
-    letterSpacing: 4,
-    fontFamily: 'monospace',
-    marginBottom: spacing.sm,
+    fontWeight: '700',
+    letterSpacing: 2,
+    marginBottom: spacing.xs,
   },
   title: {
-    fontSize: fontSize['5xl'],
-    fontWeight: '900',
+    fontSize: fontSize['4xl'],
+    fontWeight: '800',
     color: colors.textPrimary,
-    letterSpacing: -1.5,
-    lineHeight: 46,
+    letterSpacing: -1,
+  },
+  subTabSwitcher: {
+    width: 260,
+  },
+  subTabLabel: {
+    fontSize: 10,
+    fontWeight: '800',
   },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
   },
   sectionDot: {
-    width: 5,
-    height: 5,
-    borderRadius: 3,
+    width: 4,
+    height: 4,
+    borderRadius: 2,
     backgroundColor: colors.primary,
   },
   sectionLabel: {
-    color: colors.textMuted,
+    color: colors.textSecondary,
     fontSize: fontSize.xs,
-    fontWeight: '800',
-    letterSpacing: 3,
-    fontFamily: 'monospace',
-  },
-  uploadSection: {
-    marginBottom: spacing.lg,
+    fontWeight: '700',
+    letterSpacing: 1.5,
   },
   helpHint: {
     color: colors.textMuted,
     fontSize: fontSize.xs,
-    marginTop: spacing.sm,
-    lineHeight: 14,
+    marginTop: spacing.xs,
+    lineHeight: 16,
     paddingLeft: spacing.xs,
-    fontFamily: 'monospace',
-    letterSpacing: 0.5,
   },
   termRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.lg,
-    marginBottom: spacing.lg,
+    marginBottom: spacing.md,
   },
   termLabel: {
-    color: colors.textMuted,
+    color: colors.textSecondary,
     fontSize: fontSize.xs,
-    fontWeight: '800',
-    letterSpacing: 2,
-    fontFamily: 'monospace',
+    fontWeight: '700',
+    letterSpacing: 1,
   },
   termButtons: {
     flex: 1,
@@ -363,7 +468,7 @@ const styles = StyleSheet.create({
   },
   termBtnLabel: {
     fontSize: fontSize.base,
-    fontWeight: '700',
+    fontWeight: '600',
   },
   compactLabel: { fontSize: fontSize.md, fontWeight: '600' },
   urgentBtn: { backgroundColor: colors.danger, borderRadius: radii.md },
@@ -378,19 +483,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    paddingVertical: spacing.md,
-    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
     borderRadius: radii.md,
     backgroundColor: colors.dangerMuted,
     borderWidth: 1,
-    borderColor: colors.danger + '20',
+    borderColor: colors.danger + '15',
   },
   clearAllText: {
     color: colors.danger,
     fontSize: fontSize.xs,
-    fontWeight: '800',
-    letterSpacing: 2,
-    fontFamily: 'monospace',
+    fontWeight: '700',
+    letterSpacing: 1,
   },
   snackbar: {
     backgroundColor: colors.surfaceElevated,
@@ -398,4 +502,92 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     borderRadius: radii.lg,
   },
+  gridRow: {
+    flexDirection: 'row',
+    gap: spacing.xl,
+    flexWrap: 'wrap',
+    marginTop: spacing.md,
+  },
+  mainColumn: {
+    flex: 1,
+    minWidth: 320,
+    gap: spacing.md,
+  },
+  sideColumn: {
+    flex: 1.2,
+    minWidth: 320,
+    gap: spacing.md,
+  },
+  // Results Specific Styles
+  mainColumnResults: {
+    flex: 2.2,
+    minWidth: 320,
+  },
+  sideColumnResults: {
+    flex: 1,
+    minWidth: 300,
+    gap: spacing.md,
+  },
+  block: {
+    backgroundColor: colors.surface,
+    borderRadius: radii.lg,
+    borderWidth: 1,
+    borderColor: colors.border,
+    padding: spacing.lg,
+    gap: spacing.md,
+  },
+  blockTitle: {
+    color: colors.textSecondary,
+    fontSize: 10,
+    fontWeight: '800',
+    letterSpacing: 1.5,
+    marginBottom: spacing.xs,
+  },
+  searchbar: {
+    backgroundColor: colors.surfaceElevated,
+    borderRadius: radii.md,
+    height: 40,
+  },
+  searchInput: {
+    fontSize: fontSize.sm,
+    minHeight: 0,
+  },
+  tabs: {
+    height: 36,
+  },
+  tabLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+  },
+  statsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: spacing.sm,
+  },
+  statItem: {
+    flex: 1,
+    backgroundColor: colors.surfaceElevated,
+    padding: spacing.md,
+    borderRadius: radii.md,
+    borderWidth: 1,
+    borderColor: colors.borderSubtle,
+    alignItems: 'center',
+    gap: 2,
+  },
+  statHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  statLabel: {
+    fontSize: 8,
+    fontWeight: '800',
+    letterSpacing: 0.5,
+  },
+  statValue: {
+    fontSize: fontSize.lg,
+    fontWeight: '800',
+    fontVariant: ['tabular-nums'],
+  },
 });
+

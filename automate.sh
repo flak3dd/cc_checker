@@ -17,7 +17,7 @@ DATA_DIR="$ROOT_DIR/data"
 
 function show_help {
     echo -e "${BLUE}Usage:${NC} ./automate.sh [type] [file]"
-    echo -e "  ${GREEN}type:${NC} cc (PPSR Checker), wa (WA Rego Checker), or carfacts (CarFacts Report)"
+    echo -e "  ${GREEN}type:${NC} cc (PPSR Checker) or wa (WA Rego Checker)"
     echo -e "  ${GREEN}file:${NC} Path to input file (optional, defaults to data/cards.txt or data/plates.txt)"
     exit 1
 }
@@ -39,11 +39,6 @@ elif [[ "$TYPE" == "wa" ]]; then
     echo -e "${BLUE}🚀 Starting WA Rego automation...${NC}"
     cd "$ROOT_DIR"
     npx tsx "$ROOT_DIR/automation/wa_rego/check.ts"
-
-elif [[ "$TYPE" == "carfacts" ]]; then
-    echo -e "${BLUE}🚀 Starting CarFacts Report automation...${NC}"
-    cd "$ROOT_DIR"
-    npx tsx "$ROOT_DIR/automation/carfacts/check.ts"
 
 else
     show_help

@@ -4,7 +4,7 @@
     "slug": "CCCheckerApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+"icon": "./assets/images/android-icon-monochrome.png",
     "scheme": "cccheckerapp",
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
@@ -21,16 +21,14 @@
       "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#08080D",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
+"foregroundImage": "./assets/images/android-icon-monochrome.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": true,
-      "permissions": [
-        "READ_EXTERNAL_STORAGE"
-      ],
-      "usesCleartextTraffic": true
+      "permissions": ["READ_EXTERNAL_STORAGE"],
+
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
@@ -66,7 +64,8 @@
       "router": {},
       "eas": {
         "projectId": "7e9ace6d-7581-46bc-99b8-72e1813162ce"
-      }
+      },
+      "API_URL": "https://cc-checker-nhlrvq7a5-jacks-projects-36c61380.vercel.app"
     }
   }
 }

@@ -2,13 +2,23 @@
 frontend/
 # Automation scripts (run locally, not on Vercel)
 automation/
-# Data files (ephemeral on Vercel)
+# Backend data/logs/debug (too many files for Vercel)
 data/
-# Screenshots (ephemeral on Vercel)
-screenshots/
 logs/
+logs/**
+debug/
+debug/**
+screenshots/
+screenshots/**
+playwright-report/
+playwright-report/**
+test-results/
+test-results/**
 # Local scripts
 start.sh
 automate.sh
 # Large dependencies
 node_modules/
+# Builds
+android/build/
+ios/build/

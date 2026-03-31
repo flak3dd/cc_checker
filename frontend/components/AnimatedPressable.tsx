@@ -3,13 +3,12 @@
  * Every interactive element should use this instead of raw Pressable.
  */
 import React, { useCallback } from 'react';
-import { StyleProp, ViewStyle, GestureResponderEvent } from 'react-native';
+import { StyleProp, ViewStyle, GestureResponderEvent , Pressable } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import { Pressable } from 'react-native';
 import { impactLight } from '@/utils/haptics';
 import { motion } from '@/constants/theme';
 

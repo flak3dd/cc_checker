@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo, useState, useCallback } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import { View, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { Modal, Portal, Text } from 'react-native-paper';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { AnimatedPressable } from '@/components/AnimatedPressable';
@@ -9,12 +9,12 @@ import { colors, radii, spacing, fontSize, shadows } from '@/constants/theme';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 interface LiveLogPanelProps {
-  file: 'wa' | 'cc' | 'results' | 'wa-checkout' | 'carfacts';
+  file: 'wa' | 'cc' | 'results' | 'wa-checkout';
   title?: string;
   height?: number;
 }
 
-function getLineColor(line: string): string {
+const getLineColor = useCallback((line: string): string => {
   const lower = line.toLowerCase();
   if (lower.includes('[hit') || lower.includes('success') || lower.includes('✓') || lower.includes('pass'))
     return colors.success;
@@ -27,34 +27,39 @@ function getLineColor(line: string): string {
   if (lower.includes('paused') || lower.includes('waiting') || lower.includes('selected'))
     return colors.accent;
   return colors.terminalText;
-}
+}, []);
 
 const LogLines: React.FC<{
   lines: { text: string; color: string }[];
   file: string;
-  scrollRef?: React.RefObject<ScrollView | null>;
-}> = ({ lines, file, scrollRef }) => (
-  <ScrollView
-    ref={scrollRef}
+  flatListRef?: React.RefObject<FlatList> | null;
+}> = ({ lines, file, flatListRef }) => (
+  <FlatList
+    ref={flatListRef}
+    data={lines}
+    keyExtractor={(item, index) => `${file}-${index}`}
+    renderItem={({ item, index }) => (
+      <View style={styles.logRow}>
+        <Text style={styles.lineNum}>{String(index + 1).padStart(3, ' ')}</Text>
+        <Text style={[styles.logText, { color: item.color }]} numberOfLines={2}>
+          {item.text}
+        </Text>
+      </View>
+    )}
     style={styles.scrollView}
     contentContainerStyle={styles.contentContainer}
     showsVerticalScrollIndicator={false}
-  >
-    {lines.map((line, i) => (
-      <View key={`${file}-${i}`} style={styles.logRow}>
-        <Text style={styles.lineNum}>{String(i + 1).padStart(3, ' ')}</Text>
-        <Text style={[styles.logText, { color: line.color }]} numberOfLines={2}>
-          {line.text}
-        </Text>
-      </View>
-    ))}
-  </ScrollView>
+    initialNumToRender={20}
+    maxToRenderPerBatch={10}
+    windowSize={10}
+    removeClippedSubviews={true}
+  />
 );
 
 export const LiveLogPanel: React.FC<LiveLogPanelProps> = ({ file, title, height = 160 }) => {
   const { data } = useLogTailQuery(file);
-  const scrollRef = useRef<ScrollView>(null);
-  const fullscreenScrollRef = useRef<ScrollView>(null);
+const scrollRef = useRef<FlatList>(null);
+  const fullscreenScrollRef = useRef<FlatList>(null);
   const [expanded, setExpanded] = useState(false);
   const lines = data?.lines || [];
 
@@ -91,7 +96,7 @@ export const LiveLogPanel: React.FC<LiveLogPanelProps> = ({ file, title, height 
             </View>
           </AnimatedPressable>
         )}
-        <LogLines lines={coloredLines} file={file} scrollRef={scrollRef} />
+        <LogLines lines={coloredLines} file={file} flatListRef={scrollRef} />
       </View>
 
       <Portal>
@@ -110,7 +115,7 @@ export const LiveLogPanel: React.FC<LiveLogPanelProps> = ({ file, title, height 
               </AnimatedPressable>
             </View>
           </View>
-          <LogLines lines={coloredLines} file={`${file}-full`} scrollRef={fullscreenScrollRef} />
+          <LogLines lines={coloredLines} file={`${file}-full`} flatListRef={fullscreenScrollRef} />
         </Modal>
       </Portal>
     </>
@@ -132,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.sm,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
     backgroundColor: colors.surface,
@@ -148,51 +153,48 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   title: {
-    color: colors.textMuted,
-    textTransform: 'uppercase',
+    color: colors.textSecondary,
     fontSize: fontSize.xs,
-    fontWeight: '800',
-    letterSpacing: 2,
-    fontFamily: 'monospace',
+    fontWeight: '700',
+    letterSpacing: 1,
   },
   badge: {
     backgroundColor: colors.primaryMuted,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 2,
-    borderRadius: radii.xs,
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: radii.sm,
   },
   lineCount: {
     color: colors.primary,
-    fontSize: fontSize['2xs'],
-    fontWeight: '700',
+    fontSize: 10,
+    fontWeight: '600',
     fontVariant: ['tabular-nums'],
-    fontFamily: 'monospace',
   },
   scrollView: {
     flex: 1,
   },
   contentContainer: {
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.sm,
   },
   logRow: {
     flexDirection: 'row',
-    gap: spacing.sm,
+    gap: spacing.xs,
     paddingVertical: 1,
   },
   lineNum: {
     color: colors.textMuted,
     fontFamily: 'monospace',
-    fontSize: fontSize.sm,
-    lineHeight: 16,
+    fontSize: 10,
+    lineHeight: 14,
     opacity: 0.4,
-    minWidth: 24,
+    minWidth: 20,
     textAlign: 'right',
   },
   logText: {
     fontFamily: 'monospace',
-    fontSize: fontSize.sm,
-    lineHeight: 16,
+    fontSize: 10,
+    lineHeight: 14,
     flex: 1,
   },
   modal: {
@@ -216,12 +218,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
   },
   modalTitle: {
-    color: colors.textSecondary,
-    textTransform: 'uppercase',
-    fontSize: fontSize.base,
-    fontWeight: '800',
-    letterSpacing: 2,
-    fontFamily: 'monospace',
+    color: colors.textPrimary,
+    fontSize: fontSize.md,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
   closeBtn: {
     width: 32,

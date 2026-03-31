@@ -1,0 +1,8 @@
+{
+  "android": {
+    "package": "com.flak3dd.cc_checker"
+  },
+  "ios": {
+    "bundleIdentifier": "com.flak3dd.cc-checker"
+  }
+}

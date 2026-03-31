@@ -27,3 +27,4 @@ widget_data.json
 
 # Old files
 .zenflow/
+.vercel

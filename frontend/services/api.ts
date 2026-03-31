@@ -1,12 +1,12 @@
 import { Platform } from 'react-native';
 import axios from 'axios';
-import { ProcessingStatus, CardResult, AnalyticsData, ResultsResponse, PlateCheckStatus, PlateCheckResponse, WaCheckoutStatus, CarfactsStatus } from '@/types';
+import { ProcessingStatus, CardResult, AnalyticsData, ResultsResponse, PlateCheckStatus, PlateCheckResponse, WaCheckoutStatus } from '@/types';
 
 import Constants from 'expo-constants';
 
 // Production API URL — set this to your Vercel deployment URL.
 // Leave empty to use local dev server auto-detection.
-const PRODUCTION_API_URL = process.env.EXPO_PUBLIC_API_URL || '';
+const PRODUCTION_API_URL = process.env.EXPO_PUBLIC_API_URL || 'https://cc-checker-fpkwzm32l-jacks-projects-36c61380.vercel.app';
 
 // Resolve API host: use production URL if set, otherwise auto-detect LAN IP
 function getApiBaseUrl(): string {
@@ -132,7 +132,7 @@ export const api = {
     return data;
   },
 
-  getLogTail: async (file: 'wa' | 'results' | 'cc' | 'wa-checkout' | 'carfacts' = 'wa', lines: number = 50): Promise<{ lines: string[] }> => {
+  getLogTail: async (file: 'wa' | 'results' | 'cc' | 'wa-checkout' = 'wa', lines: number = 50): Promise<{ lines: string[] }> => {
     const { data } = await apiClient.get(`/api/logs/tail?file=${file}&lines=${lines}`);
     return data;
   },
@@ -183,29 +183,10 @@ export const api = {
     return data;
   },
 
-  // --- CarFacts API ---
-  getCarfactsStatus: async (): Promise<CarfactsStatus> => {
-    const { data } = await apiClient.get<CarfactsStatus>('/api/carfacts/status');
-    return data;
-  },
-
-  startCarfacts: async (): Promise<{ success: boolean; message: string }> => {
-    const { data } = await apiClient.post('/api/carfacts/start');
-    return data;
-  },
-
-  stopCarfacts: async (): Promise<{ success: boolean; message: string }> => {
-    const { data } = await apiClient.post('/api/carfacts/stop');
-    return data;
-  },
-
-  getCarfactsResults: async (): Promise<any[]> => {
-    const { data } = await apiClient.get<any[]>('/api/carfacts/results');
-    return data;
-  },
-
-  clearCarfactsLogs: async (): Promise<{ success: boolean; message: string }> => {
-    const { data } = await apiClient.post('/api/carfacts/clear');
+  // Paginated results for Results hub
+  getPaginatedResults: async (type: 'cc' | 'wa', page: number = 1, limit: number = 20): Promise<{ results: any[]; hasMore: boolean; total: number }> => {
+    const { data } = await apiClient.get(`/api/results/${type}?page=${page}&limit=${limit}`);
     return data;
   },
 };
+

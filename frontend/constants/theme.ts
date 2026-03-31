@@ -1,8 +1,7 @@
 /**
- * Design token system — Cyberpunk HUD v3
- * Deep blacks canvas (#000000 / #0A0A0F), neon accents (cyan, green, amber, crimson).
- * Generous padding (16-20pt), rounded corners (16-20pt), monospaced tactical labels.
- * Breathing room between sections (24-32pt).
+ * Design token system — Refined Professional v1
+ * Soft deep grays, sapphire accents, and clean typography.
+ * Balanced padding, subtle shadows, and modern sans-serif fonts.
  */
 
 import { Platform } from 'react-native';
@@ -11,68 +10,79 @@ import type { MD3Theme } from 'react-native-paper';
 
 // ─── Color Tokens ───────────────────────────────────────────────
 export const colors = {
-  // Primary — Cyan
-  primary: '#00CCCC',
-  primaryDim: '#008F8F',
-  primaryGlow: 'rgba(0, 204, 204, 0.14)',
-  primaryMuted: 'rgba(0, 204, 204, 0.08)',
-  primaryBright: '#33FFFF',
+  // Primary — Sapphire / Modern Teal
+  primary: '#3B82F6', // Blue 500
+  primaryDim: '#2563EB', // Blue 600
+  primaryGlow: 'rgba(59, 130, 246, 0.12)',
+  primaryMuted: 'rgba(59, 130, 246, 0.06)',
+  primaryBright: '#60A5FA', // Blue 400
 
-  // Backgrounds — Deep blacks
-  background: '#000000',
-  surface: '#0A0A0F',
-  surfaceElevated: '#111118',
-  surfaceHighlight: '#1A1A24',
-  surfaceHover: '#222230',
+  // Backgrounds — Deep refined grays
+  background: '#09090B', // Zinc 950
+  surface: '#121217',
+  surfaceElevated: '#18181B', // Zinc 900
+  surfaceHighlight: '#27272A', // Zinc 800
+  surfaceHover: '#3F3F46', // Zinc 700
 
   // Borders
-  border: '#1A1A28',
-  borderActive: '#2A2A42',
-  borderFocus: '#00CCCC',
-  borderSubtle: '#0F0F18',
+  border: '#27272A',
+  borderActive: '#3F3F46',
+  borderFocus: '#3B82F6',
+  borderSubtle: '#18181B',
 
   // Text
-  textPrimary: '#EAEAF2',
-  textSecondary: '#8888A0',
-  textMuted: '#505068',
+  textPrimary: '#FAFAFA', // Zinc 50
+  textSecondary: '#A1A1AA', // Zinc 400
+  textMuted: '#71717A', // Zinc 500
   textInverse: '#000000',
 
-  // Semantic — Neon accents
-  success: '#00E676',
-  successDim: '#00A854',
-  successMuted: 'rgba(0, 230, 118, 0.10)',
-  successGlow: 'rgba(0, 230, 118, 0.25)',
-  danger: '#FF3B5C',
-  dangerDim: '#CC2F4A',
-  dangerMuted: 'rgba(255, 59, 92, 0.10)',
-  dangerGlow: 'rgba(255, 59, 92, 0.25)',
-  warning: '#FFB020',
-  warningDim: '#CC8D1A',
-  warningMuted: 'rgba(255, 176, 32, 0.10)',
-  warningGlow: 'rgba(255, 176, 32, 0.25)',
-  info: '#4D8AFF',
-  infoDim: '#3D6ECC',
-  infoMuted: 'rgba(77, 138, 255, 0.10)',
-  infoGlow: 'rgba(77, 138, 255, 0.25)',
-  accent: '#9B6DFF',
-  accentDim: '#7B4FDB',
-  accentMuted: 'rgba(155, 109, 255, 0.10)',
-  accentGlow: 'rgba(155, 109, 255, 0.25)',
+  // Semantic
+  success: '#10B981', // Emerald 500
+  successDim: '#059669',
+  successMuted: 'rgba(16, 185, 129, 0.08)',
+  successGlow: 'rgba(16, 185, 129, 0.15)',
+  danger: '#EF4444', // Red 500
+  dangerDim: '#DC2626',
+  dangerMuted: 'rgba(239, 68, 68, 0.08)',
+  dangerGlow: 'rgba(239, 68, 68, 0.15)',
+  warning: '#F59E0B', // Amber 500
+  warningDim: '#D97706',
+  warningMuted: 'rgba(245, 158, 11, 0.08)',
+  warningGlow: 'rgba(245, 158, 11, 0.15)',
+  info: '#0EA5E9', // Sky 500
+  infoDim: '#0284C7',
+  infoMuted: 'rgba(14, 165, 233, 0.08)',
+  infoGlow: 'rgba(14, 165, 233, 0.15)',
+  accent: '#8B5CF6', // Violet 500
+  accentDim: '#7C3AED',
+  accentMuted: 'rgba(139, 92, 246, 0.08)',
+  accentGlow: 'rgba(139, 92, 246, 0.15)',
 
-  // Terminal
-  terminalBg: '#050508',
-  terminalText: '#00E676',
-  terminalDim: '#3A6A4A',
-  terminalHighlight: '#FFB020',
-  terminalError: '#FF3B5C',
-  terminalCursor: '#00CCCC',
+  // Terminal / Logs (keeping slightly technical but cleaner)
+  terminalBg: '#0C0C0E',
+  terminalText: '#E4E4E7', // Zinc 200
+  terminalDim: '#71717A',
+  terminalHighlight: '#3B82F6',
+  terminalError: '#EF4444',
+  terminalCursor: '#3B82F6',
 
   // Glass & Overlay
-  overlay: 'rgba(0, 0, 0, 0.80)',
-  shimmer: 'rgba(255, 255, 255, 0.03)',
-  glassLight: 'rgba(255, 255, 255, 0.03)',
-  glassBorder: 'rgba(255, 255, 255, 0.05)',
-  glassThin: 'rgba(255, 255, 255, 0.02)',
+  overlay: 'rgba(0, 0, 0, 0.75)',
+  shimmer: 'rgba(255, 255, 255, 0.02)',
+  glassLight: 'rgba(255, 255, 255, 0.05)',
+  glassBorder: 'rgba(255, 255, 255, 0.08)',
+  glassThin: 'rgba(255, 255, 255, 0.03)',
+  glassMorphism: {
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.37)',
+  },
+} as const;
+
+export const pageMargins = {
+  horizontal: 32, // spacing['2xl'] * 1.5 for breathing room
+  vertical: 16,
 } as const;
 
 // ─── Spacing (generous: 16-20pt cards, 24-32pt sections) ───────
@@ -89,31 +99,31 @@ export const spacing = {
   '5xl': 56,
 } as const;
 
-// ─── Radius (16-20pt for cards) ─────────────────────────────────
+// ─── Radius (12-16pt for refined look) ───────────────────────────
 export const radii = {
   xs: 4,
-  sm: 8,
-  md: 12,
-  lg: 16,
-  xl: 20,
-  '2xl': 24,
+  sm: 6,
+  md: 10,
+  lg: 12,
+  xl: 16,
+  '2xl': 20,
   full: 999,
 } as const;
 
 // ─── Typography Scale ───────────────────────────────────────────
 export const fontSize = {
-  '2xs': 8,
-  xs: 9,
-  sm: 10,
-  base: 11,
-  md: 12,
-  lg: 14,
-  xl: 16,
-  '2xl': 20,
-  '3xl': 24,
-  '4xl': 32,
-  '5xl': 40,
-  display: 48,
+  '2xs': 10,
+  xs: 11,
+  sm: 12,
+  base: 13,
+  md: 14,
+  lg: 16,
+  xl: 18,
+  '2xl': 22,
+  '3xl': 28,
+  '4xl': 36,
+  '5xl': 44,
+  display: 52,
 } as const;
 
 // ─── Shadows ────────────────────────────────────────────────────
@@ -121,45 +131,45 @@ export const shadows = {
   sm: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
     elevation: 2,
   },
   md: {
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 4,
   },
   lg: {
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.3,
     shadowRadius: 16,
     elevation: 8,
   },
-  glow: (color: string, radius = 12) =>
+  glow: (color: string, radius = 8) =>
     Platform.select({
       ios: {
         shadowColor: color,
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.5,
+        shadowOpacity: 0.2,
         shadowRadius: radius,
       },
-      default: { elevation: Math.min(Math.round(radius / 2), 12) },
+      default: { elevation: Math.min(Math.round(radius / 4), 6) },
     }) as any,
   borderGlow: (color: string) => ({
-    borderColor: color + '40',
+    borderColor: color + '30',
     borderWidth: 1,
     ...Platform.select({
       ios: {
         shadowColor: color,
         shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.3,
-        shadowRadius: 8,
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
       },
-      android: { elevation: 4 },
+      android: { elevation: 2 },
     }),
   }),
 } as const;
@@ -255,3 +265,4 @@ export const Colors = {
     tabIconSelected: colors.primary,
   },
 };
+

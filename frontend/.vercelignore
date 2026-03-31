@@ -1,0 +1,11 @@
+node_modules/
+frontend/bun.lock
+frontend/package-lock.json
+*.log
+.nyc_output
+coverage/
+.DS_Store
+.expo/
+dist/
+build/
+

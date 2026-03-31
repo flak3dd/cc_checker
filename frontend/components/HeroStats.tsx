@@ -22,8 +22,6 @@ interface HeroStatsProps {
   queueCount: number;
   totalChecked: number;
   waPlates: number;
-  cfReports: number;
-  cfPending: number;
 }
 
 // ─── Animated Ring ─────────────────────────────────────────────
@@ -53,8 +51,6 @@ const AnimatedRing: React.FC<{ percent: number; color: string }> = ({ percent, c
       <View style={[styles.ringTrack, { borderColor: color + '15' }]} />
       {/* Progress — top half mask */}
       <Animated.View style={[styles.ringProgress, { borderColor: color }, ringStyle]} />
-      {/* Inner glow */}
-      <View style={[styles.ringGlow, shadows.glow(color, 16)]} />
     </View>
   );
 };
@@ -100,8 +96,6 @@ export const HeroStats: React.FC<HeroStatsProps> = ({
   queueCount,
   totalChecked,
   waPlates,
-  cfReports,
-  cfPending,
 }) => {
   // Breathing pulse for the hero card
   const heroPulse = useSharedValue(0);
@@ -189,12 +183,10 @@ export const HeroStats: React.FC<HeroStatsProps> = ({
         </View>
       </Animated.View>
 
-      {/* ─── Bottom Grid: 4 Mini Cards ─── */}
+      {/* ─── Bottom Grid: 2 Mini Cards ─── */}
       <View style={styles.miniGrid}>
         <MiniStat value={queueCount} label="QUEUE" icon="playlist-play" color={colors.info} index={0} />
         <MiniStat value={waPlates} label="WA PLATES" icon="directions-car" color={colors.accent} index={1} />
-        <MiniStat value={cfReports} label="CF DONE" icon="fact-check" color={colors.warning} index={2} />
-        <MiniStat value={cfPending} label="CF PENDING" icon="pending-actions" color={colors.textSecondary} index={3} />
       </View>
     </View>
   );
@@ -234,35 +226,33 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
   },
   heroRateValue: {
-    fontSize: fontSize['3xl'],
-    fontWeight: '900',
-    fontFamily: 'monospace',
+    fontSize: fontSize['4xl'],
+    fontWeight: '800',
     fontVariant: ['tabular-nums'],
   },
   heroRateUnit: {
-    fontSize: fontSize.lg,
+    fontSize: fontSize.xl,
     fontWeight: '700',
     color: colors.textMuted,
     marginLeft: 1,
   },
   heroRateLabel: {
     fontSize: fontSize['2xs'],
-    fontWeight: '800',
-    color: colors.textMuted,
-    letterSpacing: 2.5,
-    fontFamily: 'monospace',
+    fontWeight: '700',
+    color: colors.textSecondary,
+    letterSpacing: 1.5,
   },
 
   heroDivider: {
     width: 1,
     backgroundColor: colors.border,
-    marginVertical: spacing.xs,
+    marginVertical: spacing.sm,
   },
 
   heroRight: {
     flex: 1,
     justifyContent: 'center',
-    gap: spacing.md,
+    gap: spacing.lg,
   },
   heroStatRow: {
     flexDirection: 'row',
@@ -270,41 +260,40 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   heroDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
+    width: 4,
+    height: 4,
+    borderRadius: 2,
   },
   heroStatText: {
-    width: 52,
+    width: 48,
   },
   heroStatValue: {
-    fontSize: fontSize.xl,
-    fontWeight: '800',
-    fontFamily: 'monospace',
+    fontSize: fontSize.lg,
+    fontWeight: '700',
     fontVariant: ['tabular-nums'],
   },
   heroStatLabel: {
-    fontSize: 6,
-    fontWeight: '800',
+    fontSize: 8,
+    fontWeight: '700',
     color: colors.textMuted,
-    letterSpacing: 1.5,
-    fontFamily: 'monospace',
+    letterSpacing: 1,
     marginTop: -1,
   },
   heroBar: {
     flex: 1,
-    height: 4,
-    borderRadius: 2,
+    height: 3,
+    borderRadius: 1.5,
     overflow: 'hidden',
   },
   heroBarFill: {
     height: '100%',
-    borderRadius: 2,
+    borderRadius: 1.5,
   },
 
   heroMiniDivider: {
     height: 1,
     backgroundColor: colors.border,
+    opacity: 0.5,
   },
 
   heroTotalRow: {
@@ -314,16 +303,14 @@ const styles = StyleSheet.create({
   },
   heroTotalLabel: {
     fontSize: fontSize['2xs'],
-    fontWeight: '800',
+    fontWeight: '700',
     color: colors.textMuted,
-    letterSpacing: 2,
-    fontFamily: 'monospace',
+    letterSpacing: 1,
   },
   heroTotalValue: {
-    fontSize: fontSize.xl,
-    fontWeight: '800',
+    fontSize: fontSize.lg,
+    fontWeight: '700',
     color: colors.textPrimary,
-    fontFamily: 'monospace',
     fontVariant: ['tabular-nums'],
   },
 
@@ -349,13 +336,6 @@ const styles = StyleSheet.create({
     borderWidth: RING_STROKE,
     borderRightColor: 'transparent',
     borderBottomColor: 'transparent',
-  },
-  ringGlow: {
-    position: 'absolute',
-    width: RING_SIZE * 0.5,
-    height: RING_SIZE * 0.5,
-    borderRadius: RING_SIZE * 0.25,
-    backgroundColor: 'transparent',
   },
 
   // ─── Mini Grid ────────────────────────────
@@ -383,17 +363,15 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   miniValue: {
-    fontSize: fontSize.xl,
-    fontWeight: '800',
-    fontFamily: 'monospace',
+    fontSize: fontSize.lg,
+    fontWeight: '700',
     fontVariant: ['tabular-nums'],
   },
   miniLabel: {
-    fontSize: 6,
-    fontWeight: '800',
+    fontSize: 8,
+    fontWeight: '700',
     color: colors.textMuted,
-    letterSpacing: 1,
-    fontFamily: 'monospace',
+    letterSpacing: 0.5,
     textAlign: 'center',
   },
 });

@@ -12,6 +12,7 @@ import { View } from 'react-native';
 import { paperTheme, colors } from '@/constants/theme';
 import { SplashAnimation } from '@/components/SplashAnimation';
 import { OfflineBanner } from '@/components/OfflineBanner';
+import { PageMargins } from '@/components/PageMargins';
 import { useApiHealth } from '@/hooks/useApiHealth';
 
 SplashScreen.preventAutoHideAsync();
@@ -20,9 +21,12 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       // Global defaults for device resilience
-      networkMode: 'always', // Keep polling even when offline
+      networkMode: 'online',
       refetchOnReconnect: true,
       refetchOnMount: true,
+      gcTime: 5 * 60 * 1000, // 5min
+      retry: 2,
+      staleTime: 5 * 1000,
     },
   },
 });
@@ -88,7 +92,7 @@ export default function RootLayout() {
     async function prepare() {
       try {
         await Asset.loadAsync([require('@/assets/images/icon.png')]);
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 200));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -115,7 +119,10 @@ export default function RootLayout() {
       <PaperProvider theme={paperTheme}>
         <ThemeProvider value={navTheme}>
           {!animationFinished && <SplashAnimation onFinish={onAnimationFinish} />}
-          <AppContent />
+      <PageMargins>
+        <AppContent />
+      </PageMargins>
+
           <StatusBar style="light" />
         </ThemeProvider>
       </PaperProvider>

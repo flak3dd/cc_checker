@@ -14,7 +14,6 @@ echo -e "${GREEN}🧹 Cleaning up orphan processes...${NC}"
 pkill -f "tsx.*automation/" 2>/dev/null
 pkill -f "tsx.*check" 2>/dev/null
 pkill -f "tsx.*checkout" 2>/dev/null
-pkill -f "tsx.*carfacts" 2>/dev/null
 # Clean stale state files
 rm -f data/wa_pending_payment.json data/wa_selected_card.json 2>/dev/null
 

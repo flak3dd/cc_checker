@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/services/api';
-import { ProcessingStatus, AnalyticsData, ResultsResponse, PlateCheckStatus, PlateCheckResponse, WaCheckoutStatus, CarfactsStatus } from '@/types';
+import { ProcessingStatus, AnalyticsData, ResultsResponse, PlateCheckStatus, PlateCheckResponse, WaCheckoutStatus } from '@/types';
 
 /** Common retry config for device resilience */
 const DEVICE_QUERY_OPTS = {
@@ -12,8 +12,8 @@ export const useStatusQuery = () =>
   useQuery<ProcessingStatus>({
     queryKey: ['status'],
     queryFn: () => api.getStatus(),
-    refetchInterval: 3000,
-    staleTime: 1500,
+    refetchInterval: 5000,
+    staleTime: 5000,
     ...DEVICE_QUERY_OPTS,
   });
 
@@ -21,7 +21,7 @@ export const useResultsQuery = () =>
   useQuery<ResultsResponse>({
     queryKey: ['results'],
     queryFn: () => api.getResults(),
-    staleTime: 10000,
+    staleTime: 30000,
     ...DEVICE_QUERY_OPTS,
   });
 
@@ -29,8 +29,8 @@ export const useAnalyticsQuery = () =>
   useQuery<AnalyticsData>({
     queryKey: ['analytics'],
     queryFn: () => api.getAnalytics(),
-    refetchInterval: 5000,
-    staleTime: 2000,
+    refetchInterval: 7000,
+    staleTime: 10000,
     ...DEVICE_QUERY_OPTS,
   });
 
@@ -52,11 +52,11 @@ export const usePlateCheckResultsQuery = () =>
     ...DEVICE_QUERY_OPTS,
   });
 
-export const useLogTailQuery = (file: 'wa' | 'results' | 'cc' | 'wa-checkout' | 'carfacts' = 'wa') =>
+export const useLogTailQuery = (file: 'wa' | 'results' | 'cc' | 'wa-checkout' = 'wa') =>
   useQuery<{ lines: string[] }>({
     queryKey: ['logTail', file],
     queryFn: () => api.getLogTail(file),
-    refetchInterval: 2000,
+    refetchInterval: 1500,
     staleTime: 1000,
     ...DEVICE_QUERY_OPTS,
   });
@@ -74,7 +74,8 @@ export const useWaRegoHitsQuery = () =>
   useQuery<any[]>({
     queryKey: ['waRegoHits'],
     queryFn: () => api.getWaRegoHits(),
-    refetchInterval: 5000,
+    refetchInterval: 10000,
+    staleTime: 15000,
     ...DEVICE_QUERY_OPTS,
   });
 
@@ -86,19 +87,10 @@ export const useWaCheckoutResultsQuery = () =>
     ...DEVICE_QUERY_OPTS,
   });
 
-export const useCarfactsStatusQuery = () =>
-  useQuery<CarfactsStatus>({
-    queryKey: ['carfactsStatus'],
-    queryFn: () => api.getCarfactsStatus(),
-    refetchInterval: 3000,
-    staleTime: 1500,
-    ...DEVICE_QUERY_OPTS,
-  });
-
-export const useCarfactsResultsQuery = () =>
-  useQuery<any[]>({
-    queryKey: ['carfactsResults'],
-    queryFn: () => api.getCarfactsResults(),
-    refetchInterval: 5000,
+export const usePaginatedResultsQuery = (type: 'cc' | 'wa', page: number = 1, limit: number = 20) =>
+  useQuery({
+    queryKey: ['paginatedResults', type, page],
+    queryFn: () => api.getPaginatedResults(type, page, limit),
+    staleTime: 30000,
     ...DEVICE_QUERY_OPTS,
   });

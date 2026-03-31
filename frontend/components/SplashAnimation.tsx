@@ -211,16 +211,16 @@ export const SplashAnimation: React.FC<SplashAnimationProps> = ({ onFinish }) =>
       };
       runGlitch();
       const glitchInterval = setInterval(runGlitch, 1800 + Math.random() * 1200);
-      setTimeout(() => clearInterval(glitchInterval), 5000);
+      setTimeout(() => clearInterval(glitchInterval), 2500);
     }, 2500);
 
-    // Phase 5: Exit (5s) — scale up + fade out
+    // Phase 5: Exit (2.5s) — scale up + fade out
     const fadeTimer = setTimeout(() => {
-      finalScale.value = withTiming(1.15, { duration: 900, easing: Easing.in(Easing.quad) });
-      finalFade.value = withTiming(0, { duration: 900, easing: Easing.in(Easing.cubic) }, () => {
+      finalScale.value = withTiming(1.1, { duration: 600, easing: Easing.in(Easing.quad) });
+      finalFade.value = withTiming(0, { duration: 600, easing: Easing.in(Easing.cubic) }, () => {
         runOnJS(onFinish)();
       });
-    }, 5000);
+    }, 2500);
 
     return () => {
       clearTimeout(fadeTimer);

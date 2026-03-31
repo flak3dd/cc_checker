@@ -331,3 +331,391 @@ Call log:
 [23:11:16]   ✓ Navigated away from Amount page
 [23:11:23]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
 [23:11:23] PAUSED: Awaiting card selection for 1EMG893...
+[09:47:55] === WA Interactive Checkout Started ===
+[09:47:55] Starting Checkout: 1CZV7951TOS148
+[09:47:57]   ✓ Clicked: Search
+[09:47:59]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/;jsessionid=kX0aGAlbxTxRRiIkAwzhcikWk-WXt9s70cRb_xTVnew1oXsC0I8j!-32210321!574594928?0
+[09:48:14]   ✗ Could not find: Proceed to Confirmation
+[09:48:14]  → [CRASH] 1CZV7951TOS148: Could not find Proceed button
+[09:48:19] Starting Checkout: 1DSV077
+[09:48:19]   ✓ Clicked: Search
+[09:48:21]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?2
+[09:48:22]   ✓ Clicked: Proceed to Confirmation
+[09:48:24]   ✓ Checked confirmation box
+[09:48:24]   ✓ Clicked: Continue
+[09:48:26]   ✓ Selected 3 Months
+[09:48:29]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[09:48:30]   ✓ Navigated away from Amount page
+[09:48:37]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[09:48:37] PAUSED: Awaiting card selection for 1DSV077...
+[09:48:47]  → Card selected: ...7143
+[09:48:47]   Waiting for payment form to load...
+[09:48:47]   Found card form in iframe(bpoint) (attempt 1)
+[09:48:47]   📋 Found 7 form fields:
+[09:48:47]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[09:48:47]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[09:48:47]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[09:48:47]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[09:48:47]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[09:48:47]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[09:48:47]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[09:48:47]   ✓ Filled Name (iframe(bpoint))
+[09:48:47]   ✓ Filled Card Number (iframe(bpoint))
+[09:48:47]   ✓ Filled Expiry Month (iframe(bpoint))
+[09:48:47]   ✓ Filled Expiry Year (iframe(bpoint))
+[09:48:47]   ✓ Filled CVV (iframe(bpoint))
+[09:48:52]   ✗ Could not find: Process Payment
+[09:48:52]   ✓ Clicked: Process Payment (iframe)
+[09:49:07]  → [RESULT] FAILED for 1DSV077
+[09:49:12] Starting Checkout: 1AAA239
+[09:49:13]   ✓ Clicked: Search
+[09:49:15]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?4
+[09:49:15]   ✓ Clicked: Proceed to Confirmation
+[09:49:17]   ✓ Checked confirmation box
+[09:49:17]   ✓ Clicked: Continue
+[09:49:19]   ✓ Selected 3 Months
+[09:49:22]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?10
+[09:49:23]   ✓ Navigated away from Amount page
+[09:49:30]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?11
+[09:49:30] PAUSED: Awaiting card selection for 1AAA239...
+[09:49:34]  → Card selected: ...2009
+[09:49:34]   Waiting for payment form to load...
+[09:49:34]   Found card form in iframe(bpoint) (attempt 1)
+[09:49:34]   📋 Found 7 form fields:
+[09:49:34]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[09:49:34]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[09:49:34]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[09:49:34]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[09:49:34]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[09:49:34]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[09:49:34]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[09:49:34]   ✓ Filled Name (iframe(bpoint))
+[09:49:34]   ✓ Filled Card Number (iframe(bpoint))
+[09:49:34]   ✓ Filled Expiry Month (iframe(bpoint))
+[09:49:34]   ✓ Filled Expiry Year (iframe(bpoint))
+[09:49:34]   ✓ Filled CVV (iframe(bpoint))
+[09:49:39]   ✗ Could not find: Process Payment
+[09:49:39]   ✓ Clicked: Process Payment (iframe)
+[09:49:54]  → [RESULT] SUCCESS for 1AAA239
+[09:49:59] Starting Checkout: 1AAA261
+[09:49:59]   ✓ Clicked: Search
+[09:50:01]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/?5
+[09:50:17]   ✗ Could not find: Proceed to Confirmation
+[09:50:17]  → [CRASH] 1AAA261: Could not find Proceed button
+[09:50:23] === WA Interactive Checkout Started ===
+[09:50:23] Starting Checkout: 1AAA302
+[09:50:24]   ✓ Clicked: Search
+[09:50:26]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?1
+[09:50:26]   ✓ Clicked: Proceed to Confirmation
+[09:50:29]   ✓ Checked confirmation box
+[09:50:29]   ✓ Clicked: Continue
+[09:50:31]   ✓ Selected 12 Months
+[09:50:34]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[09:50:35]   ✓ Navigated away from Amount page
+[09:50:42]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[09:50:42] PAUSED: Awaiting card selection for 1AAA302...
+[09:50:48]  → Card selected: ...7143
+[09:50:48]   Waiting for payment form to load...
+[09:50:48]   Found card form in iframe(bpoint) (attempt 1)
+[09:50:48]   📋 Found 7 form fields:
+[09:50:48]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[09:50:48]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[09:50:48]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[09:50:48]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[09:50:48]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[09:50:48]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[09:50:48]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[09:50:48]   ✓ Filled Name (iframe(bpoint))
+[09:50:48]   ✓ Filled Card Number (iframe(bpoint))
+[09:50:48]   ✓ Filled Expiry Month (iframe(bpoint))
+[09:50:48]   ✓ Filled Expiry Year (iframe(bpoint))
+[09:50:48]   ✓ Filled CVV (iframe(bpoint))
+[09:50:53]   ✗ Could not find: Process Payment
+[09:50:53]   ✓ Clicked: Process Payment (iframe)
+[09:51:08]  → [RESULT] FAILED for 1AAA302
+[09:51:13] Starting Checkout: 1AAA338
+[09:51:13]   ✓ Clicked: Search
+[09:51:15]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?3
+[09:51:15]   ✓ Clicked: Proceed to Confirmation
+[09:51:27]   ⚠ No checkbox found, continuing...
+[09:51:42]   ✗ Could not find: Continue
+[09:52:24]   ⚠ Could not select 12 Months, may already be selected
+[09:52:27]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?9
+[09:52:28]   ✓ Navigated away from Amount page
+[09:52:35]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?10
+[09:52:35] PAUSED: Awaiting card selection for 1AAA338...
+[07:52:38] === WA Interactive Checkout Started ===
+[07:52:39] Starting Checkout: 1AAA378
+[07:52:41]   ✓ Clicked: Search
+[07:52:43]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?1
+[07:52:43]   ✓ Clicked: Proceed to Confirmation
+[07:52:45]   ✓ Checked confirmation box
+[07:52:45]   ✓ Clicked: Continue
+[07:52:47]   ✓ Selected 3 Months
+[07:52:50]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[07:52:51]   ✓ Navigated away from Amount page
+[07:52:58]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[07:52:58] PAUSED: Awaiting card selection for 1AAA378...
+[07:53:22]  → Card selected: ...2067
+[07:53:22]   Waiting for payment form to load...
+[07:53:22]   Found card form in iframe(bpoint) (attempt 1)
+[07:53:22]   📋 Found 7 form fields:
+[07:53:22]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[07:53:22]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[07:53:22]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[07:53:22]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[07:53:22]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[07:53:22]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[07:53:22]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[07:53:22]   ✓ Filled Name (iframe(bpoint))
+[07:53:22]   ✓ Filled Card Number (iframe(bpoint))
+[07:53:22]   ✓ Filled Expiry Month (iframe(bpoint))
+[07:53:22]   ✓ Filled Expiry Year (iframe(bpoint))
+[07:53:22]   ✓ Filled CVV (iframe(bpoint))
+[07:53:27]   ✗ Could not find: Process Payment
+[07:53:27]   ✓ Clicked: Process Payment (iframe)
+[07:53:42]  → [RESULT] FAILED for 1AAA378
+[07:53:47] Starting Checkout: 1AAA424
+[07:53:49]   ✓ Clicked: Search
+[07:53:51]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?3
+[07:53:51]   ✓ Clicked: Proceed to Confirmation
+[07:53:53]   ✓ Checked confirmation box
+[07:53:53]   ✓ Clicked: Continue
+[07:53:55]   ✓ Selected 3 Months
+[07:53:58]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?10
+[07:53:59]   ✓ Navigated away from Amount page
+[07:54:06]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?11
+[07:54:06] PAUSED: Awaiting card selection for 1AAA424...
+[14:25:06] === WA Interactive Checkout Started ===
+[14:25:08] === WA Interactive Checkout Started ===
+[14:25:09] Starting Checkout: 1AAA444
+[14:25:11]   ✓ Clicked: Search
+[14:25:13]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/;jsessionid=lbUqiO3jy9wvHzSuXqnekHFm8nqiHfzYRrmL-uszJIdDD4LuZIeC!574594928!2022983925?0
+[14:25:28]   ✗ Could not find: Proceed to Confirmation
+[14:25:28]  → [CRASH] 1AAA444: Could not find Proceed button
+[14:25:33] Starting Checkout: 1AAA536
+[14:25:33]   ✓ Clicked: Search
+[14:25:35]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?2
+[14:25:35]   ✓ Clicked: Proceed to Confirmation
+[14:25:37]   ✓ Checked confirmation box
+[14:25:38]   ✓ Clicked: Continue
+[14:25:40]   ✓ Selected 12 Months
+[14:25:43]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[14:25:43]   ✓ Navigated away from Amount page
+[14:25:50]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[14:25:50] PAUSED: Awaiting card selection for 1AAA536...
+[14:26:04]  → Card selected: ...2067
+[14:26:04]   Waiting for payment form to load...
+[14:26:04]   Found card form in iframe(bpoint) (attempt 1)
+[14:26:04]   📋 Found 7 form fields:
+[14:26:04]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[14:26:04]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[14:26:04]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[14:26:04]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[14:26:04]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[14:26:04]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[14:26:04]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[14:26:04]   ✓ Filled Name (iframe(bpoint))
+[14:26:04]   ✓ Filled Card Number (iframe(bpoint))
+[14:26:04]   ✓ Filled Expiry Month (iframe(bpoint))
+[14:26:04]   ✓ Filled Expiry Year (iframe(bpoint))
+[14:26:04]   ✓ Filled CVV (iframe(bpoint))
+[14:26:09]   ✗ Could not find: Process Payment
+[14:26:10]   ✓ Clicked: Process Payment (iframe)
+[14:26:25]  → [RESULT] FAILED for 1AAA536
+[14:26:30] Starting Checkout: 1AAA539
+[14:26:30]   ✓ Clicked: Search
+[14:26:31]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/?3
+[14:26:31]  → [CRASH] 1AAA539: page.screenshot: Target page, context or browser has been closed
+[14:26:53] === WA Interactive Checkout Started ===
+[14:26:54] Starting Checkout: 1AAA553
+[14:26:56]   ✓ Clicked: Search
+[14:26:58]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?1
+[14:26:58]   ✓ Clicked: Proceed to Confirmation
+[14:27:00]   ✓ Checked confirmation box
+[14:27:01]   ✓ Clicked: Continue
+[14:27:03]   ✓ Selected 12 Months
+[14:27:06]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[14:27:06]   ✓ Navigated away from Amount page
+[14:27:14]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[14:27:14] PAUSED: Awaiting card selection for 1AAA553...
+[14:27:22]  → Card selected: ...6533
+[14:27:22]   Waiting for payment form to load...
+[14:27:22]   Found card form in iframe(bpoint) (attempt 1)
+[14:27:22]   📋 Found 7 form fields:
+[14:27:22]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[14:27:22]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[14:27:22]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[14:27:22]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[14:27:22]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[14:27:22]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[14:27:22]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[14:27:22]   ✓ Filled Name (iframe(bpoint))
+[14:27:22]   ✓ Filled Card Number (iframe(bpoint))
+[14:27:22]   ✓ Filled Expiry Month (iframe(bpoint))
+[14:27:22]   ✓ Filled Expiry Year (iframe(bpoint))
+[14:27:22]   ✓ Filled CVV (iframe(bpoint))
+[14:27:27]   ✗ Could not find: Process Payment
+[14:27:27]   ✓ Clicked: Process Payment (iframe)
+[14:27:42]  → [RESULT] FAILED for 1AAA553
+[14:27:47] Starting Checkout: 1AAA599
+[14:27:47]   ✓ Clicked: Search
+[14:27:49]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?3
+[14:27:49]   ✓ Clicked: Proceed to Confirmation
+[14:27:51]   ✓ Checked confirmation box
+[14:27:51]   ✓ Clicked: Continue
+[14:27:53]   ✓ Selected 12 Months
+[14:27:56]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?10
+[14:27:57]   ✓ Navigated away from Amount page
+[14:28:04]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?11
+[14:28:04] PAUSED: Awaiting card selection for 1AAA599...
+[14:33:25] === WA Interactive Checkout Started ===
+[14:33:26] Starting Checkout: 1AAA609
+[14:33:28]  → [CRASH] 1AAA609: page.goto: Target page, context or browser has been closed
+Call log:
+[2m  - navigating to "https://online.transport.wa.gov.au/webExternal/accountlookup/", waiting until "domcontentloaded"[22m
+
+[14:33:30] === WA Interactive Checkout Started ===
+[14:33:30] Starting Checkout: 1AAA666
+[14:33:31]   ✓ Clicked: Search
+[14:33:33]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?1
+[14:33:33]   ✓ Clicked: Proceed to Confirmation
+[14:33:35]   ✓ Checked confirmation box
+[14:33:36]   ✓ Clicked: Continue
+[14:33:38]   ✓ Selected 12 Months
+[14:33:41]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[14:33:41]   ✓ Navigated away from Amount page
+[14:33:48]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[14:33:48] PAUSED: Awaiting card selection for 1AAA666...
+[14:35:34]  → Card selected: ...9950
+[14:35:34]   Waiting for payment form to load...
+[14:35:34]   Found card form in iframe(bpoint) (attempt 1)
+[14:35:34]   📋 Found 7 form fields:
+[14:35:34]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[14:35:34]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[14:35:34]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[14:35:34]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[14:35:35]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[14:35:35]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[14:35:35]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[14:35:35]   ✓ Filled Name (iframe(bpoint))
+[14:35:35]   ✓ Filled Card Number (iframe(bpoint))
+[14:35:35]   ✓ Filled Expiry Month (iframe(bpoint))
+[14:35:35]   ✓ Filled Expiry Year (iframe(bpoint))
+[14:35:35]   ✓ Filled CVV (iframe(bpoint))
+[14:35:40]   ✗ Could not find: Process Payment
+[14:35:40]   ✓ Clicked: Process Payment (iframe)
+[14:35:55]  → [RESULT] SUCCESS for 1AAA666
+[14:36:00] Starting Checkout: 1AAA735
+[14:36:00]   ✓ Clicked: Search
+[14:36:02]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?3
+[14:36:02]   ✓ Clicked: Proceed to Confirmation
+[14:36:04]   ✓ Checked confirmation box
+[14:36:04]   ✓ Clicked: Continue
+[14:36:06]   ✓ Selected 12 Months
+[14:36:09]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?10
+[14:36:10]   ✓ Navigated away from Amount page
+[14:36:17]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?11
+[14:36:17] PAUSED: Awaiting card selection for 1AAA735...
+[22:36:19] === WA Interactive Checkout Started ===
+[22:36:19] Starting Checkout: 1AAA746
+[22:36:21]   ✓ Clicked: Search
+[22:36:23]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?1
+[22:36:23]   ✓ Clicked: Proceed to Confirmation
+[22:36:25]   ✓ Checked confirmation box
+[22:36:25]   ✓ Clicked: Continue
+[22:36:27]   ✓ Selected 12 Months
+[22:36:30]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[22:36:31]   ✓ Navigated away from Amount page
+[22:36:38]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[22:36:38] PAUSED: Awaiting card selection for 1AAA746...
+[22:36:50]  → Card selected: ...7016
+[22:36:50]   Waiting for payment form to load...
+[22:36:50]   Found card form in iframe(bpoint) (attempt 1)
+[22:36:50]   📋 Found 7 form fields:
+[22:36:50]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[22:36:50]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[22:36:50]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[22:36:50]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[22:36:50]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[22:36:50]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[22:36:50]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[22:36:50]   ✓ Filled Name (iframe(bpoint))
+[22:36:50]   ✓ Filled Card Number (iframe(bpoint))
+[22:36:50]   ✓ Filled Expiry Month (iframe(bpoint))
+[22:36:50]   ✓ Filled Expiry Year (iframe(bpoint))
+[22:36:50]   ✓ Filled CVV (iframe(bpoint))
+[22:36:55]   ✗ Could not find: Process Payment
+[22:36:58]   ✓ Clicked: Process Payment (iframe)
+[22:37:14]  → [RESULT] FAILED for 1AAA746
+[22:37:19] Starting Checkout: 1AAA774
+[22:37:19]   ✓ Clicked: Search
+[22:37:21]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?3
+[22:37:21]   ✓ Clicked: Proceed to Confirmation
+[22:37:23]   ✓ Checked confirmation box
+[22:37:23]   ✓ Clicked: Continue
+[22:37:25]   ✓ Selected 12 Months
+[22:37:28]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?10
+[22:37:29]   ✓ Navigated away from Amount page
+[22:37:36]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?11
+[22:37:36] PAUSED: Awaiting card selection for 1AAA774...
+[22:37:44]  → Card selected: ...2067
+[22:37:44]   Waiting for payment form to load...
+[22:37:44]   Found card form in iframe(bpoint) (attempt 1)
+[22:37:44]   📋 Found 7 form fields:
+[22:37:44]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[22:37:44]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[22:37:44]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[22:37:44]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[22:37:44]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[22:37:44]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[22:37:44]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[22:37:44]   ✓ Filled Name (iframe(bpoint))
+[22:37:44]   ✓ Filled Card Number (iframe(bpoint))
+[22:37:44]   ✓ Filled Expiry Month (iframe(bpoint))
+[22:37:44]   ✓ Filled Expiry Year (iframe(bpoint))
+[22:37:44]   ✓ Filled CVV (iframe(bpoint))
+[22:37:49]   ✗ Could not find: Process Payment
+[22:37:49]   ✓ Clicked: Process Payment (iframe)
+[22:38:04]  → [RESULT] FAILED for 1AAA774
+[22:38:09] Starting Checkout: 1AAA845
+[22:38:09]  → [CRASH] 1AAA845: page.goto: net::ERR_ABORTED at https://online.transport.wa.gov.au/webExternal/accountlookup/
+Call log:
+[2m  - navigating to "https://online.transport.wa.gov.au/webExternal/accountlookup/", waiting until "domcontentloaded"[22m
+
+[07:02:35] === WA Interactive Checkout Started ===
+[07:02:36] Starting Checkout: 1AAA849
+[07:02:37]   ✓ Clicked: Search
+[07:02:39]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?1
+[07:02:40]   ✓ Clicked: Proceed to Confirmation
+[07:02:42]   ✓ Checked confirmation box
+[07:02:42]   ✓ Clicked: Continue
+[07:02:44]   ✓ Selected 12 Months
+[07:02:47]   Pre-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?2
+[07:02:48]   ✓ Navigated away from Amount page
+[07:02:55]   Post-payment URL: https://online.transport.wa.gov.au/webExternal/onlinepayment/wicket/page?3
+[07:02:55] PAUSED: Awaiting card selection for 1AAA849...
+[07:02:57]  → Card selected: ...4815
+[07:02:57]   Waiting for payment form to load...
+[07:02:57]   Found card form in iframe(bpoint) (attempt 1)
+[07:02:57]   📋 Found 7 form fields:
+[07:02:57]     → <input> name="null" id="authkey" type="hidden" placeholder="null" class="null"
+[07:02:57]     → <input> name="null" id="paymentprocessingtype" type="hidden" placeholder="null" class="null"
+[07:02:57]     → <input> name="null" id="cardholdername" type="text" placeholder="null" class="form-control"
+[07:02:57]     → <input> name="null" id="cardnumber" type="text" placeholder="null" class="form-control"
+[07:02:57]     → <input> name="null" id="expirydatemonth" type="text" placeholder="MM" class="form-control"
+[07:02:57]     → <input> name="null" id="expirydateyear" type="text" placeholder="YY" class="form-control"
+[07:02:57]     → <input> name="null" id="cvc" type="text" placeholder="null" class="form-control"
+[07:02:57]   ✓ Filled Name (iframe(bpoint))
+[07:02:57]   ✓ Filled Card Number (iframe(bpoint))
+[07:02:57]   ✓ Filled Expiry Month (iframe(bpoint))
+[07:02:57]   ✓ Filled Expiry Year (iframe(bpoint))
+[07:02:57]   ✓ Filled CVV (iframe(bpoint))
+[07:03:02]   ✗ Could not find: Process Payment
+[07:03:02]   ✓ Clicked: Process Payment (iframe)
+[07:03:17]  → [RESULT] SUCCESS for 1AAA849
+[07:03:22] Starting Checkout: 1AAA882
+[07:03:22]   ✓ Clicked: Search
+[07:03:24]   Page after search: https://online.transport.wa.gov.au/webExternal/accountlookup/wicket/page?3
+[07:03:25]   ✓ Clicked: Proceed to Confirmation
+[07:03:26]  → [CRASH] 1AAA882: page.screenshot: Target page, context or browser has been closed

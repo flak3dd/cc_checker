@@ -18029,3 +18029,977 @@
 [10:00:41] [W3] Checking 1AAG367 (attempt 534, total hits 18)
 [10:00:41] [W4] ... processed 420 plates
 [10:00:41] [W3][PAGE ERROR] __name is not defined
+[23:34:18] === WA Rego Checker Started (5 workers) ===
+[23:34:20] [W4] Checking 376097253112009|08|30|7742 (attempt 1, total hits 0)
+[23:34:20] [W3] Checking 5420061004372770|08|28|640 (attempt 1, total hits 0)
+[23:34:20] [W1] Checking 4507784871667779|04|29|839 (attempt 1, total hits 0)
+[23:34:20] [W5] Checking 5365470489916497|02|27|029 (attempt 1, total hits 0)
+[23:34:20] [W2] Checking 5588601800883369|05|28|928 (attempt 1, total hits 0)
+[23:34:20] [W3][PAGE ERROR] __name is not defined
+[23:34:20] [W4][PAGE ERROR] __name is not defined
+[23:34:20] [W1][PAGE ERROR] __name is not defined
+[23:34:21] [W5][PAGE ERROR] __name is not defined
+[23:34:21] [W2][PAGE ERROR] __name is not defined
+[23:34:30] [W2] Checking 5158216282175109|01|31|346 (attempt 2, total hits 0)
+[23:34:31] [W2][PAGE ERROR] __name is not defined
+[23:34:31] [W5] Checking 5129450013365491|04|26|311 (attempt 2, total hits 0)
+[23:34:32] [W5][PAGE ERROR] __name is not defined
+[23:34:32] [W1] Checking 5295592213784472|12|26|719 (attempt 2, total hits 0)
+[23:34:32] [W1][PAGE ERROR] __name is not defined
+[23:34:32] [W3] Checking 5488093707503962|06|26|873 (attempt 2, total hits 0)
+[23:34:32] [W4] Checking 5343996285875005|09|26|757 (attempt 2, total hits 0)
+[23:34:32] [W3][PAGE ERROR] __name is not defined
+[23:34:32] [W4][PAGE ERROR] __name is not defined
+[23:34:40] [W4] Checking 5336539710532202|12|26|421 (attempt 3, total hits 0)
+[23:34:40] [W4][PAGE ERROR] __name is not defined
+[23:34:40] [W2] Checking 4400430227403133|11|26|709 (attempt 3, total hits 0)
+[23:34:40] [W2][PAGE ERROR] __name is not defined
+[23:34:41] [W3] Checking 5424587004733526|06|26|019 (attempt 3, total hits 0)
+[23:34:41] [W3][PAGE ERROR] __name is not defined
+[23:34:42] [W1] Checking 5423398905788986|06|26|969 (attempt 3, total hits 0)
+[23:34:42] [W1][PAGE ERROR] __name is not defined
+[23:34:43] [W5] Checking 5520335211373345|03|26|075 (attempt 3, total hits 0)
+[23:34:43] [W5][PAGE ERROR] __name is not defined
+[23:34:50] [W2] Checking 5157180083056176|01|28|304 (attempt 4, total hits 0)
+[23:34:51] [W2][PAGE ERROR] __name is not defined
+[23:34:51] [W4] Checking 5581620049101471|06|28|235 (attempt 4, total hits 0)
+[23:34:51] [W4][PAGE ERROR] __name is not defined
+[23:34:51] [W1] Checking 4564095200989606|08|26|528 (attempt 4, total hits 0)
+[23:34:52] [W1][PAGE ERROR] __name is not defined
+[23:34:52] [W3] Checking 5163202033077276|04|28|981 (attempt 4, total hits 0)
+[23:34:52] [W3][PAGE ERROR] __name is not defined
+[23:34:54] [W5] Checking 4017954149713787|10|26|073 (attempt 4, total hits 0)
+[23:34:54] [W5][PAGE ERROR] __name is not defined
+[23:35:01] [W3] Checking 4000123456789010|12|28|123 (attempt 5, total hits 0)
+[23:35:01] [W3][PAGE ERROR] __name is not defined
+[23:35:01] [W1] Checking 4736660000103584|12|27|564 (attempt 5, total hits 0)
+[23:35:01] [W1][PAGE ERROR] __name is not defined
+[23:35:02] [W5] Checking 4308340000710450|04|26|710 (attempt 5, total hits 0)
+[23:35:02] [W5][PAGE ERROR] __name is not defined
+[23:35:02] [W2] Checking 4159660049526686|07|31|004 (attempt 5, total hits 0)
+[23:35:02] [W2][PAGE ERROR] __name is not defined
+[23:35:03] [W4] Checking 4533188205490312|12|28|308 (attempt 5, total hits 0)
+[23:35:03] [W4][PAGE ERROR] __name is not defined
+[23:35:10] [W2] Checking 4582634083345276|12|28|869 (attempt 6, total hits 0)
+[23:35:10] [W2][PAGE ERROR] __name is not defined
+[23:35:11] [W4] Checking 4302595459787921|01|27|968 (attempt 6, total hits 0)
+[23:35:11] [W4][PAGE ERROR] __name is not defined
+[23:35:11] [W1] Checking 4096361801924815|03|30|003 (attempt 6, total hits 0)
+[23:35:11] [W1][PAGE ERROR] __name is not defined
+[23:35:12] [W3] Checking 5396700003469596|09|26|089 (attempt 6, total hits 0)
+[23:35:12] [W3][PAGE ERROR] __name is not defined
+[23:35:13] [W5] Checking 4396890004761738|09|28|140 (attempt 6, total hits 0)
+[23:35:13] [W5][PAGE ERROR] __name is not defined
+[23:35:19] [W4] Checking 4396890004307169|12|27|530 (attempt 7, total hits 0)
+[23:35:19] [W4][PAGE ERROR] __name is not defined
+[23:35:19] [W2] Checking 4396890001609328|08|28|246 (attempt 7, total hits 0)
+[23:35:19] [W2][PAGE ERROR] __name is not defined
+[23:35:21] [W1] Checking 5275287287767487|12|27|400 (attempt 7, total hits 0)
+[23:35:21] [W1][PAGE ERROR] __name is not defined
+[23:35:21] [W5] Checking 4619740001500913|05|29|432 (attempt 7, total hits 0)
+[23:35:21] [W5][PAGE ERROR] __name is not defined
+[23:35:22] [W3] Checking 4239540010288777|10|26|989 (attempt 7, total hits 0)
+[23:35:22] [W3][PAGE ERROR] __name is not defined
+[23:35:27] [W2] Checking 5379931104745201|07|29|372 (attempt 8, total hits 0)
+[23:35:27] [W2][PAGE ERROR] __name is not defined
+[23:35:30] [W3] Checking 5243471046400130|07|28|138 (attempt 8, total hits 0)
+[23:35:30] [W3][PAGE ERROR] __name is not defined
+[23:35:30] [W4] Checking 4837419034000011|04|29|772 (attempt 8, total hits 0)
+[23:35:30] [W4][PAGE ERROR] __name is not defined
+[23:35:31] [W1] Checking 5217293015561466|04|28|168 (attempt 8, total hits 0)
+[23:35:32] [W1][PAGE ERROR] __name is not defined
+[23:35:32] [W5] Checking 5225353797427417|08|28|435 (attempt 8, total hits 0)
+[23:35:32] [W5][PAGE ERROR] __name is not defined
+[23:35:36] [W2] Checking 5594100021770408|12|27|472 (attempt 9, total hits 0)
+[23:35:37] [W2][PAGE ERROR] __name is not defined
+[23:35:39] [W4] Checking 4165490216464137|09|28|381 (attempt 9, total hits 0)
+[23:35:39] [W3] Checking 5570985211805503|11|29|843 (attempt 9, total hits 0)
+[23:35:39] [W4][PAGE ERROR] __name is not defined
+[23:35:39] [W3][PAGE ERROR] __name is not defined
+[23:35:41] [W1] Checking 4165986475901743|05|29|678 (attempt 9, total hits 0)
+[23:35:41] [W1][PAGE ERROR] __name is not defined
+[23:35:42] [W5] Checking 4434020011058829|02|27|159 (attempt 9, total hits 0)
+[23:35:42] [W5][PAGE ERROR] __name is not defined
+[23:35:46] [W2] Checking 4434020001549456|05|27|233 (attempt 10, total hits 0)
+[23:35:46] [W2][PAGE ERROR] __name is not defined
+[23:35:48] [W4] Checking 5435685301149235|06|29|841 (attempt 10, total hits 0)
+[23:35:48] [W3] Checking 5268797473290861|02|27|289 (attempt 10, total hits 0)
+[23:35:49] [W4][PAGE ERROR] __name is not defined
+[23:35:49] [W3][PAGE ERROR] __name is not defined
+[23:35:51] [W1] Checking 4165986475901743|05|29|678 (attempt 10, total hits 0)
+[23:35:52] [W1][PAGE ERROR] __name is not defined
+[23:35:52] [W2] ... processed 10 plates
+[23:35:53] [W5] Checking 4434020011058829|02|27|159 (attempt 10, total hits 0)
+[23:35:54] [W5][PAGE ERROR] __name is not defined
+[23:35:54] [W4] ... processed 10 plates
+[23:35:54] [W3] ... processed 10 plates
+[23:35:57] [W3] Checking 4434020001549456|05|27|233 (attempt 11, total hits 0)
+[23:35:57] [W3][PAGE ERROR] __name is not defined
+[23:35:57] [W2] Checking 5435685301149235|06|29|841 (attempt 11, total hits 0)
+[23:35:57] [W2][PAGE ERROR] __name is not defined
+[23:35:57] [W1] ... processed 10 plates
+[23:35:59] [W4] Checking 5268797473290861|02|27|289 (attempt 11, total hits 0)
+[23:35:59] [W4][PAGE ERROR] __name is not defined
+[23:35:59] [W5] ... processed 10 plates
+[23:36:02] [W5] Checking 5353165303362589|06|26|761 (attempt 11, total hits 0)
+[23:36:02] [W5][PAGE ERROR] __name is not defined
+[23:36:03] [W1] Checking 5353161319329126|05|26|600 (attempt 11, total hits 0)
+[23:36:03] [W1][PAGE ERROR] __name is not defined
+[23:36:07] [W3] Checking 5457082278802074|02|26|419 (attempt 12, total hits 0)
+[23:36:07] [W2] Checking 5457082294828103|01|27|764 (attempt 12, total hits 0)
+[23:36:07] [W2][PAGE ERROR] __name is not defined
+[23:36:08] [W4] Checking 5363542096383071|09|27|505 (attempt 12, total hits 0)
+[23:36:08] [W3][PAGE ERROR] __name is not defined
+[23:36:08] [W4][PAGE ERROR] __name is not defined
+[23:36:13] [W5] Checking 5225315001388826|12|28|261 (attempt 12, total hits 0)
+[23:36:13] [W5][PAGE ERROR] __name is not defined
+[23:36:13] [W1] Checking 5363542106236624|01|28|242 (attempt 12, total hits 0)
+[23:36:14] [W1][PAGE ERROR] __name is not defined
+[23:36:16] [W2] Checking 5121722470046550|05|29|960 (attempt 13, total hits 0)
+[23:36:16] [W2][PAGE ERROR] __name is not defined
+[23:36:17] [W3] Checking 5163202035424989|04|28|450 (attempt 13, total hits 0)
+[23:36:17] [W3][PAGE ERROR] __name is not defined
+[23:36:18] [W4] Checking 5121722477792438|04|29|300 (attempt 13, total hits 0)
+[23:36:19] [W4][PAGE ERROR] __name is not defined
+[23:36:22] [W5] Checking 5163202039979541|07|28|752 (attempt 13, total hits 0)
+[23:36:22] [W5][PAGE ERROR] __name is not defined
+[23:36:24] [W1] Checking 5121722473190181|05|29|702 (attempt 13, total hits 0)
+[23:36:24] [W1][PAGE ERROR] __name is not defined
+[23:36:26] [W2] Checking 5121722477721056|04|26|579 (attempt 14, total hits 0)
+[23:36:26] [W2][PAGE ERROR] __name is not defined
+[23:36:27] [W3] Checking 1KUV191 (attempt 14, total hits 0)
+[23:36:27] [W3][PAGE ERROR] __name is not defined
+[23:36:29] [W4] Checking 1UGT320 (attempt 14, total hits 0)
+[23:36:29] [W4][PAGE ERROR] __name is not defined
+[23:36:32] [W5] Checking 1UIB547 (attempt 14, total hits 0)
+[23:36:32] [W5][PAGE ERROR] __name is not defined
+[23:36:33] [W1] Checking 1LBG348 (attempt 14, total hits 0)
+[23:36:33] [W1][PAGE ERROR] __name is not defined
+[23:36:35] [W2] Checking 1SYF961 (attempt 15, total hits 0)
+[23:36:36] [W2][PAGE ERROR] __name is not defined
+[23:36:37] [W4] Checking 1SNJ397 (attempt 15, total hits 0)
+[23:36:38] [W4][PAGE ERROR] __name is not defined
+[23:36:39] [W3] Checking 1IYZ439 (attempt 15, total hits 0)
+[23:36:39] [W3][PAGE ERROR] __name is not defined
+[23:36:43] [W5] Checking 1ZZA601 (attempt 15, total hits 0)
+[23:36:43] [W5][PAGE ERROR] __name is not defined
+[23:36:44] [W1] Checking 1QCF210 (attempt 15, total hits 0)
+[23:36:44] [W1][PAGE ERROR] __name is not defined
+[23:36:47] [W2] Checking 1RPA593 (attempt 16, total hits 0)
+[23:36:47] [W2][PAGE ERROR] __name is not defined
+[23:36:47] [W4] Checking 1IIT021 (attempt 16, total hits 0)
+[23:36:47] [W4][PAGE ERROR] __name is not defined
+[23:36:49] [W3] Checking 1AJB704 (attempt 16, total hits 0)
+[23:36:49] [W3][PAGE ERROR] __name is not defined
+[23:36:52] [W5] Checking 1IKN815 (attempt 16, total hits 0)
+[23:36:52] [W5][PAGE ERROR] __name is not defined
+[23:36:53] [W1] Checking 1LZA089 (attempt 16, total hits 0)
+[23:36:53] [W1][PAGE ERROR] __name is not defined
+[23:36:55] [W2] Checking 1ZVY640 (attempt 17, total hits 0)
+[23:36:55] [W2][PAGE ERROR] __name is not defined
+[23:36:57] [W4] Checking 1YRL081 (attempt 17, total hits 0)
+[23:36:57] [W4][PAGE ERROR] __name is not defined
+[23:37:00] [W3] Checking 1QMP013 (attempt 17, total hits 0)
+[23:37:01] [W3][PAGE ERROR] __name is not defined
+[23:37:01] [W5] Checking 1LPW835 (attempt 17, total hits 0)
+[23:37:01] [W5][PAGE ERROR] __name is not defined
+[23:37:05] [W1] Checking 1YID540 (attempt 17, total hits 0)
+[23:37:05] [W1][PAGE ERROR] __name is not defined
+[23:37:07] [W2] Checking 1VHF749 (attempt 18, total hits 0)
+[23:37:07] [W2][PAGE ERROR] __name is not defined
+[23:37:08] [W4] Checking 1AGA754 (attempt 18, total hits 0)
+[23:37:09] [W4][PAGE ERROR] __name is not defined
+[23:37:09] [W3] Checking 1QPZ267 (attempt 18, total hits 0)
+[23:37:10] [W3][PAGE ERROR] __name is not defined
+[23:37:10] [W5] Checking 1AEF070 (attempt 18, total hits 0)
+[23:37:11] [W5][PAGE ERROR] __name is not defined
+[23:37:16] [W1] Checking 1DOL020 (attempt 18, total hits 0)
+[23:37:16] [W1][PAGE ERROR] __name is not defined
+[23:37:17] [W1][PAGE ERROR] __name is not defined
+[23:37:19] [W2] Checking 1PCM331 (attempt 19, total hits 0)
+[23:37:19] [W4] Checking 1MMF273 (attempt 19, total hits 0)
+[23:37:19] [W2][PAGE ERROR] __name is not defined
+[23:37:19] [W4][PAGE ERROR] __name is not defined
+[23:37:21] [W3] Checking 1HCK281 (attempt 19, total hits 0)
+[23:37:21] [W3][PAGE ERROR] __name is not defined
+[23:37:22] [W5] Checking 1VBY102 (attempt 19, total hits 0)
+[23:37:22] [W5][PAGE ERROR] __name is not defined
+[23:37:22]  → [W1][HIT] 1DOL020 - Payment Due! (total hits: 1)
+[23:37:27] [W1] Checking 1YAL670 (attempt 19, total hits 1)
+[23:37:27] [W1][PAGE ERROR] __name is not defined
+[23:37:28] [W4] Checking 1LBC216 (attempt 20, total hits 1)
+[23:37:28] [W4][PAGE ERROR] __name is not defined
+[23:37:30] [W2] Checking 1PZJ374 (attempt 20, total hits 1)
+[23:37:30] [W2][PAGE ERROR] __name is not defined
+[23:37:31] [W5] Checking 1ONN814 (attempt 20, total hits 1)
+[23:37:31] [W5][PAGE ERROR] __name is not defined
+[23:37:32] [W3] Checking 1NPN227 (attempt 20, total hits 1)
+[23:37:32] [W3][PAGE ERROR] __name is not defined
+[23:37:34] [W4] ... processed 20 plates
+[23:37:36] [W2] ... processed 20 plates
+[23:37:36] [W4] Checking 1EKY508 (attempt 21, total hits 1)
+[23:37:37] [W4][PAGE ERROR] __name is not defined
+[23:37:37] [W5] ... processed 20 plates
+[23:37:38] [W1] Checking 1JLB842 (attempt 20, total hits 1)
+[23:37:38] [W1][PAGE ERROR] __name is not defined
+[23:37:38] [W2] Checking 1YFA662 (attempt 21, total hits 1)
+[23:37:38] [W3] ... processed 20 plates
+[23:37:38] [W2][PAGE ERROR] __name is not defined
+[23:37:41] [W5] Checking 1FFN611 (attempt 21, total hits 1)
+[23:37:41] [W3] Checking 1ZHK446 (attempt 21, total hits 1)
+[23:37:41] [W5][PAGE ERROR] __name is not defined
+[23:37:42] [W3][PAGE ERROR] __name is not defined
+[23:37:43] [W1] ... processed 20 plates
+[23:37:45] [W4] Checking 1RPA626 (attempt 22, total hits 1)
+[23:37:45] [W4][PAGE ERROR] __name is not defined
+[23:37:47] [W1] Checking 1YPI937 (attempt 21, total hits 1)
+[23:37:47] [W1][PAGE ERROR] __name is not defined
+[23:37:48] [W2] Checking 1WCN745 (attempt 22, total hits 1)
+[23:37:48] [W2][PAGE ERROR] __name is not defined
+[23:37:51] [W3] Checking 1SIH434 (attempt 22, total hits 1)
+[23:37:51] [W3][PAGE ERROR] __name is not defined
+[23:37:53] [W5] Checking 1GWZ814 (attempt 22, total hits 1)
+[23:37:53] [W5][PAGE ERROR] __name is not defined
+[23:37:54] [W4] Checking 1NDY536 (attempt 23, total hits 1)
+[23:37:55] [W4][PAGE ERROR] __name is not defined
+[23:37:58] [W1] Checking 1WHP797 (attempt 22, total hits 1)
+[23:37:58] [W1][PAGE ERROR] __name is not defined
+[23:37:59] [W2] Checking 1XJY622 (attempt 23, total hits 1)
+[23:37:59] [W2][PAGE ERROR] __name is not defined
+[23:38:01] [W5] Checking 1KPD652 (attempt 23, total hits 1)
+[23:38:02] [W3] Checking 1UPJ136 (attempt 23, total hits 1)
+[23:38:02] [W5][PAGE ERROR] __name is not defined
+[23:38:02] [W3][PAGE ERROR] __name is not defined
+[23:38:03] [W4] Checking 1BYC940 (attempt 24, total hits 1)
+[23:38:04] [W4][PAGE ERROR] __name is not defined
+[23:38:06] [W1] Checking 1CMK420 (attempt 23, total hits 1)
+[23:38:07] [W1][PAGE ERROR] __name is not defined
+[23:38:07] [W2] Checking 1DXL989 (attempt 24, total hits 1)
+[23:38:08] [W2][PAGE ERROR] __name is not defined
+[23:38:11] [W3] Checking 1HEG178 (attempt 24, total hits 1)
+[23:38:11] [W3][PAGE ERROR] __name is not defined
+[23:38:13] [W5] Checking 1CSZ966 (attempt 24, total hits 1)
+[23:38:14] [W5][PAGE ERROR] __name is not defined
+[23:38:14] [W5][PAGE ERROR] __name is not defined
+[23:38:15] [W4] Checking 1PXN435 (attempt 25, total hits 1)
+[23:38:15] [W4][PAGE ERROR] __name is not defined
+[23:38:16] [W2] Checking 1VGY821 (attempt 25, total hits 1)
+[23:38:16] [W2][PAGE ERROR] __name is not defined
+[23:38:16] [W1] Checking 1EXH379 (attempt 24, total hits 1)
+[23:38:16] [W1][PAGE ERROR] __name is not defined
+[23:38:19]  → [W5][HIT] 1CSZ966 - Payment Due! (total hits: 2)
+[23:38:20] [W3] Checking 1CXR426 (attempt 25, total hits 2)
+[23:38:20] [W3][PAGE ERROR] __name is not defined
+[23:38:22] [W5] Checking 1OYC513 (attempt 25, total hits 2)
+[23:38:22] [W5][PAGE ERROR] __name is not defined
+[23:38:24] [W4] Checking 1FJX156 (attempt 26, total hits 2)
+[23:38:25] [W4][PAGE ERROR] __name is not defined
+[23:38:25] [W2] Checking 1KGD823 (attempt 26, total hits 2)
+[23:38:25] [W2][PAGE ERROR] __name is not defined
+[23:38:27] [W1] Checking 1VBA000 (attempt 25, total hits 2)
+[23:38:27] [W1][PAGE ERROR] __name is not defined
+[23:38:30] [W3] Checking 1PVR646 (attempt 26, total hits 2)
+[23:38:30] [W3][PAGE ERROR] __name is not defined
+[23:38:33] [W2] Checking 1TKC858 (attempt 27, total hits 2)
+[23:38:33] [W2][PAGE ERROR] __name is not defined
+[23:38:33] [W5] Checking 1CMO020 (attempt 26, total hits 2)
+[23:38:34] [W5][PAGE ERROR] __name is not defined
+[23:38:34] [W4] Checking 1ZPN400 (attempt 27, total hits 2)
+[23:38:34] [W4][PAGE ERROR] __name is not defined
+[23:38:36] [W1] Checking 1NAK167 (attempt 26, total hits 2)
+[23:38:36] [W1][PAGE ERROR] __name is not defined
+[23:38:42] [W3] Checking 1URV917 (attempt 27, total hits 2)
+[23:38:42] [W2] Checking 1XMI398 (attempt 28, total hits 2)
+[23:38:42] [W3][PAGE ERROR] __name is not defined
+[23:38:42] [W2][PAGE ERROR] __name is not defined
+[23:38:45] [W5] Checking 1DOS231 (attempt 27, total hits 2)
+[23:38:45] [W5][PAGE ERROR] __name is not defined
+[23:38:46] [W4] Checking 1TDT256 (attempt 28, total hits 2)
+[23:38:46] [W4][PAGE ERROR] __name is not defined
+[23:38:47] [W1] Checking 1RIN233 (attempt 27, total hits 2)
+[23:38:47] [W1][PAGE ERROR] __name is not defined
+[23:38:51] [W2] Checking 1TQZ837 (attempt 29, total hits 2)
+[23:38:51] [W2][PAGE ERROR] __name is not defined
+[23:38:51] [W3] Checking 1VPH533 (attempt 28, total hits 2)
+[23:38:52] [W3][PAGE ERROR] __name is not defined
+[23:38:55] [W5] Checking 1SKU466 (attempt 28, total hits 2)
+[23:38:55] [W5][PAGE ERROR] __name is not defined
+[23:38:56] [W1] Checking 1QHM020 (attempt 28, total hits 2)
+[23:38:56] [W1][PAGE ERROR] __name is not defined
+[23:38:57] [W4] Checking 1DKH811 (attempt 29, total hits 2)
+[23:38:58] [W4][PAGE ERROR] __name is not defined
+[23:39:02] [W2] Checking 1HCT822 (attempt 30, total hits 2)
+[23:39:02] [W3] Checking 1BVA840 (attempt 29, total hits 2)
+[23:39:02] [W2][PAGE ERROR] __name is not defined
+[23:39:02] [W3][PAGE ERROR] __name is not defined
+[23:39:06] [W1] Checking 1HEF671 (attempt 29, total hits 2)
+[23:39:06] [W1][PAGE ERROR] __name is not defined
+[23:39:07] [W4] Checking 1IGL506 (attempt 30, total hits 2)
+[23:39:07] [W5] Checking 1QVP571 (attempt 29, total hits 2)
+[23:39:07] [W4][PAGE ERROR] __name is not defined
+[23:39:07] [W5][PAGE ERROR] __name is not defined
+[23:39:07] [W2] ... processed 30 plates
+[23:39:11] [W2] Checking 1XYB434 (attempt 31, total hits 2)
+[23:39:11] [W2][PAGE ERROR] __name is not defined
+[23:39:12] [W4] ... processed 30 plates
+[23:39:13] [W3] Checking 1OYT700 (attempt 30, total hits 2)
+[23:39:13] [W3][PAGE ERROR] __name is not defined
+[23:39:15] [W5] Checking 1YQA850 (attempt 30, total hits 2)
+[23:39:15] [W1] Checking 1KSX307 (attempt 30, total hits 2)
+[23:39:15] [W5][PAGE ERROR] __name is not defined
+[23:39:15] [W4] Checking 1XCP294 (attempt 31, total hits 2)
+[23:39:15] [W1][PAGE ERROR] __name is not defined
+[23:39:15] [W4][PAGE ERROR] __name is not defined
+[23:39:19] [W3] ... processed 30 plates
+[23:39:20] [W2] Checking 1CDY385 (attempt 32, total hits 2)
+[23:39:20] [W2][PAGE ERROR] __name is not defined
+[23:39:21] [W5] ... processed 30 plates
+[23:39:21] [W1] ... processed 30 plates
+[23:39:23] [W1] Checking 1ZKY941 (attempt 31, total hits 2)
+[23:39:23] [W1][PAGE ERROR] __name is not defined
+[23:39:24] [W4] Checking 1RKY388 (attempt 32, total hits 2)
+[23:39:24] [W4][PAGE ERROR] __name is not defined
+[23:39:24] [W3] Checking 1HBZ615 (attempt 31, total hits 2)
+[23:39:24] [W3][PAGE ERROR] __name is not defined
+[23:39:26] [W5] Checking 1TIJ870 (attempt 31, total hits 2)
+[23:39:26] [W5][PAGE ERROR] __name is not defined
+[23:39:29] [W2] Checking 1PES479 (attempt 33, total hits 2)
+[23:39:30] [W2][PAGE ERROR] __name is not defined
+[23:39:31] [W1] Checking 1KBF870 (attempt 32, total hits 2)
+[23:39:31] [W1][PAGE ERROR] __name is not defined
+[23:39:34] [W5] Checking 1BNV847 (attempt 32, total hits 2)
+[23:39:34] [W3] Checking 1NLE589 (attempt 32, total hits 2)
+[23:39:34] [W4] Checking 1YIN684 (attempt 33, total hits 2)
+[23:39:35] [W5][PAGE ERROR] __name is not defined
+[23:39:35] [W3][PAGE ERROR] __name is not defined
+[23:39:35] [W4][PAGE ERROR] __name is not defined
+[23:39:39] [W2] Checking 1CGS136 (attempt 34, total hits 2)
+[23:39:39] [W2][PAGE ERROR] __name is not defined
+[23:39:39] [W1] Checking 1VPP913 (attempt 33, total hits 2)
+[23:39:40] [W1][PAGE ERROR] __name is not defined
+[23:39:40] [W2][PAGE ERROR] __name is not defined
+[23:39:43] [W4] Checking 1TYS589 (attempt 34, total hits 2)
+[23:39:43] [W4][PAGE ERROR] __name is not defined
+[23:39:43] [W5] Checking 1HUI762 (attempt 33, total hits 2)
+[23:39:43] [W5][PAGE ERROR] __name is not defined
+[23:39:44] [W4][PAGE ERROR] __name is not defined
+[23:39:44] [W3] Checking 1AAG360 (attempt 33, total hits 2)
+[23:39:44] [W3][PAGE ERROR] __name is not defined
+[23:39:45]  → [W2][HIT] 1CGS136 - Payment Due! (total hits: 3)
+[23:39:48] [W1] Checking 1AAG361 (attempt 34, total hits 3)
+[23:39:48]  → [W4][HIT] 1TYS589 - Payment Due! (total hits: 4)
+[23:39:49] [W1][PAGE ERROR] __name is not defined
+[23:39:50] [W2] Checking 1AAG362 (attempt 35, total hits 4)
+[23:39:50] [W2][PAGE ERROR] __name is not defined
+[23:39:52] [W5] Checking 1AAG363 (attempt 34, total hits 4)
+[23:39:52] [W5][PAGE ERROR] __name is not defined
+[23:39:54] [W3] Checking 1AAG364 (attempt 34, total hits 4)
+[23:39:54] [W3][PAGE ERROR] __name is not defined
+[23:39:54] [W4] Checking 1AAG365 (attempt 35, total hits 4)
+[23:39:55] [W4][PAGE ERROR] __name is not defined
+[23:39:57] [W1] Checking 1AAG366 (attempt 35, total hits 4)
+[23:39:58] [W1][PAGE ERROR] __name is not defined
+[23:39:58] [W2] Checking 1AAG367 (attempt 36, total hits 4)
+[23:39:59] [W2][PAGE ERROR] __name is not defined
+[23:40:00] [W5] Checking 1AAG368 (attempt 35, total hits 4)
+[23:40:00] [W5][PAGE ERROR] __name is not defined
+[23:40:04] [W3] Checking 1AAG369 (attempt 35, total hits 4)
+[23:40:04] [W3][PAGE ERROR] __name is not defined
+[23:40:04] [W4] Checking 1AAG370 (attempt 36, total hits 4)
+[23:40:05] [W4][PAGE ERROR] __name is not defined
+[23:40:07] [W2] Checking 1AAG371 (attempt 37, total hits 4)
+[23:40:08] [W2][PAGE ERROR] __name is not defined
+[23:40:09] [W1] Checking 1AAG372 (attempt 36, total hits 4)
+[23:40:09] [W1][PAGE ERROR] __name is not defined
+[23:40:11] [W5] Checking 1AAG373 (attempt 36, total hits 4)
+[23:40:11] [W5][PAGE ERROR] __name is not defined
+[23:40:13] [W3] Checking 1AAG374 (attempt 36, total hits 4)
+[23:40:13] [W3][PAGE ERROR] __name is not defined
+[23:40:15] [W4] Checking 1AAG375 (attempt 37, total hits 4)
+[23:40:15] [W4][PAGE ERROR] __name is not defined
+[23:40:19] [W2] Checking 1AAG376 (attempt 38, total hits 4)
+[23:40:19] [W2][PAGE ERROR] __name is not defined
+[23:40:19] [W5] Checking 1AAG377 (attempt 37, total hits 4)
+[23:40:19] [W5][PAGE ERROR] __name is not defined
+[23:40:20] [W1] Checking 1AAG378 (attempt 37, total hits 4)
+[23:40:20] [W1][PAGE ERROR] __name is not defined
+[23:40:23] [W4] Checking 1AAG379 (attempt 38, total hits 4)
+[23:40:23] [W4][PAGE ERROR] __name is not defined
+[23:40:25] [W3] Checking 1AAG380 (attempt 37, total hits 4)
+[23:40:25] [W3][PAGE ERROR] __name is not defined
+[23:40:27] [W5] Checking 1AAG381 (attempt 38, total hits 4)
+[23:40:28] [W5][PAGE ERROR] __name is not defined
+[23:40:30] [W2] Checking 1AAG382 (attempt 39, total hits 4)
+[23:40:31] [W2][PAGE ERROR] __name is not defined
+[23:40:31] [W1] Checking 1AAG383 (attempt 38, total hits 4)
+[23:40:31] [W1][PAGE ERROR] __name is not defined
+[23:40:32] [W4] Checking 1AAG384 (attempt 39, total hits 4)
+[23:40:32] [W4][PAGE ERROR] __name is not defined
+[23:40:33] [W3] Checking 1AAG385 (attempt 38, total hits 4)
+[23:40:33] [W3][PAGE ERROR] __name is not defined
+[23:40:39] [W5] Checking 1AAG386 (attempt 39, total hits 4)
+[23:40:39] [W5][PAGE ERROR] __name is not defined
+[23:40:40] [W1] Checking 1AAG387 (attempt 39, total hits 4)
+[23:40:40] [W1][PAGE ERROR] __name is not defined
+[23:40:41] [W2] Checking 1AAG388 (attempt 40, total hits 4)
+[23:40:41] [W2][PAGE ERROR] __name is not defined
+[23:40:42] [W3] Checking 1AAG389 (attempt 39, total hits 4)
+[23:40:43] [W3][PAGE ERROR] __name is not defined
+[23:40:43] [W4] Checking 1AAG390 (attempt 40, total hits 4)
+[23:40:43] [W4][PAGE ERROR] __name is not defined
+[23:40:47] [W2] ... processed 40 plates
+[23:40:48] [W5] Checking 1AAG391 (attempt 40, total hits 4)
+[23:40:48] [W5][PAGE ERROR] __name is not defined
+[23:40:49] [W4] ... processed 40 plates
+[23:40:50] [W2] Checking 1AAG392 (attempt 41, total hits 4)
+[23:40:50] [W2][PAGE ERROR] __name is not defined
+[23:40:50] [W1] Checking 1AAG393 (attempt 40, total hits 4)
+[23:40:51] [W1][PAGE ERROR] __name is not defined
+[23:40:52] [W3] Checking 1AAG394 (attempt 40, total hits 4)
+[23:40:52] [W3][PAGE ERROR] __name is not defined
+[23:40:52] [W4] Checking 1AAG395 (attempt 41, total hits 4)
+[23:40:52] [W4][PAGE ERROR] __name is not defined
+[23:40:54] [W5] ... processed 40 plates
+[23:40:56] [W1] ... processed 40 plates
+[23:40:58] [W3] ... processed 40 plates
+[23:41:00] [W5] Checking 1AAG396 (attempt 41, total hits 4)
+[23:41:00] [W5][PAGE ERROR] __name is not defined
+[23:41:00] [W2] Checking 1AAG397 (attempt 42, total hits 4)
+[23:41:01] [W2][PAGE ERROR] __name is not defined
+[23:41:01] [W3] Checking 1AAG398 (attempt 41, total hits 4)
+[23:41:01] [W3][PAGE ERROR] __name is not defined
+[23:41:02] [W1] Checking 1AAG399 (attempt 41, total hits 4)
+[23:41:02] [W1][PAGE ERROR] __name is not defined
+[23:41:03] [W4] Checking 1AAG400 (attempt 42, total hits 4)
+[23:41:04] [W4][PAGE ERROR] __name is not defined
+[23:41:08] [W5] Checking 1AAG401 (attempt 42, total hits 4)
+[23:41:08] [W5][PAGE ERROR] __name is not defined
+[23:41:09] [W3] Checking 1AAG402 (attempt 42, total hits 4)
+[23:41:09] [W3][PAGE ERROR] __name is not defined
+[23:41:11] [W2] Checking 1AAG403 (attempt 43, total hits 4)
+[23:41:12] [W2][PAGE ERROR] __name is not defined
+[23:41:13] [W4] Checking 1AAG404 (attempt 43, total hits 4)
+[23:41:13] [W4][PAGE ERROR] __name is not defined
+[23:41:13] [W1] Checking 1AAG405 (attempt 42, total hits 4)
+[23:41:13] [W1][PAGE ERROR] __name is not defined
+[23:41:16] [W5] Checking 1AAG406 (attempt 43, total hits 4)
+[23:41:16] [W5][PAGE ERROR] __name is not defined
+[23:41:21] [W3] Checking 1AAG407 (attempt 43, total hits 4)
+[23:41:21] [W3][PAGE ERROR] __name is not defined
+[23:41:21] [W1] Checking 1AAG408 (attempt 43, total hits 4)
+[23:41:21] [W1][PAGE ERROR] __name is not defined
+[23:41:22] [W2] Checking 1AAG409 (attempt 44, total hits 4)
+[23:41:22] [W2][PAGE ERROR] __name is not defined
+[23:41:23] [W4] Checking 1AAG410 (attempt 44, total hits 4)
+[23:41:23] [W4][PAGE ERROR] __name is not defined
+[23:41:26] [W5] Checking 1AAG411 (attempt 44, total hits 4)
+[23:41:26] [W5][PAGE ERROR] __name is not defined
+[23:41:29] [W3] Checking 1AAG412 (attempt 44, total hits 4)
+[23:41:29] [W3][PAGE ERROR] __name is not defined
+[23:41:31] [W1] Checking 1AAG413 (attempt 44, total hits 4)
+[23:41:31] [W1][PAGE ERROR] __name is not defined
+[23:41:33] [W4] Checking 1AAG414 (attempt 45, total hits 4)
+[23:41:33] [W4][PAGE ERROR] __name is not defined
+[23:41:33] [W2] Checking 1AAG415 (attempt 45, total hits 4)
+[23:41:33] [W2][PAGE ERROR] __name is not defined
+[23:41:34] [W4][PAGE ERROR] __name is not defined
+[23:41:36] [W5] Checking 1AAG416 (attempt 45, total hits 4)
+[23:41:36] [W5][PAGE ERROR] __name is not defined
+[23:41:38] [W3] Checking 1AAG417 (attempt 45, total hits 4)
+[23:41:38] [W3][PAGE ERROR] __name is not defined
+[23:41:39] [W1] Checking 1AAG418 (attempt 45, total hits 4)
+[23:41:39] [W1][PAGE ERROR] __name is not defined
+[23:41:39]  → [W4][HIT] 1AAG414 - Payment Due! (total hits: 5)
+[23:41:42] [W2] Checking 1AAG419 (attempt 46, total hits 5)
+[23:41:42] [W2][PAGE ERROR] __name is not defined
+[23:41:42] [W4] Checking 1AAG420 (attempt 46, total hits 5)
+[23:41:43] [W4][PAGE ERROR] __name is not defined
+[23:41:47] [W5] Checking 1AAG421 (attempt 46, total hits 5)
+[23:41:47] [W5][PAGE ERROR] __name is not defined
+[23:41:48] [W1] Checking 1AAG422 (attempt 46, total hits 5)
+[23:41:48] [W1][PAGE ERROR] __name is not defined
+[23:41:49] [W3] Checking 1AAG423 (attempt 46, total hits 5)
+[23:41:49] [W3][PAGE ERROR] __name is not defined
+[23:41:52] [W4] Checking 1AAG424 (attempt 47, total hits 5)
+[23:41:52] [W4][PAGE ERROR] __name is not defined
+[23:41:53] [W2] Checking 1AAG425 (attempt 47, total hits 5)
+[23:41:53] [W2][PAGE ERROR] __name is not defined
+[23:41:56] [W1] Checking 1AAG426 (attempt 47, total hits 5)
+[23:41:56] [W1][PAGE ERROR] __name is not defined
+[23:41:57] [W5] Checking 1AAG427 (attempt 47, total hits 5)
+[23:41:57] [W5][PAGE ERROR] __name is not defined
+[23:41:58] [W3] Checking 1AAG428 (attempt 47, total hits 5)
+[23:41:58] [W3][PAGE ERROR] __name is not defined
+[23:42:01] [W4] Checking 1AAG429 (attempt 48, total hits 5)
+[23:42:01] [W4][PAGE ERROR] __name is not defined
+[23:42:03] [W2] Checking 1AAG430 (attempt 48, total hits 5)
+[23:42:03] [W2][PAGE ERROR] __name is not defined
+[23:42:06] [W5] Checking 1AAG431 (attempt 48, total hits 5)
+[23:42:06] [W5][PAGE ERROR] __name is not defined
+[23:42:06] [W1] Checking 1AAG432 (attempt 48, total hits 5)
+[23:42:06] [W1][PAGE ERROR] __name is not defined
+[23:42:08] [W3] Checking 1AAG433 (attempt 48, total hits 5)
+[23:42:09] [W3][PAGE ERROR] __name is not defined
+[23:42:11] [W4] Checking 1AAG434 (attempt 49, total hits 5)
+[23:42:12] [W4][PAGE ERROR] __name is not defined
+[23:42:13] [W2] Checking 1AAG435 (attempt 49, total hits 5)
+[23:42:13] [W2][PAGE ERROR] __name is not defined
+[23:42:16] [W1] Checking 1AAG436 (attempt 49, total hits 5)
+[23:42:16] [W5] Checking 1AAG437 (attempt 49, total hits 5)
+[23:42:16] [W1][PAGE ERROR] __name is not defined
+[23:42:16] [W5][PAGE ERROR] __name is not defined
+[23:42:18] [W3] Checking 1AAG438 (attempt 49, total hits 5)
+[23:42:18] [W3][PAGE ERROR] __name is not defined
+[23:42:21] [W4] Checking 1AAG439 (attempt 50, total hits 5)
+[23:42:22] [W4][PAGE ERROR] __name is not defined
+[23:42:24] [W1] Checking 1AAG440 (attempt 50, total hits 5)
+[23:42:25] [W2] Checking 1AAG441 (attempt 50, total hits 5)
+[23:42:25] [W1][PAGE ERROR] __name is not defined
+[23:42:25] [W2][PAGE ERROR] __name is not defined
+[23:42:25] [W5] Checking 1AAG442 (attempt 50, total hits 5)
+[23:42:25] [W5][PAGE ERROR] __name is not defined
+[23:42:27] [W4] ... processed 50 plates
+[23:42:30] [W3] Checking 1AAG443 (attempt 50, total hits 5)
+[23:42:30] [W3][PAGE ERROR] __name is not defined
+[23:42:30] [W2] ... processed 50 plates
+[23:42:30] [W1] ... processed 50 plates
+[23:42:31] [W5] ... processed 50 plates
+[23:42:31] [W4] Checking 1AAG444 (attempt 51, total hits 5)
+[23:42:31] [W4][PAGE ERROR] __name is not defined
+[23:42:33] [W2] Checking 1AAG445 (attempt 51, total hits 5)
+[23:42:33] [W2][PAGE ERROR] __name is not defined
+[23:42:34] [W1] Checking 1AAG446 (attempt 51, total hits 5)
+[23:42:34] [W1][PAGE ERROR] __name is not defined
+[23:42:36] [W3] ... processed 50 plates
+[23:42:36] [W5] Checking 1AAG447 (attempt 51, total hits 5)
+[23:42:37] [W5][PAGE ERROR] __name is not defined
+[23:42:39] [W3] Checking 1AAG448 (attempt 51, total hits 5)
+[23:42:39] [W3][PAGE ERROR] __name is not defined
+[23:42:40] [W4] Checking 1AAG449 (attempt 52, total hits 5)
+[23:42:40] [W4][PAGE ERROR] __name is not defined
+[23:42:43] [W2] Checking 1AAG450 (attempt 52, total hits 5)
+[23:42:43] [W2][PAGE ERROR] __name is not defined
+[23:42:43] [W1] Checking 1AAG451 (attempt 52, total hits 5)
+[23:42:43] [W1][PAGE ERROR] __name is not defined
+[23:42:48] [W5] Checking 1AAG452 (attempt 52, total hits 5)
+[23:42:48] [W4] Checking 1AAG453 (attempt 53, total hits 5)
+[23:42:48] [W5][PAGE ERROR] __name is not defined
+[23:42:48] [W4][PAGE ERROR] __name is not defined
+[23:42:50] [W3] Checking 1AAG454 (attempt 52, total hits 5)
+[23:42:50] [W3][PAGE ERROR] __name is not defined
+[23:42:51] [W1] Checking 1AAG455 (attempt 53, total hits 5)
+[23:42:51] [W1][PAGE ERROR] __name is not defined
+[23:42:52] [W2] Checking 1AAG456 (attempt 53, total hits 5)
+[23:42:52] [W2][PAGE ERROR] __name is not defined
+[23:42:58] [W3] Checking 1AAG457 (attempt 53, total hits 5)
+[23:42:58] [W3][PAGE ERROR] __name is not defined
+[23:42:58] [W5] Checking 1AAG458 (attempt 53, total hits 5)
+[23:42:58] [W5][PAGE ERROR] __name is not defined
+[23:42:59] [W4] Checking 1AAG459 (attempt 54, total hits 5)
+[23:42:59] [W4][PAGE ERROR] __name is not defined
+[23:43:01] [W2] Checking 1AAG460 (attempt 54, total hits 5)
+[23:43:01] [W2][PAGE ERROR] __name is not defined
+[23:43:01] [W1] Checking 1AAG461 (attempt 54, total hits 5)
+[23:43:01] [W1][PAGE ERROR] __name is not defined
+[23:43:09] [W3] Checking 1AAG462 (attempt 54, total hits 5)
+[23:43:09] [W3][PAGE ERROR] __name is not defined
+[23:43:09] [W5] Checking 1AAG463 (attempt 54, total hits 5)
+[23:43:09] [W5][PAGE ERROR] __name is not defined
+[23:43:10] [W3][PAGE ERROR] __name is not defined
+[23:43:10] [W4] Checking 1AAG464 (attempt 55, total hits 5)
+[23:43:10] [W4][PAGE ERROR] __name is not defined
+[23:43:10] [W1] Checking 1AAG465 (attempt 55, total hits 5)
+[23:43:11] [W1][PAGE ERROR] __name is not defined
+[23:43:11] [W2] Checking 1AAG466 (attempt 55, total hits 5)
+[23:43:11] [W2][PAGE ERROR] __name is not defined
+[23:43:14]  → [W3][HIT] 1AAG462 - Payment Due! (total hits: 6)
+[23:43:17] [W5] Checking 1AAG467 (attempt 55, total hits 6)
+[23:43:17] [W3] Checking 1AAG468 (attempt 55, total hits 6)
+[23:43:17] [W5][PAGE ERROR] __name is not defined
+[23:43:17] [W3][PAGE ERROR] __name is not defined
+[23:43:18] [W4] Checking 1AAG469 (attempt 56, total hits 6)
+[23:43:18] [W4][PAGE ERROR] __name is not defined
+[23:43:20] [W1] Checking 1AAG470 (attempt 56, total hits 6)
+[23:43:20] [W1][PAGE ERROR] __name is not defined
+[23:43:21] [W2] Checking 1AAG471 (attempt 56, total hits 6)
+[23:43:21] [W2][PAGE ERROR] __name is not defined
+[23:43:26] [W4] Checking 1AAG472 (attempt 57, total hits 6)
+[23:43:26] [W4][PAGE ERROR] __name is not defined
+[23:43:27] [W3] Checking 1AAG473 (attempt 56, total hits 6)
+[23:43:28] [W3][PAGE ERROR] __name is not defined
+[23:43:28] [W5] Checking 1AAG474 (attempt 56, total hits 6)
+[23:43:29] [W5][PAGE ERROR] __name is not defined
+[23:43:31] [W1] Checking 1AAG475 (attempt 57, total hits 6)
+[23:43:31] [W1][PAGE ERROR] __name is not defined
+[23:43:31] [W2] Checking 1AAG476 (attempt 57, total hits 6)
+[23:43:31] [W2][PAGE ERROR] __name is not defined
+[23:43:34] [W4] Checking 1AAG477 (attempt 58, total hits 6)
+[23:43:34] [W4][PAGE ERROR] __name is not defined
+[23:43:38] [W5] Checking 1AAG478 (attempt 57, total hits 6)
+[23:43:38] [W3] Checking 1AAG479 (attempt 57, total hits 6)
+[23:43:38] [W5][PAGE ERROR] __name is not defined
+[23:43:38] [W3][PAGE ERROR] __name is not defined
+[23:43:42] [W1] Checking 1AAG480 (attempt 58, total hits 6)
+[23:43:42] [W1][PAGE ERROR] __name is not defined
+[23:43:43] [W4] Checking 1AAG481 (attempt 59, total hits 6)
+[23:43:43] [W2] Checking 1AAG482 (attempt 58, total hits 6)
+[23:43:43] [W4][PAGE ERROR] __name is not defined
+[23:43:43] [W2][PAGE ERROR] __name is not defined
+[23:43:47] [W5] Checking 1AAG483 (attempt 58, total hits 6)
+[23:43:47] [W5][PAGE ERROR] __name is not defined
+[23:43:48] [W3] Checking 1AAG484 (attempt 58, total hits 6)
+[23:43:49] [W3][PAGE ERROR] __name is not defined
+[23:43:51] [W4] Checking 1AAG485 (attempt 60, total hits 6)
+[23:43:52] [W4][PAGE ERROR] __name is not defined
+[23:43:52] [W2] Checking 1AAG486 (attempt 59, total hits 6)
+[23:43:52] [W1] Checking 1AAG487 (attempt 59, total hits 6)
+[23:43:52] [W2][PAGE ERROR] __name is not defined
+[23:43:52] [W1][PAGE ERROR] __name is not defined
+[23:43:57] [W4] ... processed 60 plates
+[23:43:58] [W5] Checking 1AAG488 (attempt 59, total hits 6)
+[23:43:58] [W5][PAGE ERROR] __name is not defined
+[23:43:58] [W3] Checking 1AAG489 (attempt 59, total hits 6)
+[23:43:59] [W3][PAGE ERROR] __name is not defined
+[23:44:01] [W1] Checking 1AAG490 (attempt 60, total hits 6)
+[23:44:01] [W1][PAGE ERROR] __name is not defined
+[23:44:01] [W2] Checking 1AAG491 (attempt 60, total hits 6)
+[23:44:02] [W2][PAGE ERROR] __name is not defined
+[23:44:02] [W4] Checking 1AAG492 (attempt 61, total hits 6)
+[23:44:02] [W4][PAGE ERROR] __name is not defined
+[23:44:07] [W3] Checking 1AAG493 (attempt 60, total hits 6)
+[23:44:07] [W3][PAGE ERROR] __name is not defined
+[23:44:07] [W1] ... processed 60 plates
+[23:44:07] [W2] ... processed 60 plates
+[23:44:10] [W5] Checking 1AAG494 (attempt 60, total hits 6)
+[23:44:10] [W5][PAGE ERROR] __name is not defined
+[23:44:11] [W4] Checking 1AAG495 (attempt 62, total hits 6)
+[23:44:11] [W4][PAGE ERROR] __name is not defined
+[23:44:12] [W3] ... processed 60 plates
+[23:44:13] [W1] Checking 1AAG496 (attempt 61, total hits 6)
+[23:44:13] [W1][PAGE ERROR] __name is not defined
+[23:44:13] [W2] Checking 1AAG497 (attempt 61, total hits 6)
+[23:44:13] [W2][PAGE ERROR] __name is not defined
+[23:44:16] [W5] ... processed 60 plates
+[23:44:16] [W3] Checking 1AAG498 (attempt 61, total hits 6)
+[23:44:16] [W3][PAGE ERROR] __name is not defined
+[23:44:21] [W4] Checking 1AAG499 (attempt 63, total hits 6)
+[23:44:21] [W5] Checking 1AAG500 (attempt 61, total hits 6)
+[23:44:21] [W4][PAGE ERROR] __name is not defined
+[23:44:21] [W5][PAGE ERROR] __name is not defined
+[23:44:22] [W1] Checking 1AAG501 (attempt 62, total hits 6)
+[23:44:23] [W1][PAGE ERROR] __name is not defined
+[23:44:24] [W2] Checking 1AAG502 (attempt 62, total hits 6)
+[23:44:25] [W2][PAGE ERROR] __name is not defined
+[23:44:27] [W3] Checking 1AAG503 (attempt 62, total hits 6)
+[23:44:27] [W3][PAGE ERROR] __name is not defined
+[23:44:30] [W4] Checking 1AAG504 (attempt 64, total hits 6)
+[23:44:30] [W4][PAGE ERROR] __name is not defined
+[23:44:30] [W5] Checking 1AAG505 (attempt 62, total hits 6)
+[23:44:31] [W5][PAGE ERROR] __name is not defined
+[23:44:33] [W1] Checking 1AAG506 (attempt 63, total hits 6)
+[23:44:33] [W1][PAGE ERROR] __name is not defined
+[23:44:36] [W3] Checking 1AAG507 (attempt 63, total hits 6)
+[23:44:36] [W3][PAGE ERROR] __name is not defined
+[23:44:36] [W2] Checking 1AAG508 (attempt 63, total hits 6)
+[23:44:36] [W2][PAGE ERROR] __name is not defined
+[23:44:40] [W4] Checking 1AAG509 (attempt 65, total hits 6)
+[23:44:41] [W5] Checking 1AAG510 (attempt 63, total hits 6)
+[23:44:41] [W4][PAGE ERROR] __name is not defined
+[23:44:41] [W5][PAGE ERROR] __name is not defined
+[23:44:41] [W1] Checking 1AAG511 (attempt 64, total hits 6)
+[23:44:41] [W1][PAGE ERROR] __name is not defined
+[23:44:47] [W3] Checking 1AAG512 (attempt 64, total hits 6)
+[23:44:47] [W3][PAGE ERROR] __name is not defined
+[23:44:47] [W2] Checking 1AAG513 (attempt 64, total hits 6)
+[23:44:47] [W2][PAGE ERROR] __name is not defined
+[23:44:49] [W4] Checking 1AAG514 (attempt 66, total hits 6)
+[23:44:49] [W4][PAGE ERROR] __name is not defined
+[23:44:51] [W5] Checking 1AAG515 (attempt 64, total hits 6)
+[23:44:52] [W5][PAGE ERROR] __name is not defined
+[23:44:52] [W1] Checking 1AAG516 (attempt 65, total hits 6)
+[23:44:52] [W1][PAGE ERROR] __name is not defined
+[23:44:56] [W2] Checking 1AAG517 (attempt 65, total hits 6)
+[23:44:56] [W2][PAGE ERROR] __name is not defined
+[23:44:57] [W3] Checking 1AAG518 (attempt 65, total hits 6)
+[23:44:57] [W3][PAGE ERROR] __name is not defined
+[23:45:00] [W4] Checking 1AAG519 (attempt 67, total hits 6)
+[23:45:01] [W4][PAGE ERROR] __name is not defined
+[23:45:03] [W1] Checking 1AAG520 (attempt 66, total hits 6)
+[23:45:03] [W5] Checking 1AAG521 (attempt 65, total hits 6)
+[23:45:03] [W1][PAGE ERROR] __name is not defined
+[23:45:03] [W5][PAGE ERROR] __name is not defined
+[23:45:05] [W2] Checking 1AAG522 (attempt 66, total hits 6)
+[23:45:06] [W2][PAGE ERROR] __name is not defined
+[23:45:06] [W3] Checking 1AAG523 (attempt 66, total hits 6)
+[23:45:07] [W3][PAGE ERROR] __name is not defined
+[23:45:11] [W1] Checking 1AAG524 (attempt 67, total hits 6)
+[23:45:11] [W4] Checking 1AAG525 (attempt 68, total hits 6)
+[23:45:11] [W1][PAGE ERROR] __name is not defined
+[23:45:11] [W5] Checking 1AAG526 (attempt 66, total hits 6)
+[23:45:12] [W4][PAGE ERROR] __name is not defined
+[23:45:12] [W5][PAGE ERROR] __name is not defined
+[23:45:15] [W2] Checking 1AAG527 (attempt 67, total hits 6)
+[23:45:16] [W2][PAGE ERROR] __name is not defined
+[23:45:17] [W3] Checking 1AAG528 (attempt 67, total hits 6)
+[23:45:18] [W3][PAGE ERROR] __name is not defined
+[23:45:21] [W4] Checking 1AAG529 (attempt 69, total hits 6)
+[23:45:22] [W4][PAGE ERROR] __name is not defined
+[23:45:22] [W1] Checking 1AAG530 (attempt 68, total hits 6)
+[23:45:22] [W1][PAGE ERROR] __name is not defined
+[23:45:22] [W5] Checking 1AAG531 (attempt 67, total hits 6)
+[23:45:23] [W5][PAGE ERROR] __name is not defined
+[23:45:26] [W2] Checking 1AAG532 (attempt 68, total hits 6)
+[23:45:26] [W2][PAGE ERROR] __name is not defined
+[23:45:26] [W3] Checking 1AAG533 (attempt 68, total hits 6)
+[23:45:26] [W3][PAGE ERROR] __name is not defined
+[23:45:30] [W1] Checking 1AAG534 (attempt 69, total hits 6)
+[23:45:31] [W1][PAGE ERROR] __name is not defined
+[23:45:31] [W5] Checking 1AAG535 (attempt 68, total hits 6)
+[23:45:31] [W5][PAGE ERROR] __name is not defined
+[23:45:33] [W4] Checking 1AAG536 (attempt 70, total hits 6)
+[23:45:33] [W4][PAGE ERROR] __name is not defined
+[23:45:34] [W2] Checking 1AAG537 (attempt 69, total hits 6)
+[23:45:34] [W2][PAGE ERROR] __name is not defined
+[23:45:37] [W3] Checking 1AAG538 (attempt 69, total hits 6)
+[23:45:37] [W3][PAGE ERROR] __name is not defined
+[23:45:39] [W4] ... processed 70 plates
+[23:45:40] [W1] Checking 1AAG539 (attempt 70, total hits 6)
+[23:45:40] [W1][PAGE ERROR] __name is not defined
+[23:45:42] [W5] Checking 1AAG540 (attempt 69, total hits 6)
+[23:45:42] [W5][PAGE ERROR] __name is not defined
+[23:45:43] [W2] Checking 1AAG541 (attempt 70, total hits 6)
+[23:45:43] [W2][PAGE ERROR] __name is not defined
+[23:45:44] [W4] Checking 1AAG542 (attempt 71, total hits 6)
+[23:45:44] [W4][PAGE ERROR] __name is not defined
+[23:45:46] [W1] ... processed 70 plates
+[23:45:47] [W3] Checking 1AAG543 (attempt 70, total hits 6)
+[23:45:47] [W3][PAGE ERROR] __name is not defined
+[23:45:48] [W2] ... processed 70 plates
+[23:45:50] [W1] Checking 1AAG544 (attempt 71, total hits 6)
+[23:45:50] [W1][PAGE ERROR] __name is not defined
+[23:45:50] [W5] Checking 1AAG545 (attempt 70, total hits 6)
+[23:45:51] [W5][PAGE ERROR] __name is not defined
+[23:45:51] [W2] Checking 1AAG546 (attempt 71, total hits 6)
+[23:45:51] [W2][PAGE ERROR] __name is not defined
+[23:45:53] [W3] ... processed 70 plates
+[23:45:53] [W4] Checking 1AAG547 (attempt 72, total hits 6)
+[23:45:53] [W4][PAGE ERROR] __name is not defined
+[23:45:55] [W3] Checking 1AAG548 (attempt 71, total hits 6)
+[23:45:55] [W3][PAGE ERROR] __name is not defined
+[23:45:56] [W5] ... processed 70 plates
+[23:45:59] [W1] Checking 1AAG549 (attempt 72, total hits 6)
+[23:45:59] [W1][PAGE ERROR] __name is not defined
+[23:45:59] [W5] Checking 1AAG550 (attempt 71, total hits 6)
+[23:46:00] [W5][PAGE ERROR] __name is not defined
+[23:46:00] [W2] Checking 1AAG551 (attempt 72, total hits 6)
+[23:46:00] [W2][PAGE ERROR] __name is not defined
+[23:46:01] [W4] Checking 1AAG552 (attempt 73, total hits 6)
+[23:46:01] [W4][PAGE ERROR] __name is not defined
+[23:46:03] [W3] Checking 1AAG553 (attempt 72, total hits 6)
+[23:46:03] [W3][PAGE ERROR] __name is not defined
+[23:46:08] [W2] Checking 1AAG554 (attempt 73, total hits 6)
+[23:46:08] [W2][PAGE ERROR] __name is not defined
+[23:46:08] [W5] Checking 1AAG555 (attempt 72, total hits 6)
+[23:46:09] [W5][PAGE ERROR] __name is not defined
+[23:46:09] [W1] Checking 1AAG556 (attempt 73, total hits 6)
+[23:46:09] [W1][PAGE ERROR] __name is not defined
+[23:46:10] [W4] Checking 1AAG557 (attempt 74, total hits 6)
+[23:46:10] [W4][PAGE ERROR] __name is not defined
+[23:46:11] [W3] Checking 1AAG558 (attempt 73, total hits 6)
+[23:46:11] [W3][PAGE ERROR] __name is not defined
+[23:46:17] [W2] Checking 1AAG559 (attempt 74, total hits 6)
+[23:46:17] [W1] Checking 1AAG560 (attempt 74, total hits 6)
+[23:46:17] [W2][PAGE ERROR] __name is not defined
+[23:46:17] [W1][PAGE ERROR] __name is not defined
+[23:46:18] [W5] Checking 1AAG561 (attempt 73, total hits 6)
+[23:46:18] [W5][PAGE ERROR] __name is not defined
+[23:46:20] [W3] Checking 1AAG562 (attempt 74, total hits 6)
+[23:46:20] [W3][PAGE ERROR] __name is not defined
+[23:46:21] [W4] Checking 1AAG563 (attempt 75, total hits 6)
+[23:46:21] [W4][PAGE ERROR] __name is not defined
+[23:46:25] [W2] Checking 1AAG564 (attempt 75, total hits 6)
+[23:46:25] [W2][PAGE ERROR] __name is not defined
+[23:46:27] [W5] Checking 1AAG565 (attempt 74, total hits 6)
+[23:46:27] [W5][PAGE ERROR] __name is not defined
+[23:46:27] [W1] Checking 1AAG566 (attempt 75, total hits 6)
+[23:46:27] [W1][PAGE ERROR] __name is not defined
+[23:46:28] [W3] Checking 1AAG567 (attempt 75, total hits 6)
+[23:46:29] [W3][PAGE ERROR] __name is not defined
+[23:46:30] [W4] Checking 1AAG568 (attempt 76, total hits 6)
+[23:46:30] [W4][PAGE ERROR] __name is not defined
+[23:46:34] [W2] Checking 1AAG569 (attempt 76, total hits 6)
+[23:46:34] [W2][PAGE ERROR] __name is not defined
+[23:46:36] [W1] Checking 1AAG570 (attempt 76, total hits 6)
+[23:46:36] [W1][PAGE ERROR] __name is not defined
+[23:46:37] [W5] Checking 1AAG571 (attempt 75, total hits 6)
+[23:46:37] [W5][PAGE ERROR] __name is not defined
+[23:46:38] [W3] Checking 1AAG572 (attempt 76, total hits 6)
+[23:46:38] [W3][PAGE ERROR] __name is not defined
+[23:46:40] [W4] Checking 1AAG573 (attempt 77, total hits 6)
+[23:46:40] [W4][PAGE ERROR] __name is not defined
+[23:46:43] [W2] Checking 1AAG574 (attempt 77, total hits 6)
+[23:46:43] [W2][PAGE ERROR] __name is not defined
+[23:46:45] [W1] Checking 1AAG575 (attempt 77, total hits 6)
+[23:46:45] [W1][PAGE ERROR] __name is not defined
+[23:46:46] [W5] Checking 1AAG576 (attempt 76, total hits 6)
+[23:46:46] [W5][PAGE ERROR] __name is not defined
+[23:46:50] [W4] Checking 1AAG577 (attempt 78, total hits 6)
+[23:46:50] [W3] Checking 1AAG578 (attempt 77, total hits 6)
+[23:46:50] [W4][PAGE ERROR] __name is not defined
+[23:46:50] [W3][PAGE ERROR] __name is not defined
+[23:46:52] [W2] Checking 1AAG579 (attempt 78, total hits 6)
+[23:46:52] [W2][PAGE ERROR] __name is not defined
+[23:46:54] [W1] Checking 1AAG580 (attempt 78, total hits 6)
+[23:46:54] [W1][PAGE ERROR] __name is not defined
+[23:46:58] [W5] Checking 1AAG581 (attempt 77, total hits 6)
+[23:46:58] [W5][PAGE ERROR] __name is not defined
+[23:46:59] [W3] Checking 1AAG582 (attempt 78, total hits 6)
+[23:46:59] [W3][PAGE ERROR] __name is not defined
+[23:47:00] [W4] Checking 1AAG583 (attempt 79, total hits 6)
+[23:47:00] [W4][PAGE ERROR] __name is not defined
+[23:47:02] [W1] Checking 1AAG584 (attempt 79, total hits 6)
+[23:47:02] [W1][PAGE ERROR] __name is not defined
+[23:47:03] [W2] Checking 1AAG585 (attempt 79, total hits 6)
+[23:47:03] [W2][PAGE ERROR] __name is not defined
+[23:47:06] [W5] Checking 1AAG586 (attempt 78, total hits 6)
+[23:47:06] [W5][PAGE ERROR] __name is not defined
+[23:47:08] [W3] Checking 1AAG587 (attempt 79, total hits 6)
+[23:47:08] [W3][PAGE ERROR] __name is not defined
+[23:47:09] [W4] Checking 1AAG588 (attempt 80, total hits 6)
+[23:47:10] [W4][PAGE ERROR] __name is not defined
+[23:47:12] [W1] Checking 1AAG589 (attempt 80, total hits 6)
+[23:47:12] [W1][PAGE ERROR] __name is not defined
+[23:47:13] [W2] Checking 1AAG590 (attempt 80, total hits 6)
+[23:47:14] [W2][PAGE ERROR] __name is not defined
+[23:47:15] [W5] Checking 1AAG591 (attempt 79, total hits 6)
+[23:47:15] [W5][PAGE ERROR] __name is not defined
+[23:47:15] [W4] ... processed 80 plates
+[23:47:17] [W1] ... processed 80 plates
+[23:47:17] [W3] Checking 1AAG592 (attempt 80, total hits 6)
+[23:47:18] [W3][PAGE ERROR] __name is not defined
+[23:47:18] [W4] Checking 1AAG593 (attempt 81, total hits 6)
+[23:47:19] [W4][PAGE ERROR] __name is not defined
+[23:47:19] [W2] ... processed 80 plates
+[23:47:21] [W2] Checking 1AAG594 (attempt 81, total hits 6)
+[23:47:21] [W2][PAGE ERROR] __name is not defined
+[23:47:22] [W1] Checking 1AAG595 (attempt 81, total hits 6)
+[23:47:23] [W1][PAGE ERROR] __name is not defined
+[23:47:23] [W3] ... processed 80 plates
+[23:47:26] [W5] Checking 1AAG596 (attempt 80, total hits 6)
+[23:47:27] [W5][PAGE ERROR] __name is not defined
+[23:47:29] [W4] Checking 1AAG597 (attempt 82, total hits 6)
+[23:47:29] [W3] Checking 1AAG598 (attempt 81, total hits 6)
+[23:47:29] [W4][PAGE ERROR] __name is not defined
+[23:47:29] [W3][PAGE ERROR] __name is not defined
+[23:47:30] [W2] Checking 1AAG599 (attempt 82, total hits 6)
+[23:47:31] [W2][PAGE ERROR] __name is not defined
+[23:47:31] [W1] Checking 1AAG600 (attempt 82, total hits 6)
+[23:47:31] [W1][PAGE ERROR] __name is not defined
+[23:47:32] [W5] ... processed 80 plates
+[23:47:37] [W4] Checking 1AAG601 (attempt 83, total hits 6)
+[23:47:37] [W4][PAGE ERROR] __name is not defined
+[23:47:38] [W5] Checking 1AAG602 (attempt 81, total hits 6)
+[23:47:38] [W5][PAGE ERROR] __name is not defined
+[23:47:41] [W3] Checking 1AAG603 (attempt 82, total hits 6)
+[23:47:41] [W3][PAGE ERROR] __name is not defined
+[23:47:42] [W2] Checking 1AAG604 (attempt 83, total hits 6)
+[23:47:42] [W2][PAGE ERROR] __name is not defined
+[23:47:43] [W1] Checking 1AAG605 (attempt 83, total hits 6)
+[23:47:43] [W1][PAGE ERROR] __name is not defined
+[23:47:46] [W4] Checking 1AAG606 (attempt 84, total hits 6)
+[23:47:46] [W4][PAGE ERROR] __name is not defined
+[23:47:47] [W5] Checking 1AAG607 (attempt 82, total hits 6)
+[23:47:47] [W5][PAGE ERROR] __name is not defined
+[23:47:51] [W3] Checking 1AAG608 (attempt 83, total hits 6)
+[23:47:51] [W3][PAGE ERROR] __name is not defined
+[23:47:53] [W2] Checking 1AAG609 (attempt 84, total hits 6)
+[23:47:53] [W2][PAGE ERROR] __name is not defined
+[23:47:53] [W1] Checking 1AAG610 (attempt 84, total hits 6)
+[23:47:53] [W1][PAGE ERROR] __name is not defined
+[23:47:57] [W4] Checking 1AAG611 (attempt 85, total hits 6)
+[23:47:57] [W4][PAGE ERROR] __name is not defined
+[23:47:59] [W5] Checking 1AAG612 (attempt 83, total hits 6)
+[23:47:59] [W5][PAGE ERROR] __name is not defined
+[23:48:00] [W3] Checking 1AAG613 (attempt 84, total hits 6)
+[23:48:00] [W3][PAGE ERROR] __name is not defined
+[23:48:02] [W1] Checking 1AAG614 (attempt 85, total hits 6)
+[23:48:02] [W1][PAGE ERROR] __name is not defined
+[23:48:04] [W2] Checking 1AAG615 (attempt 85, total hits 6)
+[23:48:05] [W2][PAGE ERROR] __name is not defined
+[23:48:08] [W3] Checking 1AAG616 (attempt 85, total hits 6)
+[23:48:08] [W3][PAGE ERROR] __name is not defined
+[23:48:09] [W5] Checking 1AAG617 (attempt 84, total hits 6)
+[23:48:09] [W4] Checking 1AAG618 (attempt 86, total hits 6)
+[23:48:09] [W5][PAGE ERROR] __name is not defined
+[23:48:09] [W4][PAGE ERROR] __name is not defined
+[23:48:10] [W1] Checking 1AAG619 (attempt 86, total hits 6)
+[23:48:10] [W1][PAGE ERROR] __name is not defined
+[23:48:13] [W2] Checking 1AAG620 (attempt 86, total hits 6)
+[23:48:14] [W2][PAGE ERROR] __name is not defined
+[23:48:17] [W3] Checking 1AAG621 (attempt 86, total hits 6)
+[23:48:17] [W3][PAGE ERROR] __name is not defined
+[23:48:19] [W4] Checking 1AAG622 (attempt 87, total hits 6)
+[23:48:19] [W5] Checking 1AAG623 (attempt 85, total hits 6)
+[23:48:19] [W4][PAGE ERROR] __name is not defined
+[23:48:19] [W1] Checking 1AAG624 (attempt 87, total hits 6)
+[23:48:19] [W5][PAGE ERROR] __name is not defined
+[23:48:19] [W1][PAGE ERROR] __name is not defined
+[23:48:25] [W2] Checking 1AAG625 (attempt 87, total hits 6)
+[23:48:25] [W2][PAGE ERROR] __name is not defined
+[23:48:26] [W3] Checking 1AAG626 (attempt 87, total hits 6)
+[23:48:26] [W3][PAGE ERROR] __name is not defined
+[23:48:30] [W5] Checking 1AAG627 (attempt 86, total hits 6)
+[23:48:30] [W1] Checking 1AAG628 (attempt 88, total hits 6)
+[23:48:30] [W5][PAGE ERROR] __name is not defined
+[23:48:30] [W1][PAGE ERROR] __name is not defined
+[23:48:30] [W4] Checking 1AAG629 (attempt 88, total hits 6)
+[23:48:31] [W4][PAGE ERROR] __name is not defined
+[23:48:35] [W2] Checking 1AAG630 (attempt 88, total hits 6)
+[23:48:35] [W2][PAGE ERROR] __name is not defined
+[23:48:36] [W3] Checking 1AAG631 (attempt 88, total hits 6)
+[23:48:36] [W3][PAGE ERROR] __name is not defined
+[23:48:39] [W5] Checking 1AAG632 (attempt 87, total hits 6)
+[23:48:39] [W5][PAGE ERROR] __name is not defined
+[23:48:40] [W1] Checking 1AAG633 (attempt 89, total hits 6)
+[23:48:40] [W1][PAGE ERROR] __name is not defined
+[23:48:40] [W4] Checking 1AAG634 (attempt 89, total hits 6)
+[23:48:40] [W4][PAGE ERROR] __name is not defined
+[23:48:45] [W2] Checking 1AAG635 (attempt 89, total hits 6)
+[23:48:45] [W2][PAGE ERROR] __name is not defined
+[23:48:48] [W3] Checking 1AAG636 (attempt 89, total hits 6)
+[23:48:48] [W3][PAGE ERROR] __name is not defined
+[23:48:48] [W4] Checking 1AAG637 (attempt 90, total hits 6)
+[23:48:48] [W4][PAGE ERROR] __name is not defined
+[23:48:50] [W5] Checking 1AAG638 (attempt 88, total hits 6)
+[23:48:50] [W5][PAGE ERROR] __name is not defined
+[23:48:51] [W1] Checking 1AAG639 (attempt 90, total hits 6)
+[23:48:52] [W1][PAGE ERROR] __name is not defined
+[23:48:54] [W4] ... processed 90 plates
+[23:48:56] [W2] Checking 1AAG640 (attempt 90, total hits 6)
+[23:48:56] [W3] Checking 1AAG641 (attempt 90, total hits 6)
+[23:48:56] [W2][PAGE ERROR] __name is not defined
+[23:48:56] [W3][PAGE ERROR] __name is not defined
+[23:48:57] [W1] ... processed 90 plates
+[23:48:58] [W4] Checking 1AAG642 (attempt 91, total hits 6)
+[23:48:59] [W4][PAGE ERROR] __name is not defined
+[23:48:59] [W1] Checking 1AAG643 (attempt 91, total hits 6)
+[23:49:00] [W5] Checking 1AAG644 (attempt 89, total hits 6)
+[23:49:00] [W1][PAGE ERROR] __name is not defined
+[23:49:00] [W5][PAGE ERROR] __name is not defined
+[23:49:02] [W2] ... processed 90 plates
+[23:49:02] [W3] ... processed 90 plates
+[23:49:05] [W2] Checking 1AAG645 (attempt 91, total hits 6)
+[23:49:06] [W2][PAGE ERROR] __name is not defined
+[23:49:06] [W3] Checking 1AAG646 (attempt 91, total hits 6)
+[23:49:07] [W3][PAGE ERROR] __name is not defined
+[23:49:08] [W1] Checking 1AAG647 (attempt 92, total hits 6)
+[23:49:08] [W1][PAGE ERROR] __name is not defined
+[23:49:10] [W4] Checking 1AAG648 (attempt 92, total hits 6)
+[23:49:10] [W4][PAGE ERROR] __name is not defined
+[23:49:10] [W5] Checking 1AAG649 (attempt 90, total hits 6)
+[23:49:10] [W5][PAGE ERROR] __name is not defined
+[23:49:14] [W2] Checking 1AAG650 (attempt 92, total hits 6)
+[23:49:15] [W2][PAGE ERROR] __name is not defined
+[23:49:15] [W3] Checking 1AAG651 (attempt 92, total hits 6)
+[23:49:15] [W3][PAGE ERROR] __name is not defined
+[23:49:16] [W5] ... processed 90 plates

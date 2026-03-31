@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import { Text } from 'react-native-paper';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { AnimatedPressable } from '@/components/AnimatedPressable';
@@ -89,35 +89,44 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
 
       {/* Rows */}
       {displayRows.length > 0 ? (
-        displayRows.map((row, idx) => (
-          <AnimatedCard key={row.id} index={idx}>
-            <View style={[styles.row, idx === displayRows.length - 1 && !hasMore && styles.rowLast]}>
-              <MaterialIcons
-                name={(STATUS_ICONS[row.status] || 'circle') as any}
-                size={14}
-                color={row.statusColor}
-              />
-              <View style={styles.rowContent}>
-                <Text style={styles.primary} numberOfLines={1}>{row.primary}</Text>
-                <Text style={styles.secondary} numberOfLines={1}>{row.secondary}</Text>
-              </View>
-              <View style={styles.rowRight}>
-                <Text style={[styles.statusBadge, { color: row.statusColor }]}>{row.status}</Text>
-                {row.timestamp && (
-                  <Text style={styles.timestamp}>{row.timestamp}</Text>
+        <FlatList
+          data={displayRows}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item: row, index: idx }: { item: ResultRow; index: number }) => (
+            <AnimatedCard key={row.id} index={idx}>
+              <View style={[styles.row, idx === displayRows.length - 1 && !hasMore && styles.rowLast]}>
+                <MaterialIcons
+                  name={(STATUS_ICONS[row.status] || 'circle') as any}
+                  size={14}
+                  color={row.statusColor}
+                />
+                <View style={styles.rowContent}>
+                  <Text style={styles.primary} numberOfLines={1}>{row.primary}</Text>
+                  <Text style={styles.secondary} numberOfLines={1}>{row.secondary}</Text>
+                </View>
+                <View style={styles.rowRight}>
+                  <Text style={[styles.statusBadge, { color: row.statusColor }]}>{row.status}</Text>
+                  {row.timestamp && (
+                    <Text style={styles.timestamp}>{row.timestamp}</Text>
+                  )}
+                </View>
+                {row.imageUrl && (
+                  <AnimatedPressable
+                    onPress={() => setViewingImage({ url: row.imageUrl!, title: `${row.primary} — ${row.status}` })}
+                    style={styles.screenshotBtn}
+                  >
+                    <MaterialIcons name="photo-camera" size={14} color={colors.primary} />
+                  </AnimatedPressable>
                 )}
               </View>
-              {row.imageUrl && (
-                <AnimatedPressable
-                  onPress={() => setViewingImage({ url: row.imageUrl!, title: `${row.primary} — ${row.status}` })}
-                  style={styles.screenshotBtn}
-                >
-                  <MaterialIcons name="photo-camera" size={14} color={colors.primary} />
-                </AnimatedPressable>
-              )}
-            </View>
-          </AnimatedCard>
-        ))
+            </AnimatedCard>
+          )}
+          scrollEnabled={false}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={null}
+          removeClippedSubviews={true}
+          maxToRenderPerBatch={10}
+        />
       ) : (
         <View style={styles.emptyContainer}>
           <MaterialIcons name="inbox" size={20} color={colors.textMuted} />
@@ -192,27 +201,24 @@ const styles = StyleSheet.create({
   title: {
     color: colors.textSecondary,
     fontSize: fontSize.xs,
-    fontWeight: '800',
-    letterSpacing: 2,
-    textTransform: 'uppercase',
-    fontFamily: 'monospace',
+    fontWeight: '700',
+    letterSpacing: 1,
   },
   countBadge: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 2,
-    borderRadius: radii.xs,
+    paddingHorizontal: 6,
+    paddingVertical: 1,
+    borderRadius: radii.sm,
   },
   count: {
-    fontSize: fontSize.xs,
-    fontWeight: '800',
+    fontSize: 10,
+    fontWeight: '700',
     fontVariant: ['tabular-nums'],
-    fontFamily: 'monospace',
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
+    paddingVertical: spacing.sm,
     gap: spacing.sm,
     borderBottomWidth: 1,
     borderBottomColor: colors.borderSubtle,
@@ -222,34 +228,31 @@ const styles = StyleSheet.create({
   },
   rowContent: {
     flex: 1,
-    gap: 2,
+    gap: 0,
   },
   primary: {
     color: colors.textPrimary,
-    fontFamily: 'monospace',
-    fontSize: fontSize.base,
+    fontSize: fontSize.sm,
     fontWeight: '600',
+    letterSpacing: 0.1,
   },
   secondary: {
     color: colors.textMuted,
-    fontSize: fontSize.xs,
-    fontFamily: 'monospace',
+    fontSize: 10,
   },
   rowRight: {
     alignItems: 'flex-end',
-    gap: 2,
+    gap: 1,
   },
   statusBadge: {
-    fontSize: fontSize['2xs'],
-    fontWeight: '800',
-    letterSpacing: 1,
-    fontFamily: 'monospace',
+    fontSize: 9,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
   timestamp: {
     color: colors.textMuted,
-    fontSize: fontSize['2xs'],
+    fontSize: 9,
     fontVariant: ['tabular-nums'],
-    fontFamily: 'monospace',
   },
   emptyContainer: {
     flexDirection: 'row',
@@ -260,12 +263,11 @@ const styles = StyleSheet.create({
   },
   empty: {
     color: colors.textMuted,
-    fontSize: fontSize.base,
-    fontFamily: 'monospace',
+    fontSize: fontSize.sm,
   },
   screenshotBtn: {
-    width: 30,
-    height: 30,
+    width: 28,
+    height: 28,
     borderRadius: radii.sm,
     backgroundColor: colors.primaryMuted,
     justifyContent: 'center',
@@ -285,7 +287,6 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: fontSize.sm,
     fontWeight: '700',
-    letterSpacing: 1,
-    fontFamily: 'monospace',
+    letterSpacing: 0.5,
   },
 });

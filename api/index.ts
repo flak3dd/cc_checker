@@ -1,45 +1,25 @@
 /**
- * Vercel Serverless API — Express app wrapped for @vercel/node runtime.
+ * Vercel Serverless API with Postgres — Express app for @vercel/node runtime.
  * 
- * Key differences from local backend/server.ts:
- * - Uses /tmp for file storage (ephemeral, persists across warm invocations)
- * - Process spawning (Playwright automation) is disabled — returns cloud-mode errors
- * - In-memory store supplements /tmp for hot data
- * - CLOUD_MODE flag lets the frontend adapt its UI
+ * Replaces /tmp file storage with Postgres for durable persistence.
+ * Automation still cloud-disabled; use local start.sh for Playwright.
  */
+
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import multer from 'multer';
+import { sql } from '@vercel/postgres';
+import { v4 as uuidv4 } from 'uuid';
 import path from 'path';
 import fs from 'fs';
 
 const app = express();
 const CLOUD_MODE = true;
 
-// --- Paths (use /tmp on Vercel) ---
-const DATA_DIR = '/tmp/data';
+// --- Paths (screenshots only now) ---
 const SCREENSHOTS_DIR = '/tmp/screenshots';
-
-const filePath = (name: string) => path.join(DATA_DIR, name);
-
-const RESULTS_FILE = filePath('results.txt');
-const CARDS_FILE = filePath('cards.txt');
-const PLATES_FILE = filePath('plates.txt');
-const LOG_FILE = filePath('wa_hits_log.txt');
-const WA_CHECKOUT_LOG = filePath('wa_checkout_log.txt');
-const WA_HITS_JSON = filePath('wa_hits.json');
-const WA_HITS_FILE = filePath('wa_hits.txt');
-const WA_CHECKOUT_RESULTS_JSON = filePath('wa_checkout_results.json');
-const WA_PENDING_PAYMENT_FILE = filePath('wa_pending_payment.json');
-const WA_SELECTED_CARD_FILE = filePath('wa_selected_card.json');
-const WA_CHECKOUT_TERM_FILE = filePath('wa_checkout_term.json');
-const CARFACTS_LOG = filePath('carfacts_log.txt');
-const CARFACTS_RESULTS_JSON = filePath('carfacts_results.json');
-
-// Ensure /tmp directories
-[DATA_DIR, SCREENSHOTS_DIR, path.join(SCREENSHOTS_DIR, 'hits')].forEach(d => {
-  if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
-});
+if (!fs.existsSync(SCREENSHOTS_DIR)) fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
+if (!fs.existsSync(path.join(SCREENSHOTS_DIR, 'hits'))) fs.mkdirSync(path.join(SCREENSHOTS_DIR, 'hits'), { recursive: true });
 
 // --- Middleware ---
 app.use(cors({
@@ -52,88 +32,195 @@ app.use('/screenshots', express.static(SCREENSHOTS_DIR));
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-// --- Helpers ---
-function safeRead(filepath: string, fallback = ''): string {
+// --- DB Schema Init (runs on cold start) ---
+async function initSchema() {
   try {
-    return fs.existsSync(filepath) ? fs.readFileSync(filepath, 'utf-8') : fallback;
-  } catch {
-    return fallback;
+    // Results table
+    await sql`
+      CREATE TABLE IF NOT EXISTS results (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        card_number TEXT NOT NULL,
+        mm TEXT NOT NULL,
+        yy TEXT NOT NULL,
+        cvv TEXT NOT NULL,
+        status TEXT NOT NULL,
+        screenshot_path TEXT,
+        timestamp TIMESTAMPTZ DEFAULT NOW(),
+        INDEX idx_status (status),
+        INDEX idx_timestamp (timestamp)
+      );
+    `;
+
+    // Cards queue
+    await sql`
+      CREATE TABLE IF NOT EXISTS cards (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        card_number TEXT NOT NULL,
+        mm TEXT NOT NULL,
+        yy TEXT NOT NULL,
+        cvv TEXT NOT NULL,
+        created_at TIMESTAMPTZ DEFAULT NOW(),
+        INDEX idx_card (card_number, mm, yy, cvv)
+      );
+    `;
+
+    // Plates queue
+    await sql`
+      CREATE TABLE IF NOT EXISTS plates (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        plate TEXT NOT NULL,
+        created_at TIMESTAMPTZ DEFAULT NOW(),
+        INDEX idx_plate (plate)
+      );
+    `;
+
+    // WA Hits
+    await sql`
+      CREATE TABLE IF NOT EXISTS wa_hits (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        plate TEXT NOT NULL,
+        data JSONB,
+        screenshot_path TEXT,
+        timestamp TIMESTAMPTZ DEFAULT NOW()
+      );
+    `;
+
+    // WA Checkout Results
+    await sql`
+      CREATE TABLE IF NOT EXISTS wa_checkout_results (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        data JSONB NOT NULL,
+        timestamp TIMESTAMPTZ DEFAULT NOW()
+      );
+    `;
+
+    // Logs tables
+    await sql`
+      CREATE TABLE IF NOT EXISTS logs_wa (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), message TEXT NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());
+      CREATE TABLE IF NOT EXISTS logs_wa_checkout (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), message TEXT NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());
+      CREATE TABLE IF NOT EXISTS logs_cc (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), message TEXT NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());
+    `;
+
+    // State tables (singleton-like)
+    await sql`
+      CREATE TABLE IF NOT EXISTS pending_payment (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data JSONB, updated_at TIMESTAMPTZ DEFAULT NOW());
+      CREATE TABLE IF NOT EXISTS selected_card (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data JSONB, updated_at TIMESTAMPTZ DEFAULT NOW());
+      CREATE TABLE IF NOT EXISTS checkout_term (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), term INTEGER DEFAULT 12, updated_at TIMESTAMPTZ DEFAULT NOW());
+    `;
+
+    console.log('Postgres schema initialized');
+  } catch (error) {
+    console.error('Schema init failed:', error);
   }
 }
 
-function safeReadJSON(filepath: string, fallback: any = []): any {
-  try {
-    return fs.existsSync(filepath) ? JSON.parse(fs.readFileSync(filepath, 'utf-8')) : fallback;
-  } catch {
-    return fallback;
+// Init on first request
+let schemaInited = false;
+app.use(async (_req: Request, res: Response, next) => {
+  if (!schemaInited) {
+    await initSchema();
+    schemaInited = true;
   }
+  next();
+});
+
+// --- DB Helpers ---
+async function getResults(): Promise<any[]> {
+  const { rows } = await sql`SELECT * FROM results ORDER BY timestamp DESC`;
+  return rows.map(r => ({
+    card_number: r.card_number,
+    mm: r.mm,
+    yy: r.yy,
+    cvv: r.cvv,
+    status: r.status,
+    screenshot_path: r.screenshot_path,
+    timestamp: r.timestamp,
+  }));
 }
 
-function safeWrite(filepath: string, content: string) {
-  try {
-    fs.writeFileSync(filepath, content);
-  } catch (e) {
-    console.error(`Failed to write ${filepath}:`, e);
-  }
-}
-
-function parseResultsFile() {
-  const content = safeRead(RESULTS_FILE);
-  return content.split('\n')
-    .filter(line => line.trim() && !line.startsWith('#'))
-    .map(line => {
-      const parts = line.split('|');
-      if (parts.length >= 6) {
-        return {
-          card_number: parts[0],
-          mm: parts[1],
-          yy: parts[2],
-          cvv: parts[3],
-          status: parts[4],
-          screenshot_path: parts[5],
-          timestamp: parts[6] || new Date().toISOString(),
-        };
-      }
-      return null;
-    })
-    .filter(Boolean);
-}
-
-function parseResultsGrouped() {
+async function getResultsGrouped(): Promise<any[][]> {
+  // Simple grouping by approximate run (last 50 results split into chunks)
+  const results = await getResults();
+  const chunkSize = 20;
   const runs: any[][] = [];
-  let currentRun: any[] = [];
-  const content = safeRead(RESULTS_FILE);
-
-  content.split('\n').forEach(line => {
-    line = line.trim();
-    if (!line || line.startsWith('#')) return;
-    const parts = line.split('|');
-    if (parts.length >= 6) {
-      currentRun.push({
-        card_number: parts[0],
-        mm: parts[1],
-        yy: parts[2],
-        cvv: parts[3],
-        status: parts[4],
-        screenshot_path: parts[5],
-        timestamp: parts[6] || new Date().toISOString(),
-      });
-    } else {
-      if (currentRun.length > 0) {
-        runs.push(currentRun);
-        currentRun = [];
-      }
-    }
-  });
-  if (currentRun.length > 0) runs.push(currentRun);
-  return runs;
+  for (let i = 0; i < results.length; i += chunkSize) {
+    runs.push(results.slice(i, i + chunkSize));
+  }
+  return runs.reverse();
 }
 
-function countRemainingCards() {
-  return safeRead(CARDS_FILE).split('\n').filter(l => l.trim()).length;
+async function countCards(): Promise<number> {
+  const { rows } = await sql`SELECT COUNT(*)::integer FROM cards`;
+  return rows[0].count;
 }
 
-/** Cloud-mode guard: returns error for process management endpoints */
+async function countPlates(): Promise<number> {
+  const { rows } = await sql`SELECT COUNT(*)::integer FROM plates`;
+  return rows[0].count;
+}
+
+async function countWaHits(): Promise<number> {
+  const { rows } = await sql`SELECT COUNT(*)::integer FROM wa_hits`;
+  return rows[0].count;
+}
+
+async function getWaHits() {
+  const { rows } = await sql`SELECT * FROM wa_hits ORDER BY timestamp DESC`;
+  return rows;
+}
+
+async function getWaCheckoutResults() {
+  const { rows } = await sql`SELECT * FROM wa_checkout_results ORDER BY timestamp DESC`;
+  return rows;
+}
+
+async function getPendingPayment() {
+  const { rows } = await sql`SELECT data FROM pending_payment ORDER BY updated_at DESC LIMIT 1`;
+  return rows[0]?.data || null;
+}
+
+async function getSelectedCard() {
+  const { rows } = await sql`SELECT data FROM selected_card ORDER BY updated_at DESC LIMIT 1`;
+  return rows[0]?.data || null;
+}
+
+async function getCheckoutTerm(): Promise<number> {
+  const { rows } = await sql`SELECT term FROM checkout_term ORDER BY updated_at DESC LIMIT 1`;
+  return rows[0]?.term || 12;
+}
+
+async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc', message: string) {
+  await sql`INSERT INTO ${sql.unsafe(table)} (message) VALUES (${message})`;
+}
+
+async function getLogTail(table: string, limit = 50): Promise<string[]> {
+  const { rows } = await sql.unsafe(`SELECT message FROM ${table} ORDER BY timestamp DESC LIMIT ${limit}`);
+  return rows.map(r => r.message).reverse();
+}
+
+async function clearTable(table: string) {
+  await sql.unsafe(`DELETE FROM ${table}`);
+}
+
+async function bulkInsertCards(cards: string[]) {
+  for (const card of cards) {
+    const [card_number, mm, yy, cvv] = card.split('|');
+    await sql`INSERT INTO cards (card_number, mm, yy, cvv) VALUES (${card_number}, ${mm}, ${yy}, ${cvv})`;
+  }
+}
+
+async function bulkInsertPlates(plates: string[]) {
+  for (const plate of plates) {
+    await sql`INSERT INTO plates (plate) VALUES (${plate})`;
+  }
+}
+
+async function upsertJson(table: string, data: any) {
+  await sql`DELETE FROM ${sql.unsafe(table)}`;
+  await sql`INSERT INTO ${sql.unsafe(table)} (data) VALUES (${JSON.stringify(data)})`;
+}
+
+/** Cloud-mode guard */
 function cloudModeError(res: Response, action: string) {
   return res.status(503).json({
     success: false,
@@ -143,144 +230,145 @@ function cloudModeError(res: Response, action: string) {
 }
 
 // ─── Health ─────────────────────────────────────────────────────
-app.get('/api/health', (_req: Request, res: Response) => {
-  res.json({ status: 'ok', cloud_mode: CLOUD_MODE, runtime: 'vercel' });
+app.get('/api/health', async (_req: Request, res: Response) => {
+  try {
+    await sql`SELECT 1`;
+    res.json({ status: 'ok', db: 'connected', cloud_mode: CLOUD_MODE, runtime: 'vercel' });
+  } catch {
+    res.status(500).json({ status: 'error', db: 'disconnected' });
+  }
 });
 
 // ─── Status & Analytics ─────────────────────────────────────────
-app.get('/api/status', (_req: Request, res: Response) => {
-  const results = parseResultsFile();
-  const remaining = countRemainingCards();
+app.get('/api/status', async (_req: Request, res: Response) => {
+  const [resultsLen, remaining] = await Promise.all([getResults().then(r => r.length), countCards()]);
   res.json({
-    is_running: false, // Always false in cloud mode
+    is_running: false,
     remaining_cards: remaining,
-    total_processed: results.length,
+    total_processed: resultsLen,
   });
 });
 
-app.get('/api/results', (_req: Request, res: Response) => {
-  const runs = parseResultsGrouped();
-  runs.reverse();
-  res.json({ runs, total: parseResultsFile().length });
+app.get('/api/results', async (_req: Request, res: Response) => {
+  const [runs, total] = await Promise.all([getResultsGrouped(), getResults().then(r => r.length)]);
+  res.json({ runs, total });
 });
 
-app.get('/api/analytics', (_req: Request, res: Response) => {
-  const results = parseResultsFile() as any[];
-  const successCount = results.filter(r => r.status === 'SUCCESS').length;
-  const failCount = results.filter(r => ['FAIL', 'ERROR_PREPAYMENT'].includes(r.status)).length;
-  const totalCount = results.length;
-  const successRate = totalCount > 0 ? (successCount / totalCount * 100) : 0;
-
+app.get('/api/analytics', async (_req: Request, res: Response) => {
+  const { rows } = await sql`
+    SELECT 
+      COUNT(*) FILTER (WHERE status = 'SUCCESS') as success_count,
+      COUNT(*) FILTER (WHERE status IN ('FAIL', 'ERROR_PREPAYMENT')) as fail_count,
+      COUNT(*) as total_count
+    FROM results
+  `;
+  const { success_count, fail_count, total_count } = rows[0];
+  const success_rate = total_count > 0 ? (success_count / total_count * 100) : 0;
   res.json({
-    success_count: successCount,
-    fail_count: failCount,
-    total_count: totalCount,
-    success_rate: Math.round(successRate * 10) / 10,
+    success_count,
+    fail_count,
+    total_count,
+    success_rate: Math.round(success_rate * 10) / 10,
   });
 });
 
 // ─── Upload ─────────────────────────────────────────────────────
-app.post('/api/upload', upload.single('file'), (req: Request, res: Response) => {
+app.post('/api/upload', upload.single('file'), async (req: Request, res: Response) => {
   const target = req.query.target as string || 'cc';
   if (!req.file) return res.status(400).json({ success: false, message: 'No file uploaded' });
 
   const content = req.file.buffer.toString('utf-8');
   const lines = content.trim().split(/\r?\n/);
 
-  if (target === 'cc') {
-    const validLines: string[] = [];
-    for (const l of lines) {
-      const trimmed = l.trim();
-      if (!trimmed) continue;
-      const parts = trimmed.split('|');
-      if (parts.length >= 4 && parts.slice(0, 4).every(p => /^\d+$/.test(p.trim()))) {
-        validLines.push(trimmed);
+  try {
+    if (target === 'cc') {
+      const validLines: string[] = [];
+      for (const l of lines) {
+        const trimmed = l.trim();
+        if (!trimmed) continue;
+        const parts = trimmed.split('|');
+        if (parts.length >= 4 && parts.slice(0, 4).every(p => /^\d+$/.test(p.trim()))) {
+          validLines.push(trimmed);
+        }
       }
-    }
-    if (validLines.length === 0) return res.json({ success: false, message: 'No valid card data found (format: CC|MM|YY|CVV)' });
-
-    const existing = safeRead(CARDS_FILE);
-    safeWrite(CARDS_FILE, existing + validLines.join('\n') + '\n');
-    res.json({ success: true, message: `Uploaded ${validLines.length} cards`, count: validLines.length });
-  } else if (target === 'wa_rego') {
-    const validLines: string[] = [];
-    const plateRegex = /^[A-Z0-9]{1,10}$/;
-    for (const l of lines) {
-      const parts = l.replace(/,/g, ' ').split(/\s+/);
-      for (let p of parts) {
-        p = p.trim().toUpperCase();
-        if (plateRegex.test(p)) validLines.push(p);
+      if (validLines.length === 0) return res.json({ success: false, message: 'No valid card data found (format: CC|MM|YY|CVV)' });
+      await bulkInsertCards(validLines);
+      res.json({ success: true, message: `Uploaded ${validLines.length} cards to DB`, count: validLines.length });
+    } else if (target === 'wa_rego') {
+      const validLines: string[] = [];
+      const plateRegex = /^[A-Z0-9]{1,10}$/;
+      for (const l of lines) {
+        const parts = l.replace(/,/g, ' ').split(/\s+/);
+        for (let p of parts) {
+          p = p.trim().toUpperCase();
+          if (plateRegex.test(p)) validLines.push(p);
+        }
       }
+      if (validLines.length === 0) return res.json({ success: false, message: 'No valid plates found' });
+      await bulkInsertPlates(validLines);
+      res.json({ success: true, message: `Uploaded ${validLines.length} plates to DB`, count: validLines.length });
+    } else {
+      res.status(400).json({ success: false, message: `Invalid target: ${target}` });
     }
-    if (validLines.length === 0) return res.json({ success: false, message: 'No valid plates found' });
-
-    const existing = safeRead(PLATES_FILE);
-    safeWrite(PLATES_FILE, existing + validLines.join('\n') + '\n');
-    res.json({ success: true, message: `Uploaded ${validLines.length} plates`, count: validLines.length });
-  } else {
-    res.status(400).json({ success: false, message: `Invalid target: ${target}` });
+  } catch (error) {
+    console.error('Upload error:', error);
+    res.status(500).json({ success: false, message: 'DB insert failed' });
   }
 });
 
-// ─── Process Management (cloud-mode disabled) ───────────────────
+// ─── Process Management (cloud-disabled) ────────────────────────
 app.post('/api/processing/start', (_req: Request, res: Response) => cloudModeError(res, 'CC Checker'));
 app.post('/api/processing/stop', (_req: Request, res: Response) => cloudModeError(res, 'CC Checker'));
 app.post('/api/plate-check/start', (_req: Request, res: Response) => cloudModeError(res, 'Plate Check'));
 app.post('/api/plate-check/stop', (_req: Request, res: Response) => cloudModeError(res, 'Plate Check'));
 app.post('/api/wa-checkout/start', (_req: Request, res: Response) => cloudModeError(res, 'WA Checkout'));
 app.post('/api/wa-checkout/stop', (_req: Request, res: Response) => cloudModeError(res, 'WA Checkout'));
-app.post('/api/carfacts/start', (_req: Request, res: Response) => cloudModeError(res, 'CarFacts'));
-app.post('/api/carfacts/stop', (_req: Request, res: Response) => cloudModeError(res, 'CarFacts'));
 
-// ─── Data Management (works in cloud) ───────────────────────────
-app.post('/api/results/clear', (_req: Request, res: Response) => {
-  safeWrite(RESULTS_FILE, '');
-  res.json({ success: true, message: 'Results cleared' });
+// ─── Data Management ────────────────────────────────────────────
+app.post('/api/results/clear', async (_req: Request, res: Response) => {
+  await clearTable('results');
+  res.json({ success: true, message: 'Results cleared from DB' });
 });
 
-app.post('/api/rerun', (req: Request, res: Response) => {
+app.post('/api/rerun', async (req: Request, res: Response) => {
   const { cards } = req.body;
   if (!cards || !Array.isArray(cards)) return res.status(400).json({ success: false, message: 'No cards provided' });
 
-  const existing = safeRead(CARDS_FILE).split('\n').filter(l => l.trim());
   const newLines = cards.map((c: any) => `${c.card_number}|${c.mm}|${c.yy}|${c.cvv}`);
-  safeWrite(CARDS_FILE, [...newLines, ...existing].join('\n') + '\n');
-  res.json({ success: true, message: `Re-queued ${newLines.length} cards`, count: newLines.length });
+  await bulkInsertCards(newLines);
+  res.json({ success: true, message: `Re-queued ${newLines.length} cards to DB`, count: newLines.length });
 });
 
 // ─── Logs ───────────────────────────────────────────────────────
-app.get('/api/logs/tail', (req: Request, res: Response) => {
+app.get('/api/logs/tail', async (req: Request, res: Response) => {
   const file = req.query.file as string || 'wa';
   const linesCount = parseInt(req.query.lines as string) || 50;
 
-  const pathMap: Record<string, string> = {
-    'wa': LOG_FILE,
-    'wa-checkout': WA_CHECKOUT_LOG,
-    'results': RESULTS_FILE,
-    'cc': filePath('cc_log.txt'),
-    'carfacts': CARFACTS_LOG,
+  const tableMap: Record<string, string> = {
+    'wa': 'logs_wa',
+    'wa-checkout': 'logs_wa_checkout',
+    'results': 'results', // reuse for now
+    'cc': 'logs_cc',
   };
 
-  const target = pathMap[file];
-  if (!target) return res.json({ lines: [] });
+  const table = tableMap[file];
+  if (!table) return res.json({ lines: [] });
 
-  const content = safeRead(target).split('\n');
-  res.json({ lines: content.slice(-linesCount).map(l => l.trim()) });
+  const lines = await getLogTail(table!, linesCount);
+  res.json({ lines });
 });
 
 // ─── Plate Check ────────────────────────────────────────────────
-app.post('/api/plate-check/clear', (_req: Request, res: Response) => {
-  safeWrite(LOG_FILE, '');
-  safeWrite(WA_HITS_JSON, '[]');
-  safeWrite(WA_HITS_FILE, '');
-  res.json({ success: true, message: 'Plate logs and hits cleared' });
+app.post('/api/plate-check/clear', async (_req: Request, res: Response) => {
+  await Promise.all([clearTable('logs_wa'), clearTable('wa_hits')]);
+  res.json({ success: true, message: 'Plate logs and hits cleared from DB' });
 });
 
-app.post('/api/plate-check/generate', (req: Request, res: Response) => {
+app.post('/api/plate-check/generate', async (req: Request, res: Response) => {
   const count = parseInt(req.query.count as string) || 100;
-  const generated: string[] = [];
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
   const digits = '0123456789';
+  const generated: string[] = [];
 
   for (let i = 0; i < count; i++) {
     let l = '';
@@ -290,15 +378,12 @@ app.post('/api/plate-check/generate', (req: Request, res: Response) => {
     generated.push(`1${l}${d}`);
   }
 
-  const existing = safeRead(PLATES_FILE);
-  safeWrite(PLATES_FILE, existing + generated.join('\n') + '\n');
-  res.json({ success: true, message: `Generated ${count} plates`, count });
+  await bulkInsertPlates(generated);
+  res.json({ success: true, message: `Generated ${count} plates to DB`, count });
 });
 
-app.get('/api/plate-check/status', (_req: Request, res: Response) => {
-  const hitsCount = safeReadJSON(WA_HITS_JSON, []).length;
-  const pendingCount = safeRead(PLATES_FILE).split('\n').filter(l => l.trim()).length;
-
+app.get('/api/plate-check/status', async (_req: Request, res: Response) => {
+  const [hitsCount, pendingCount] = await Promise.all([countWaHits(), countPlates()]);
   res.json({
     is_running: false,
     hits_count: hitsCount,
@@ -307,118 +392,123 @@ app.get('/api/plate-check/status', (_req: Request, res: Response) => {
   });
 });
 
-app.get('/api/plate-check/results', (_req: Request, res: Response) => {
-  const content = safeRead(LOG_FILE);
-  const lines = content.split('\n').filter(l => l.trim()).slice(-100);
-  res.json({ results: lines });
+app.get('/api/plate-check/results', async (_req: Request, res: Response) => {
+  const logs = await getLogTail('logs_wa', 100);
+  res.json({ results: logs });
 });
 
 // ─── WA Rego / Checkout ─────────────────────────────────────────
-app.get('/api/wa-rego/hits', (_req: Request, res: Response) => {
-  res.json(safeReadJSON(WA_HITS_JSON, []));
+app.get('/api/wa-rego/hits', getWaHits);
+
+app.get('/api/wa-rego/checkout-results', getWaCheckoutResults);
+
+app.post('/api/wa-checkout/clear', async (_req: Request, res: Response) => {
+  await clearTable('wa_checkout_results');
+  await clearTable('logs_wa_checkout');
+  res.json({ success: true, message: 'WA Checkout data cleared from DB' });
 });
 
-app.get('/api/wa-rego/checkout-results', (_req: Request, res: Response) => {
-  res.json(safeReadJSON(WA_CHECKOUT_RESULTS_JSON, []));
-});
-
-app.post('/api/wa-checkout/clear', (_req: Request, res: Response) => {
-  safeWrite(WA_CHECKOUT_LOG, '');
-  safeWrite(WA_CHECKOUT_RESULTS_JSON, '[]');
-  res.json({ success: true, message: 'WA Checkout logs and results cleared' });
-});
-
-app.post('/api/wa-checkout/set-term', (req: Request, res: Response) => {
+app.post('/api/wa-checkout/set-term', async (req: Request, res: Response) => {
   const { term } = req.body;
   if (![3, 6, 12].includes(term)) {
     return res.status(400).json({ success: false, message: 'Term must be 3, 6, or 12' });
   }
-  safeWrite(WA_CHECKOUT_TERM_FILE, JSON.stringify({ term }));
+  await sql`DELETE FROM checkout_term`;
+  await sql`INSERT INTO checkout_term (term) VALUES (${term})`;
   res.json({ success: true, message: `Term set to ${term} months` });
 });
 
-app.get('/api/wa-checkout/term', (_req: Request, res: Response) => {
-  const data = safeReadJSON(WA_CHECKOUT_TERM_FILE, { term: 12 });
-  res.json({ term: data.term || 12 });
+app.get('/api/wa-checkout/term', async (_req: Request, res: Response) => {
+  const term = await getCheckoutTerm();
+  res.json({ term });
 });
 
-app.get('/api/wa-checkout/status', (_req: Request, res: Response) => {
-  const hitsCount = safeRead(WA_HITS_FILE).split('\n').filter(l => l.trim()).length;
-  const pending_payment = safeReadJSON(WA_PENDING_PAYMENT_FILE, null);
-
+app.get('/api/wa-checkout/status', async (_req: Request, res: Response) => {
+  const [hitsCount, pendingPayment] = await Promise.all([
+    countWaHits(),
+    getPendingPayment()
+  ]);
   res.json({
     is_running: false,
     hits_to_process: hitsCount,
-    pending_payment,
+    pending_payment: pendingPayment,
   });
 });
 
-app.post('/api/wa-checkout/select-card', (req: Request, res: Response) => {
+app.post('/api/wa-checkout/select-card', async (req: Request, res: Response) => {
   const cardData = req.body;
   if (!cardData || !cardData.card_number) {
     return res.status(400).json({ success: false, message: 'Invalid card data' });
   }
-  safeWrite(WA_SELECTED_CARD_FILE, JSON.stringify(cardData));
-  res.json({ success: true, message: 'Card selected for automation' });
+  await upsertJson('selected_card', cardData);
+  res.json({ success: true, message: 'Card selected (stored in DB)' });
 });
 
-// ─── CarFacts ───────────────────────────────────────────────────
-app.get('/api/carfacts/status', (_req: Request, res: Response) => {
-  const resultsCount = safeReadJSON(CARFACTS_RESULTS_JSON, []).length;
-  const pendingPlates = safeRead(PLATES_FILE).split('\n').filter(l => l.trim()).length;
-  res.json({ is_running: false, results_count: resultsCount, pending_plates: pendingPlates });
-});
-
-app.get('/api/carfacts/results', (_req: Request, res: Response) => {
-  res.json(safeReadJSON(CARFACTS_RESULTS_JSON, []));
-});
-
-app.post('/api/carfacts/clear', (_req: Request, res: Response) => {
-  safeWrite(CARFACTS_LOG, '');
-  safeWrite(CARFACTS_RESULTS_JSON, '[]');
-  res.json({ success: true, message: 'CarFacts logs and results cleared' });
-});
-
-// ─── Push Data (for local automation to push results to cloud) ──
-app.post('/api/sync/push', (req: Request, res: Response) => {
-  const { file, content, append } = req.body;
-  if (!file || content === undefined) {
-    return res.status(400).json({ success: false, message: 'file and content required' });
+// ─── Sync (local → cloud push/pull) ─────────────────────────────
+app.post('/api/sync/push', async (req: Request, res: Response) => {
+  const { table, data, append = false } = req.body;
+  if (!table || data === undefined) {
+    return res.status(400).json({ success: false, message: 'table and data required' });
   }
 
-  const allowedFiles = [
-    'results.txt', 'wa_hits.json', 'wa_hits.txt', 'wa_checkout_results.json',
-    'wa_hits_log.txt', 'wa_checkout_log.txt', 'cc_log.txt',
-    'carfacts_results.json', 'carfacts_log.txt',
-    'wa_pending_payment.json', 'wa_selected_card.json',
-  ];
-
-  if (!allowedFiles.includes(file)) {
-    return res.status(400).json({ success: false, message: `File not allowed: ${file}` });
+  const allowedTables = ['results', 'wa_hits', 'wa_checkout_results', 'logs_wa', 'logs_wa_checkout', 'logs_cc', 'pending_payment', 'selected_card'];
+  if (!allowedTables.includes(table)) {
+    return res.status(400).json({ success: false, message: `Table not allowed: ${table}` });
   }
 
-  const targetPath = filePath(file);
-  if (append) {
-    const existing = safeRead(targetPath);
-    safeWrite(targetPath, existing + content);
-  } else {
-    safeWrite(targetPath, typeof content === 'string' ? content : JSON.stringify(content));
+  try {
+    if (append) {
+      // Append mode for logs/results (INSERT)
+      if (Array.isArray(data)) {
+        for (const item of data) {
+          if (table === 'results') {
+            const { card_number, mm, yy, cvv, status, screenshot_path, timestamp } = item;
+            await sql`
+              INSERT INTO results (card_number, mm, yy, cvv, status, screenshot_path, timestamp)
+              VALUES (${card_number}, ${mm}, ${yy}, ${cvv}, ${status}, ${screenshot_path}, ${timestamp || new Date().toISOString()})
+            `;
+          } else if (table === 'wa_hits') {
+            await sql`INSERT INTO wa_hits (plate, data, screenshot_path) VALUES (${item.plate}, ${JSON.stringify(item.data)}, ${item.screenshot_path})`;
+          }
+          // Add more append cases as needed
+        }
+      }
+    } else {
+      // Replace (upsert)
+      await upsertJson(table, data);
+    }
+    res.json({ success: true, message: `Synced to ${table}` });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Sync failed' });
   }
-
-  res.json({ success: true, message: `Synced ${file}` });
 });
 
-app.get('/api/sync/pull', (req: Request, res: Response) => {
-  const file = req.query.file as string;
-  if (!file) return res.status(400).json({ success: false, message: 'file param required' });
+app.get('/api/sync/pull', async (req: Request, res: Response) => {
+  const table = req.query.table as string;
+  if (!table) return res.status(400).json({ success: false, message: 'table param required' });
 
-  const allowedFiles = ['cards.txt', 'plates.txt', 'wa_selected_card.json', 'wa_checkout_term.json'];
-  if (!allowedFiles.includes(file)) {
-    return res.status(400).json({ success: false, message: `File not allowed: ${file}` });
+  const allowedTables = ['cards', 'plates', 'selected_card', 'checkout_term'];
+  if (!allowedTables.includes(table)) {
+    return res.status(400).json({ success: false, message: `Table not allowed: ${table}` });
   }
 
-  res.json({ success: true, content: safeRead(filePath(file)) });
+  let content: any;
+  switch (table) {
+    case 'cards':
+      content = await sql`SELECT card_number || '|' || mm || '|' || yy || '|' || cvv AS line FROM cards`;
+      break;
+    case 'plates':
+      content = await sql`SELECT plate AS line FROM plates`;
+      break;
+    case 'selected_card':
+    case 'checkout_term':
+      if (table === 'selected_card') content = await getSelectedCard();
+      else content = { term: await getCheckoutTerm() };
+      break;
+  }
+  res.json({ success: true, content });
 });
 
 // ─── Export for Vercel ──────────────────────────────────────────
 export default app;
+

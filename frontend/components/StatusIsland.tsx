@@ -129,17 +129,15 @@ const styles = StyleSheet.create({
   },
   statusText: {
     color: colors.textMuted,
-    fontSize: fontSize.base,
-    fontWeight: '800',
-    letterSpacing: 2,
-    fontFamily: 'monospace',
+    fontSize: fontSize.sm,
+    fontWeight: '700',
+    letterSpacing: 1,
     fontVariant: ['tabular-nums'],
   },
   labels: {
     color: colors.textSecondary,
-    fontSize: fontSize.sm,
+    fontSize: fontSize.xs,
     fontWeight: '600',
-    letterSpacing: 0.5,
-    fontFamily: 'monospace',
+    letterSpacing: 0.2,
   },
 });

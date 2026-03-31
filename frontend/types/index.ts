@@ -51,10 +51,3 @@ export interface WaCheckoutStatus {
     timestamp: number;
   } | null;
 }
-
-// CarFacts Types
-export interface CarfactsStatus {
-  is_running: boolean;
-  results_count: number;
-  pending_plates: number;
-}

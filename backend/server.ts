@@ -24,8 +24,6 @@ const WA_CHECKOUT_RESULTS_JSON = path.join(DATA_DIR, 'wa_checkout_results.json')
 const WA_PENDING_PAYMENT_FILE = path.join(DATA_DIR, 'wa_pending_payment.json');
 const WA_SELECTED_CARD_FILE = path.join(DATA_DIR, 'wa_selected_card.json');
 const WA_CHECKOUT_TERM_FILE = path.join(DATA_DIR, 'wa_checkout_term.json');
-const CARFACTS_LOG = path.join(DATA_DIR, 'carfacts_log.txt');
-const CARFACTS_RESULTS_JSON = path.join(DATA_DIR, 'carfacts_results.json');
 
 // Ensure directories exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -41,7 +39,6 @@ app.use('/screenshots', express.static(SCREENSHOTS_DIR));
 let ccCheckProcess: ChildProcess | null = null;
 let plateCheckProcess: ChildProcess | null = null;
 let plateCheckoutProcess: ChildProcess | null = null;
-let carfactsProcess: ChildProcess | null = null;
 
 // Clean up any stale state files from previous runs on startup
 const STALE_FILES = [
@@ -166,6 +163,39 @@ app.get('/api/results', (req: Request, res: Response) => {
   });
 });
 
+app.get('/api/results/cc', (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const allResults = parseResultsFile();
+  const start = (page - 1) * limit;
+  const results = allResults.slice(start, start + limit);
+  res.json({
+    results,
+    total: allResults.length,
+    hasMore: start + limit < allResults.length
+  });
+});
+
+app.get('/api/results/wa', (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  
+  let waResults: any[] = [];
+  if (fs.existsSync(WA_CHECKOUT_RESULTS_JSON)) {
+    try {
+      waResults = JSON.parse(fs.readFileSync(WA_CHECKOUT_RESULTS_JSON, 'utf-8'));
+    } catch {}
+  }
+  
+  const start = (page - 1) * limit;
+  const results = waResults.slice(start, start + limit);
+  res.json({
+    results,
+    total: waResults.length,
+    hasMore: start + limit < waResults.length
+  });
+});
+
 app.get('/api/analytics', (req: Request, res: Response) => {
   const results = parseResultsFile() as any[];
   const successCount = results.filter(r => r.status === 'SUCCESS').length;
@@ -280,7 +310,6 @@ app.get('/api/logs/tail', (req: Request, res: Response) => {
     'wa-checkout': WA_CHECKOUT_LOG,
     'results': RESULTS_FILE,
     'cc': path.join(DATA_DIR, 'cc_log.txt'),
-    'carfacts': CARFACTS_LOG,
   };
 
   const target = pathMap[file];
@@ -486,69 +515,6 @@ app.post('/api/wa-checkout/select-card', (req: Request, res: Response) => {
 
   fs.writeFileSync(WA_SELECTED_CARD_FILE, JSON.stringify(cardData));
   res.json({ success: true, message: 'Card selected for automation' });
-});
-
-// --- CarFacts Endpoints ---
-
-app.post('/api/carfacts/start', (req: Request, res: Response) => {
-  if (isProcessAlive(carfactsProcess)) {
-    return res.json({ success: false, message: 'CarFacts is already running' });
-  }
-
-  const scriptPath = path.join(BASE_DIR, 'automation', 'carfacts', 'check.ts');
-  try {
-    carfactsProcess = spawn('npx', ['tsx', scriptPath], {
-      cwd: BASE_DIR,
-      detached: true,
-      stdio: 'ignore',
-    });
-    carfactsProcess.unref();
-    res.json({ success: true, message: 'CarFacts started', pid: carfactsProcess.pid });
-  } catch (e: any) {
-    res.status(500).json({ success: false, message: `Failed to start: ${e.message}` });
-  }
-});
-
-app.post('/api/carfacts/stop', (req: Request, res: Response) => {
-  if (isProcessAlive(carfactsProcess)) {
-    killProcessGroup(carfactsProcess);
-    carfactsProcess = null;
-    return res.json({ success: true, message: 'CarFacts stopped' });
-  }
-  carfactsProcess = null;
-  res.json({ success: false, message: 'CarFacts is not running' });
-});
-
-app.get('/api/carfacts/status', (req: Request, res: Response) => {
-  const isRunning = isProcessAlive(carfactsProcess);
-  if (!isRunning && carfactsProcess) carfactsProcess = null;
-  let resultsCount = 0;
-  if (fs.existsSync(CARFACTS_RESULTS_JSON)) {
-    try {
-      resultsCount = JSON.parse(fs.readFileSync(CARFACTS_RESULTS_JSON, 'utf-8')).length;
-    } catch {}
-  }
-  const pendingPlates = fs.existsSync(PLATES_FILE)
-    ? fs.readFileSync(PLATES_FILE, 'utf-8').split('\n').filter(l => l.trim()).length
-    : 0;
-
-  res.json({ is_running: isRunning, results_count: resultsCount, pending_plates: pendingPlates });
-});
-
-app.get('/api/carfacts/results', (req: Request, res: Response) => {
-  if (!fs.existsSync(CARFACTS_RESULTS_JSON)) return res.json([]);
-  try {
-    const results = JSON.parse(fs.readFileSync(CARFACTS_RESULTS_JSON, 'utf-8'));
-    res.json(results);
-  } catch {
-    res.json([]);
-  }
-});
-
-app.post('/api/carfacts/clear', (req: Request, res: Response) => {
-  if (fs.existsSync(CARFACTS_LOG)) fs.writeFileSync(CARFACTS_LOG, '');
-  if (fs.existsSync(CARFACTS_RESULTS_JSON)) fs.writeFileSync(CARFACTS_RESULTS_JSON, '[]');
-  res.json({ success: true, message: 'CarFacts logs and results cleared' });
 });
 
 app.listen(PORT as number, '0.0.0.0', () => {
