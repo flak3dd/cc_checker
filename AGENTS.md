@@ -3,11 +3,9 @@
 ## Project Structure & Module Organization
 This repository is a unified system for CC checking and plate rotation automation, featuring a dashboard interface and stealth automation capabilities.
 
-- **`frontend/`**: Expo-based React Native web application for monitoring and control.
-- **`backend/`**: Express server (`backend/server.ts`) acting as an API bridge for the automation scripts.
-- **`automation/`**: Core logic for browser automation using Playwright and Puppeteer Stealth.
-  - `cc_checker/`: PPSR automation.
-  - `wa_rego/`: WA registration checking and payment automation.
+- **`src/mobile/`**: Expo-based React Native application code (app, components, hooks, assets).
+- **`src/server/`**: Express server (`index.ts`) acting as an API bridge.
+- **`src/automation/`**: Core logic for browser automation using Playwright and Puppeteer Stealth.
 - **`data/`**: Input files (`cards.txt`, `plates.txt`) and output results (`results.txt`, `*.json`).
 - **`screenshots/`**: Captured evidence from automation runs.
 
@@ -18,12 +16,12 @@ The system uses a unified startup script for development.
 - **Run automation via CLI**: `./automate.sh [type] [file]`
   - `type`: `cc` (PPSR) or `wa` (WA Rego).
   - `file`: Optional path to input file.
-- **Backend standalone**: `npx tsx backend/server.ts --port 8000`
-- **Frontend standalone**: `cd frontend && npx expo start --web --port 8085`
+- **Backend standalone**: `npx tsx src/server/index.ts --port 8000`
+- **Mobile standalone**: `npx expo start --web --port 8085`
 
 ## Coding Style & Naming Conventions
-- **Language**: Strict TypeScript across both frontend and backend.
-- **Linting**: Uses `eslint-config-expo` for the frontend.
+- **Language**: Strict TypeScript across both mobile and server.
+- **Linting**: Uses `eslint-config-expo` for the mobile app.
 - **Style**: Standard React/Expo conventions for components and hooks.
 - **Automation**: Uses Playwright with stealth plugins for bypassing detection.
 

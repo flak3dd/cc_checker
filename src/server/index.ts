@@ -1,0 +1,831 @@
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import { spawn, ChildProcess } from 'child_process';
+import morgan from 'morgan';
+import { sql } from '@vercel/postgres';
+import { v4 as uuidv4 } from 'uuid';
+
+const app = express();
+const PORT = process.env.PORT || 8000;
+const USE_DB = process.env.VERCEL === '1' || !!process.env.POSTGRES_URL;
+const DISABLE_AUTOMATION = process.env.VERCEL === '1'; // Automation is only disabled on serverless (Vercel)
+const CLOUD_MODE = USE_DB; // Backwards compatibility for the rest of the file
+
+// Paths
+const BASE_DIR = path.resolve(__dirname, '../../');
+const DATA_DIR = path.join(BASE_DIR, 'data');
+const SCREENSHOTS_DIR = path.join(BASE_DIR, 'screenshots');
+const DIST_DIR = path.join(BASE_DIR, 'dist');
+const RESULTS_FILE = path.join(DATA_DIR, 'results.txt');
+const CARDS_FILE = path.join(DATA_DIR, 'cards.txt');
+const PLATES_FILE = path.join(DATA_DIR, 'plates.txt');
+const LOG_FILE = path.join(DATA_DIR, 'wa_hits_log.txt');
+const WA_CHECKOUT_LOG = path.join(DATA_DIR, 'wa_checkout_log.txt');
+const WA_HITS_JSON = path.join(DATA_DIR, 'wa_hits.json');
+const WA_HITS_FILE = path.join(DATA_DIR, 'wa_hits.txt');
+const WA_CHECKOUT_RESULTS_JSON = path.join(DATA_DIR, 'wa_checkout_results.json');
+const WA_PENDING_PAYMENT_FILE = path.join(DATA_DIR, 'wa_pending_payment.json');
+const WA_SELECTED_CARD_FILE = path.join(DATA_DIR, 'wa_selected_card.json');
+const WA_CHECKOUT_TERM_FILE = path.join(DATA_DIR, 'wa_checkout_term.json');
+
+// Ensure directories exist
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+if (!fs.existsSync(SCREENSHOTS_DIR)) fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
+
+// --- DB Schema Init (for Cloud Mode) ---
+async function initSchema() {
+  if (!CLOUD_MODE) return;
+  try {
+    await sql`CREATE TABLE IF NOT EXISTS results (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), card_number TEXT NOT NULL, mm TEXT NOT NULL, yy TEXT NOT NULL, cvv TEXT NOT NULL, status TEXT NOT NULL, screenshot_path TEXT, timestamp TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS cards (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), card_number TEXT NOT NULL, mm TEXT NOT NULL, yy TEXT NOT NULL, cvv TEXT NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS plates (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), plate TEXT NOT NULL, created_at TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS wa_hits (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), plate TEXT NOT NULL, data JSONB, screenshot_path TEXT, timestamp TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS wa_checkout_results (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data JSONB NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS logs_wa (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), message TEXT NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS logs_wa_checkout (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), message TEXT NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS logs_cc (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), message TEXT NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS pending_payment (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data JSONB, updated_at TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS selected_card (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data JSONB, updated_at TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS checkout_term (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), term INTEGER DEFAULT 12, updated_at TIMESTAMPTZ DEFAULT NOW());`;
+    console.log('Postgres schema initialized');
+  } catch (error) {
+    console.error('Schema init failed:', error);
+  }
+}
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+app.use(morgan('dev'));
+app.use('/screenshots', express.static(SCREENSHOTS_DIR));
+
+// Serve Expo web build in production/cloud mode
+if (fs.existsSync(DIST_DIR)) {
+  app.use(express.static(DIST_DIR));
+}
+
+let schemaInited = false;
+app.use(async (_req, _res, next) => {
+  if (CLOUD_MODE && !schemaInited) {
+    await initSchema();
+    schemaInited = true;
+  }
+  next();
+});
+
+// Process Management — all null on startup, nothing auto-starts
+let ccCheckProcess: ChildProcess | null = null;
+let plateCheckProcess: ChildProcess | null = null;
+let plateCheckoutProcess: ChildProcess | null = null;
+
+// Clean up any stale state files from previous runs on startup
+const STALE_FILES = [
+  path.join(DATA_DIR, 'wa_pending_payment.json'),
+  path.join(DATA_DIR, 'wa_selected_card.json'),
+];
+STALE_FILES.forEach(f => { try { if (fs.existsSync(f)) fs.unlinkSync(f); } catch {} });
+
+const upload = multer({ storage: multer.memoryStorage() });
+
+// --- DB Helpers ---
+async function getResults() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT * FROM results ORDER BY timestamp DESC`;
+    return rows.map(r => ({
+      id: r.id,
+      card_number: r.card_number,
+      mm: r.mm,
+      yy: r.yy,
+      cvv: r.cvv,
+      status: r.status,
+      screenshot_path: r.screenshot_path,
+      screenshot_url: r.screenshot_path ? `/screenshots/${r.screenshot_path}` : null,
+      timestamp: r.timestamp,
+    }));
+  }
+  return parseResultsFile();
+}
+
+async function getResultsGrouped(): Promise<any[][]> {
+  if (CLOUD_MODE) {
+    const results = await getResults();
+    const chunkSize = 20;
+    const runs: any[][] = [];
+    for (let i = 0; i < results.length; i += chunkSize) {
+      runs.push(results.slice(i, i + chunkSize));
+    }
+    return runs.reverse();
+  }
+  return parseResultsGrouped();
+}
+
+async function countCards() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT COUNT(*)::integer FROM cards`;
+    return rows[0].count;
+  }
+  return countRemainingCards();
+}
+
+async function countPlates() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT COUNT(*)::integer FROM plates`;
+    return rows[0].count;
+  }
+  if (!fs.existsSync(PLATES_FILE)) return 0;
+  return fs.readFileSync(PLATES_FILE, 'utf-8').split('\n').filter(l => l.trim()).length;
+}
+
+async function countWaHits() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT COUNT(*)::integer FROM wa_hits`;
+    return rows[0].count;
+  }
+  if (!fs.existsSync(WA_HITS_FILE)) return 0;
+  return fs.readFileSync(WA_HITS_FILE, 'utf-8').split('\n').filter(l => l.trim()).length;
+}
+
+async function getWaHits() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT * FROM wa_hits ORDER BY timestamp DESC`;
+    return rows.map(r => ({
+      ...r,
+      screenshot_url: r.screenshot_path ? `/screenshots/hits/${r.screenshot_path}` : null,
+    }));
+  }
+  if (!fs.existsSync(WA_HITS_JSON)) return [];
+  try { 
+    const data = JSON.parse(fs.readFileSync(WA_HITS_JSON, 'utf-8'));
+    return data.map((r: any) => ({
+      ...r,
+      screenshot_url: r.screenshot ? `/screenshots/hits/${r.screenshot}` : null,
+    }));
+  } catch { return []; }
+}
+
+async function getWaCheckoutResults() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT * FROM wa_checkout_results ORDER BY timestamp DESC`;
+    return rows;
+  }
+  if (!fs.existsSync(WA_CHECKOUT_RESULTS_JSON)) return [];
+  try { return JSON.parse(fs.readFileSync(WA_CHECKOUT_RESULTS_JSON, 'utf-8')); } catch { return []; }
+}
+
+async function getPendingPayment() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT data FROM pending_payment ORDER BY updated_at DESC LIMIT 1`;
+    return rows[0]?.data || null;
+  }
+  if (!fs.existsSync(WA_PENDING_PAYMENT_FILE)) return null;
+  try { return JSON.parse(fs.readFileSync(WA_PENDING_PAYMENT_FILE, 'utf-8')); } catch { return null; }
+}
+
+async function getSelectedCard() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT data FROM selected_card ORDER BY updated_at DESC LIMIT 1`;
+    return rows[0]?.data || null;
+  }
+  if (!fs.existsSync(WA_SELECTED_CARD_FILE)) return null;
+  try { return JSON.parse(fs.readFileSync(WA_SELECTED_CARD_FILE, 'utf-8')); } catch { return null; }
+}
+
+async function getCheckoutTerm(): Promise<number> {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT term FROM checkout_term ORDER BY updated_at DESC LIMIT 1`;
+    return rows[0]?.term || 12;
+  }
+  if (!fs.existsSync(WA_CHECKOUT_TERM_FILE)) return 12;
+  try { return JSON.parse(fs.readFileSync(WA_CHECKOUT_TERM_FILE, 'utf-8')).term; } catch { return 12; }
+}
+
+async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc', message: string) {
+  if (CLOUD_MODE) {
+    await sql`INSERT INTO ${sql.unsafe(table)} (message) VALUES (${message})`;
+  } else {
+    const logFile = table === 'logs_wa' ? LOG_FILE : (table === 'logs_wa_checkout' ? WA_CHECKOUT_LOG : path.join(DATA_DIR, 'cc_log.txt'));
+    fs.appendFileSync(logFile, `[${new Date().toISOString()}] ${message}\n`);
+  }
+}
+
+async function getLogTailFromDB(table: string, limit = 50): Promise<string[]> {
+  const { rows } = await sql.unsafe(`SELECT message FROM ${table} ORDER BY timestamp DESC LIMIT ${limit}`);
+  return rows.map(r => r.message).reverse();
+}
+
+async function clearTable(table: string) {
+  if (CLOUD_MODE) await sql.unsafe(`DELETE FROM ${table}`);
+}
+
+async function bulkInsertCards(cards: string[]) {
+  if (CLOUD_MODE) {
+    for (const card of cards) {
+      const [card_number, mm, yy, cvv] = card.split('|');
+      await sql`INSERT INTO cards (card_number, mm, yy, cvv) VALUES (${card_number}, ${mm}, ${yy}, ${cvv})`;
+    }
+  } else {
+    fs.appendFileSync(CARDS_FILE, cards.join('\n') + '\n');
+  }
+}
+
+async function bulkInsertPlates(plates: string[]) {
+  if (CLOUD_MODE) {
+    for (const plate of plates) {
+      await sql`INSERT INTO plates (plate) VALUES (${plate})`;
+    }
+  } else {
+    fs.appendFileSync(PLATES_FILE, plates.join('\n') + '\n');
+  }
+}
+
+async function upsertJson(table: string, data: any) {
+  if (CLOUD_MODE) {
+    await sql`DELETE FROM ${sql.unsafe(table)}`;
+    await sql`INSERT INTO ${sql.unsafe(table)} (data) VALUES (${JSON.stringify(data)})`;
+  }
+}
+
+/** Cloud-mode guard for automation start/stop */
+function cloudModeError(res: Response, action: string) {
+  return res.status(503).json({
+    success: false,
+    message: `${action} is not available in cloud mode. Run automation locally with start.sh`,
+    cloud_mode: true,
+  });
+}
+
+// --- Helpers ---
+
+function parseResultsFile() {
+  if (!fs.existsSync(RESULTS_FILE)) return [];
+  const content = fs.readFileSync(RESULTS_FILE, 'utf-8');
+  return content.split('\n')
+    .filter(line => line.trim() && !line.startsWith('#'))
+    .map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 6) {
+        return {
+          card_number: parts[0],
+          mm: parts[1],
+          yy: parts[2],
+          cvv: parts[3],
+          status: parts[4],
+          screenshot_path: parts[5],
+          screenshot_url: parts[5] ? `/screenshots/${parts[5]}` : null,
+          timestamp: parts[6] || new Date().toISOString(),
+        };
+      }
+      return null;
+    })
+    .filter(Boolean);
+}
+
+function parseResultsGrouped() {
+  const runs: any[][] = [];
+  let currentRun: any[] = [];
+  if (!fs.existsSync(RESULTS_FILE)) return runs;
+
+  const content = fs.readFileSync(RESULTS_FILE, 'utf-8');
+  content.split('\n').forEach(line => {
+    line = line.trim();
+    if (!line || line.startsWith('#')) return;
+    const parts = line.split('|');
+    if (parts.length >= 6) {
+      currentRun.push({
+        card_number: parts[0],
+        mm: parts[1],
+        yy: parts[2],
+        cvv: parts[3],
+        status: parts[4],
+        screenshot_path: parts[5],
+        screenshot_url: parts[5] ? `/screenshots/${parts[5]}` : null,
+        timestamp: parts[6] || new Date().toISOString(),
+      });
+    } else {
+      if (currentRun.length > 0) {
+        runs.push(currentRun);
+        currentRun = [];
+      }
+    }
+  });
+  if (currentRun.length > 0) runs.push(currentRun);
+  return runs;
+}
+
+function countRemainingCards() {
+  if (!fs.existsSync(CARDS_FILE)) return 0;
+  return fs.readFileSync(CARDS_FILE, 'utf-8').split('\n').filter(l => l.trim()).length;
+}
+
+function killProcessGroup(proc: ChildProcess | null) {
+  if (proc && proc.pid) {
+    try {
+      process.kill(-proc.pid, 'SIGTERM');
+    } catch {
+      // Process group kill failed, try direct kill
+      try { proc.kill('SIGTERM'); } catch {}
+    }
+    // Also try SIGKILL after a short delay as fallback
+    setTimeout(() => {
+      try { process.kill(-proc.pid!, 'SIGKILL'); } catch {}
+      try { proc.kill('SIGKILL'); } catch {}
+    }, 2000);
+    return true;
+  }
+  return false;
+}
+
+/** Check if a PID is still alive */
+function isProcessAlive(proc: ChildProcess | null): boolean {
+  if (!proc || !proc.pid) return false;
+  try {
+    process.kill(proc.pid, 0); // signal 0 = just check existence
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// --- SSE Live Logs (local file tailing or DB polling) ---
+app.get('/api/logs/stream', async (req: Request, res: Response) => {
+  const fileParam = req.query.file as string || 'wa';
+  const tableMap: Record<string, string> = {
+    'wa': 'logs_wa',
+    'wa-checkout': 'logs_wa_checkout',
+    'cc': 'logs_cc',
+  };
+  const pathMap: Record<string, string> = {
+    'wa': LOG_FILE,
+    'wa-checkout': WA_CHECKOUT_LOG,
+    'cc': path.join(DATA_DIR, 'cc_log.txt'),
+  };
+
+  const table = tableMap[fileParam];
+  const targetFile = pathMap[fileParam];
+
+  if (CLOUD_MODE && !table) return res.status(400).json({ error: 'Invalid file for cloud mode' });
+  if (!CLOUD_MODE && (!targetFile || !fs.existsSync(targetFile))) return res.status(400).json({ error: 'Invalid file' });
+
+  // SSE headers
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'Access-Control-Allow-Origin': '*',
+  });
+
+  if (CLOUD_MODE) {
+    const initialLines = await getLogTailFromDB(table!, 50);
+    initialLines.forEach(line => res.write(`data: ${JSON.stringify(line)}\n\n`));
+    res.write(': Initial tail sent\n\n');
+
+    const interval = setInterval(async () => {
+      if (res.writableEnded) return clearInterval(interval);
+      try {
+        const lines = await getLogTailFromDB(table!, 3);
+        lines.slice(-1).forEach(line => res.write(`data: ${JSON.stringify(line)}\n\n`));
+      } catch {}
+    }, 2000);
+
+    req.on('close', () => clearInterval(interval));
+  } else {
+    // Local tailing
+    try {
+      const content = fs.readFileSync(targetFile, 'utf-8');
+      const lines = content.split('\n').slice(-50).filter(l => l.trim());
+      lines.forEach(line => res.write(`data: ${JSON.stringify(line.trim())}\n\n`));
+    } catch {}
+    res.write(': Initial tail sent\n\n');
+
+    const watcher = fs.watchFile(targetFile, { interval: 1000 }, () => {
+      try {
+        const content = fs.readFileSync(targetFile, 'utf-8');
+        const lines = content.split('\n').slice(-1).filter(l => l.trim());
+        lines.forEach(line => res.write(`data: ${JSON.stringify(line)}\n\n`));
+      } catch {}
+    });
+
+    req.on('close', () => watcher.unref());
+  }
+
+  req.on('close', () => {
+    if (!res.writableEnded) res.end();
+  });
+});
+
+// --- Endpoints ---
+
+app.get('/api/status', async (req: Request, res: Response) => {
+  const isRunning = isProcessAlive(ccCheckProcess);
+  const results = await getResults();
+  const remaining = await countCards();
+
+  res.json({
+    is_running: isRunning,
+    remaining_cards: remaining,
+    total_processed: results.length,
+  });
+});
+
+app.get('/api/results', async (req: Request, res: Response) => {
+  const runs = await getResultsGrouped();
+  runs.reverse();
+  const allResults = await getResults();
+  res.json({
+    runs,
+    total: allResults.length,
+  });
+});
+
+app.get('/api/results/cc', async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const allResults = await getResults();
+  const start = (page - 1) * limit;
+  const results = allResults.slice(start, start + limit);
+  res.json({
+    results,
+    total: allResults.length,
+    hasMore: start + limit < allResults.length
+  });
+});
+
+app.get('/api/results/wa', async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  
+  const waResults = await getWaCheckoutResults();
+  
+  const start = (page - 1) * limit;
+  const results = waResults.slice(start, start + limit);
+  res.json({
+    results,
+    total: waResults.length,
+    hasMore: start + limit < waResults.length
+  });
+});
+
+app.get('/api/analytics', async (req: Request, res: Response) => {
+  const results = await getResults();
+  const successCount = results.filter(r => r.status === 'SUCCESS').length;
+  const failCount = results.filter(r => ['FAIL', 'ERROR_PREPAYMENT'].includes(r.status)).length;
+  const totalCount = results.length;
+  const successRate = totalCount > 0 ? (successCount / totalCount * 100) : 0;
+
+  res.json({
+    success_count: successCount,
+    fail_count: failCount,
+    total_count: totalCount,
+    success_rate: Math.round(successRate * 10) / 10,
+  });
+});
+
+app.post('/api/upload', upload.single('file'), async (req: Request, res: Response) => {
+  const target = req.query.target as string || 'cc';
+  if (!req.file) return res.status(400).json({ success: false, message: 'No file uploaded' });
+
+  const content = req.file.buffer.toString('utf-8');
+  const lines = content.trim().split(/\r?\n/);
+
+  if (target === 'cc') {
+    const validLines: string[] = [];
+    for (const l of lines) {
+      const trimmed = l.trim();
+      if (!trimmed) continue;
+      const parts = trimmed.split('|');
+      if (parts.length >= 4 && parts.slice(0, 4).every(p => /^\d+$/.test(p.trim()))) {
+        validLines.push(trimmed);
+      }
+    }
+    if (validLines.length === 0) return res.json({ success: false, message: 'No valid card data found (format: CC|MM|YY|CVV)' });
+
+    await bulkInsertCards(validLines);
+    res.json({ success: true, message: `Uploaded ${validLines.length} cards`, count: validLines.length });
+  } else if (target === 'wa_rego') {
+    const validLines: string[] = [];
+    const plateRegex = /^[A-Z0-9]{1,10}$/;
+    for (const l of lines) {
+      const parts = l.replace(/,/g, ' ').split(/\s+/);
+      for (let p of parts) {
+        p = p.trim().toUpperCase();
+        if (plateRegex.test(p)) {
+          validLines.push(p);
+        }
+      }
+    }
+    if (validLines.length === 0) return res.json({ success: false, message: 'No valid plates found' });
+
+    await bulkInsertPlates(validLines);
+    res.json({ success: true, message: `Uploaded ${validLines.length} plates`, count: validLines.length });
+  } else {
+    res.status(400).json({ success: false, message: `Invalid target: ${target}` });
+  }
+});
+
+app.post('/api/processing/start', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'CC Checker');
+  if (isProcessAlive(ccCheckProcess)) {
+    return res.json({ success: false, message: 'CC Check is already running' });
+  }
+
+  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'cc_checker', 'check.ts');
+  try {
+    ccCheckProcess = spawn('npx', ['tsx', scriptPath], {
+      cwd: BASE_DIR,
+      detached: true,
+      stdio: 'ignore'
+    });
+    ccCheckProcess.unref(); // Allow the parent to exit independently if needed
+    res.json({ success: true, message: 'Processing started', pid: ccCheckProcess.pid });
+  } catch (e: any) {
+    res.status(500).json({ success: false, message: `Failed to start: ${e.message}` });
+  }
+});
+
+app.post('/api/processing/stop', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'CC Checker');
+  if (isProcessAlive(ccCheckProcess)) {
+    killProcessGroup(ccCheckProcess);
+    ccCheckProcess = null;
+    return res.json({ success: true, message: 'Processing stopped' });
+  }
+  ccCheckProcess = null;
+  res.json({ success: false, message: 'Processing is not running' });
+});
+
+app.post('/api/results/clear', async (req: Request, res: Response) => {
+  await clearTable('results');
+  if (!CLOUD_MODE) fs.writeFileSync(RESULTS_FILE, '');
+  res.json({ success: true, message: 'Results cleared' });
+});
+
+app.post('/api/rerun', async (req: Request, res: Response) => {
+  const { cards } = req.body;
+  if (!cards || !Array.isArray(cards)) return res.status(400).json({ success: false, message: 'No cards provided' });
+
+  const newLines = cards.map((c: any) => `${c.card_number}|${c.mm}|${c.yy}|${c.cvv}`);
+  await bulkInsertCards(newLines);
+  res.json({ success: true, message: `Re-queued ${newLines.length} cards`, count: newLines.length });
+});
+
+app.get('/api/logs/tail', async (req: Request, res: Response) => {
+  const file = req.query.file as string || 'wa';
+  const linesCount = parseInt(req.query.lines as string) || 50;
+
+  if (CLOUD_MODE) {
+    const tableMap: Record<string, string> = {
+      'wa': 'logs_wa',
+      'wa-checkout': 'logs_wa_checkout',
+      'cc': 'logs_cc',
+    };
+    const table = tableMap[file];
+    if (!table) return res.json({ lines: [] });
+    const lines = await getLogTailFromDB(table, linesCount);
+    return res.json({ lines });
+  }
+
+  const pathMap: Record<string, string> = {
+    'wa': LOG_FILE,
+    'wa-checkout': WA_CHECKOUT_LOG,
+    'results': RESULTS_FILE,
+    'cc': path.join(DATA_DIR, 'cc_log.txt'),
+  };
+
+  const target = pathMap[file];
+  if (!target || !fs.existsSync(target)) return res.json({ lines: [] });
+
+  try {
+    const content = fs.readFileSync(target, 'utf-8').split('\n');
+    res.json({ lines: content.slice(-linesCount).map(l => l.trim()) });
+  } catch (e: any) {
+    res.status(500).json({ detail: e.message });
+  }
+});
+
+app.get('/api/health', async (req: Request, res: Response) => {
+  if (CLOUD_MODE) {
+    try {
+      await sql`SELECT 1`;
+      return res.json({ status: 'ok', db: 'connected', cloud_mode: true });
+    } catch {
+      return res.status(500).json({ status: 'error', db: 'disconnected' });
+    }
+  }
+  res.json({ status: 'ok', cloud_mode: false });
+});
+
+// --- Plate Check Endpoints ---
+
+app.post('/api/plate-check/start', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Plate Check');
+  if (isProcessAlive(plateCheckProcess)) {
+    return res.json({ success: false, message: 'Plate check is already running' });
+  }
+
+  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'wa_rego', 'check.ts');
+  try {
+    plateCheckProcess = spawn('npx', ['tsx', scriptPath], {
+      cwd: BASE_DIR,
+      detached: true,
+      stdio: 'ignore'
+    });
+    plateCheckProcess.unref();
+    res.json({ success: true, message: 'Plate check started', pid: plateCheckProcess.pid });
+  } catch (e: any) {
+    res.status(500).json({ success: false, message: `Failed to start: ${e.message}` });
+  }
+});
+
+app.post('/api/plate-check/stop', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Plate Check');
+  if (isProcessAlive(plateCheckProcess)) {
+    killProcessGroup(plateCheckProcess);
+    plateCheckProcess = null;
+    return res.json({ success: true, message: 'Plate check stopped' });
+  }
+  plateCheckProcess = null;
+  res.json({ success: false, message: 'Plate check is not running' });
+});
+
+app.post('/api/plate-check/clear', async (req: Request, res: Response) => {
+  if (CLOUD_MODE) {
+    await clearTable('wa_hits');
+    await clearTable('logs_wa');
+  } else {
+    fs.writeFileSync(LOG_FILE, '');
+    if (fs.existsSync(WA_HITS_JSON)) fs.writeFileSync(WA_HITS_JSON, '[]');
+    if (fs.existsSync(WA_HITS_FILE)) fs.writeFileSync(WA_HITS_FILE, '');
+  }
+  res.json({ success: true, message: 'Plate logs and hits cleared' });
+});
+
+app.post('/api/plate-check/generate', async (req: Request, res: Response) => {
+  const count = parseInt(req.query.count as string) || 100;
+  const generated: string[] = [];
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const digits = '0123456789';
+
+  for (let i = 0; i < count; i++) {
+    let l = '';
+    for (let j = 0; j < 3; j++) l += chars.charAt(Math.floor(Math.random() * chars.length));
+    let d = '';
+    for (let j = 0; j < 3; j++) d += digits.charAt(Math.floor(Math.random() * digits.length));
+    generated.push(`1${l}${d}`);
+  }
+
+  await bulkInsertPlates(generated);
+  res.json({ success: true, message: `Generated ${count} plates`, count });
+});
+
+app.get('/api/plate-check/status', async (req: Request, res: Response) => {
+  const isRunning = isProcessAlive(plateCheckProcess);
+  if (!isRunning && plateCheckProcess) plateCheckProcess = null;
+
+  const hits = await getWaHits();
+  const hitsCount = hits.length;
+  const pendingCount = await countPlates();
+
+  res.json({
+    is_running: isRunning,
+    hits_count: hitsCount,
+    total_lines: hitsCount + pendingCount,
+    pending_count: pendingCount,
+  });
+});
+
+app.get('/api/plate-check/results', async (req: Request, res: Response) => {
+  if (CLOUD_MODE) {
+    const lines = await getLogTailFromDB('logs_wa', 100);
+    return res.json({ results: lines });
+  }
+
+  if (!fs.existsSync(LOG_FILE)) return res.json({ results: [] });
+  try {
+    const content = fs.readFileSync(LOG_FILE, 'utf-8');
+    const lines = content.split('\n').filter(l => l.trim()).slice(-100);
+    res.json({ results: lines });
+  } catch {
+    res.json({ results: [] });
+  }
+});
+
+// --- Plate Checkout Endpoints ---
+
+app.post('/api/wa-checkout/start', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'WA Checkout');
+  if (isProcessAlive(plateCheckoutProcess)) {
+    return res.json({ success: false, message: 'WA Checkout is already running' });
+  }
+
+  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'wa_rego', 'checkout.ts');
+  try {
+    plateCheckoutProcess = spawn('npx', ['tsx', scriptPath], {
+      cwd: BASE_DIR,
+      detached: true,
+      stdio: 'ignore'
+    });
+    plateCheckoutProcess.unref();
+    res.json({ success: true, message: 'WA Checkout started', pid: plateCheckoutProcess.pid });
+  } catch (e: any) {
+    res.status(500).json({ success: false, message: `Failed to start: ${e.message}` });
+  }
+});
+
+app.post('/api/wa-checkout/stop', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'WA Checkout');
+  if (isProcessAlive(plateCheckoutProcess)) {
+    killProcessGroup(plateCheckoutProcess);
+    plateCheckoutProcess = null;
+    return res.json({ success: true, message: 'WA Checkout stopped' });
+  }
+  plateCheckoutProcess = null;
+  res.json({ success: false, message: 'WA Checkout is not running' });
+});
+
+app.post('/api/wa-checkout/clear', async (req: Request, res: Response) => {
+  if (CLOUD_MODE) {
+    await clearTable('wa_checkout_results');
+    await clearTable('logs_wa_checkout');
+  } else {
+    fs.writeFileSync(WA_CHECKOUT_LOG, '');
+    if (fs.existsSync(WA_CHECKOUT_RESULTS_JSON)) fs.writeFileSync(WA_CHECKOUT_RESULTS_JSON, '[]');
+  }
+  res.json({ success: true, message: 'WA Checkout logs and results cleared' });
+});
+
+app.get('/api/wa-rego/hits', async (req: Request, res: Response) => {
+  const hits = await getWaHits();
+  res.json(hits);
+});
+
+app.get('/api/wa-rego/checkout-results', async (req: Request, res: Response) => {
+  const results = await getWaCheckoutResults();
+  res.json(results);
+});
+
+app.post('/api/wa-checkout/set-term', async (req: Request, res: Response) => {
+  const { term } = req.body;
+  if (![3, 6, 12].includes(term)) {
+    return res.status(400).json({ success: false, message: 'Term must be 3, 6, or 12' });
+  }
+  if (CLOUD_MODE) {
+    await upsertJson('checkout_term', { term });
+  } else {
+    fs.writeFileSync(WA_CHECKOUT_TERM_FILE, JSON.stringify({ term }));
+  }
+  res.json({ success: true, message: `Term set to ${term} months` });
+});
+
+app.get('/api/wa-checkout/term', async (req: Request, res: Response) => {
+  const term = await getCheckoutTerm();
+  res.json({ term });
+});
+
+app.get('/api/wa-checkout/status', async (req: Request, res: Response) => {
+  const isRunning = isProcessAlive(plateCheckoutProcess);
+  if (!isRunning && plateCheckoutProcess) plateCheckoutProcess = null;
+  
+  const hits = await getWaHits();
+  const hitsCount = hits.length;
+  
+  const pending_payment = await getPendingPayment();
+
+  res.json({ 
+    is_running: isRunning, 
+    hits_to_process: hitsCount,
+    pending_payment: pending_payment
+  });
+});
+
+app.post('/api/wa-checkout/select-card', async (req: Request, res: Response) => {
+  const cardData = req.body;
+  if (!cardData || !cardData.card_number) {
+    return res.status(400).json({ success: false, message: 'Invalid card data' });
+  }
+
+  if (CLOUD_MODE) {
+    await upsertJson('selected_card', cardData);
+  } else {
+    fs.writeFileSync(WA_SELECTED_CARD_FILE, JSON.stringify(cardData));
+  }
+  res.json({ success: true, message: 'Card selected for automation' });
+});
+
+app.listen(PORT as number, '0.0.0.0', () => {
+  console.log(`Server is running on http://0.0.0.0:${PORT}`);
+});
+
+// Fallback for SPA routing
+if (fs.existsSync(DIST_DIR)) {
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/screenshots')) {
+      return next();
+    }
+    res.sendFile(path.join(DIST_DIR, 'index.html'));
+  });
+}
+
+export default app;

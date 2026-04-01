@@ -2,18 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "functions": {
-    "api/index.ts": {
+    "src/server/index.ts": {
       "maxDuration": 30
     }
   },
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/index.ts"
+      "dest": "/src/server/index.ts"
     },
     {
       "src": "/screenshots/(.*)",
-      "dest": "/api/index.ts"
+      "dest": "/src/server/index.ts"
     }
   ]
 }

@@ -1,8 +1,76 @@
 {
-  "android": {
-    "package": "com.flak3dd.cc_checker"
-  },
-  "ios": {
-    "bundleIdentifier": "com.flak3dd.cc-checker"
+  "expo": {
+    "name": "CCChecker",
+    "slug": "cc-checker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/mobile/assets/images/android-icon-monochrome.png",
+    "scheme": "ccchecker",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ccchecker",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        }
+      }
+    },
+    "android": {
+      "package": "com.ccchecker",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#08080D",
+        "foregroundImage": "./src/mobile/assets/images/android-icon-monochrome.png",
+        "backgroundImage": "./src/mobile/assets/images/android-icon-background.png",
+        "monochromeImage": "./src/mobile/assets/images/android-icon-monochrome.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": true,
+      "permissions": ["READ_EXTERNAL_STORAGE"]
+    },
+    "web": {
+      "favicon": "./src/mobile/assets/images/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "root": "./src/mobile/app"
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./src/mobile/assets/images/icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#08080D",
+          "dark": {
+            "backgroundColor": "#08080D"
+          }
+        }
+      ],
+      [
+        "expo-document-picker",
+        {
+          "iCloudContainerEnvironment": "Production"
+        }
+      ],
+      "expo-asset",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": false
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7e9ace6d-7581-46bc-99b8-72e1813162ce"
+      },
+      "API_URL": "https://cc-checker-nhlrvq7a5-jacks-projects-36c61380.vercel.app"
+    }
   }
 }
