@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 import { generateVin } from './gen_vin';
-import { launchStealthBrowser } from '../shared/browser';
+import { launchStealthBrowser, createStealthContext } from '../shared/browser';
 
 export {};
 
@@ -89,18 +89,18 @@ async function processCard(page: Page, cardData: string): Promise<string> {
 
     try {
       // Wait for ANY indicator of completion (success or fail)
-      await page.waitForSelector(`${successSelector}, ${failSelector}`, { timeout: 45000 });
+      await page.waitForSelector(`${successSelector}, ${failSelector}`, { timeout: 60000 });
       logToFile("Result page detected");
     } catch (e) {
       logToFile("Timeout waiting for result selectors, analyzing page as-is");
     }
 
     // Small extra wait to ensure all elements are rendered if we timed out
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(5000);
 
     const pageText = await page.innerText('body');
     const failPatterns = ["declined", "failed", "invalid card", "insufficient funds", "error", "expired", "not authorized", "an error has occurred"];
-    const successPatterns = ["thank you", "successful", "received", "reference number", "receipt number"];
+    const successPatterns = ["thank you", "successful", "received", "reference number", "receipt number", "Quick motor vehicle search result", "Your search has now been completed", "no security interest"];
 
     let status = "UNKNOWN";
     for (const fp of failPatterns) {
@@ -162,13 +162,7 @@ async function main() {
   while (currentIndex < lines.length) {
     const currentCard = lines[currentIndex];
 
-    const context = await browser.newContext({
-      viewport: { width: 375, height: 667 },
-      userAgent: 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
-      locale: 'en-AU',
-      timezoneId: 'Australia/Sydney',
-      bypassCSP: true,
-    });
+    const context = await createStealthContext(browser, { mobile: true });
     const page = await context.newPage();
 
     const status = await processCard(page, currentCard);

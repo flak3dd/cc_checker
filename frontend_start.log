@@ -1,0 +1,10 @@
+env: load .env.local
+env: export NEXT_PUBLIC_SUPABASE_ANON_KEY NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY NEXT_PUBLIC_SUPABASE_URL POSTGRES_DATABASE POSTGRES_HOST POSTGRES_PASSWORD POSTGRES_PRISMA_URL POSTGRES_URL POSTGRES_URL_NON_POOLING POSTGRES_USER SUPABASE_ANON_KEY SUPABASE_JWT_SECRET SUPABASE_PUBLISHABLE_KEY SUPABASE_SECRET_KEY SUPABASE_SERVICE_ROLE_KEY SUPABASE_URL VERCEL_OIDC_TOKEN
+Could not find a shared URI scheme for the dev client between the local /ios and /android directories. App launches (QR code, interstitial, terminal keys) may not work as expected. You can configure a custom scheme using the --scheme option, or by running npx expo prebuild to regenerate the native directories with URI schemes.
+Starting project at /Users/adminuser/vsc/cc_checker
+Starting Metro Bundler
+
+Waiting on http://localhost:8085
+Logs for your project will appear below.
+Web Bundled 485ms node_modules/expo-router/entry.js (1442 modules)
+ LOG  [web] Logs will appear in the browser console

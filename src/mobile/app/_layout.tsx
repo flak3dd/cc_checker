@@ -10,9 +10,10 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { View } from 'react-native';
 
 import { paperTheme, colors } from '@/constants/theme';
-import { SplashAnimation } from '@/components/SplashAnimation';
+import { VideoSplash } from '@/components/VideoSplash';
 import { OfflineBanner } from '@/components/OfflineBanner';
 import { PageMargins } from '@/components/PageMargins';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { useApiHealth } from '@/hooks/useApiHealth';
 
 SplashScreen.preventAutoHideAsync();
@@ -115,17 +116,19 @@ export default function RootLayout() {
   if (!appIsReady) return null;
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <PaperProvider theme={paperTheme}>
-        <ThemeProvider value={navTheme}>
-          {!animationFinished && <SplashAnimation onFinish={onAnimationFinish} />}
-      <PageMargins>
-        <AppContent />
-      </PageMargins>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <PaperProvider theme={paperTheme}>
+          <ThemeProvider value={navTheme}>
+            {!animationFinished && <VideoSplash onFinish={onAnimationFinish} />}
+        <PageMargins>
+          <AppContent />
+        </PageMargins>
 
-          <StatusBar style="light" />
-        </ThemeProvider>
-      </PaperProvider>
-    </QueryClientProvider>
+            <StatusBar style="light" />
+          </ThemeProvider>
+        </PaperProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   );
 }

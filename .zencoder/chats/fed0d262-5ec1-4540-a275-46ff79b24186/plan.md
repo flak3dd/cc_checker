@@ -15,3 +15,9 @@ Investigate and resolve the deployment failure.
 2. Review the Nixpkgs archive URL and package names.
 3. Optimize the build process to avoid resource limits or timeouts.
 4. If necessary, simplify `nixpacks.toml` or provide a `Dockerfile` as an alternative.
+
+### [ ] Step: Launch on Android Emulator
+Launch the app on the Android emulator for testing.
+1. Ensure an Android emulator is running.
+2. Start the development server if not already running.
+3. Trigger the launch on Android (`npx expo run:android` or `a` in the terminal).

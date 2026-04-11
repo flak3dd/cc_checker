@@ -24,6 +24,10 @@ interface ResultsTableProps {
   maxRows?: number;
   emptyText?: string;
   accentColor?: string;
+  sortable?: boolean;
+  onSort?: (field: 'timestamp' | 'status' | 'primary') => void;
+  sortField?: string;
+  sortDirection?: 'asc' | 'desc';
 }
 
 const STATUS_ICONS: Record<string, string> = {
@@ -45,6 +49,10 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
   maxRows = 5,
   emptyText = 'No results yet',
   accentColor,
+  sortable = false,
+  onSort,
+  sortField,
+  sortDirection = 'desc',
 }) => {
   const [expanded, setExpanded] = useState(false);
   const [viewingImage, setViewingImage] = useState<{ url: string; title: string } | null>(null);
@@ -52,6 +60,13 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
     impactLight();
     setExpanded(prev => !prev);
   }, []);
+
+  const handleSort = useCallback((field: 'timestamp' | 'status' | 'primary') => {
+    if (onSort) {
+      impactLight();
+      onSort(field);
+    }
+  }, [onSort]);
 
   const displayRows = expanded ? rows : rows.slice(0, maxRows);
   const hasMore = rows.length > maxRows;
@@ -74,6 +89,24 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({
           <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.headerRight}>
+          {sortable && (
+            <View style={styles.sortButtons}>
+              <AnimatedPressable onPress={() => handleSort('timestamp')} style={styles.sortBtn}>
+                <MaterialIcons
+                  name={sortField === 'timestamp' ? (sortDirection === 'asc' ? 'arrow-upward' : 'arrow-downward') : 'schedule'}
+                  size={14}
+                  color={sortField === 'timestamp' ? resolvedAccent : colors.textMuted}
+                />
+              </AnimatedPressable>
+              <AnimatedPressable onPress={() => handleSort('status')} style={styles.sortBtn}>
+                <MaterialIcons
+                  name={sortField === 'status' ? (sortDirection === 'asc' ? 'arrow-upward' : 'arrow-downward') : 'flag'}
+                  size={14}
+                  color={sortField === 'status' ? resolvedAccent : colors.textMuted}
+                />
+              </AnimatedPressable>
+            </View>
+          )}
           <View style={[styles.countBadge, { backgroundColor: resolvedAccent + '12' }]}>
             <Text style={[styles.count, { color: resolvedAccent }]}>{rows.length}</Text>
           </View>
@@ -288,5 +321,16 @@ const styles = StyleSheet.create({
     fontSize: fontSize.sm,
     fontWeight: '700',
     letterSpacing: 0.5,
+  },
+  sortButtons: {
+    flexDirection: 'row',
+    gap: spacing.xs,
+  },
+  sortBtn: {
+    width: 24,
+    height: 24,
+    borderRadius: radii.sm,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

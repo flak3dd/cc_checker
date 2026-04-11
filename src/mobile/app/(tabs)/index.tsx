@@ -4,9 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   useStatusQuery,
   useAnalyticsQuery,
+  useGateway2StatusQuery,
   useWaCheckoutStatusQuery,
   usePlateCheckStatusQuery,
   useResultsQuery,
+  useGateway2ResultsQuery,
   usePaginatedResultsQuery,
 } from '@/hooks/useQueries';
 import { StatusIsland } from '@/components/StatusIsland';
@@ -34,8 +36,12 @@ export default function DashboardScreen() {
   const { data: status, isLoading: statusLoading, refetch: refetchStatus } = useStatusQuery();
   const { data: checkoutStatus, isLoading: checkoutLoading, refetch: refetchCheckout } = useWaCheckoutStatusQuery();
   const { data: plateStatus, isLoading: plateLoading, refetch: refetchPlate } = usePlateCheckStatusQuery();
+  const { data: gateway2Status, isLoading: gateway2Loading, refetch: refetchGateway2 } = useGateway2StatusQuery();
   const { data: analytics, isLoading: analyticsLoading, refetch: refetchAnalytics } = useAnalyticsQuery();
   const { data: ccResults } = useResultsQuery();
+  const { data: gateway2Results } = useGateway2ResultsQuery();
+
+  const gateway2Running = !!gateway2Status?.is_running;
 
   const { isLoading: actionLoading, snackMessage, showSnack, dismissSnack, execute } = useActionHandler();
   const [showCardModal, setShowCardModal] = useState(false);
@@ -44,15 +50,45 @@ export default function DashboardScreen() {
   // RESULTS STATES
   const [activeResultsTab, setActiveResultsTab] = useState<string>('cc');
   const [search, setSearch] = useState('');
+  const [sortField, setSortField] = useState<'timestamp' | 'status' | 'primary'>('timestamp');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   const { data: paginatedData, isLoading: resultsLoading } = usePaginatedResultsQuery(activeResultsTab as any, 1, 50);
   const results = paginatedData?.results || [];
 
-  const filteredResults = useMemo(() => 
-    results.filter(r => 
-      r.card_number?.includes(search) || 
-      r.plate?.includes(search) || 
+  const filteredResults = useMemo(() => {
+    let filtered = results.filter(r =>
+      r.card_number?.includes(search) ||
+      r.plate?.includes(search) ||
       r.status?.toLowerCase().includes(search.toLowerCase())
-    ), [results, search]);
+    );
+
+    // Sort
+    filtered.sort((a, b) => {
+      let aVal: any, bVal: any;
+      switch (sortField) {
+        case 'timestamp':
+          aVal = new Date(a.timestamp || 0).getTime();
+          bVal = new Date(b.timestamp || 0).getTime();
+          break;
+        case 'status':
+          aVal = a.status || '';
+          bVal = b.status || '';
+          break;
+        case 'primary':
+          aVal = a.card_number || a.plate || '';
+          bVal = b.card_number || b.plate || '';
+          break;
+        default:
+          return 0;
+      }
+
+      if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    return filtered;
+  }, [results, search, sortField, sortDirection]);
 
   const resultsStats = useMemo(() => {
     const total = filteredResults.length;
@@ -62,7 +98,7 @@ export default function DashboardScreen() {
     return { total, success, fail, unknown };
   }, [filteredResults]);
 
-  const isRefreshing = statusLoading || analyticsLoading || checkoutLoading || plateLoading;
+  const isRefreshing = statusLoading || analyticsLoading || checkoutLoading || plateLoading || gateway2Loading;
 
   useEffect(() => {
     setShowCardModal(!!checkoutStatus?.pending_payment);
@@ -77,23 +113,35 @@ export default function DashboardScreen() {
     api.setCheckoutTerm(Number(value) as 3 | 6 | 12).catch(() => {});
   };
 
+  const handleSort = (field: 'timestamp' | 'status' | 'primary') => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortDirection('desc');
+    }
+  };
+
   const handleRefresh = () => {
     refetchStatus();
     refetchAnalytics();
     refetchCheckout();
     refetchPlate();
+    refetchGateway2();
   };
 
   const ccRunning = !!status?.is_running;
   const coRunning = !!checkoutStatus?.is_running;
   const plRunning = !!plateStatus?.is_running;
-  const activeCount = [ccRunning, coRunning, plRunning].filter(Boolean).length;
+  const gwRunning = !!gateway2Status?.is_running;
+  const activeCount = [ccRunning, coRunning, plRunning, gwRunning].filter(Boolean).length;
 
   const activeLabels = useMemo(() => {
     const labels: string[] = [];
     if (ccRunning) labels.push('CC');
     if (coRunning) labels.push('Checkout');
     if (plRunning) labels.push('Plates');
+    if (gwRunning) labels.push('GW2');
     return labels;
   }, [ccRunning, coRunning, plRunning]);
 
@@ -164,8 +212,43 @@ export default function DashboardScreen() {
 
         {activeSubTab === 'monitor' ? (
           <View key="monitor-view">
-            {/* Monitor Header */}
+            {/* ─── Quick Stats Bar ───────────────────────────────────── */}
             <AnimatedCard index={1}>
+              {isRefreshing ? (
+                <View style={styles.quickStatsRow}>
+                  <View style={styles.quickStat}>
+                    <ShimmerLoader height={20} style={{ marginBottom: spacing.xs }} />
+                    <ShimmerLoader height={16} />
+                  </View>
+                  <View style={styles.quickStat}>
+                    <ShimmerLoader height={20} style={{ marginBottom: spacing.xs }} />
+                    <ShimmerLoader height={16} />
+                  </View>
+                  <View style={styles.quickStat}>
+                    <ShimmerLoader height={20} style={{ marginBottom: spacing.xs }} />
+                    <ShimmerLoader height={16} />
+                  </View>
+                </View>
+              ) : (
+                <View style={styles.quickStatsRow}>
+                  <View style={styles.quickStat}>
+                    <Text style={styles.quickStatValue}>{activeCount}</Text>
+                    <Text style={styles.quickStatLabel}>Active</Text>
+                  </View>
+                  <View style={styles.quickStat}>
+                    <Text style={[styles.quickStatValue, { color: colors.success }]}>{passCount}</Text>
+                    <Text style={styles.quickStatLabel}>Passed</Text>
+                  </View>
+                  <View style={styles.quickStat}>
+                    <Text style={[styles.quickStatValue, { color: colors.danger }]}>{failCount}</Text>
+                    <Text style={styles.quickStatLabel}>Failed</Text>
+                  </View>
+                </View>
+              )}
+            </AnimatedCard>
+
+            {/* ─── Status & Hero ──────────────────────────────────────── */}
+            <AnimatedCard index={2}>
               {isRefreshing ? (
                 <>
                   <StatusIsland activeCount={0} labels={[]} />
@@ -179,117 +262,120 @@ export default function DashboardScreen() {
               )}
             </AnimatedCard>
 
-            <View style={styles.gridRow}>
-              {/* ─── Main Column: Upload & Controls ────── */}
-              <View style={styles.mainColumn}>
-                <CollapsibleSection title="UPLOAD DATA" icon="cloud-upload" accentColor={colors.primary} defaultOpen>
-                  {isRefreshing ? (
-                    <ShimmerBlock lines={3} />
+            {/* ─── Control Row ────────────────────────────────────────── */}
+            <View style={styles.controlRow}>
+              <AnimatedCard index={3} style={styles.controlCard}>
+                <View style={styles.controlCardHeader}>
+                  <MaterialIcons name="credit-score" size={18} color={colors.info} />
+                  <Text style={styles.controlCardTitle}>CC / PPSR</Text>
+                </View>
+                <ControlPanel
+                  title=""
+                  icon=""
+                  accentColor={colors.info}
+                  isRunning={ccRunning}
+                  onStart={() => execute(() => api.startProcessing(), 'CC Checker started', 'Failed to start', handleRefresh)}
+                  onStop={() => execute(() => api.stopProcessing(), 'CC Checker stopped', 'Failed to stop', handleRefresh)}
+                >
+                  <Text style={styles.controlHint}>Validates cards via PPSR payment gateway</Text>
+                </ControlPanel>
+              </AnimatedCard>
+
+              <AnimatedCard index={4} style={styles.controlCard}>
+                <View style={styles.controlCardHeader}>
+                  <MaterialIcons name="shopping-cart-checkout" size={18} color={colors.accent} />
+                  <Text style={styles.controlCardTitle}>WA Checkout</Text>
+                </View>
+                <ControlPanel
+                  title=""
+                  icon=""
+                  accentColor={colors.accent}
+                  isRunning={coRunning}
+                  onStart={() => execute(() => api.startWaCheckout(), 'Checkout started', 'Failed to start', handleRefresh)}
+                  onStop={() => execute(() => api.stopWaCheckout(), 'Checkout stopped', 'Failed to stop', handleRefresh)}
+                  startDisabled={checkoutStatus?.hits_to_process === 0}
+                >
+                  <View style={styles.termRow}>
+                    <Text style={styles.termLabel}>TERM</Text>
+                    <SegmentedButtons
+                      value={checkoutTerm}
+                      onValueChange={handleTermChange}
+                      density="small"
+                      style={styles.termButtons}
+                      buttons={[
+                        { value: '3', label: '3 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                        { value: '6', label: '6 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                        { value: '12', label: '12 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
+                      ]}
+                    />
+                  </View>
+                  {checkoutStatus?.pending_payment ? (
+                    <Button
+                      mode="contained"
+                      onPress={() => setShowCardModal(true)}
+                      icon="credit-card-plus"
+                      style={styles.urgentBtn}
+                      labelStyle={styles.compactLabel}
+                    >
+                      Select Card — {checkoutStatus.pending_payment.plate}
+                    </Button>
                   ) : (
-                    <>
-                      <FilePickerButton
-                        label="Upload Cards (.txt)"
-                        icon="upload-file"
-                        disabled={actionLoading}
-                        onFilePicked={handleFilePicked}
-                      />
-                      <Text style={styles.helpHint}>Format: CC|MM|YY|CVV — one card per line</Text>
-                    </>
+                    <Text style={styles.controlHint}>Automates WA rego payments · {checkoutTerm} month term</Text>
                   )}
-                </CollapsibleSection>
+                </ControlPanel>
+              </AnimatedCard>
 
-                <CollapsibleSection title="CONTROLS" icon="tune" accentColor={colors.info} defaultOpen>
-                  {isRefreshing ? (
-                    <>
-                      <ShimmerLoader height={80} style={{ marginBottom: spacing.lg }} />
-                      <ShimmerLoader height={80} style={{ marginBottom: spacing.lg }} />
-                      <ShimmerLoader height={120} />
-                    </>
-                  ) : (
-                    <>
-                      <ControlPanel
-                        title="CC / PPSR Checker"
-                        icon="credit-score"
-                        accentColor={colors.info}
-                        isRunning={ccRunning}
-                        onStart={() => execute(() => api.startProcessing(), 'CC Checker started', 'Failed to start', handleRefresh)}
-                        onStop={() => execute(() => api.stopProcessing(), 'CC Checker stopped', 'Failed to stop', handleRefresh)}
-                      >
-                        <Text style={styles.helpHint}>Validates cards via PPSR payment gateway</Text>
-                      </ControlPanel>
+              <AnimatedCard index={5} style={styles.controlCard}>
+                <View style={styles.controlCardHeader}>
+                  <MaterialIcons name="rotate-right" size={18} color={colors.success} />
+                  <Text style={styles.controlCardTitle}>Plate Rotation</Text>
+                </View>
+                <ControlPanel
+                  title=""
+                  icon=""
+                  accentColor={colors.success}
+                  isRunning={plRunning}
+                  onStart={() => execute(() => api.startPlateCheck(), 'Plate rotation started', 'Failed to start', handleRefresh)}
+                  onStop={() => execute(() => api.stopPlateCheck(), 'Plate rotation stopped', 'Failed to stop', handleRefresh)}
+                >
+                  <Text style={styles.controlHint}>Automated WA government registration lookup and rotation</Text>
+                </ControlPanel>
+              </AnimatedCard>
 
-                      <ControlPanel
-                        title="WA Checkout"
-                        icon="shopping-cart-checkout"
-                        accentColor={colors.accent}
-                        isRunning={coRunning}
-                        onStart={() => execute(() => api.startWaCheckout(), 'Checkout started', 'Failed to start', handleRefresh)}
-                        onStop={() => execute(() => api.stopWaCheckout(), 'Checkout stopped', 'Failed to stop', handleRefresh)}
-                        startDisabled={checkoutStatus?.hits_to_process === 0}
-                      >
-                        <View style={styles.termRow}>
-                          <Text style={styles.termLabel}>TERM</Text>
-                          <SegmentedButtons
-                            value={checkoutTerm}
-                            onValueChange={handleTermChange}
-                            density="small"
-                            style={styles.termButtons}
-                            buttons={[
-                              { value: '3', label: '3 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
-                              { value: '6', label: '6 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
-                              { value: '12', label: '12 mo', style: styles.termBtn, labelStyle: styles.termBtnLabel },
-                            ]}
-                          />
-                        </View>
-
-                        {checkoutStatus?.pending_payment ? (
-                          <Button
-                            mode="contained"
-                            onPress={() => setShowCardModal(true)}
-                            icon="credit-card-plus"
-                            style={styles.urgentBtn}
-                            labelStyle={styles.compactLabel}
-                          >
-                            Select Card — {checkoutStatus.pending_payment.plate}
-                          </Button>
-                        ) : (
-                          <Text style={styles.helpHint}>Automates WA rego payments · {checkoutTerm} month term</Text>
-                        )}
-                      </ControlPanel>
-
-                      <ControlPanel
-                        title="Plate Rotation"
-                        icon="rotate-right"
-                        accentColor={colors.success}
-                        isRunning={plRunning}
-                        onStart={() => execute(() => api.startPlateCheck(), 'Plate rotation started', 'Failed to start', handleRefresh)}
-                        onStop={() => execute(() => api.stopPlateCheck(), 'Plate rotation stopped', 'Failed to stop', handleRefresh)}
-                      >
-                        <Text style={styles.helpHint}>Automated WA government registration lookup and rotation</Text>
-                      </ControlPanel>
-                    </>
-                  )}
-                </CollapsibleSection>
-              </View>
-
-              {/* ─── Side Column: Live Activity ─────────── */}
-              <View style={styles.sideColumn}>
-                <CollapsibleSection title="LIVE ACTIVITY" icon="monitor" accentColor={colors.success} defaultOpen>
-                  {isRefreshing ? (
-                    <>
-                      <ShimmerLoader height={160} style={{ marginBottom: spacing.lg }} />
-                      <ShimmerLoader height={160} />
-                    </>
-                  ) : (
-                    <>
-                      <LiveLogPanel file="cc" title="CC Checker" height={300} />
-                      <LiveLogPanel file="wa" title="Plate Rotation" height={300} />
-                      <LiveLogPanel file="wa-checkout" title="WA Checkout" height={300} />
-                    </>
-                  )}
-                </CollapsibleSection>
-              </View>
+              <AnimatedCard index={6} style={styles.controlCard}>
+                <View style={styles.controlCardHeader}>
+                  <MaterialIcons name="payment" size={18} color={colors.warning} />
+                  <Text style={styles.controlCardTitle}>Gateway2</Text>
+                </View>
+                <ControlPanel
+                  title=""
+                  icon=""
+                  accentColor={colors.warning}
+                  isRunning={gwRunning}
+                  onStart={() => execute(() => api.startGateway2(), 'Gateway2 started', 'Failed to start', handleRefresh)}
+                  onStop={() => execute(() => api.stopGateway2(), 'Gateway2 stopped', 'Failed to stop', handleRefresh)}
+                >
+                  <Text style={styles.controlHint}>Validates cards via DonorPerfect donation gateway</Text>
+                </ControlPanel>
+              </AnimatedCard>
             </View>
+
+            {/* ─── Activity Terminal ─────────────────────────────────── */}
+            <AnimatedCard index={7} style={styles.activityCard}>
+              {isRefreshing ? (
+                <ShimmerLoader height={300} />
+              ) : (
+                <LiveLogPanel
+                  tabs={[
+                    { file: 'cc', title: 'CC Checker', icon: 'credit-score' },
+                    { file: 'wa-checkout', title: 'WA Checkout', icon: 'shopping-cart-checkout' },
+                    { file: 'wa', title: 'Plate Rotation', icon: 'rotate-right' },
+                    { file: 'gateway2', title: 'Gateway2', icon: 'payment' },
+                  ]}
+                  height={350}
+                />
+              )}
+            </AnimatedCard>
           </View>
         ) : (
           <View key="results-view" style={styles.gridRow}>
@@ -314,6 +400,7 @@ export default function DashboardScreen() {
                   buttons={[
                     { value: 'cc', label: 'PPSR/CC', labelStyle: styles.tabLabel, icon: 'credit-card' },
                     { value: 'wa', label: 'WA REGO', labelStyle: styles.tabLabel, icon: 'car' },
+                    { value: 'gateway2', label: 'GATEWAY2', labelStyle: styles.tabLabel, icon: 'payment' },
                   ]}
                 />
               </View>
@@ -335,26 +422,30 @@ export default function DashboardScreen() {
                 title={`${activeResultsTab.toUpperCase()} DATA STREAM`}
                 rows={filteredResults.map(r => ({
                   id: r.id || r.timestamp,
-                  primary: activeResultsTab === 'cc' 
+                  primary: (activeResultsTab === 'cc' || activeResultsTab === 'gateway2')
                     ? `${r.card_number} | ${r.mm}/${r.yy} | ${r.cvv}`
                     : `${r.plate || 'N/A'} — ${r.details || 'Found'}`,
                   secondary: r.timestamp || '',
                   status: r.status || 'UNKNOWN',
-                  statusColor: r.status === 'SUCCESS' ? colors.success : 
-                               (r.status === 'FAIL' || r.status === 'ERROR' || r.status?.startsWith('ERROR')) ? colors.danger : 
+                  statusColor: r.status === 'SUCCESS' ? colors.success :
+                               (r.status === 'FAIL' || r.status === 'ERROR' || r.status?.startsWith('ERROR')) ? colors.danger :
                                colors.warning,
                   imageUrl: r.screenshot_url,
                 }))}
                 maxRows={20}
                 emptyText={resultsLoading ? 'Loading records...' : `No ${activeResultsTab} results found`}
                 accentColor={colors.primary}
+                sortable
+                onSort={handleSort}
+                sortField={sortField}
+                sortDirection={sortDirection}
               />
             </View>
           </View>
         )}
 
         {/* ─── Footer ──────────────────────────── */}
-        <AnimatedCard index={12}>
+        <AnimatedCard index={7}>
           <View style={styles.footerRow}>
             <AnimatedPressable
               onPress={() => {
@@ -364,6 +455,7 @@ export default function DashboardScreen() {
                     await api.clearResults();
                     await api.clearPlateResults();
                     await api.clearWaCheckoutLogs();
+                    await api.clearGateway2Results();
                   },
                   'All data cleared',
                   'Failed to clear',
@@ -524,6 +616,72 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     borderRadius: radii.lg,
   },
+  // Quick Stats
+  quickStatsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    paddingVertical: spacing.lg,
+  },
+  quickStat: {
+    alignItems: 'center',
+    flex: 1,
+  },
+  quickStatValue: {
+    fontSize: fontSize['2xl'],
+    fontWeight: '800',
+    color: colors.textPrimary,
+    letterSpacing: -0.5,
+  },
+  quickStatLabel: {
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+    color: colors.textMuted,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginTop: spacing['2xs'],
+  },
+
+  // Control Row Layout
+  controlRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    gap: spacing.md,
+    marginTop: spacing.md,
+    marginBottom: spacing.lg,
+  },
+  controlCard: {
+    width: '48%',
+    padding: spacing.lg,
+    gap: spacing.sm,
+    marginBottom: spacing.md,
+  },
+  controlCardHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.sm,
+  },
+  controlCardTitle: {
+    fontSize: fontSize.md,
+    fontWeight: '700',
+    color: colors.textPrimary,
+  },
+  controlHint: {
+    color: colors.textMuted,
+    fontSize: fontSize.xs,
+    marginTop: spacing.xs,
+    lineHeight: 16,
+  },
+
+  // Activity Terminal
+  activityCard: {
+    marginTop: spacing.md,
+  },
+
+
+  // Legacy grid (kept for results tab)
   gridRow: {
     flexDirection: 'row',
     gap: spacing.xl,

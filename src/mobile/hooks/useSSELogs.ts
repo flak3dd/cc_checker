@@ -1,13 +1,18 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
+import { Platform } from 'react-native';
+
 const EventSourcePolyfill = require('event-source-polyfill').EventSourcePolyfill;
-  type EventSource = InstanceType<typeof EventSourcePolyfill>;
+const EventSourceClass = Platform.OS === 'web' && typeof window !== 'undefined' && window.EventSource
+  ? window.EventSource
+  : EventSourcePolyfill;
+
+type EventSource = InstanceType<typeof EventSourceClass>;
+
 import { API_BASE_URL } from '@/services/api';
-import { colors } from '@/constants/theme';
 
 interface SSELogLine {
-  text: string;
-  color: string;
-  timestamp: Date;
+  text: any;
+  timestamp?: string;
 }
 
 interface UseSSELogsProps {
@@ -17,17 +22,9 @@ interface UseSSELogsProps {
 export const useSSELogs = ({ file }: UseSSELogsProps) => {
   const [lines, setLines] = useState<SSELogLine[]>([]);
   const [isConnected, setIsConnected] = useState(false);
-  const eventSourceRef = useRef<EventSource | null>(null);
-  const timeoutRef = useRef<any>(null);
 
-  const getLineColor = useCallback((line: string) => {
-    const lower = line.toLowerCase();
-    if (lower.includes('[hit') || lower.includes('success') || lower.includes('✓') || lower.includes('pass')) return colors.success;
-    if (lower.includes('[fail') || lower.includes('error') || lower.includes('✗') || lower.includes('failed')) return colors.terminalError;
-    if (lower.includes('warning') || lower.includes('retry')) return colors.terminalHighlight;
-    if (lower.includes('start') || lower.includes('running')) return colors.info;
-    return colors.terminalText;
-  }, []);
+  const eventSourceRef = useRef<EventSource | null>(null);
+  const timeoutRef = useRef<{ id: NodeJS.Timeout; delay: number } | null>(null);
 
   const connect = useCallback(() => {
     if (eventSourceRef.current) {
@@ -35,49 +32,55 @@ export const useSSELogs = ({ file }: UseSSELogsProps) => {
     }
 
     const url = `${API_BASE_URL}/api/logs/stream?file=${file}`;
-    const eventSource = new EventSourcePolyfill(url, {
-      withCredentials: false,
-    });
+
+    const eventSource = new EventSourceClass(url);
 
     eventSource.onopen = () => {
-      console.log(`[SSE] Connected to ${file} stream`);
       setIsConnected(true);
-      setLines([]); // Clear on reconnect
+      setLines([]);
     };
 
-eventSource.onmessage = (event: MessageEvent) => {
-  try {
-    const line = JSON.parse(event.data);
-    setLines(prev => {
-      const newLines = [...prev, { text: line, color: getLineColor(line), timestamp: new Date() }];
-      return newLines.slice(-200); // Keep last 200
-    });
-  } catch {
-    // Ignore parse errors
-  }
-};
+    eventSource.onmessage = (event: MessageEvent) => {
+      try {
+        const line = JSON.parse(event.data);
+        if (!line || typeof line !== 'object') return;
 
-eventSource.onerror = (err: Event) => {
-  console.error(`[SSE] Error on ${file}:`, err);
-  setIsConnected(false);
-  eventSource.close();
-};
+        const timestampStr = typeof line.timestamp === 'string' 
+          ? line.timestamp 
+          : '';
+
+        setLines((prev) => {
+          const newLines = [...prev, { text: line, timestamp: timestampStr }];
+          return newLines.slice(-200);
+        });
+      } catch {
+        // Silently ignore parse errors
+      }
+    };
+
+    eventSource.onerror = () => {
+      setIsConnected(false);
+      eventSource.close();
+
+      const current = timeoutRef.current;
+      const delay = current ? Math.min(current.delay * 2, 30000) : 1000;
+
+      timeoutRef.current = {
+        id: setTimeout(() => connect(), delay),
+        delay,
+      };
+    };
 
     eventSourceRef.current = eventSource;
-
-    // Reconnect logic
-    timeoutRef.current = setTimeout(() => {
-      if (!isConnected) connect();
-    }, 5000);
   }, [file]);
 
   useEffect(() => {
     connect();
 
-  return () => {
-    if (eventSourceRef.current) eventSourceRef.current.close();
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  };
+    return () => {
+      if (eventSourceRef.current) eventSourceRef.current.close();
+      if (timeoutRef.current?.id) clearTimeout(timeoutRef.current.id);
+    };
   }, [connect]);
 
   return {
@@ -86,4 +89,3 @@ eventSource.onerror = (err: Event) => {
     reconnect: connect,
   };
 };
-

@@ -3606,3 +3606,2522 @@ Call log:
 [06:52:24] Result: FAIL
 [06:52:24] Processed 9596 -> FAIL. 0 left.
 [06:52:24] === Session Finished ===
+[07:45:42] === CC Checker Session Started (TypeScript) ===
+[07:45:43] Starting: 4987
+[07:45:48] Form: VIN=6H8BBE030T4097773 EMAIL=user_sphljh6k@outlook.com
+[07:45:49] Waiting for payment form...
+[07:45:49] Processing transaction...
+[07:45:49] Timeout waiting for result selectors, analyzing page as-is
+[07:45:50] Result: FAIL
+[07:45:50] Processed 4987 -> FAIL. 186 left.
+[07:45:52] Starting: 9662
+[07:45:58] Form: VIN=6H8CUW955XV593435 EMAIL=user_nk96svvk@outlook.com
+[07:45:58] Waiting for payment form...
+[07:45:58] Processing transaction...
+[07:45:58] Timeout waiting for result selectors, analyzing page as-is
+[07:45:59] Result: UNKNOWN
+[07:45:59] Processed 9662 -> UNKNOWN. 185 left.
+[07:46:01] Starting: 4395
+[07:46:07] Form: VIN=6H8UL8939V2893270 EMAIL=user_zu8ou5k5@outlook.com
+[07:46:07] Waiting for payment form...
+[07:46:07] Error: locator.fill: Target page, context or browser has been closed
+Call log:
+  - waiting for getByRole('textbox', { name: 'Expiry year:' })
+
+[10:16:09] === CC Checker Session Started (TypeScript) ===
+[10:16:11] Starting: 4395
+[10:16:12] Form: VIN=6H88UX4M9XU409081 EMAIL=user_bb619pk3@outlook.com
+[10:16:27] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:16:27] Processed 4395 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 184 left.
+[10:16:29] Starting: 0659
+[10:16:30] Form: VIN=6H82HY8Z5TN773668 EMAIL=user_w2nmxmbl@outlook.com
+[10:16:45] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:16:45] Processed 0659 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 183 left.
+[10:16:47] Starting: 8638
+[10:16:48] Form: VIN=6H8J7HXB5ZU541377 EMAIL=user_yq1smlx6@outlook.com
+[10:17:03] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:17:03] Processed 8638 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 182 left.
+[10:17:05] Starting: 4310
+[10:17:06] Form: VIN=6H8NLHAY9ZT279900 EMAIL=user_d47xpvsv@outlook.com
+[10:17:08] Error: locator.waitFor: Target page, context or browser has been closed
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:18:58] === CC Checker Session Started (TypeScript) ===
+[10:18:59] Starting: 4310
+[10:18:59] Form: VIN=6H8YJEFR8X8667459 EMAIL=user_l02jd2be@outlook.com
+[10:19:15] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:19:15] Processed 4310 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 181 left.
+[10:19:17] Starting: 2012
+[10:19:17] Form: VIN=6H8U636U9TM462842 EMAIL=user_uj3q416o@outlook.com
+[10:19:25] Error: locator.waitFor: Target page, context or browser has been closed
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:59:11] === CC Checker Session Started (TypeScript) ===
+[10:59:12] Starting: 2012
+[10:59:13] Form: VIN=6H8UHMBP5XR564745 EMAIL=user_tqadi502@outlook.com
+[10:59:28] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:59:28] Processed 2012 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 180 left.
+[10:59:30] Starting: 8619
+[10:59:31] Form: VIN=6H85393R0R6943530 EMAIL=user_vu8e85hj@outlook.com
+[10:59:46] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[10:59:46] Processed 8619 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 179 left.
+[10:59:48] Starting: 3018
+[10:59:49] Form: VIN=6H8EHBR86ZP701326 EMAIL=user_hqyory1k@outlook.com
+[11:00:04] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:00:04] Processed 3018 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 178 left.
+[11:00:06] Starting: 6262
+[11:00:06] Form: VIN=6H8YJR5G3RZ057957 EMAIL=user_4eno6sqz@outlook.com
+[11:00:21] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:00:21] Processed 6262 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 177 left.
+[11:00:23] Starting: 3871
+[11:00:24] Form: VIN=6H8TF8ZP6TL768921 EMAIL=user_33rfdi5p@outlook.com
+[11:00:39] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:00:39] Processed 3871 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 176 left.
+[11:00:41] Starting: 5793
+[11:00:42] Form: VIN=6H8YYBG55Z4568937 EMAIL=user_et8e04nk@outlook.com
+[11:00:57] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:00:57] Processed 5793 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 175 left.
+[11:00:59] Starting: 5854
+[11:01:00] Form: VIN=6H8EX2UY9SK424734 EMAIL=user_rw4u5st4@outlook.com
+[11:01:15] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:01:15] Processed 5854 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 174 left.
+[11:01:17] Starting: 1536
+[11:01:18] Form: VIN=6H8AFDWL6ZY699788 EMAIL=user_sx4ksnym@outlook.com
+[11:01:33] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:01:33] Processed 1536 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 173 left.
+[11:01:35] Starting: 7428
+[11:01:36] Form: VIN=6H8H0ZEZ1RS002789 EMAIL=user_s87t7439@outlook.com
+[11:01:51] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:01:51] Processed 7428 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 172 left.
+[11:01:53] Starting: 6390
+[11:01:54] Form: VIN=6H8D9GUK0T7772375 EMAIL=user_946i4txd@outlook.com
+[11:02:09] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:02:09] Processed 6390 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 171 left.
+[11:02:11] Starting: 8705
+[11:02:11] Form: VIN=6H8U7FFV0UH464268 EMAIL=user_98wlto9b@outlook.com
+[11:02:26] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:02:26] Processed 8705 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 170 left.
+[11:02:28] Starting: 7401
+[11:02:29] Form: VIN=6H8LY39U2WE820931 EMAIL=user_liafe2oh@outlook.com
+[11:02:44] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:02:44] Processed 7401 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 169 left.
+[11:02:46] Starting: 2888
+[11:02:47] Form: VIN=6H825TGY7YC241877 EMAIL=user_5i4emuuq@outlook.com
+[11:03:02] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:03:02] Processed 2888 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 168 left.
+[11:03:04] Starting: 4352
+[11:03:05] Form: VIN=6H8R0XTA9ZH079610 EMAIL=user_4u6413a2@outlook.com
+[11:03:20] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:03:20] Processed 4352 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 167 left.
+[11:03:22] Starting: 9010
+[11:03:23] Form: VIN=6H80AM4V5ZF293088 EMAIL=user_3jz4o630@outlook.com
+[11:03:38] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:03:38] Processed 9010 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 166 left.
+[11:03:40] Starting: 7989
+[11:03:41] Form: VIN=6H8ZZVKZ1W8606696 EMAIL=user_llsww8ap@outlook.com
+[11:03:56] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:03:56] Processed 7989 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 165 left.
+[11:03:58] Starting: 2500
+[11:03:59] Form: VIN=6H8DGUS47SW415854 EMAIL=user_0izq5fhr@outlook.com
+[11:04:14] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:04:14] Processed 2500 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 164 left.
+[11:04:16] Starting: 5698
+[11:04:16] Form: VIN=6H89G9Y78WC530460 EMAIL=user_yqrhdih4@outlook.com
+[11:04:31] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:04:31] Processed 5698 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 163 left.
+[11:04:33] Starting: 1372
+[11:04:34] Form: VIN=6H8ZLXP45ZJ683224 EMAIL=user_nd43lcdv@outlook.com
+[11:04:49] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:04:49] Processed 1372 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 162 left.
+[11:04:51] Starting: 7475
+[11:04:52] Form: VIN=6H8E2KJBXUP356481 EMAIL=user_gvwo4v2u@outlook.com
+[11:05:07] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:05:07] Processed 7475 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 161 left.
+[11:05:09] Starting: 2647
+[11:05:10] Form: VIN=6H8ZCL913UN894998 EMAIL=user_nj2wbob5@outlook.com
+[11:05:25] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:05:25] Processed 2647 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 160 left.
+[11:05:27] Starting: 8343
+[11:05:28] Form: VIN=6H8BJFVC0R3220598 EMAIL=user_1tiole1j@outlook.com
+[11:05:43] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:05:43] Processed 8343 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 159 left.
+[11:05:45] Starting: 7549
+[11:05:46] Form: VIN=6H81695U6TE307506 EMAIL=user_azmyai5k@outlook.com
+[11:06:01] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:06:01] Processed 7549 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 158 left.
+[11:06:03] Starting: 1155
+[11:06:03] Form: VIN=6H87VTFX6S0851292 EMAIL=user_n8d5yjvp@outlook.com
+[11:06:18] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:06:19] Processed 1155 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 157 left.
+[11:06:21] Starting: 0771
+[11:06:21] Form: VIN=6H89HB5V2V1723804 EMAIL=user_bz7damy1@outlook.com
+[11:06:36] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:06:36] Processed 0771 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 156 left.
+[11:06:38] Starting: 0128
+[11:06:39] Form: VIN=6H8SGCHY6Z9448784 EMAIL=user_wpysx8wz@outlook.com
+[11:06:54] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:06:54] Processed 0128 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 155 left.
+[11:06:56] Starting: 7670
+[11:06:57] Form: VIN=6H8WG8834VL917600 EMAIL=user_0s4u4vit@outlook.com
+[11:07:12] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:07:12] Processed 7670 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 154 left.
+[11:07:14] Starting: 1670
+[11:07:15] Form: VIN=6H8TZ80U9RG510923 EMAIL=user_vu2imib6@outlook.com
+[11:07:30] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:07:30] Processed 1670 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 153 left.
+[11:07:32] Starting: 6624
+[11:07:33] Form: VIN=6H8ML04L5Y0311593 EMAIL=user_wv5z4jy2@outlook.com
+[11:07:48] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:07:48] Processed 6624 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 152 left.
+[11:07:50] Starting: 0694
+[11:07:50] Form: VIN=6H8ZG7UPXUK661967 EMAIL=user_ydarrtpx@outlook.com
+[11:08:05] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:08:06] Processed 0694 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 151 left.
+[11:08:08] Starting: 0881
+[11:08:08] Form: VIN=6H8VRTEL3UB600067 EMAIL=user_wr6ocl5h@outlook.com
+[11:08:23] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:08:23] Processed 0881 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 150 left.
+[11:08:25] Starting: 4515
+[11:08:26] Form: VIN=6H8H5ND82Y5086458 EMAIL=user_ixl72gmx@outlook.com
+[11:08:41] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:08:41] Processed 4515 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 149 left.
+[11:08:43] Starting: 1610
+[11:08:44] Form: VIN=6H8JYWK30U9368462 EMAIL=user_x855ix0k@outlook.com
+[11:08:59] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:08:59] Processed 1610 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 148 left.
+[11:09:01] Starting: 7181
+[11:09:02] Form: VIN=6H8THT156RR924386 EMAIL=user_t1rkr6yy@outlook.com
+[11:09:17] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:09:17] Processed 7181 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 147 left.
+[11:09:19] Starting: 2400
+[11:09:20] Form: VIN=6H80ERX18Z1423050 EMAIL=user_axdjytow@outlook.com
+[11:09:35] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:09:35] Processed 2400 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 146 left.
+[11:09:37] Starting: 5711
+[11:09:38] Form: VIN=6H8905W60UG924726 EMAIL=user_zc08qp87@outlook.com
+[11:09:53] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:09:53] Processed 5711 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 145 left.
+[11:09:55] Starting: 0494
+[11:09:55] Form: VIN=6H8AVGXH9S0993320 EMAIL=user_ee6xacqj@outlook.com
+[11:10:10] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:10:10] Processed 0494 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 144 left.
+[11:10:12] Starting: 6701
+[11:10:13] Form: VIN=6H8U49MN9TK098891 EMAIL=user_jozu11m8@outlook.com
+[11:10:28] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:10:28] Processed 6701 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 143 left.
+[11:10:30] Starting: 4956
+[11:10:31] Form: VIN=6H8UBNUP9XN888468 EMAIL=user_iheuuikt@outlook.com
+[11:10:46] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:10:46] Processed 4956 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 142 left.
+[11:10:48] Starting: 8549
+[11:10:49] Form: VIN=6H8KPED85RZ291833 EMAIL=user_pqj8g13e@outlook.com
+[11:11:04] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:11:04] Processed 8549 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 141 left.
+[11:11:06] Starting: 0251
+[11:11:07] Form: VIN=6H8C50LT5Y6121734 EMAIL=user_r1900abu@outlook.com
+[11:11:22] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:11:22] Processed 0251 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 140 left.
+[11:11:24] Starting: 3068
+[11:11:24] Form: VIN=6H8LSTGP1S6547306 EMAIL=user_3alabfqf@outlook.com
+[11:11:39] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:11:40] Processed 3068 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 139 left.
+[11:11:42] Starting: 4012
+[11:11:42] Form: VIN=6H8RRARN2YE177469 EMAIL=user_jpfykfhf@outlook.com
+[11:11:57] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:11:57] Processed 4012 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 138 left.
+[11:11:59] Starting: 7351
+[11:12:00] Form: VIN=6H8BC04Z9XC723640 EMAIL=user_h28sv409@outlook.com
+[11:12:15] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:12:15] Processed 7351 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 137 left.
+[11:12:17] Starting: 0594
+[11:12:18] Form: VIN=6H8RHFV31YE690636 EMAIL=user_vk46b8cx@outlook.com
+[11:12:33] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:12:33] Processed 0594 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 136 left.
+[11:12:35] Starting: 6979
+[11:12:36] Form: VIN=6H8Y24CV1VZ852162 EMAIL=user_c3f0ss9z@outlook.com
+[11:12:51] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:12:51] Processed 6979 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 135 left.
+[11:12:53] Starting: 3408
+[11:12:54] Form: VIN=6H8T02PK6TS622367 EMAIL=user_105zrifp@outlook.com
+[11:13:09] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:13:09] Processed 3408 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 134 left.
+[11:13:11] Starting: 2087
+[11:13:12] Form: VIN=6H8VCJC80YJ979075 EMAIL=user_jdh2norj@outlook.com
+[11:13:27] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:13:27] Processed 2087 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 133 left.
+[11:13:29] Starting: 5657
+[11:13:30] Form: VIN=6H8V3NDZ0XM676485 EMAIL=user_o26mx63f@outlook.com
+[11:13:45] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:13:45] Processed 5657 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 132 left.
+[11:13:47] Starting: 8604
+[11:13:47] Form: VIN=6H8924GV2R2178472 EMAIL=user_wn3gowlt@outlook.com
+[11:14:02] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:14:03] Processed 8604 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 131 left.
+[11:14:05] Starting: 2029
+[11:14:05] Form: VIN=6H86W9JE6ZF076601 EMAIL=user_y42129sw@outlook.com
+[11:14:20] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:14:20] Processed 2029 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 130 left.
+[11:14:22] Starting: 8021
+[11:14:23] Form: VIN=6H89Z9VG4VU607445 EMAIL=user_4uafblf0@outlook.com
+[11:14:38] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:14:38] Processed 8021 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 129 left.
+[11:14:40] Starting: 2232
+[11:14:41] Form: VIN=6H8MAJ7E0Y8739873 EMAIL=user_s7hp8te0@outlook.com
+[11:14:56] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:14:56] Processed 2232 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 128 left.
+[11:14:58] Starting: 3977
+[11:14:59] Form: VIN=6H8NUYP58Z9584506 EMAIL=user_nnwg2fzm@outlook.com
+[11:15:14] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:15:14] Processed 3977 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 127 left.
+[11:15:16] Starting: 5499
+[11:15:16] Form: VIN=6H8UY4H20Z8242891 EMAIL=user_si2lg8np@outlook.com
+[11:15:31] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:15:31] Processed 5499 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 126 left.
+[11:15:34] Starting: 0628
+[11:15:34] Form: VIN=6H8ZZ9ND5R1050137 EMAIL=user_yfh221hw@outlook.com
+[11:15:49] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:15:49] Processed 0628 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 125 left.
+[11:15:51] Starting: 3988
+[11:15:52] Form: VIN=6H8LDT331WX296252 EMAIL=user_q04u6kke@outlook.com
+[11:16:07] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:16:07] Processed 3988 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 124 left.
+[11:16:09] Starting: 1247
+[11:16:10] Form: VIN=6H8XSKMA1U1866586 EMAIL=user_pc4m1hcf@outlook.com
+[11:16:25] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:16:25] Processed 1247 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 123 left.
+[11:16:27] Starting: 2835
+[11:16:31] Form: VIN=6H8BBR7A9TA758570 EMAIL=user_gkrl8ku4@outlook.com
+[11:16:46] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:16:46] Processed 2835 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 122 left.
+[11:16:48] Starting: 6698
+[11:16:52] Form: VIN=6H82YBA62ZA838389 EMAIL=user_ybyw02rj@outlook.com
+[11:17:07] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:17:07] Processed 6698 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 121 left.
+[11:17:10] Starting: 4098
+[11:17:30] Form: VIN=6H81G1VD6VH832789 EMAIL=user_2ca1fls3@outlook.com
+[11:17:45] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:17:45] Processed 4098 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 120 left.
+[11:17:47] Starting: 5174
+[11:17:50] Form: VIN=6H8D3B7L9Z2418398 EMAIL=user_yuncxs3r@outlook.com
+[11:18:05] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:18:05] Processed 5174 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 119 left.
+[11:18:07] Starting: 7230
+[11:18:08] Form: VIN=6H89S47V1T5510536 EMAIL=user_vniiguz2@outlook.com
+[11:18:23] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:18:23] Processed 7230 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 118 left.
+[11:18:25] Starting: 3986
+[11:18:28] Form: VIN=6H8D5GLP8WF295388 EMAIL=user_qwu62xfa@outlook.com
+[11:18:43] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:18:43] Processed 3986 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 117 left.
+[11:18:45] Starting: 3670
+[11:18:55] Form: VIN=6H8F5LRJ6T5347218 EMAIL=user_0wr3vi8c@outlook.com
+[11:19:10] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:19:10] Processed 3670 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 116 left.
+[11:19:12] Starting: 6603
+[11:19:13] Form: VIN=6H8KPXSY2R5504517 EMAIL=user_tjkaorjt@outlook.com
+[11:19:28] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:19:28] Processed 6603 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 115 left.
+[11:19:30] Starting: 4355
+[11:19:31] Form: VIN=6H8XDAUL3SC350737 EMAIL=user_ngfn7590@outlook.com
+[11:19:46] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:19:46] Processed 4355 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 114 left.
+[11:19:48] Starting: 6003
+[11:19:49] Form: VIN=6H853WU45Z1334416 EMAIL=user_inxe6cx6@outlook.com
+[11:20:04] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:20:04] Processed 6003 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 113 left.
+[11:20:06] Starting: 6653
+[11:20:06] Form: VIN=6H8UEDLP0VF959356 EMAIL=user_e212cc1m@outlook.com
+[11:20:21] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:20:21] Processed 6653 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 112 left.
+[11:20:24] Starting: 3380
+[11:20:24] Form: VIN=6H8LJ53W5S4543430 EMAIL=user_eitjgkbg@outlook.com
+[11:20:39] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:20:39] Processed 3380 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 111 left.
+[11:20:41] Starting: 0130
+[11:20:42] Form: VIN=6H81BCH00W7038655 EMAIL=user_t4qsjj9n@outlook.com
+[11:20:57] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:20:57] Processed 0130 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 110 left.
+[11:20:59] Starting: 7371
+[11:21:00] Form: VIN=6H8HUYCPXS6678172 EMAIL=user_yks3c2n7@outlook.com
+[11:21:15] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:21:15] Processed 7371 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 109 left.
+[11:21:17] Starting: 9798
+[11:21:18] Form: VIN=6H8H26GD2WY510126 EMAIL=user_qroxi2j3@outlook.com
+[11:21:33] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:21:33] Processed 9798 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 108 left.
+[11:21:35] Starting: 6108
+[11:21:36] Form: VIN=6H8VLMV94UU728639 EMAIL=user_3l7keuft@outlook.com
+[11:21:51] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:21:51] Processed 6108 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 107 left.
+[11:21:53] Starting: 5586
+[11:21:54] Form: VIN=6H83SB6T1RA185512 EMAIL=user_cwafo2gp@outlook.com
+[11:22:09] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:22:09] Processed 5586 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 106 left.
+[11:22:11] Starting: 0929
+[11:22:12] Form: VIN=6H8PBY3Y0YM438286 EMAIL=user_y9wgbwts@outlook.com
+[11:22:27] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:22:27] Processed 0929 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 105 left.
+[11:22:29] Starting: 5469
+[11:22:29] Form: VIN=6H8TWYD77W4568264 EMAIL=user_1koh02o1@outlook.com
+[11:22:44] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:22:45] Processed 5469 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 104 left.
+[11:22:47] Starting: 6100
+[11:22:47] Form: VIN=6H8RZGVK6ZL210341 EMAIL=user_0fxaj106@outlook.com
+[11:23:02] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:23:02] Processed 6100 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 103 left.
+[11:23:04] Starting: 6466
+[11:23:05] Form: VIN=6H88PVTEXU6569069 EMAIL=user_rd02qo2b@outlook.com
+[11:23:20] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:23:20] Processed 6466 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 102 left.
+[11:23:22] Starting: 8564
+[11:23:23] Form: VIN=6H82U7Y32RJ348622 EMAIL=user_nt07ocbv@outlook.com
+[11:23:38] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:23:38] Processed 8564 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 101 left.
+[11:23:40] Starting: 8306
+[11:23:41] Form: VIN=6H8PV0UE8V7158882 EMAIL=user_191dclmb@outlook.com
+[11:23:56] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:23:56] Processed 8306 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 100 left.
+[11:23:58] Starting: 7121
+[11:23:59] Form: VIN=6H8NRC100SG553463 EMAIL=user_dtcu4m5k@outlook.com
+[11:24:14] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:24:14] Processed 7121 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 99 left.
+[11:24:16] Starting: 7093
+[11:24:17] Form: VIN=6H8ME5JL7YP072406 EMAIL=user_2yun4cl2@outlook.com
+[11:24:32] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:24:32] Processed 7093 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 98 left.
+[11:24:34] Starting: 0881
+[11:24:34] Form: VIN=6H8LUJCJ0VX942222 EMAIL=user_rr43l7du@outlook.com
+[11:24:49] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:24:50] Processed 0881 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 97 left.
+[11:24:52] Starting: 2047
+[11:24:52] Form: VIN=6H82PKS05ZP538940 EMAIL=user_xxsmnnw2@outlook.com
+[11:25:07] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:25:07] Processed 2047 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 96 left.
+[11:25:09] Starting: 0111
+[11:25:10] Form: VIN=6H899V083TC060616 EMAIL=user_dqd1zq2q@outlook.com
+[11:25:25] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:25:25] Processed 0111 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 95 left.
+[11:25:27] Starting: 7055
+[11:25:28] Form: VIN=6H8JR2UM5VX552319 EMAIL=user_o3a60gl0@outlook.com
+[11:25:43] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:25:43] Processed 7055 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 94 left.
+[11:25:45] Starting: 3165
+[11:25:46] Form: VIN=6H8YJJD9XYJ488071 EMAIL=user_fyhmniwf@outlook.com
+[11:26:01] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:26:01] Processed 3165 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 93 left.
+[11:26:03] Starting: 7795
+[11:26:04] Form: VIN=6H8BPL5V8Z2519860 EMAIL=user_yc7mn5jn@outlook.com
+[11:26:19] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:26:19] Processed 7795 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 92 left.
+[11:26:21] Starting: 5600
+[11:26:21] Form: VIN=6H8E29E75R9562057 EMAIL=user_eib959a1@outlook.com
+[11:26:36] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:26:36] Processed 5600 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 91 left.
+[11:26:38] Starting: 1543
+[11:26:39] Form: VIN=6H8R08U1XRZ234857 EMAIL=user_r89868rl@outlook.com
+[11:26:54] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:26:54] Processed 1543 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 90 left.
+[11:26:56] Starting: 3771
+[11:26:58] Form: VIN=6H82R4GV1XA778156 EMAIL=user_u0q9vtms@outlook.com
+[11:27:13] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:27:13] Processed 3771 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 89 left.
+[11:27:15] Starting: 6275
+[11:27:15] Form: VIN=6H8UPEY77R4310762 EMAIL=user_l95fqmwj@outlook.com
+[11:27:30] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:27:30] Processed 6275 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 88 left.
+[11:27:32] Starting: 5649
+[11:27:33] Form: VIN=6H8RW4582WV693130 EMAIL=user_yltrczt5@outlook.com
+[11:27:48] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:27:48] Processed 5649 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 87 left.
+[11:27:50] Starting: 0652
+[11:27:51] Form: VIN=6H8ES0RE7YA176452 EMAIL=user_d45iqyf0@outlook.com
+[11:28:06] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:28:06] Processed 0652 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 86 left.
+[11:28:08] Starting: 4688
+[11:28:09] Form: VIN=6H8W92PV2UA019789 EMAIL=user_gp9uysdj@outlook.com
+[11:28:24] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:28:24] Processed 4688 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 85 left.
+[11:28:26] Starting: 2058
+[11:28:27] Form: VIN=6H82427E2XS464013 EMAIL=user_oksfaaud@outlook.com
+[11:28:42] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:28:42] Processed 2058 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 84 left.
+[11:28:44] Starting: 1561
+[11:28:44] Form: VIN=6H8MJWK3XUN261024 EMAIL=user_p29dul0k@outlook.com
+[11:28:59] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:28:59] Processed 1561 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 83 left.
+[11:29:01] Starting: 2753
+[11:29:02] Form: VIN=6H8CDRHC8Z0366709 EMAIL=user_wzuiwxjb@outlook.com
+[11:29:17] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:29:17] Processed 2753 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 82 left.
+[11:29:19] Starting: 0079
+[11:29:20] Form: VIN=6H8SMGY20SZ536134 EMAIL=user_wyssbzu5@outlook.com
+[11:29:35] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:29:35] Processed 0079 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 81 left.
+[11:29:37] Starting: 9886
+[11:29:38] Form: VIN=6H8BPL875X4522052 EMAIL=user_w3orkfg9@outlook.com
+[11:29:53] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:29:53] Processed 9886 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 80 left.
+[11:29:55] Starting: 0754
+[11:29:56] Form: VIN=6H8EBK193YN197723 EMAIL=user_heyq4z57@outlook.com
+[11:30:11] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:30:11] Processed 0754 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 79 left.
+[11:30:13] Starting: 8382
+[11:30:13] Form: VIN=6H8DJT0N2RC759000 EMAIL=user_2gj9fla4@outlook.com
+[11:30:28] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:30:28] Processed 8382 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 78 left.
+[11:30:30] Starting: 9735
+[11:30:31] Form: VIN=6H82003V4UL184198 EMAIL=user_kxhqxqlm@outlook.com
+[11:30:46] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:30:46] Processed 9735 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 77 left.
+[11:30:48] Starting: 9281
+[11:30:49] Form: VIN=6H8VLLMC9ZP532385 EMAIL=user_ox0z7a42@outlook.com
+[11:31:04] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:31:04] Processed 9281 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 76 left.
+[11:31:06] Starting: 6190
+[11:31:07] Form: VIN=6H8UTP6B1UL364510 EMAIL=user_a0e7zzmu@outlook.com
+[11:31:22] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:31:22] Processed 6190 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 75 left.
+[11:31:24] Starting: 0901
+[11:31:25] Form: VIN=6H8VWGVT3RU289378 EMAIL=user_51h4xde6@outlook.com
+[11:31:40] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:31:40] Processed 0901 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 74 left.
+[11:31:42] Starting: 9128
+[11:31:42] Form: VIN=6H81278H8UJ069827 EMAIL=user_bl35spxm@outlook.com
+[11:31:57] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:31:57] Processed 9128 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 73 left.
+[11:32:00] Starting: 5855
+[11:32:00] Form: VIN=6H8W7BTE9UB904545 EMAIL=user_fgjk1911@outlook.com
+[11:32:15] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:32:15] Processed 5855 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 72 left.
+[11:32:17] Starting: 2772
+[11:32:18] Form: VIN=6H8TMX944S5949315 EMAIL=user_l1o4519e@outlook.com
+[11:32:33] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:32:33] Processed 2772 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 71 left.
+[11:32:35] Starting: 6783
+[11:32:36] Form: VIN=6H83KWK9XXT799610 EMAIL=user_btutqj7e@outlook.com
+[11:32:51] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:32:51] Processed 6783 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 70 left.
+[11:32:53] Starting: 9829
+[11:32:54] Form: VIN=6H84ZJCE2W3399697 EMAIL=user_gv8pa82e@outlook.com
+[11:33:09] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:33:09] Processed 9829 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 69 left.
+[11:33:11] Starting: 3429
+[11:33:12] Form: VIN=6H8ZV20N4VL172263 EMAIL=user_b699xdj6@outlook.com
+[11:33:27] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:33:27] Processed 3429 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 68 left.
+[11:33:29] Starting: 1010
+[11:33:30] Form: VIN=6H80ZFRBXV3644799 EMAIL=user_rtufsa21@outlook.com
+[11:33:45] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:33:45] Processed 1010 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 67 left.
+[11:33:47] Starting: 7284
+[11:33:47] Form: VIN=6H85DM5J7V6959080 EMAIL=user_7pq5caxd@outlook.com
+[11:34:02] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:34:02] Processed 7284 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 66 left.
+[11:34:05] Starting: 5076
+[11:34:05] Form: VIN=6H85NKDC2RS683330 EMAIL=user_hd25pr1j@outlook.com
+[11:34:20] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:34:20] Processed 5076 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 65 left.
+[11:34:22] Starting: 3762
+[11:34:23] Form: VIN=6H8G31071WU825121 EMAIL=user_zom5osrj@outlook.com
+[11:34:38] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:34:38] Processed 3762 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 64 left.
+[11:34:40] Starting: 5241
+[11:34:41] Form: VIN=6H85B4VF5WG319866 EMAIL=user_bc9q8tcr@outlook.com
+[11:34:56] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:34:56] Processed 5241 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 63 left.
+[11:34:58] Starting: 4519
+[11:34:59] Form: VIN=6H85DH8W6RH569192 EMAIL=user_j0qzzjiz@outlook.com
+[11:35:14] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:35:14] Processed 4519 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 62 left.
+[11:35:16] Starting: 6635
+[11:35:17] Form: VIN=6H885HEM8T0042676 EMAIL=user_kljs4yhq@outlook.com
+[11:35:32] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:35:32] Processed 6635 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 61 left.
+[11:35:34] Starting: 9482
+[11:35:34] Form: VIN=6H8PDKV74XD236495 EMAIL=user_qw2e014d@outlook.com
+[11:35:49] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:35:49] Processed 9482 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 60 left.
+[11:35:51] Starting: 6909
+[11:35:52] Form: VIN=6H8H11EY8RP887758 EMAIL=user_se1d1z47@outlook.com
+[11:36:07] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:36:07] Processed 6909 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 59 left.
+[11:36:09] Starting: 9824
+[11:36:10] Form: VIN=6H86C9ZP0SX037808 EMAIL=user_rfe8btmf@outlook.com
+[11:36:25] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:36:25] Processed 9824 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 58 left.
+[11:36:27] Starting: 4581
+[11:36:28] Form: VIN=6H8JGHKC3WZ481100 EMAIL=user_mweo6yxc@outlook.com
+[11:36:43] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:36:43] Processed 4581 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 57 left.
+[11:36:45] Starting: 4929
+[11:36:46] Form: VIN=6H80XSD09YV319588 EMAIL=user_m1jqviw3@outlook.com
+[11:37:01] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:37:01] Processed 4929 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 56 left.
+[11:37:03] Starting: 3696
+[11:37:03] Form: VIN=6H8XT6EU0T4113142 EMAIL=user_jqbjuyz2@outlook.com
+[11:37:18] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:37:18] Processed 3696 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 55 left.
+[11:37:21] Starting: 5591
+[11:37:21] Form: VIN=6H80JXWA0ZU720779 EMAIL=user_ydu0pwpt@outlook.com
+[11:37:36] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:37:36] Processed 5591 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 54 left.
+[11:37:38] Starting: 8850
+[11:37:39] Form: VIN=6H8YK4H81Z9273214 EMAIL=user_egman086@outlook.com
+[11:37:54] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:37:54] Processed 8850 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 53 left.
+[11:37:56] Starting: 9125
+[11:37:57] Form: VIN=6H84A0197X0499563 EMAIL=user_2r0niczg@outlook.com
+[11:38:12] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:38:12] Processed 9125 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 52 left.
+[11:38:14] Starting: 1829
+[11:38:15] Form: VIN=6H8LW9GM2TZ136123 EMAIL=user_w3lm5wrh@outlook.com
+[11:38:30] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:38:30] Processed 1829 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 51 left.
+[11:38:32] Starting: 4561
+[11:38:33] Form: VIN=6H88S8W14XG956580 EMAIL=user_zcpbkshm@outlook.com
+[11:38:48] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:38:48] Processed 4561 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 50 left.
+[11:38:50] Starting: 6705
+[11:38:51] Form: VIN=6H8PP2Y80WH730050 EMAIL=user_ibxi9fd2@outlook.com
+[11:39:06] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:39:06] Processed 6705 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 49 left.
+[11:39:08] Starting: 5726
+[11:39:09] Form: VIN=6H8KAYERXVL993914 EMAIL=user_n0yhouer@outlook.com
+[11:39:24] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:39:24] Processed 5726 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 48 left.
+[11:39:26] Starting: 8740
+[11:39:27] Form: VIN=6H82379JXTH000839 EMAIL=user_w77qipu4@outlook.com
+[11:39:42] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:39:42] Processed 8740 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 47 left.
+[11:39:44] Starting: 5979
+[11:39:44] Form: VIN=6H82MEAK0TS473478 EMAIL=user_yp1n3ohc@outlook.com
+[11:39:59] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:40:00] Processed 5979 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 46 left.
+[11:40:02] Starting: 7021
+[11:40:02] Form: VIN=6H8TNGZH9X6055330 EMAIL=user_h5x9gwz8@outlook.com
+[11:40:17] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:40:17] Processed 7021 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 45 left.
+[11:40:19] Starting: 8789
+[11:40:20] Form: VIN=6H80ZBPB4W3403334 EMAIL=user_gkly6hxt@outlook.com
+[11:40:35] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:40:35] Processed 8789 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 44 left.
+[11:40:37] Starting: 3328
+[11:40:38] Form: VIN=6H8YN5WM6VJ007130 EMAIL=user_o9wdzz0d@outlook.com
+[11:40:53] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:40:53] Processed 3328 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 43 left.
+[11:40:55] Starting: 4638
+[11:40:56] Form: VIN=6H8ER4LP3R1126825 EMAIL=user_ulvhj37l@outlook.com
+[11:41:11] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:41:11] Processed 4638 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 42 left.
+[11:41:13] Starting: 2176
+[11:41:14] Form: VIN=6H8LM9GT9RS277656 EMAIL=user_holasrgm@outlook.com
+[11:41:29] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:41:29] Processed 2176 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 41 left.
+[11:41:31] Starting: 6969
+[11:41:32] Form: VIN=6H8E5E5X7S3907503 EMAIL=user_12q8v0km@outlook.com
+[11:41:47] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:41:47] Processed 6969 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 40 left.
+[11:41:49] Starting: 2345
+[11:41:50] Form: VIN=6H8KUPGK5S2811894 EMAIL=user_1hotlk4t@outlook.com
+[11:42:05] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:42:05] Processed 2345 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 39 left.
+[11:42:07] Starting: 2429
+[11:42:08] Form: VIN=6H887XR24ZW579046 EMAIL=user_6rutlte3@outlook.com
+[11:42:23] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:42:23] Processed 2429 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 38 left.
+[11:42:25] Starting: 3472
+[11:42:26] Form: VIN=6H8NM4UMXRM574853 EMAIL=user_9tir25ki@outlook.com
+[11:42:41] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:42:41] Processed 3472 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 37 left.
+[11:42:43] Starting: 6692
+[11:42:43] Form: VIN=6H88KHL79T7488896 EMAIL=user_k7fn2rj3@outlook.com
+[11:42:58] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:42:58] Processed 6692 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 36 left.
+[11:43:01] Starting: 1402
+[11:43:01] Form: VIN=6H8Y2L1R0XC346229 EMAIL=user_ndtlxj48@outlook.com
+[11:43:16] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:43:16] Processed 1402 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 35 left.
+[11:43:18] Starting: 1694
+[11:43:19] Form: VIN=6H86TT2JXRX516704 EMAIL=user_zfs4r36v@outlook.com
+[11:43:34] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:43:34] Processed 1694 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 34 left.
+[11:43:36] Starting: 6460
+[11:43:37] Form: VIN=6H8YT7KC8XW441294 EMAIL=user_b83efo02@outlook.com
+[11:43:52] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:43:52] Processed 6460 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 33 left.
+[11:43:54] Starting: 3871
+[11:43:55] Form: VIN=6H8544GBXSH335389 EMAIL=user_kjjkyjem@outlook.com
+[11:44:10] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:44:10] Processed 3871 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 32 left.
+[11:44:12] Starting: 2337
+[11:44:12] Form: VIN=6H8LLVZM2XD609231 EMAIL=user_z9hs60ss@outlook.com
+[11:44:27] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:44:27] Processed 2337 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 31 left.
+[11:44:30] Starting: 2563
+[11:44:30] Form: VIN=6H8ZUK8M0XC492441 EMAIL=user_0r9yc859@outlook.com
+[11:44:45] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:44:45] Processed 2563 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 30 left.
+[11:44:47] Starting: 8111
+[11:44:48] Form: VIN=6H8LMMV16V1857385 EMAIL=user_qljw9qj2@outlook.com
+[11:45:03] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:45:03] Processed 8111 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 29 left.
+[11:45:05] Starting: 0292
+[11:45:06] Form: VIN=6H8GJM298T2901172 EMAIL=user_bcjkw9q1@outlook.com
+[11:45:21] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:45:21] Processed 0292 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 28 left.
+[11:45:23] Starting: 2070
+[11:45:24] Form: VIN=6H8FHAW89S7562544 EMAIL=user_la71w3s0@outlook.com
+[11:45:39] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:45:39] Processed 2070 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 27 left.
+[11:45:41] Starting: 4875
+[11:45:42] Form: VIN=6H8U3CAH0SH231919 EMAIL=user_fouhzhs2@outlook.com
+[11:45:57] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:45:57] Processed 4875 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 26 left.
+[11:45:59] Starting: 9213
+[11:45:59] Form: VIN=6H8BBXCS5WM538798 EMAIL=user_lf9gaijb@outlook.com
+[11:46:14] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:46:14] Processed 9213 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 25 left.
+[11:46:16] Starting: 8524
+[11:46:17] Form: VIN=6H8E0PU22SH870704 EMAIL=user_rtatz30l@outlook.com
+[11:46:32] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:46:32] Processed 8524 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 24 left.
+[11:46:34] Starting: 2152
+[11:46:35] Form: VIN=6H8FZ9V32TK444660 EMAIL=user_fu8m3mu0@outlook.com
+[11:46:50] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:46:50] Processed 2152 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 23 left.
+[11:46:52] Starting: 5338
+[11:46:53] Form: VIN=6H8DJNYS2T0299108 EMAIL=user_mlbxxx79@outlook.com
+[11:47:08] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:47:08] Processed 5338 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 22 left.
+[11:47:10] Starting: 4538
+[11:47:11] Form: VIN=6H812FFX7S5888516 EMAIL=user_5hzex250@outlook.com
+[11:47:27] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:47:27] Processed 4538 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 21 left.
+[11:47:29] Starting: 0625
+[11:47:29] Form: VIN=6H883N3V4VU463760 EMAIL=user_q6qlmzzr@outlook.com
+[11:47:44] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:47:44] Processed 0625 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 20 left.
+[11:47:46] Starting: 6265
+[11:47:47] Form: VIN=6H85RP094YZ168623 EMAIL=user_zur4huub@outlook.com
+[11:48:02] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:48:02] Processed 6265 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 19 left.
+[11:48:04] Starting: 2024
+[11:48:05] Form: VIN=6H8B1WY11WL959243 EMAIL=user_3e0v7n5j@outlook.com
+[11:48:20] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:48:20] Processed 2024 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 18 left.
+[11:48:22] Starting: 8211
+[11:48:23] Form: VIN=6H8UGX9MXUZ675531 EMAIL=user_cgps4fsx@outlook.com
+[11:48:38] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:48:38] Processed 8211 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 17 left.
+[11:48:40] Starting: 1449
+[11:48:41] Form: VIN=6H8DF8BE3WW590109 EMAIL=user_fkn57sgz@outlook.com
+[11:48:56] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:48:56] Processed 1449 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 16 left.
+[11:48:58] Starting: 4760
+[11:48:59] Form: VIN=6H8FTNB46TR710387 EMAIL=user_kwifb6f8@outlook.com
+[11:49:14] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:49:14] Processed 4760 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 15 left.
+[11:49:16] Starting: 6717
+[11:49:16] Form: VIN=6H8W0J119R0397941 EMAIL=user_gmuhsukc@outlook.com
+[11:49:31] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:49:31] Processed 6717 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 14 left.
+[11:49:34] Starting: 1032
+[11:49:34] Form: VIN=6H8LR4JJ4UB257996 EMAIL=user_baeigvv6@outlook.com
+[11:49:49] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:49:49] Processed 1032 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 13 left.
+[11:49:51] Starting: 4880
+[11:49:52] Form: VIN=6H8BKBF24VG560464 EMAIL=user_8l2h68a5@outlook.com
+[11:50:07] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:50:07] Processed 4880 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 12 left.
+[11:50:09] Starting: 6728
+[11:50:10] Form: VIN=6H8U969P8V6523457 EMAIL=user_d6yk1xvh@outlook.com
+[11:50:25] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:50:25] Processed 6728 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 11 left.
+[11:50:27] Starting: 1745
+[11:50:28] Form: VIN=6H817MZM9UK038382 EMAIL=user_v4s4dh59@outlook.com
+[11:50:43] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:50:43] Processed 1745 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 10 left.
+[11:50:45] Starting: 3512
+[11:50:46] Form: VIN=6H8311XF3YB755735 EMAIL=user_bbbghwzo@outlook.com
+[11:51:01] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:51:01] Processed 3512 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 9 left.
+[11:51:03] Starting: 5083
+[11:51:03] Form: VIN=6H8UEG585RP116440 EMAIL=user_sufbfl2h@outlook.com
+[11:51:18] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:51:18] Processed 5083 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 8 left.
+[11:51:20] Starting: 3584
+[11:51:21] Form: VIN=6H80HER12XS884006 EMAIL=user_uajaxsqh@outlook.com
+[11:51:36] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:51:36] Processed 3584 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 7 left.
+[11:51:38] Starting: 0450
+[11:51:39] Form: VIN=6H80DXC91R1858561 EMAIL=user_i4cb64uv@outlook.com
+[11:51:54] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:51:54] Processed 0450 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 6 left.
+[11:51:56] Starting: 6686
+[11:51:57] Form: VIN=6H8EPEGZ2YC209091 EMAIL=user_cjclupo8@outlook.com
+[11:52:12] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:52:12] Processed 6686 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 5 left.
+[11:52:14] Starting: 0312
+[11:52:15] Form: VIN=6H8YPKTK9YZ482322 EMAIL=user_rm554cn3@outlook.com
+[11:52:30] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:52:30] Processed 0312 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 4 left.
+[11:52:32] Starting: 5276
+[11:52:32] Form: VIN=6H8R3YVS8XJ899895 EMAIL=user_d92wszfz@outlook.com
+[11:52:47] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:52:47] Processed 5276 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 3 left.
+[11:52:49] Starting: 7921
+[11:52:50] Form: VIN=6H8KNE4G6WD181136 EMAIL=user_mdg6tpfz@outlook.com
+[11:53:05] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:53:05] Processed 7921 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 2 left.
+[11:53:07] Starting: 4815
+[11:53:08] Form: VIN=6H8AFJR11SB131630 EMAIL=user_b0aca5rm@outlook.com
+[11:53:23] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:53:23] Processed 4815 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 1 left.
+[11:53:25] Starting: 9596
+[11:53:26] Form: VIN=6H82DCTW7RP058609 EMAIL=user_ewnbjg3q@outlook.com
+[11:53:41] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[11:53:41] Processed 9596 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 0 left.
+[11:53:41] === Session Finished ===
+[11:58:13] === CC Checker Session Started (TypeScript) ===
+[11:58:13] No cards found in source file.
+[12:00:55] === CC Checker Session Started (TypeScript) ===
+[12:00:55] Starting: 1111
+[12:00:56] Form: VIN=6H821DAG2VV104511 EMAIL=user_9zd2qw9i@outlook.com
+[12:01:11] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[12:01:11] Processed 1111 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 1 left.
+[12:01:13] Starting: 0002
+[12:01:14] Form: VIN=6H8834BB5SM619401 EMAIL=user_2rtt4l1w@outlook.com
+[12:01:29] Error: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+
+[12:01:29] Processed 0002 -> ERROR: locator.waitFor: Timeout 15000ms exceeded.
+Call log:
+  - waiting for getByRole('textbox', { name: 'VIN/Chassis number:' }) to be visible
+. 0 left.
+[12:01:29] === Session Finished ===
+[14:48:17] === CC Checker Session Started (TypeScript) ===
+[14:48:17] Starting: 2656
+[14:48:21] Form: VIN=6H8JE0SU0ZF300279 EMAIL=user_ayvx1b2v@outlook.com
+[14:48:21] Waiting for payment form...
+[14:48:21] Processing transaction...
+[14:48:21] Timeout waiting for result selectors, analyzing page as-is
+[14:48:22] Result: UNKNOWN
+[14:48:22] Processed 2656 -> UNKNOWN. 5 left.
+[14:48:24] Starting: 5528
+[14:48:27] Form: VIN=6H85HVEEXXD791835 EMAIL=user_21rcdzhc@outlook.com
+[14:48:27] Waiting for payment form...
+[14:48:27] Processing transaction...
+[14:48:27] Timeout waiting for result selectors, analyzing page as-is
+[14:48:28] Result: UNKNOWN
+[14:48:28] Processed 5528 -> UNKNOWN. 4 left.
+[14:48:31] Starting: 1507
+[14:48:32] Error: page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://transact.ppsr.gov.au/ppsr-mobile/QMVS", waiting until "networkidle"
+
+[14:52:56] === CC Checker Session Started (TypeScript) ===
+[14:52:56] No cards found in source file.
+[14:53:33] === CC Checker Session Started (TypeScript) ===
+[14:53:33] Starting: 1507
+[14:53:37] Form: VIN=6H8WDKS56T9708725 EMAIL=user_thc72eb5@outlook.com
+[14:53:37] Waiting for payment form...
+[14:53:37] Processing transaction...
+[14:53:37] Timeout waiting for result selectors, analyzing page as-is
+[14:53:42] Result: FAIL
+[14:53:42] Processed 1507 -> FAIL. 6 left.
+[14:53:44] Starting: 3640
+[14:53:47] Form: VIN=6H8K58GT2VB467389 EMAIL=user_f9sybu6z@outlook.com
+[14:53:47] Waiting for payment form...
+[14:53:48] Processing transaction...
+[14:53:48] Timeout waiting for result selectors, analyzing page as-is
+[14:53:53] Result: FAIL
+[14:53:53] Processed 3640 -> FAIL. 5 left.
+[14:53:55] Starting: 0074
+[14:53:58] Form: VIN=6H8TN9UZ4T4740692 EMAIL=user_u3wwh2p5@outlook.com
+[14:53:58] Waiting for payment form...
+[14:53:58] Processing transaction...
+[14:53:58] Timeout waiting for result selectors, analyzing page as-is
+[14:54:03] Result: UNKNOWN
+[14:54:03] Processed 0074 -> UNKNOWN. 4 left.
+[14:54:05] Starting: 0055
+[14:54:08] Form: VIN=6H8FX4466XZ609451 EMAIL=user_qjebye2m@outlook.com
+[14:54:08] Waiting for payment form...
+[14:54:09] Processing transaction...
+[14:54:09] Timeout waiting for result selectors, analyzing page as-is
+[14:54:14] Result: UNKNOWN
+[14:54:14] Processed 0055 -> UNKNOWN. 3 left.
+[14:54:16] Starting: 9662
+[14:54:19] Form: VIN=6H8MP86Z1SZ594890 EMAIL=user_tom0npjm@outlook.com
+[14:54:19] Waiting for payment form...
+[14:54:19] Processing transaction...
+[14:54:19] Timeout waiting for result selectors, analyzing page as-is
+[14:54:24] Result: FAIL
+[14:54:24] Processed 9662 -> FAIL. 2 left.
+[14:54:26] Starting: 2656
+[14:54:29] Form: VIN=6H8B4PHC7UK244940 EMAIL=user_szorq762@outlook.com
+[14:54:29] Waiting for payment form...
+[14:54:29] Processing transaction...
+[14:54:29] Timeout waiting for result selectors, analyzing page as-is
+[14:54:35] Result: UNKNOWN
+[14:54:35] Processed 2656 -> UNKNOWN. 1 left.
+[14:54:37] Starting: 5528
+[14:54:40] Form: VIN=6H8Y1URU5T2075525 EMAIL=user_vc524itc@outlook.com
+[14:54:40] Waiting for payment form...
+[14:54:40] Processing transaction...
+[14:54:40] Timeout waiting for result selectors, analyzing page as-is
+[14:54:45] Result: FAIL
+[14:54:45] Processed 5528 -> FAIL. 0 left.
+[14:54:45] === Session Finished ===
+[15:01:38] === CC Checker Session Started (TypeScript) ===
+[15:01:38] Starting: 7607
+[15:01:42] Form: VIN=6H8DJJMG8Y2953227 EMAIL=user_x1yla6lr@outlook.com
+[15:01:42] Waiting for payment form...
+[15:01:42] Processing transaction...
+[15:01:42] Timeout waiting for result selectors, analyzing page as-is
+[15:01:47] Result: FAIL
+[15:01:47] Processed 7607 -> FAIL. 5 left.
+[15:01:49] Starting: 1765
+[15:01:52] Form: VIN=6H84RBK86UW620215 EMAIL=user_soa5snq8@outlook.com
+[15:01:52] Waiting for payment form...
+[15:01:52] Processing transaction...
+[15:01:52] Timeout waiting for result selectors, analyzing page as-is
+[15:01:57] Result: SUCCESS
+[15:01:57] Processed 1765 -> SUCCESS. 4 left.
+[15:02:00] Starting: 4650
+[15:02:02] Form: VIN=6H8FASM42YH284826 EMAIL=user_v1mmwvtq@outlook.com
+[15:02:03] Waiting for payment form...
+[15:02:03] Processing transaction...
+[15:02:03] Timeout waiting for result selectors, analyzing page as-is
+[15:02:08] Result: SUCCESS
+[15:02:08] Processed 4650 -> SUCCESS. 3 left.
+[15:02:10] Starting: 5528
+[15:02:13] Form: VIN=6H88AA299X6849813 EMAIL=user_4tf76op6@outlook.com
+[15:02:13] Waiting for payment form...
+[15:02:13] Processing transaction...
+[15:02:13] Timeout waiting for result selectors, analyzing page as-is
+[15:02:18] Result: FAIL
+[15:02:18] Processed 5528 -> FAIL. 2 left.
+[15:02:20] Starting: 1507
+[15:02:23] Form: VIN=6H8SHWP13ZK872290 EMAIL=user_mkzhmbo0@outlook.com
+[15:02:24] Waiting for payment form...
+[15:02:24] Processing transaction...
+[15:02:24] Timeout waiting for result selectors, analyzing page as-is
+[15:02:29] Result: FAIL
+[15:02:29] Processed 1507 -> FAIL. 1 left.
+[15:02:31] Starting: 3640
+[15:02:34] Form: VIN=6H8XSBPJ8WP298266 EMAIL=user_o1p7jt5z@outlook.com
+[15:02:34] Waiting for payment form...
+[15:02:34] Processing transaction...
+[15:02:34] Timeout waiting for result selectors, analyzing page as-is
+[15:02:39] Result: FAIL
+[15:02:39] Processed 3640 -> FAIL. 0 left.
+[15:02:40] === Session Finished ===
+[22:56:09] === CC Checker Session Started (TypeScript) ===
+[22:56:10] Starting: 9662
+[22:56:13] Form: VIN=6H8K4M360VL969730 EMAIL=user_o6ayi8xt@outlook.com
+[22:56:13] Waiting for payment form...
+[22:56:14] Processing transaction...
+[22:56:14] Timeout waiting for result selectors, analyzing page as-is
+[22:56:19] Result: FAIL
+[22:56:19] Processed 9662 -> FAIL. 0 left.
+[22:56:19] === Session Finished ===
+[05:55:00] === CC Checker Session Started (TypeScript) ===
+[05:55:01] Starting: 3605
+[05:55:04] Form: VIN=6H8N4UHF6WX284972 EMAIL=user_1ltnmhjs@outlook.com
+[05:55:05] Waiting for payment form...
+[05:55:05] Processing transaction...
+[05:55:05] Timeout waiting for result selectors, analyzing page as-is
+[05:55:10] Result: FAIL
+[05:55:10] Processed 3605 -> FAIL. 6 left.
+[05:55:12] Starting: 9662
+[05:55:15] Form: VIN=6H8LJCX58ZK115251 EMAIL=user_9dsx5ypi@outlook.com
+[05:55:15] Waiting for payment form...
+[05:55:15] Processing transaction...
+[05:55:15] Timeout waiting for result selectors, analyzing page as-is
+[05:55:20] Result: FAIL
+[05:55:20] Processed 9662 -> FAIL. 5 left.
+[05:55:22] Starting: 2656
+[05:55:25] Form: VIN=6H8MLGV82T0987625 EMAIL=user_pb453e9a@outlook.com
+[05:55:25] Waiting for payment form...
+[05:55:25] Processing transaction...
+[05:55:25] Timeout waiting for result selectors, analyzing page as-is
+[05:55:30] Result: SUCCESS
+[05:55:30] Processed 2656 -> SUCCESS. 4 left.
+[05:55:33] Starting: 5528
+[05:55:35] Form: VIN=6H8JXRU12SL525473 EMAIL=user_cn7vck6h@outlook.com
+[05:55:36] Waiting for payment form...
+[05:55:36] Processing transaction...
+[05:55:36] Timeout waiting for result selectors, analyzing page as-is
+[05:55:41] Result: FAIL
+[05:55:41] Processed 5528 -> FAIL. 3 left.
+[05:55:43] Starting: 0074
+[05:55:46] Form: VIN=6H8AD6RW4TW273348 EMAIL=user_omztjxt4@outlook.com
+[05:55:46] Waiting for payment form...
+[05:55:46] Processing transaction...
+[05:55:46] Timeout waiting for result selectors, analyzing page as-is
+[05:55:51] Result: SUCCESS
+[05:55:51] Processed 0074 -> SUCCESS. 2 left.
+[05:55:53] Starting: 0055
+[05:55:56] Form: VIN=6H82EFEB8R0494726 EMAIL=user_pdmxdfc8@outlook.com
+[05:55:56] Waiting for payment form...
+[05:55:56] Processing transaction...
+[05:55:56] Timeout waiting for result selectors, analyzing page as-is
+[05:56:01] Result: SUCCESS
+[05:56:01] Processed 0055 -> SUCCESS. 1 left.
+[05:56:03] Starting: 4650
+[05:56:06] Form: VIN=6H8YC30G9SD283809 EMAIL=user_w070solo@outlook.com
+[05:56:06] Waiting for payment form...
+[05:56:06] Processing transaction...
+[05:56:06] Timeout waiting for result selectors, analyzing page as-is
+[05:56:11] Result: FAIL
+[05:56:11] Processed 4650 -> FAIL. 0 left.
+[05:56:11] === Session Finished ===
+[06:18:55] === CC Checker Session Started (TypeScript) ===
+[06:18:56] Starting: 3599
+[06:18:58] Form: VIN=6H8ZSTAF7WL213850 EMAIL=user_6eqvfmws@outlook.com
+[06:18:59] Waiting for payment form...
+[06:18:59] Processing transaction...
+[06:18:59] Timeout waiting for result selectors, analyzing page as-is
+[06:19:04] Result: FAIL
+[06:19:04] Processed 3599 -> FAIL. 0 left.
+[06:19:04] === Session Finished ===
+[06:19:46] === CC Checker Session Started (TypeScript) ===
+[06:19:46] Starting: 9050
+[06:19:49] Form: VIN=6H8XK0EB6VF044611 EMAIL=user_r57lkg86@outlook.com
+[06:19:49] Waiting for payment form...
+[06:19:49] Processing transaction...
+[06:19:49] Timeout waiting for result selectors, analyzing page as-is
+[06:19:54] Result: FAIL
+[06:19:54] Processed 9050 -> FAIL. 0 left.
+[06:19:54] === Session Finished ===
+[06:21:36] === CC Checker Session Started (TypeScript) ===
+[06:21:36] Starting: 3599
+[06:21:39] Form: VIN=6H8UPLFJ8XK684583 EMAIL=user_vlyj9fsc@outlook.com
+[06:21:39] Waiting for payment form...
+[06:21:39] Processing transaction...
+[06:21:39] Timeout waiting for result selectors, analyzing page as-is
+[06:21:44] Result: FAIL
+[06:21:44] Processed 3599 -> FAIL. 1 left.
+[06:21:46] Starting: 6439
+[06:21:49] Form: VIN=6H8FZGKJ1ZT858569 EMAIL=user_p32rthw1@outlook.com
+[06:21:50] Waiting for payment form...
+[06:21:50] Processing transaction...
+[06:21:50] Timeout waiting for result selectors, analyzing page as-is
+[06:21:55] Result: SUCCESS
+[06:21:55] Processed 6439 -> SUCCESS. 0 left.
+[06:21:55] === Session Finished ===
+[06:23:23] === CC Checker Session Started (TypeScript) ===
+[06:23:23] Starting: 6439
+[06:23:26] Form: VIN=6H8LZG3G0U2573947 EMAIL=user_aljwiioh@outlook.com
+[06:23:26] Waiting for payment form...
+[06:23:26] Processing transaction...
+[06:23:26] Timeout waiting for result selectors, analyzing page as-is
+[06:23:31] Result: FAIL
+[06:23:31] Processed 6439 -> FAIL. 0 left.
+[06:23:31] === Session Finished ===
+[06:26:22] === CC Checker Session Started (TypeScript) ===
+[06:26:22] Starting: 1765
+[06:26:25] Form: VIN=6H8J0F0B9ZM775427 EMAIL=user_iu8shw3x@outlook.com
+[06:26:25] Waiting for payment form...
+[06:26:26] Processing transaction...
+[06:26:26] Timeout waiting for result selectors, analyzing page as-is
+[06:26:31] Result: FAIL
+[06:26:31] Processed 1765 -> FAIL. 1 left.
+[06:26:33] Starting: 4650
+[06:26:36] Form: VIN=6H8298DK8UW747180 EMAIL=user_cvz1b3g4@outlook.com
+[06:26:36] Waiting for payment form...
+[06:26:36] Processing transaction...
+[06:26:36] Timeout waiting for result selectors, analyzing page as-is
+[06:26:41] Result: FAIL
+[06:26:41] Processed 4650 -> FAIL. 0 left.
+[06:26:41] === Session Finished ===
+[05:17:22] === CC Checker Session Started (TypeScript) ===
+[05:17:23] Starting: 0055
+[05:17:25] Form: VIN=6H8JRWCW4YN383002 EMAIL=user_ww90ze88@outlook.com
+[05:17:26] Waiting for payment form...
+[05:17:26] Processing transaction...
+[05:17:26] Timeout waiting for result selectors, analyzing page as-is
+[05:17:31] Result: SUCCESS
+[05:17:31] Processed 0055 -> SUCCESS. 6 left.
+[05:17:33] Starting: 2554
+[05:17:35] Form: VIN=6H8F91EYXUF505373 EMAIL=user_ie4nqupb@outlook.com
+[05:17:35] Waiting for payment form...
+[05:17:35] Processing transaction...
+[05:17:35] Timeout waiting for result selectors, analyzing page as-is
+[05:17:40] Result: FAIL
+[05:17:40] Processed 2554 -> FAIL. 5 left.
+[05:17:42] Starting: 3777
+[05:17:44] Form: VIN=6H8ZC2HT9VR921550 EMAIL=user_2c800g46@outlook.com
+[05:17:45] Waiting for payment form...
+[05:17:45] Processing transaction...
+[05:17:45] Timeout waiting for result selectors, analyzing page as-is
+[05:17:50] Result: FAIL
+[05:17:50] Processed 3777 -> FAIL. 4 left.
+[05:17:52] Starting: 6454
+[05:17:54] Form: VIN=6H8VWZREXYJ588728 EMAIL=user_wpr11p3x@outlook.com
+[05:17:54] Waiting for payment form...
+[05:17:54] Processing transaction...
+[05:17:54] Timeout waiting for result selectors, analyzing page as-is
+[05:17:59] Result: FAIL
+[05:17:59] Processed 6454 -> FAIL. 3 left.
+[05:18:01] Starting: 2802
+[05:18:03] Form: VIN=6H8TVMG39SC649335 EMAIL=user_94q6f3oa@outlook.com
+[05:18:03] Waiting for payment form...
+[05:18:04] Processing transaction...
+[05:18:04] Timeout waiting for result selectors, analyzing page as-is
+[05:18:09] Result: FAIL
+[05:18:09] Processed 2802 -> FAIL. 2 left.
+[05:18:11] Starting: 1027
+[05:18:13] Form: VIN=6H80KRYR4YE989484 EMAIL=user_gecrb4te@outlook.com
+[05:18:13] Waiting for payment form...
+[05:18:14] Processing transaction...
+[05:18:14] Timeout waiting for result selectors, analyzing page as-is
+[05:18:19] Result: FAIL
+[05:18:19] Processed 1027 -> FAIL. 1 left.
+[05:18:21] Starting: 0290
+[05:18:23] Form: VIN=6H85CJ41XZP505523 EMAIL=user_k8oenex2@outlook.com
+[05:18:23] Waiting for payment form...
+[05:18:23] Processing transaction...
+[05:18:23] Timeout waiting for result selectors, analyzing page as-is
+[05:18:28] Result: FAIL
+[05:18:28] Processed 0290 -> FAIL. 0 left.
+[05:18:28] === Session Finished ===
+[05:54:16] === CC Checker Session Started (TypeScript) ===
+[05:54:17] Starting: 4987
+[05:54:19] Form: VIN=6H8EE1NC7TG679339 EMAIL=user_k7p5q3kq@outlook.com
+[05:54:19] Waiting for payment form...
+[05:54:19] Processing transaction...
+[05:54:19] Timeout waiting for result selectors, analyzing page as-is
+[05:54:24] Result: FAIL
+[05:54:24] Processed 4987 -> FAIL. 185 left.
+[05:54:26] Starting: 9662
+[05:54:29] Form: VIN=6H8NJ60W6XA106323 EMAIL=user_je0q14y7@outlook.com
+[05:54:29] Waiting for payment form...
+[05:54:29] Processing transaction...
+[05:54:29] Timeout waiting for result selectors, analyzing page as-is
+[05:54:34] Result: FAIL
+[05:54:34] Processed 9662 -> FAIL. 184 left.
+[05:55:11] === CC Checker Session Started (TypeScript) ===
+[05:55:12] Starting: 6454
+[05:55:14] Form: VIN=6H86RT7G4YP460916 EMAIL=user_x73hlr7w@outlook.com
+[05:55:14] Waiting for payment form...
+[05:55:14] Processing transaction...
+[05:55:14] Timeout waiting for result selectors, analyzing page as-is
+[05:55:19] Result: FAIL
+[05:55:19] Processed 6454 -> FAIL. 3 left.
+[05:55:22] Starting: 2802
+[05:55:24] Form: VIN=6H8WX7332TX025918 EMAIL=user_w3rp8p26@outlook.com
+[05:55:24] Waiting for payment form...
+[05:55:24] Processing transaction...
+[05:55:24] Timeout waiting for result selectors, analyzing page as-is
+[05:55:29] Result: FAIL
+[05:55:29] Processed 2802 -> FAIL. 2 left.
+[05:55:31] Starting: 1027
+[05:55:33] Form: VIN=6H8EPPM9XY9572137 EMAIL=user_le6tnbto@outlook.com
+[05:55:33] Waiting for payment form...
+[05:55:34] Processing transaction...
+[05:55:34] Timeout waiting for result selectors, analyzing page as-is
+[05:55:39] Result: FAIL
+[05:55:39] Processed 1027 -> FAIL. 1 left.
+[05:55:41] Starting: 0290
+[05:55:43] Form: VIN=6H8074510YK142224 EMAIL=user_b4g7z1i3@outlook.com
+[05:55:44] Waiting for payment form...
+[05:55:44] Processing transaction...
+[05:55:44] Timeout waiting for result selectors, analyzing page as-is
+[05:55:49] Result: FAIL
+[05:55:49] Processed 0290 -> FAIL. 0 left.
+[05:55:49] === Session Finished ===
+[06:00:30] === CC Checker Session Started (TypeScript) ===
+[06:00:31] Starting: 9395
+[06:00:33] Form: VIN=6H8GVMH21T0641188 EMAIL=user_bjpdwzks@outlook.com
+[06:00:33] Waiting for payment form...
+[06:00:34] Processing transaction...
+[06:00:34] Timeout waiting for result selectors, analyzing page as-is
+[06:00:39] Result: FAIL
+[06:00:39] Processed 9395 -> FAIL. 3 left.
+[06:00:41] Starting: 4172
+[06:00:43] Form: VIN=6H80JTUM9Y9124612 EMAIL=user_sibzy4zp@outlook.com
+[06:00:43] Waiting for payment form...
+[06:00:43] Processing transaction...
+[06:00:43] Timeout waiting for result selectors, analyzing page as-is
+[06:00:48] Result: FAIL
+[06:00:48] Processed 4172 -> FAIL. 2 left.
+[06:00:51] Starting: 0813
+[06:00:52] Form: VIN=6H80AN389XU196499 EMAIL=user_7e15ws0k@outlook.com
+[06:00:53] Waiting for payment form...
+[06:00:53] Processing transaction...
+[06:00:53] Timeout waiting for result selectors, analyzing page as-is
+[06:00:58] Result: FAIL
+[06:00:58] Processed 0813 -> FAIL. 1 left.
+[06:01:00] Starting: 9065
+[06:01:02] Form: VIN=6H8ER58V0Y5709504 EMAIL=user_q4c6a6ul@outlook.com
+[06:01:02] Waiting for payment form...
+[06:01:02] Processing transaction...
+[06:01:02] Timeout waiting for result selectors, analyzing page as-is
+[06:01:07] Result: FAIL
+[06:01:07] Processed 9065 -> FAIL. 0 left.
+[06:01:07] === Session Finished ===
+[00:57:29] === CC Checker Session Started (TypeScript) ===
+[00:57:30] Starting: 5001
+[00:57:33] Form: VIN=6H8JX55B7VR981289 EMAIL=user_iali0zeb@outlook.com
+[00:57:33] Waiting for payment form...
+[00:57:34] Processing transaction...
+[00:57:34] Timeout waiting for result selectors, analyzing page as-is
+[00:57:39] Result: FAIL
+[00:57:39] Processed 5001 -> FAIL. 0 left.
+[00:57:39] === Session Finished ===
+[01:04:36] === CC Checker Session Started (TypeScript) ===
+[01:04:36] Starting: 8954
+[01:04:42] Form: VIN=6H8LTTH6XYA573508 EMAIL=user_kr3gix10@outlook.com
+[01:04:42] Waiting for payment form...
+[01:04:43] Processing transaction...
+[01:04:43] Timeout waiting for result selectors, analyzing page as-is
+[01:04:48] Result: FAIL
+[01:04:48] Processed 8954 -> FAIL. 1 left.
+[01:04:50] Starting: 0712
+[01:04:55] Form: VIN=6H8CZ1CY9T3812118 EMAIL=user_zhc9rwbg@outlook.com
+[01:04:56] Waiting for payment form...
+[01:04:57] Processing transaction...
+[01:04:57] Timeout waiting for result selectors, analyzing page as-is
+[01:05:02] Result: FAIL
+[01:05:02] Processed 0712 -> FAIL. 0 left.
+[01:05:02] === Session Finished ===
+[01:07:55] === CC Checker Session Started (TypeScript) ===
+[01:07:56] Starting: 6533
+[01:07:59] Form: VIN=6H8RLG128R1904807 EMAIL=user_pkftg8cb@outlook.com
+[01:08:00] Waiting for payment form...
+[01:08:00] Processing transaction...
+[01:08:01] Timeout waiting for result selectors, analyzing page as-is
+[01:08:06] Result: FAIL
+[01:08:06] Processed 6533 -> FAIL. 7 left.
+[01:08:08] Starting: 2929
+[01:08:12] Form: VIN=6H8LR6CZ4UM577516 EMAIL=user_ey1tgvmr@outlook.com
+[01:08:12] Waiting for payment form...
+[01:08:12] Processing transaction...
+[01:08:12] Timeout waiting for result selectors, analyzing page as-is
+[01:08:17] Result: FAIL
+[01:08:17] Processed 2929 -> FAIL. 6 left.
+[01:08:20] Starting: 2067
+[01:08:25] Form: VIN=6H88ZV50XWR907051 EMAIL=user_40q6hvt0@outlook.com
+[01:08:25] Waiting for payment form...
+[01:08:25] Processing transaction...
+[01:08:25] Timeout waiting for result selectors, analyzing page as-is
+[01:08:31] Result: FAIL
+[01:08:31] Processed 2067 -> FAIL. 5 left.
+[01:08:33] Starting: 6618
+[01:08:36] Form: VIN=6H8N2L1F0TE702850 EMAIL=user_3z07qt1j@outlook.com
+[01:08:36] Waiting for payment form...
+[01:08:37] Processing transaction...
+[01:08:37] Timeout waiting for result selectors, analyzing page as-is
+[01:08:42] Result: FAIL
+[01:08:42] Processed 6618 -> FAIL. 4 left.
+[01:08:44] Starting: 2878
+[01:08:47] Form: VIN=6H8FM49F5T3574352 EMAIL=user_6fgdit95@outlook.com
+[01:08:47] Waiting for payment form...
+[01:08:48] Processing transaction...
+[01:08:48] Timeout waiting for result selectors, analyzing page as-is
+[01:08:53] Result: FAIL
+[01:08:53] Processed 2878 -> FAIL. 3 left.
+[01:08:55] Starting: 5837
+[01:09:02] Form: VIN=6H8K4XS4XXT646628 EMAIL=user_lvjuvhly@outlook.com
+[01:09:03] Waiting for payment form...
+[01:09:04] Processing transaction...
+[01:09:04] Timeout waiting for result selectors, analyzing page as-is
+[01:09:09] Result: FAIL
+[01:09:09] Processed 5837 -> FAIL. 2 left.
+[01:09:11] Starting: 3217
+[01:09:16] Form: VIN=6H80NG4B7Y5153964 EMAIL=user_p323bijh@outlook.com
+[01:09:16] Waiting for payment form...
+[01:09:16] Processing transaction...
+[01:09:16] Timeout waiting for result selectors, analyzing page as-is
+[01:09:21] Result: FAIL
+[01:09:21] Processed 3217 -> FAIL. 1 left.
+[01:09:23] Starting: 8695
+[01:09:27] Form: VIN=6H8950ZH3T4770529 EMAIL=user_6i917e37@outlook.com
+[01:09:27] Waiting for payment form...
+[01:09:28] Processing transaction...
+[01:09:28] Timeout waiting for result selectors, analyzing page as-is
+[01:09:33] Result: FAIL
+[01:09:33] Processed 8695 -> FAIL. 0 left.
+[01:09:33] === Session Finished ===
+[09:18:05] === CC Checker Session Started (TypeScript) ===
+[09:18:06] Starting: 1051
+[09:18:09] Form: VIN=6H8WVH7C8WD808804 EMAIL=user_ftsvb3ln@outlook.com
+[09:18:09] Waiting for payment form...
+[09:18:09] Processing transaction...
+[09:18:09] Timeout waiting for result selectors, analyzing page as-is
+[09:18:14] Result: FAIL
+[09:18:14] Processed 1051 -> FAIL. 11 left.
+[09:18:16] Starting: 8033
+[09:18:19] Form: VIN=6H8Z0L0B0Z0071383 EMAIL=user_pj0u7ci7@outlook.com
+[09:18:19] Waiting for payment form...
+[09:18:19] Processing transaction...
+[09:18:19] Timeout waiting for result selectors, analyzing page as-is
+[09:18:25] Result: FAIL
+[09:18:25] Processed 8033 -> FAIL. 10 left.
+[09:18:27] Starting: 5734
+[09:18:30] Form: VIN=6H8E10676YP716332 EMAIL=user_iynlz150@outlook.com
+[09:18:30] Waiting for payment form...
+[09:18:30] Processing transaction...
+[09:18:30] Timeout waiting for result selectors, analyzing page as-is
+[09:18:35] Result: FAIL
+[09:18:35] Processed 5734 -> FAIL. 9 left.
+[09:18:37] Starting: 9442
+[09:18:40] Form: VIN=6H8H80MZ0ZF201959 EMAIL=user_tmwbgoq2@outlook.com
+[09:18:40] Waiting for payment form...
+[09:18:41] Processing transaction...
+[09:18:41] Timeout waiting for result selectors, analyzing page as-is
+[09:18:46] Result: FAIL
+[09:18:46] Processed 9442 -> FAIL. 8 left.
+[09:18:48] Starting: 0136
+[09:18:50] Form: VIN=6H8BW8029Y4059740 EMAIL=user_sjedq60j@outlook.com
+[09:18:51] Waiting for payment form...
+[09:18:51] Processing transaction...
+[09:18:51] Timeout waiting for result selectors, analyzing page as-is
+[09:18:56] Result: FAIL
+[09:18:56] Processed 0136 -> FAIL. 7 left.
+[09:18:58] Starting: 0543
+[09:19:01] Form: VIN=6H8HN3U29X1552327 EMAIL=user_l8ps0z07@outlook.com
+[09:19:01] Waiting for payment form...
+[09:19:02] Processing transaction...
+[09:19:02] Timeout waiting for result selectors, analyzing page as-is
+[09:19:07] Result: FAIL
+[09:19:07] Processed 0543 -> FAIL. 6 left.
+[09:19:09] Starting: 5303
+[09:19:11] Form: VIN=6H8HPXJH5YM801054 EMAIL=user_bcr6toqn@outlook.com
+[09:19:12] Waiting for payment form...
+[09:19:12] Processing transaction...
+[09:19:12] Timeout waiting for result selectors, analyzing page as-is
+[09:19:17] Result: FAIL
+[09:19:17] Processed 5303 -> FAIL. 5 left.
+[09:19:19] Starting: 3023
+[09:19:24] Form: VIN=6H8CVU9UXVX335518 EMAIL=user_95a1tejb@outlook.com
+[09:19:24] Waiting for payment form...
+[09:19:24] Processing transaction...
+[09:19:24] Timeout waiting for result selectors, analyzing page as-is
+[09:19:29] Result: FAIL
+[09:19:29] Processed 3023 -> FAIL. 4 left.
+[09:19:31] Starting: 5748
+[09:19:34] Form: VIN=6H80HPN68VY748616 EMAIL=user_h3gw8nhh@outlook.com
+[09:19:34] Waiting for payment form...
+[09:19:35] Processing transaction...
+[09:19:35] Timeout waiting for result selectors, analyzing page as-is
+[09:19:40] Result: FAIL
+[09:19:40] Processed 5748 -> FAIL. 3 left.
+[09:19:42] Starting: 6693
+[09:19:50] Form: VIN=6H86F9KY8ZV844092 EMAIL=user_dcd22zvc@outlook.com
+[09:19:50] Waiting for payment form...
+[09:19:50] Processing transaction...
+[09:19:50] Timeout waiting for result selectors, analyzing page as-is
+[09:19:55] Result: FAIL
+[09:19:55] Processed 6693 -> FAIL. 2 left.
+[09:19:57] Starting: 1217
+[09:20:00] Form: VIN=6H8C8F8JXWB325094 EMAIL=user_tytxmijz@outlook.com
+[09:20:02] Waiting for payment form...
+[09:20:02] Processing transaction...
+[09:20:02] Timeout waiting for result selectors, analyzing page as-is
+[09:20:07] Result: FAIL
+[09:20:07] Processed 1217 -> FAIL. 1 left.
+[09:20:09] Starting: 1246
+[09:20:12] Form: VIN=6H8TNY4Y6WF164274 EMAIL=user_ek1bxbxp@outlook.com
+[09:20:13] Waiting for payment form...
+[09:20:13] Processing transaction...
+[09:20:13] Timeout waiting for result selectors, analyzing page as-is
+[09:20:18] Result: FAIL
+[09:20:18] Processed 1246 -> FAIL. 0 left.
+[09:20:18] === Session Finished ===
+[08:36:56] === CC Checker Session Started (TypeScript) ===
+[08:36:57] Starting: 8086
+[08:37:00] Form: VIN=6H8Y9DUL2SR976428 EMAIL=user_amackzak@outlook.com
+[08:37:00] Waiting for payment form...
+[08:37:00] Processing transaction...
+[08:37:00] Timeout waiting for result selectors, analyzing page as-is
+[08:37:05] Result: FAIL
+[08:37:05] Processed 8086 -> FAIL. 0 left.
+[08:37:05] === Session Finished ===
+[08:55:16] === CC Checker Session Started (TypeScript) ===
+[08:55:17] Starting: 5792
+[08:55:19] Form: VIN=6H8XFPL32XX451847 EMAIL=user_pjv0eddp@outlook.com
+[08:55:20] Waiting for payment form...
+[08:55:20] Processing transaction...
+[08:55:20] Timeout waiting for result selectors, analyzing page as-is
+[08:55:25] Result: FAIL
+[08:55:25] Processed 5792 -> FAIL. 2 left.
+[08:55:27] Starting: 2682
+[08:55:29] Form: VIN=6H8KMVZU5YF221845 EMAIL=user_8rx8d8hr@outlook.com
+[08:55:29] Waiting for payment form...
+[08:55:30] Processing transaction...
+[08:55:30] Timeout waiting for result selectors, analyzing page as-is
+[08:55:35] Result: SUCCESS
+[08:55:35] Processed 2682 -> SUCCESS. 1 left.
+[08:55:37] Starting: 5240
+[08:55:39] Form: VIN=6H871E6A0UD936417 EMAIL=user_844y507p@outlook.com
+[08:55:39] Waiting for payment form...
+[08:55:39] Processing transaction...
+[08:55:39] Timeout waiting for result selectors, analyzing page as-is
+[08:55:44] Result: SUCCESS
+[08:55:44] Processed 5240 -> SUCCESS. 0 left.
+[08:55:44] === Session Finished ===
+[05:26:21] === CC Checker Session Started (TypeScript) ===
+[05:26:22] Starting: 1984
+[05:26:27] Form: VIN=6H8YZ87CXU7633402 EMAIL=user_7r75q0ta@outlook.com
+[05:26:28] Waiting for payment form...
+[05:26:29] Processing transaction...
+[05:26:29] Timeout waiting for result selectors, analyzing page as-is
+[05:26:34] Result: FAIL
+[05:26:34] Processed 1984 -> FAIL. 5 left.
+[05:26:36] Starting: 7851
+[05:26:41] Form: VIN=6H8RK8FA4W2500174 EMAIL=user_surcv863@outlook.com
+[05:26:41] Waiting for payment form...
+[05:26:41] Processing transaction...
+[05:26:41] Timeout waiting for result selectors, analyzing page as-is
+[05:26:46] Result: FAIL
+[05:26:46] Processed 7851 -> FAIL. 4 left.
+[05:26:48] Starting: 7353
+[05:26:53] Form: VIN=6H8T0ZU17UJ446781 EMAIL=user_7e9pt51u@outlook.com
+[05:26:53] Waiting for payment form...
+[05:26:54] Processing transaction...
+[05:26:54] Timeout waiting for result selectors, analyzing page as-is
+[05:26:59] Result: FAIL
+[05:26:59] Processed 7353 -> FAIL. 3 left.
+[05:27:01] Starting: 7155
+[05:27:05] Form: VIN=6H80WB3F5S1671378 EMAIL=user_x645vair@outlook.com
+[05:27:06] Waiting for payment form...
+[05:27:06] Processing transaction...
+[05:27:06] Timeout waiting for result selectors, analyzing page as-is
+[05:27:11] Result: FAIL
+[05:27:11] Processed 7155 -> FAIL. 2 left.
+[05:27:13] Starting: 3826
+[05:27:17] Form: VIN=6H8PBVL06TD733636 EMAIL=user_u9vrqdjn@outlook.com
+[05:27:18] Waiting for payment form...
+[05:27:18] Processing transaction...
+[05:27:18] Timeout waiting for result selectors, analyzing page as-is
+[05:27:23] Result: FAIL
+[05:27:23] Processed 3826 -> FAIL. 1 left.
+[05:27:25] Starting: 2010
+[05:27:33] Form: VIN=6H8CSN4M6VG971990 EMAIL=user_3rtyccg3@outlook.com
+[05:27:34] Waiting for payment form...
+[05:27:35] Processing transaction...
+[05:27:35] Timeout waiting for result selectors, analyzing page as-is
+[05:27:40] Result: FAIL
+[05:27:40] Processed 2010 -> FAIL. 0 left.
+[05:27:40] === Session Finished ===

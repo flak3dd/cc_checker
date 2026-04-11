@@ -8,12 +8,13 @@ import Animated, {
   withDelay,
   withSpring,
   withTiming,
-  withRepeat,
   withSequence,
+  withRepeat,
   Easing,
   interpolate,
 } from 'react-native-reanimated';
 import { colors, spacing, radii, fontSize, motion, shadows } from '@/constants/theme';
+import { TrendChart } from './LineChart';
 
 interface HeroStatsProps {
   passCount: number;
@@ -136,49 +137,33 @@ export const HeroStats: React.FC<HeroStatsProps> = ({
         <View style={styles.heroDivider} />
 
         <View style={styles.heroRight}>
-          {/* Live */}
-          <View style={styles.heroStatRow}>
-            <View style={[styles.heroDot, { backgroundColor: colors.success }]} />
-            <View style={styles.heroStatText}>
+          <TrendChart
+            passCount={passCount}
+            failCount={failCount}
+            totalChecked={totalChecked}
+            successRate={successRate}
+          />
+
+          {/* Stats summary */}
+          <View style={styles.heroStatsSummary}>
+            <View style={styles.heroStatRow}>
+              <View style={[styles.heroDot, { backgroundColor: colors.success }]} />
               <Text style={[styles.heroStatValue, { color: colors.success }]}>{passCount}</Text>
               <Text style={styles.heroStatLabel}>LIVE</Text>
             </View>
-            <View style={[styles.heroBar, { backgroundColor: colors.success + '15' }]}>
-              <View style={[
-                styles.heroBarFill,
-                {
-                  backgroundColor: colors.success,
-                  width: totalChecked > 0 ? `${(passCount / totalChecked) * 100}%` : '0%',
-                },
-              ]} />
-            </View>
-          </View>
 
-          {/* Dead */}
-          <View style={styles.heroStatRow}>
-            <View style={[styles.heroDot, { backgroundColor: colors.danger }]} />
-            <View style={styles.heroStatText}>
+            <View style={styles.heroStatRow}>
+              <View style={[styles.heroDot, { backgroundColor: colors.danger }]} />
               <Text style={[styles.heroStatValue, { color: colors.danger }]}>{failCount}</Text>
               <Text style={styles.heroStatLabel}>DEAD</Text>
             </View>
-            <View style={[styles.heroBar, { backgroundColor: colors.danger + '15' }]}>
-              <View style={[
-                styles.heroBarFill,
-                {
-                  backgroundColor: colors.danger,
-                  width: totalChecked > 0 ? `${(failCount / totalChecked) * 100}%` : '0%',
-                },
-              ]} />
+
+            <View style={styles.heroMiniDivider} />
+
+            <View style={styles.heroTotalRow}>
+              <Text style={styles.heroTotalLabel}>TOTAL CHECKED</Text>
+              <Text style={styles.heroTotalValue}>{totalChecked}</Text>
             </View>
-          </View>
-
-          {/* Divider */}
-          <View style={styles.heroMiniDivider} />
-
-          {/* Total */}
-          <View style={styles.heroTotalRow}>
-            <Text style={styles.heroTotalLabel}>CHECKED</Text>
-            <Text style={styles.heroTotalValue}>{totalChecked}</Text>
           </View>
         </View>
       </Animated.View>
@@ -254,6 +239,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: spacing.lg,
   },
+  heroStatsSummary: {
+    gap: spacing.sm,
+  },
   heroStatRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -279,16 +267,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     marginTop: -1,
   },
-  heroBar: {
-    flex: 1,
-    height: 3,
-    borderRadius: 1.5,
-    overflow: 'hidden',
-  },
-  heroBarFill: {
-    height: '100%',
-    borderRadius: 1.5,
-  },
+
 
   heroMiniDivider: {
     height: 1,

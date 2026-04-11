@@ -36,15 +36,21 @@ function logger(msg: string) {
   fs.appendFileSync(logFile, formatted + '\n');
 }
 
-async function gotoWithRetry(page: Page, url: string, retries = 3) {
+async function gotoWithRetry(page: Page, url: string, retries = 3 /*, id: number */) {
   for (let i = 0; i < retries; i++) {
     try {
-      await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await page.goto(url, { 
+        waitUntil: 'domcontentloaded', 
+        timeout: 45000
+      });
       return true;
     } catch (e: any) {
-      logger(`Navigation attempt ${i + 1} failed: ${e.message}`);
+      console.log(`[NAV FAIL ${i+1}] ${e.message}`);  // Silent log, no id available
       if (i === retries - 1) throw e;
-      await page.waitForTimeout(5000);
+      try {
+        await page.reload({ waitUntil: 'domcontentloaded', timeout: 20000 });
+      } catch {}
+      await page.waitForTimeout(3000);
     }
   }
 }
@@ -118,7 +124,18 @@ function recordHit(plate: string, details: string) {
 // --- Worker ---
 async function worker(id: number, context: BrowserContext, hitsRef: { count: number }) {
   const page = await context.newPage();
-  page.on('pageerror', err => logger(`[W${id}][PAGE ERROR] ${err.message}`));
+page.on('pageerror', err => {
+  const msg = err.message;
+  // Suppress __name__ completely (logged via console if needed)
+});
+page.on('console', msg => {
+  if (msg.type() === 'error') {
+    const text = msg.text();
+    if (!text.includes('__name__') && !text.includes('CORS') && !text.includes('Failed to load resource')) {
+      logger(`[W${id}][CONSOLE ERROR] ${text}`);
+    }
+  }
+});
 
   let localAttempts = 0;
 
@@ -134,7 +151,7 @@ async function worker(id: number, context: BrowserContext, hitsRef: { count: num
 
     try {
       await gotoWithRetry(page, 'https://online.transport.wa.gov.au/webExternal/accountlookup/');
-      await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
+      await page.waitForLoadState('load', { timeout: 15000 }).catch(() => {});
 
       const plateInput = await page.waitForSelector('input[name="plateTextField"]', { timeout: 10000 });
       await page.fill('input[name="mdlNumberTextField"]', '');

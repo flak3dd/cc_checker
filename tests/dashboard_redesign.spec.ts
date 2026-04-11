@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Dashboard Modernization E2E', () => {
+  const BASE_URL = process.env.BASE_URL || 'http://localhost:8000';
+
   test.beforeEach(async ({ page }) => {
-    // Wait for the app to be available (port 8085 as per start.sh)
-    await page.goto('http://localhost:8085', { waitUntil: 'networkidle' });
+    // Wait for the app to be available (port 8000 as per investigation)
+    await page.goto(BASE_URL, { waitUntil: 'networkidle' });
     // Reduced splash animation to 2.5s + asset loading. 5s is safe.
     await page.waitForTimeout(5000);
   });

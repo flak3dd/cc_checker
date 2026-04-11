@@ -11,8 +11,15 @@ const PRODUCTION_API_URL = process.env.EXPO_PUBLIC_API_URL || '';
 function getApiBaseUrl(): string {
   if (Platform.OS === 'web') {
     // If we're on web and PRODUCTION_API_URL is set, use it.
+    if (PRODUCTION_API_URL) return PRODUCTION_API_URL;
+    
+    // In local development, if we're accessing via localhost or 127.0.0.1, use port 8000 on that same host.
+    if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname.startsWith('192.168.'))) {
+      return `${window.location.protocol}//${window.location.hostname}:8000`;
+    }
+    
     // Otherwise, use relative URLs (empty string) to call the same host.
-    return PRODUCTION_API_URL || '';
+    return '';
   }
 
   // If a production URL is configured for native apps, use it
@@ -136,8 +143,34 @@ export const api = {
     return data;
   },
 
-  getLogTail: async (file: 'wa' | 'results' | 'cc' | 'wa-checkout' = 'wa', lines: number = 50): Promise<{ lines: string[] }> => {
+  getLogTail: async (file: 'wa' | 'results' | 'cc' | 'wa-checkout' | 'gateway2' = 'wa', lines: number = 50): Promise<{ lines: string[] }> => {
     const { data } = await apiClient.get(`/api/logs/tail?file=${file}&lines=${lines}`);
+    return data;
+  },
+
+  // --- Gateway2 API ---
+  getGateway2Status: async (): Promise<ProcessingStatus> => {
+    const { data } = await apiClient.get<ProcessingStatus>('/api/gateway2/status');
+    return data;
+  },
+
+  startGateway2: async (): Promise<{ success: boolean; message: string }> => {
+    const { data } = await apiClient.post('/api/gateway2/start');
+    return data;
+  },
+
+  stopGateway2: async (): Promise<{ success: boolean; message: string }> => {
+    const { data } = await apiClient.post('/api/gateway2/stop');
+    return data;
+  },
+
+  getGateway2Results: async (): Promise<{ results: CardResult[]; total: number; hasMore: boolean }> => {
+    const { data } = await apiClient.get('/api/gateway2/results');
+    return data;
+  },
+
+  clearGateway2Results: async (): Promise<{ success: boolean; message: string }> => {
+    const { data } = await apiClient.post('/api/gateway2/clear');
     return data;
   },
 
@@ -188,8 +221,9 @@ export const api = {
   },
 
   // Paginated results for Results hub
-  getPaginatedResults: async (type: 'cc' | 'wa', page: number = 1, limit: number = 20): Promise<{ results: any[]; hasMore: boolean; total: number }> => {
-    const { data } = await apiClient.get(`/api/results/${type}?page=${page}&limit=${limit}`);
+  getPaginatedResults: async (type: 'cc' | 'wa' | 'gateway2', page: number = 1, limit: number = 20): Promise<{ results: any[]; hasMore: boolean; total: number }> => {
+    const endpoint = type === 'gateway2' ? `/api/gateway2/results?page=${page}&limit=${limit}` : `/api/results/${type}?page=${page}&limit=${limit}`;
+    const { data } = await apiClient.get(endpoint);
     return data;
   },
 };

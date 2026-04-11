@@ -18,7 +18,7 @@ const STEALTH_HEADERS = {
   'Sec-Fetch-Mode': 'navigate',
   'Sec-Fetch-Site': 'none',
   'Sec-Fetch-User': '?1',
-  'Upgrade-Insecure-Requests': '1',
+'Upgrade-Insecure-Requests': undefined,
   'Referer': 'https://www.google.com.au/',
 };
 
@@ -94,18 +94,53 @@ async function applyAntiDetectPatches(context: BrowserContext) {
       csi: () => ({}),
     };
 
-    // Fix for __name is not defined (often caused by bundler-injected code)
-    if (typeof (window as any).__name === 'undefined') {
-      (window as any).__name = (f: any, n: any) => f;
-    }
+    // Enhanced __name fix for Python/WASM errors
+    (globalThis as any).__name = '__main__';
+    (globalThis as any).__name__ = '__main__';
+    Object.defineProperty(globalThis, '__name__', { 
+      value: '__main__', 
+      writable: false, 
+      configurable: false 
+    });
   });
+
+}
+
+/**
+ * Create a new stealth context with Australian defaults and anti-detection patches.
+ */
+export async function createStealthContext(browser: Browser, opts: LaunchOptions = {}): Promise<BrowserContext> {
+  const { viewport, mobile } = opts;
+
+  const contextOpts: any = {
+    viewport: mobile
+      ? { width: 375, height: 667 }
+      : viewport || { width: 1366, height: 768 },
+    userAgent: mobile
+      ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
+      : CHROME_UA,
+    locale: 'en-AU',
+    timezoneId: 'Australia/Sydney',
+    geolocation: { latitude: -33.8688, longitude: 151.2093 }, // Sydney, NSW
+    permissions: ['geolocation'],
+    extraHTTPHeaders: STEALTH_HEADERS,
+    bypassCSP: true,
+    javaScriptEnabled: true,
+    ignoreHTTPSErrors: true,
+    colorScheme: 'light' as const,
+    reducedMotion: 'no-preference' as const,
+  };
+
+  const context = await browser.newContext(contextOpts);
+  await applyAntiDetectPatches(context);
+  return context;
 }
 
 /**
  * Launch a stealth browser + context with Cloudflare-ready headers.
  */
 export async function launchStealthBrowser(opts: LaunchOptions = {}): Promise<{ browser: Browser; context: BrowserContext }> {
-  const { headless = true, viewport, mobile } = opts;
+  const { headless = true } = opts;
 
   const browser = await chromium.launch({
     headless,
@@ -121,29 +156,7 @@ export async function launchStealthBrowser(opts: LaunchOptions = {}): Promise<{ 
     ],
   });
 
-  const contextOpts: any = {
-    viewport: mobile
-      ? { width: 375, height: 667 }
-      : viewport || { width: 1366, height: 768 },
-    userAgent: mobile
-      ? 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
-      : CHROME_UA,
-    locale: 'en-AU',
-    timezoneId: 'Australia/Perth',
-    geolocation: { latitude: -31.9505, longitude: 115.8605 }, // Perth, WA
-    permissions: ['geolocation'],
-    extraHTTPHeaders: STEALTH_HEADERS,
-    bypassCSP: true,
-    javaScriptEnabled: true,
-    ignoreHTTPSErrors: true,
-    colorScheme: 'light' as const,
-    reducedMotion: 'no-preference' as const,
-  };
-
-  const context = await browser.newContext(contextOpts);
-
-  // Apply anti-fingerprint patches to every page
-  await applyAntiDetectPatches(context);
+  const context = await createStealthContext(browser, opts);
 
   return { browser, context };
 }

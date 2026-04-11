@@ -1,127 +1,102 @@
-import React, { useRef, useEffect, useMemo, useState, useCallback } from 'react';
-import { View, StyleSheet, FlatList, Dimensions } from 'react-native';
-import { Modal, Portal, Text } from 'react-native-paper';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { AnimatedPressable } from '@/components/AnimatedPressable';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSSELogs } from '@/hooks/useSSELogs';
-import { useLogTailQuery } from '@/hooks/useQueries';
-import { colors, radii, spacing, fontSize, shadows } from '@/constants/theme';
-
-const SCREEN_HEIGHT = Dimensions.get('window').height;
+import { colors, spacing, fontSize, radii } from '@/constants/theme';
 
 interface LiveLogPanelProps {
-  file: 'wa' | 'cc' | 'results' | 'wa-checkout';
+  tabs?: { file: string; title: string; icon?: string }[];
+  file?: string;
   title?: string;
   height?: number;
-  useSSE?: boolean;
 }
 
 const LogLines: React.FC<{
-  lines: { text: string; color: string }[];
+  lines: { text: string; color: string; timestamp: string }[];
   file: string;
-  flatListRef?: React.RefObject<FlatList> | null;
-}> = ({ lines, file, flatListRef }) => (
+}> = ({ lines, file }) => (
   <FlatList
-    ref={flatListRef}
     data={lines}
-    keyExtractor={(item, index) => `${file}-${index}`}
+    keyExtractor={(_, i) => `${file}-${i}`}
     renderItem={({ item, index }) => (
       <View style={styles.logRow}>
-        <Text style={styles.lineNum}>{String(index + 1).padStart(3, ' ')}</Text>
-        <Text style={[styles.logText, { color: item.color }]} numberOfLines={2}>
-          {item.text}
-        </Text>
+        <Text style={styles.lineNum}>{item.timestamp || String(index + 1).padStart(3, ' ')}</Text>
+        <Text style={[styles.logText, { color: item.color }]} numberOfLines={2}>{item.text}</Text>
       </View>
     )}
     style={styles.scrollView}
     contentContainerStyle={styles.contentContainer}
     showsVerticalScrollIndicator={false}
-    initialNumToRender={20}
-    maxToRenderPerBatch={10}
-    windowSize={10}
-    removeClippedSubviews={true}
+    initialNumToRender={15}
+    maxToRenderPerBatch={8}
   />
 );
 
-export const LiveLogPanel: React.FC<LiveLogPanelProps> = ({ file, title, height = 160, useSSE = false }) => {
-  const getLineColor = useCallback((line: string): string => {
-    const lower = line.toLowerCase();
-    if (lower.includes('[hit') || lower.includes('success') || lower.includes('✓') || lower.includes('pass'))
-      return colors.success;
-    if (lower.includes('[fail') || lower.includes('error') || lower.includes('✗') || lower.includes('failed') || lower.includes('crash'))
-      return colors.terminalError;
-    if (lower.includes('warning') || lower.includes('retry') || lower.includes('timeout') || lower.includes('⏳'))
-      return colors.terminalHighlight;
-    if (lower.includes('start') || lower.includes('running') || lower.includes('session') || lower.includes('==='))
-      return colors.info;
-    if (lower.includes('paused') || lower.includes('waiting') || lower.includes('selected'))
-      return colors.accent;
-    return colors.terminalText;
-  }, []);
+export const LiveLogPanel: React.FC<LiveLogPanelProps> = ({
+  tabs,
+  file,
+  title,
+  height = 160
+}) => {
+  const logTabs = tabs || (file ? [{ file, title: title || file }] : []);
+  if (logTabs.length === 0) return null;
 
-  const sseData = useSSELogs({ file: file as any });
-  const { data: pollData } = useLogTailQuery(file);
-  const scrollRef = useRef<FlatList<any>>(null);
-  const fullscreenScrollRef = useRef<FlatList<any>>(null);
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const activeTab = logTabs[activeTabIndex] || { file: 'wa', title: 'wa' };
+
+  const sseData = useSSELogs({ file: activeTab.file as any });
+  const scrollRef = useRef<FlatList>(null);
   const [expanded, setExpanded] = useState(false);
-  const lines = useSSE ? sseData.lines.map((l: any) => l.text) : (pollData?.lines || []);
-  
+
   const coloredLines = useMemo(
-    () => lines.filter(l => l.trim()).map((line) => ({ text: line, color: getLineColor(line) })),
-    [lines],
+    () => sseData.lines
+      .filter((l: any) => l?.text?.content)
+      .map((l: any) => ({
+        text: l.text.content || '',
+        color: colors.terminalText,
+        timestamp: l.text.timestamp || '',
+      })),
+    [sseData.lines]
   );
 
   useEffect(() => {
-    const ref = expanded ? fullscreenScrollRef : scrollRef;
-    if (ref.current && coloredLines.length > 0) {
-      ref.current.scrollToEnd({ animated: true });
+    if (coloredLines.length > 0 && scrollRef.current) {
+      scrollRef.current.scrollToEnd({ animated: true });
     }
-  }, [coloredLines, expanded]);
+  }, [coloredLines.length]);
 
-  const toggleExpand = useCallback(() => setExpanded(prev => !prev), []);
+  const toggleExpand = () => setExpanded(prev => !prev);
 
   if (coloredLines.length === 0) return null;
 
   return (
-    <>
-      <View style={[styles.container, { height }]}>
-        {title && (
-          <AnimatedPressable onPress={toggleExpand} style={styles.titleRow} haptic="light">
-            <View style={styles.titleLeft}>
-              <MaterialIcons name="terminal" size={12} color={colors.primary} />
-              <Text style={styles.title}>{title}</Text>
-            </View>
-            <View style={styles.titleRight}>
-              <View style={styles.badge}>
-                <Text style={styles.lineCount}>{coloredLines.length}</Text>
-              </View>
-              <MaterialIcons name="open-in-full" size={13} color={colors.textMuted} />
-            </View>
-          </AnimatedPressable>
-        )}
-        <LogLines lines={coloredLines} file={file} flatListRef={scrollRef as any} />
-      </View>
-
-      <Portal>
-        <Modal visible={expanded} onDismiss={toggleExpand} contentContainerStyle={styles.modal}>
-          <View style={styles.modalHeader}>
-            <View style={styles.titleLeft}>
-              <MaterialIcons name="terminal" size={14} color={colors.primary} />
-              <Text style={styles.modalTitle}>{title || file}</Text>
-            </View>
-            <View style={styles.titleRight}>
-              <View style={styles.badge}>
-                <Text style={styles.lineCount}>{coloredLines.length}</Text>
-              </View>
-              <AnimatedPressable onPress={toggleExpand} style={styles.closeBtn}>
-                <MaterialIcons name="close-fullscreen" size={16} color={colors.textSecondary} />
-              </AnimatedPressable>
-            </View>
+    <View style={[styles.container, { height }]}>
+      <TouchableOpacity onPress={toggleExpand} style={styles.titleRow}>
+        <View style={styles.titleLeft}>
+          <Text style={styles.title}>Live Activity</Text>
+        </View>
+        <View style={styles.titleRight}>
+          <View style={styles.badge}>
+            <Text style={styles.lineCount}>{coloredLines.length}</Text>
           </View>
-          <LogLines lines={coloredLines} file={`${file}-full`} flatListRef={fullscreenScrollRef as any} />
-        </Modal>
-      </Portal>
-    </>
+        </View>
+      </TouchableOpacity>
+
+      {logTabs.length > 1 && (
+        <View style={styles.tabsRow}>
+          {logTabs.map((tab, i) => (
+            <TouchableOpacity
+              key={tab.file}
+              onPress={() => setActiveTabIndex(i)}
+              style={[styles.tab, i === activeTabIndex && styles.tabActive]}
+            >
+              <Text style={[styles.tabText, i === activeTabIndex && styles.tabTextActive]}>{tab.title}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      )}
+
+      <LogLines lines={coloredLines} file={activeTab.file} />
+    </View>
   );
 };
 
@@ -129,8 +104,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.terminalBg,
     borderRadius: radii.lg,
-    marginTop: spacing.xs,
-    marginBottom: spacing.md,
     borderWidth: 1,
     borderColor: colors.border,
     overflow: 'hidden',
@@ -139,99 +112,84 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
+    backgroundColor: colors.surface,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
-    backgroundColor: colors.surface,
   },
   titleLeft: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
   },
+  title: {
+    color: colors.primary,
+    fontSize: fontSize.sm,
+    fontWeight: '600',
+  },
   titleRight: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
   },
-  title: {
-    color: colors.textSecondary,
-    fontSize: fontSize.xs,
-    fontWeight: '700',
-    letterSpacing: 1,
-  },
   badge: {
     backgroundColor: colors.primaryMuted,
-    paddingHorizontal: 6,
-    paddingVertical: 1,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing['2xs'],
     borderRadius: radii.sm,
   },
   lineCount: {
     color: colors.primary,
-    fontSize: 10,
+    fontSize: fontSize.xs,
     fontWeight: '600',
-    fontVariant: ['tabular-nums'],
+  },
+  tabsRow: {
+    flexDirection: 'row',
+    backgroundColor: colors.surfaceElevated,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: spacing.sm,
+    alignItems: 'center',
+  },
+  tabActive: {
+    backgroundColor: colors.terminalBg,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.primary,
+  },
+  tabText: {
+    fontSize: fontSize.xs,
+    color: colors.textMuted,
+    fontWeight: '500',
+  },
+  tabTextActive: {
+    color: colors.primary,
+    fontWeight: '600',
   },
   scrollView: {
     flex: 1,
   },
   contentContainer: {
-    paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.sm,
+    padding: spacing.sm,
   },
   logRow: {
     flexDirection: 'row',
-    gap: spacing.xs,
-    paddingVertical: 1,
+    paddingVertical: 2,
   },
   lineNum: {
-    color: colors.textMuted,
-    fontFamily: 'monospace',
-    fontSize: 10,
-    lineHeight: 14,
-    opacity: 0.4,
-    minWidth: 20,
+    fontSize: fontSize.xs,
+    color: colors.terminalDim,
+    minWidth: 45,
     textAlign: 'right',
+    marginRight: spacing.sm,
+    fontFamily: 'monospace',
   },
   logText: {
+    fontSize: fontSize.sm,
     fontFamily: 'monospace',
-    fontSize: 10,
-    lineHeight: 14,
     flex: 1,
-  },
-  modal: {
-    backgroundColor: colors.terminalBg,
-    margin: spacing.lg,
-    borderRadius: radii.xl,
-    borderWidth: 1,
-    borderColor: colors.border,
-    height: SCREEN_HEIGHT * 0.85,
-    overflow: 'hidden',
-    ...shadows.lg,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: spacing.xl,
-    paddingVertical: spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-    backgroundColor: colors.surface,
-  },
-  modalTitle: {
-    color: colors.textPrimary,
-    fontSize: fontSize.md,
-    fontWeight: '700',
-    letterSpacing: 0.5,
-  },
-  closeBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: radii.md,
-    backgroundColor: colors.surfaceElevated,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

@@ -1,0 +1,995 @@
+[04:05:51] === Gateway2 (DonorPerfect) CC Checker Started ===
+[04:05:52] Starting Run 1: 1745
+[04:06:07] Error Run 1: page.goto: Timeout 15000ms exceeded.
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "networkidle"[22m
+
+[04:06:07] Progress: 1/11 (ERROR: page.goto: Timeout 15000ms exceeded.
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "networkidle"[22m
+). 10 remaining.
+[04:06:10] Starting Run 2: 3512
+[04:06:25] Error Run 2: page.goto: Timeout 15000ms exceeded.
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "networkidle"[22m
+
+[04:06:26] Progress: 2/11 (ERROR: page.goto: Timeout 15000ms exceeded.
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "networkidle"[22m
+). 9 remaining.
+[04:06:30] Starting Run 3: 5083
+[04:06:45] Error Run 3: page.goto: Timeout 15000ms exceeded.
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "networkidle"[22m
+
+[04:06:45] Progress: 3/11 (ERROR: page.goto: Timeout 15000ms exceeded.
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "networkidle"[22m
+). 8 remaining.
+[04:06:49] Starting Run 4: 3584
+[04:07:01] Error Run 4: page.goto: Target page, context or browser has been closed
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "networkidle"[22m
+
+[04:07:01] Critical error: Error: page.screenshot: Target page, context or browser has been closed
+[04:08:45] === Gateway2 (DonorPerfect) CC Checker Started ===
+[04:08:45] Starting Run 4: 3584
+[04:09:03] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:09:03] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed First Name (#first_name_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed Last Name (#last_name_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed Address (#address_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed City (#city_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed State (#state_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed Email (#email_ucEmail): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed Card Number (#CardAccountNum_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed Expiry Month (#ExpirationDate_ucExpirationMonth): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed Expiry Year (#ExpirationDate_ucExpirationYear): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] Failed CVV (input[id*="CVV"], input[id*="Cvv"], input[id*="SecurityCode"]): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [!] CVV field not found
+[04:09:03] [-] Failed Confirm Button (#btnConfirm12345): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] [-] Failed Fallback Submit (button:has-text("Donate"), button:has-text("Submit"), input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[04:09:03] Error Run 4: page.waitForTimeout: Target page, context or browser has been closed
+[04:09:03] Critical error: Error: page.screenshot: Target page, context or browser has been closed
+[04:12:44] === Gateway2 (DonorPerfect) CC Checker Started ===
+[04:12:45] Starting Run 4: 3584
+[04:13:11] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:13:19] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:13:19] [+] Filled First Name
+[04:13:19] [+] Filled Last Name
+[04:13:19] [+] Filled Address
+[04:13:19] [+] Filled City
+[04:13:49] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:13:49] [+] Filled Email
+[04:13:49] [+] Filled Card Number
+[04:13:49] [+] Selected Expiry Month: 12
+[04:13:49] [+] Selected Expiry Year: 27
+[04:13:49] [+] Filled CVV
+[04:13:51] [+] Clicked Confirm Button
+[04:13:59] Result 4: UNKNOWN (result_3584_1775708039874.png)
+[04:13:59] Progress: 4/11 (UNKNOWN). 7 remaining.
+[04:14:03] Starting Run 5: 0450
+[04:14:23] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:14:31] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:14:31] [+] Filled First Name
+[04:14:31] [+] Filled Last Name
+[04:14:31] [+] Filled Address
+[04:14:31] [+] Filled City
+[04:15:01] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:15:01] [+] Filled Email
+[04:15:01] [+] Filled Card Number
+[04:15:01] [+] Selected Expiry Month: 04
+[04:15:01] [+] Selected Expiry Year: 26
+[04:15:01] [+] Filled CVV
+[04:15:01] [+] Clicked Confirm Button
+[04:15:09] Result 5: UNKNOWN (result_0450_1775708109465.png)
+[04:15:09] Progress: 5/11 (UNKNOWN). 6 remaining.
+[04:15:13] Starting Run 6: 6686
+[04:15:27] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:15:35] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:15:36] [+] Filled First Name
+[04:15:36] [+] Filled Last Name
+[04:15:36] [+] Filled Address
+[04:15:36] [+] Filled City
+[04:16:06] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:16:06] [+] Filled Email
+[04:16:06] [+] Filled Card Number
+[04:16:06] [+] Selected Expiry Month: 07
+[04:16:06] [+] Selected Expiry Year: 31
+[04:16:06] [+] Filled CVV
+[04:16:06] [+] Clicked Confirm Button
+[04:16:14] Result 6: UNKNOWN (result_6686_1775708174074.png)
+[04:16:14] Progress: 6/11 (UNKNOWN). 5 remaining.
+[04:16:17] Starting Run 7: 0312
+[04:16:34] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:16:42] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:16:42] [+] Filled First Name
+[04:16:42] [+] Filled Last Name
+[04:16:42] [+] Filled Address
+[04:16:42] [+] Filled City
+[04:17:12] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:17:12] [+] Filled Email
+[04:17:12] [+] Filled Card Number
+[04:17:12] [+] Selected Expiry Month: 12
+[04:17:12] [+] Selected Expiry Year: 28
+[04:17:12] [+] Filled CVV
+[04:17:13] [+] Clicked Confirm Button
+[04:17:21] Result 7: UNKNOWN (result_0312_1775708241348.png)
+[04:17:21] Progress: 7/11 (UNKNOWN). 4 remaining.
+[04:17:24] Starting Run 8: 5276
+[04:17:44] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:17:52] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:17:52] [+] Filled First Name
+[04:17:52] [+] Filled Last Name
+[04:17:52] [+] Filled Address
+[04:17:52] [+] Filled City
+[04:18:22] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:18:22] [+] Filled Email
+[04:18:22] [+] Filled Card Number
+[04:18:22] [+] Selected Expiry Month: 12
+[04:18:22] [+] Selected Expiry Year: 28
+[04:18:22] [+] Filled CVV
+[04:18:22] [+] Clicked Confirm Button
+[04:18:30] Result 8: UNKNOWN (result_5276_1775708310208.png)
+[04:18:30] Progress: 8/11 (UNKNOWN). 3 remaining.
+[04:18:33] Starting Run 9: 7921
+[04:18:50] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:18:58] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:18:58] [+] Filled First Name
+[04:18:58] [+] Filled Last Name
+[04:18:58] [+] Filled Address
+[04:18:58] [+] Filled City
+[04:19:28] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:19:28] [+] Filled Email
+[04:19:28] [+] Filled Card Number
+[04:19:28] [+] Selected Expiry Month: 01
+[04:19:28] [+] Selected Expiry Year: 27
+[04:19:28] [+] Filled CVV
+[04:19:28] [+] Clicked Confirm Button
+[04:19:36] Result 9: UNKNOWN (result_7921_1775708376815.png)
+[04:19:36] Progress: 9/11 (UNKNOWN). 2 remaining.
+[04:19:40] Starting Run 10: 4815
+[04:19:56] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:20:04] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:20:04] [+] Filled First Name
+[04:20:04] [+] Filled Last Name
+[04:20:04] [+] Filled Address
+[04:20:04] [+] Filled City
+[04:20:34] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:20:34] [+] Filled Email
+[04:20:34] [+] Filled Card Number
+[04:20:34] [+] Selected Expiry Month: 03
+[04:20:34] [+] Selected Expiry Year: 30
+[04:20:34] [+] Filled CVV
+[04:20:36] [+] Clicked Confirm Button
+[04:20:44] Result 10: UNKNOWN (result_4815_1775708444710.png)
+[04:20:44] Progress: 10/11 (UNKNOWN). 1 remaining.
+[04:20:48] Starting Run 11: 9596
+[04:21:20] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:21:28] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:21:28] [+] Filled First Name
+[04:21:28] [+] Filled Last Name
+[04:21:28] [+] Filled Address
+[04:21:28] [+] Filled City
+[04:21:58] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:21:58] [+] Filled Email
+[04:21:58] [+] Filled Card Number
+[04:21:58] [+] Selected Expiry Month: 09
+[04:21:58] [+] Selected Expiry Year: 26
+[04:21:58] [+] Filled CVV
+[04:21:58] [+] Clicked Confirm Button
+[04:22:07] Result 11: UNKNOWN (result_9596_1775708526967.png)
+[04:22:07] Progress: 11/11 (UNKNOWN). 0 remaining.
+[04:22:07] === Gateway2 Session Finished ===
+[04:22:32] === Gateway2 (DonorPerfect) CC Checker Started ===
+[04:22:33] Starting Run 1: 2563
+[04:22:50] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:22:58] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:22:58] [+] Filled First Name
+[04:22:58] [+] Filled Last Name
+[04:22:58] [+] Filled Address
+[04:22:58] [+] Filled City
+[04:23:28] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:23:28] [+] Filled Email
+[04:23:28] [+] Filled Card Number
+[04:23:28] [+] Selected Expiry Month: 11
+[04:23:28] [+] Selected Expiry Year: 27
+[04:23:28] [+] Filled CVV
+[04:23:30] [+] Clicked Confirm Button
+[04:23:30] Timeout waiting for result selectors, analyzing page as-is
+[04:23:34] Result 1: UNKNOWN (result_2563_1775708613973.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:23:34] Progress: 1/15 (UNKNOWN). 14 remaining.
+[04:23:37] Starting Run 2: 8111
+[04:23:58] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:24:06] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:24:06] [+] Filled First Name
+[04:24:06] [+] Filled Last Name
+[04:24:06] [+] Filled Address
+[04:24:06] [+] Filled City
+[04:24:36] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:24:36] [+] Filled Email
+[04:24:36] [+] Filled Card Number
+[04:24:36] [+] Selected Expiry Month: 07
+[04:24:36] [+] Selected Expiry Year: 26
+[04:24:36] [+] Filled CVV
+[04:24:36] [+] Clicked Confirm Button
+[04:24:36] Timeout waiting for result selectors, analyzing page as-is
+[04:24:40] Result 2: UNKNOWN (result_8111_1775708680135.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:24:40] Progress: 2/15 (UNKNOWN). 13 remaining.
+[04:24:43] Starting Run 3: 0292
+[04:25:06] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:25:14] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:25:14] [+] Filled First Name
+[04:25:14] [+] Filled Last Name
+[04:25:14] [+] Filled Address
+[04:25:14] [+] Filled City
+[04:25:44] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:25:44] [+] Filled Email
+[04:25:44] [+] Filled Card Number
+[04:25:44] [+] Selected Expiry Month: 12
+[04:25:44] [+] Selected Expiry Year: 28
+[04:25:44] [+] Filled CVV
+[04:25:44] [+] Clicked Confirm Button
+[04:25:44] Timeout waiting for result selectors, analyzing page as-is
+[04:25:47] Result 3: UNKNOWN (result_0292_1775708747642.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:25:47] Progress: 3/15 (UNKNOWN). 12 remaining.
+[04:25:51] Starting Run 4: 2070
+[04:26:10] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:26:18] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:26:18] [+] Filled First Name
+[04:26:18] [+] Filled Last Name
+[04:26:18] [+] Filled Address
+[04:26:18] [+] Filled City
+[04:26:48] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:26:48] [+] Filled Email
+[04:26:48] [+] Filled Card Number
+[04:26:48] [+] Selected Expiry Month: 11
+[04:26:48] [+] Selected Expiry Year: 26
+[04:26:48] [+] Filled CVV
+[04:26:50] [+] Clicked Confirm Button
+[04:26:50] Timeout waiting for result selectors, analyzing page as-is
+[04:26:53] Result 4: UNKNOWN (result_2070_1775708813555.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:26:53] Progress: 4/15 (UNKNOWN). 11 remaining.
+[04:26:57] Starting Run 5: 4875
+[04:27:21] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:27:29] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:27:29] [+] Filled First Name
+[04:27:29] [+] Filled Last Name
+[04:27:29] [+] Filled Address
+[04:27:29] [+] Filled City
+[04:27:59] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:27:59] [+] Filled Email
+[04:27:59] [+] Filled Card Number
+[04:27:59] [+] Selected Expiry Month: 07
+[04:27:59] [+] Selected Expiry Year: 27
+[04:27:59] [+] Filled CVV
+[04:27:59] [+] Clicked Confirm Button
+[04:27:59] Timeout waiting for result selectors, analyzing page as-is
+[04:28:04] Result 5: UNKNOWN (result_4875_1775708884619.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:28:04] Progress: 5/15 (UNKNOWN). 10 remaining.
+[04:28:08] Starting Run 6: 9213
+[04:28:24] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:28:32] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:28:32] [+] Filled First Name
+[04:28:32] [+] Filled Last Name
+[04:28:32] [+] Filled Address
+[04:28:32] [+] Filled City
+[04:29:02] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:29:02] [+] Filled Email
+[04:29:02] [+] Filled Card Number
+[04:29:02] [+] Selected Expiry Month: 12
+[04:29:02] [+] Selected Expiry Year: 27
+[04:29:02] [+] Filled CVV
+[04:29:02] [+] Clicked Confirm Button
+[04:29:02] Timeout waiting for result selectors, analyzing page as-is
+[04:29:05] Result 6: UNKNOWN (result_9213_1775708945155.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:29:05] Progress: 6/15 (UNKNOWN). 9 remaining.
+[04:29:08] Starting Run 7: 8524
+[04:29:38] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:29:46] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:29:46] [+] Filled First Name
+[04:29:46] [+] Filled Last Name
+[04:29:46] [+] Filled Address
+[04:29:46] [+] Filled City
+[04:30:16] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:30:16] [+] Filled Email
+[04:30:16] [+] Filled Card Number
+[04:30:16] [+] Selected Expiry Month: 01
+[04:30:16] [+] Selected Expiry Year: 28
+[04:30:16] [+] Filled CVV
+[04:30:16] [+] Clicked Confirm Button
+[04:30:16] Timeout waiting for result selectors, analyzing page as-is
+[04:30:19] Result 7: UNKNOWN (result_8524_1775709019470.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:30:19] Progress: 7/15 (UNKNOWN). 8 remaining.
+[04:30:23] Starting Run 8: 2152
+[04:30:50] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:30:58] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:30:58] [+] Filled First Name
+[04:30:58] [+] Filled Last Name
+[04:30:58] [+] Filled Address
+[04:30:58] [+] Filled City
+[04:31:28] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:31:28] [+] Filled Email
+[04:31:28] [+] Filled Card Number
+[04:31:28] [+] Selected Expiry Month: 06
+[04:31:28] [+] Selected Expiry Year: 27
+[04:31:28] [+] Filled CVV
+[04:31:28] [+] Clicked Confirm Button
+[04:31:28] Timeout waiting for result selectors, analyzing page as-is
+[04:31:31] Result 8: UNKNOWN (result_2152_1775709091741.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:31:31] Progress: 8/15 (UNKNOWN). 7 remaining.
+[04:31:35] Starting Run 9: 5338
+[04:31:57] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:32:05] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:32:05] [+] Filled First Name
+[04:32:05] [+] Filled Last Name
+[04:32:05] [+] Filled Address
+[04:32:05] [+] Filled City
+[04:32:35] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:32:35] [+] Filled Email
+[04:32:36] [+] Filled Card Number
+[04:32:36] [+] Selected Expiry Month: 07
+[04:32:36] [+] Selected Expiry Year: 26
+[04:32:36] [+] Filled CVV
+[04:32:36] [+] Clicked Confirm Button
+[04:32:36] Timeout waiting for result selectors, analyzing page as-is
+[04:32:39] Result 9: UNKNOWN (result_5338_1775709159031.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:32:39] Progress: 9/15 (UNKNOWN). 6 remaining.
+[04:32:42] Starting Run 10: 4538
+[04:33:05] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:33:13] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:33:13] [+] Filled First Name
+[04:33:13] [+] Filled Last Name
+[04:33:13] [+] Filled Address
+[04:33:13] [+] Filled City
+[04:33:43] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:33:43] [+] Filled Email
+[04:33:43] [+] Filled Card Number
+[04:33:43] [+] Selected Expiry Month: 05
+[04:33:43] [+] Selected Expiry Year: 27
+[04:33:43] [+] Filled CVV
+[04:33:43] [+] Clicked Confirm Button
+[04:33:43] Timeout waiting for result selectors, analyzing page as-is
+[04:33:46] Result 10: UNKNOWN (result_4538_1775709226611.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:33:46] Progress: 10/15 (UNKNOWN). 5 remaining.
+[04:33:50] Starting Run 11: 0625
+[04:34:05] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:34:13] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:34:13] [+] Filled First Name
+[04:34:13] [+] Filled Last Name
+[04:34:13] [+] Filled Address
+[04:34:13] [+] Filled City
+[04:34:43] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:34:43] [+] Filled Email
+[04:34:43] [+] Filled Card Number
+[04:34:43] [+] Selected Expiry Month: 02
+[04:34:43] [+] Selected Expiry Year: 27
+[04:34:43] [+] Filled CVV
+[04:34:43] [+] Clicked Confirm Button
+[04:34:43] Timeout waiting for result selectors, analyzing page as-is
+[04:34:46] Result 11: UNKNOWN (result_0625_1775709286837.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:34:46] Progress: 11/15 (UNKNOWN). 4 remaining.
+[04:34:50] Starting Run 12: 6265
+[04:35:06] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:35:14] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:35:14] [+] Filled First Name
+[04:35:14] [+] Filled Last Name
+[04:35:14] [+] Filled Address
+[04:35:14] [+] Filled City
+[04:35:44] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:35:44] [+] Filled Email
+[04:35:44] [+] Filled Card Number
+[04:35:44] [+] Selected Expiry Month: 10
+[04:35:44] [+] Selected Expiry Year: 28
+[04:35:44] [+] Filled CVV
+[04:35:46] [+] Clicked Confirm Button
+[04:35:46] Timeout waiting for result selectors, analyzing page as-is
+[04:35:49] Result 12: UNKNOWN (result_6265_1775709349585.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:35:49] Progress: 12/15 (UNKNOWN). 3 remaining.
+[04:35:53] Starting Run 13: 2024
+[04:36:06] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:36:14] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:36:14] [+] Filled First Name
+[04:36:14] [+] Filled Last Name
+[04:36:14] [+] Filled Address
+[04:36:14] [+] Filled City
+[04:36:44] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:36:44] [+] Filled Email
+[04:36:44] [+] Filled Card Number
+[04:36:44] [+] Selected Expiry Month: 07
+[04:36:44] [+] Selected Expiry Year: 29
+[04:36:44] [+] Filled CVV
+[04:36:44] [+] Clicked Confirm Button
+[04:36:44] Timeout waiting for result selectors, analyzing page as-is
+[04:36:47] Result 13: UNKNOWN (result_2024_1775709407489.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:36:47] Progress: 13/15 (UNKNOWN). 2 remaining.
+[04:36:51] Starting Run 14: 8211
+[04:37:03] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:37:11] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:37:11] [+] Filled First Name
+[04:37:12] [+] Filled Last Name
+[04:37:12] [+] Filled Address
+[04:37:12] [+] Filled City
+[04:37:42] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:37:42] [+] Filled Email
+[04:37:42] [+] Filled Card Number
+[04:37:42] [+] Selected Expiry Month: 06
+[04:37:42] [+] Selected Expiry Year: 26
+[04:37:42] [+] Filled CVV
+[04:37:44] [+] Clicked Confirm Button
+[04:37:44] Timeout waiting for result selectors, analyzing page as-is
+[04:37:47] Result 14: UNKNOWN (result_8211_1775709467103.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:37:47] Progress: 14/15 (UNKNOWN). 1 remaining.
+[04:37:50] Starting Run 15: 1449
+[04:38:07] [-] Failed Other Amount Button (#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn > label.btn.btn-primary.col-xs-12.other-amount > div > div > i') to be visible[22m
+
+[04:38:15] [!] Failed Amount (input#Part\|23621\|amount\|A\|Y\|amount_divSecondColumn input[type="text"], input[id*="amount"]): page.waitForSelector: Timeout 8000ms exceeded.
+Call log:
+[2m  - waiting for locator('input#Part\\|23621\\|amount\\|A\\|Y\\|amount_divSecondColumn input[type="text"], input[id*="amount"]') to be visible[22m
+[2m    21 × locator resolved to 2 elements. Proceeding with the first one: <input value="0.00" type="hidden" id="nm_amount" name="nm_amount"/>[22m
+
+[04:38:15] [+] Filled First Name
+[04:38:15] [+] Filled Last Name
+[04:38:15] [+] Filled Address
+[04:38:15] [+] Filled City
+[04:38:45] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[04:38:45] [+] Filled Email
+[04:38:45] [+] Filled Card Number
+[04:38:45] [+] Selected Expiry Month: 08
+[04:38:45] [+] Selected Expiry Year: 30
+[04:38:45] [+] Filled CVV
+[04:38:45] [+] Clicked Confirm Button
+[04:38:45] Timeout waiting for result selectors, analyzing page as-is
+[04:38:48] Result 15: UNKNOWN (result_1449_1775709528343.png) - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[04:38:48] Progress: 15/15 (UNKNOWN). 0 remaining.
+[04:38:48] === Gateway2 Session Finished ===

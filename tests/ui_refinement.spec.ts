@@ -1,9 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('UI Refinement Verification', () => {
+  const BASE_URL = process.env.BASE_URL || 'http://localhost:8000';
+
   test.beforeEach(async ({ page }) => {
     // Wait for the app to be available
-    await page.goto('http://localhost:8085', { waitUntil: 'networkidle' });
+    await page.goto(BASE_URL, { waitUntil: 'networkidle' });
     // Wait for splash screen animation to finish (approx 6 seconds, giving 15 for safety)
     await page.waitForTimeout(15000);
   });

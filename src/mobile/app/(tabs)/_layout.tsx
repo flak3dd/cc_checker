@@ -39,6 +39,15 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="advanced"
+        options={{
+          title: 'Advanced',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="bolt" color={color} size={size} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

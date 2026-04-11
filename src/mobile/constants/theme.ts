@@ -10,19 +10,19 @@ import type { MD3Theme } from 'react-native-paper';
 
 // ─── Color Tokens ───────────────────────────────────────────────
 export const colors = {
-  // Primary — Sapphire / Modern Teal
-  primary: '#3B82F6', // Blue 500
-  primaryDim: '#2563EB', // Blue 600
-  primaryGlow: 'rgba(59, 130, 246, 0.12)',
-  primaryMuted: 'rgba(59, 130, 246, 0.06)',
-  primaryBright: '#60A5FA', // Blue 400
+  // Primary — Electric Blue / Modern Accent
+  primary: '#0EA5E9', // Sky 500 - more vibrant
+  primaryDim: '#0284C7', // Sky 600
+  primaryGlow: 'rgba(14, 165, 233, 0.15)',
+  primaryMuted: 'rgba(14, 165, 233, 0.08)',
+  primaryBright: '#38BDF8', // Sky 400
 
-  // Backgrounds — Deep refined grays
-  background: '#09090B', // Zinc 950
-  surface: '#121217',
-  surfaceElevated: '#18181B', // Zinc 900
-  surfaceHighlight: '#27272A', // Zinc 800
-  surfaceHover: '#3F3F46', // Zinc 700
+  // Backgrounds — Deep refined grays with better hierarchy
+  background: '#0A0A0C', // Darker for more depth
+  surface: '#141418',
+  surfaceElevated: '#1C1C20', // Zinc 900
+  surfaceHighlight: '#2A2A30', // Zinc 800
+  surfaceHover: '#404046', // Zinc 700
 
   // Borders
   border: '#27272A',

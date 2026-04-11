@@ -8,9 +8,23 @@ import morgan from 'morgan';
 import { sql } from '@vercel/postgres';
 import { v4 as uuidv4 } from 'uuid';
 
+
+
 const app = express();
-const PORT = process.env.PORT || 8000;
-const USE_DB = process.env.VERCEL === '1' || !!process.env.POSTGRES_URL;
+// Parse port from command line arguments (--port XXX) or environment variable
+let portArg = 8000;
+const portIdx = process.argv.indexOf('--port');
+if (portIdx !== -1 && process.argv[portIdx + 1]) {
+  portArg = parseInt(process.argv[portIdx + 1], 10);
+}
+
+// Railway compatibility: Map DATABASE_URL to POSTGRES_URL if needed
+if (process.env.DATABASE_URL && !process.env.POSTGRES_URL) {
+  process.env.POSTGRES_URL = process.env.DATABASE_URL;
+}
+
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : portArg;
+const USE_DB = process.env.VERCEL === '1' || !!process.env.POSTGRES_URL || !!process.env.DATABASE_URL;
 const DISABLE_AUTOMATION = process.env.VERCEL === '1'; // Automation is only disabled on serverless (Vercel)
 const CLOUD_MODE = USE_DB; // Backwards compatibility for the rest of the file
 
@@ -30,6 +44,8 @@ const WA_CHECKOUT_RESULTS_JSON = path.join(DATA_DIR, 'wa_checkout_results.json')
 const WA_PENDING_PAYMENT_FILE = path.join(DATA_DIR, 'wa_pending_payment.json');
 const WA_SELECTED_CARD_FILE = path.join(DATA_DIR, 'wa_selected_card.json');
 const WA_CHECKOUT_TERM_FILE = path.join(DATA_DIR, 'wa_checkout_term.json');
+const GATEWAY2_LOG_FILE = path.join(DATA_DIR, 'gateway2_log.txt');
+const GATEWAY2_RESULTS_FILE = path.join(DATA_DIR, 'gateway2_results.txt');
 
 // Ensure directories exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
@@ -50,6 +66,8 @@ async function initSchema() {
     await sql`CREATE TABLE IF NOT EXISTS pending_payment (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data JSONB, updated_at TIMESTAMPTZ DEFAULT NOW());`;
     await sql`CREATE TABLE IF NOT EXISTS selected_card (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), data JSONB, updated_at TIMESTAMPTZ DEFAULT NOW());`;
     await sql`CREATE TABLE IF NOT EXISTS checkout_term (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), term INTEGER DEFAULT 12, updated_at TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS gateway2_results (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), card_number TEXT NOT NULL, mm TEXT NOT NULL, yy TEXT NOT NULL, cvv TEXT NOT NULL, status TEXT NOT NULL, screenshot_path TEXT, timestamp TIMESTAMPTZ DEFAULT NOW());`;
+    await sql`CREATE TABLE IF NOT EXISTS logs_gateway2 (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), message TEXT NOT NULL, timestamp TIMESTAMPTZ DEFAULT NOW());`;
     console.log('Postgres schema initialized');
   } catch (error) {
     console.error('Schema init failed:', error);
@@ -57,7 +75,12 @@ async function initSchema() {
 }
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use('/screenshots', express.static(SCREENSHOTS_DIR));
@@ -80,6 +103,7 @@ app.use(async (_req, _res, next) => {
 let ccCheckProcess: ChildProcess | null = null;
 let plateCheckProcess: ChildProcess | null = null;
 let plateCheckoutProcess: ChildProcess | null = null;
+let gateway2Process: ChildProcess | null = null;
 
 // Clean up any stale state files from previous runs on startup
 const STALE_FILES = [
@@ -202,22 +226,30 @@ async function getCheckoutTerm(): Promise<number> {
   try { return JSON.parse(fs.readFileSync(WA_CHECKOUT_TERM_FILE, 'utf-8')).term; } catch { return 12; }
 }
 
-async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc', message: string) {
+async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc' | 'logs_gateway2', message: string) {
   if (CLOUD_MODE) {
-    await sql`INSERT INTO ${sql.unsafe(table)} (message) VALUES (${message})`;
+    if (table === 'logs_wa') {
+      await sql`INSERT INTO logs_wa (message) VALUES (${message})`;
+    } else if (table === 'logs_wa_checkout') {
+      await sql`INSERT INTO logs_wa_checkout (message) VALUES (${message})`;
+    } else if (table === 'logs_cc') {
+      await sql`INSERT INTO logs_cc (message) VALUES (${message})`;
+    } else if (table === 'logs_gateway2') {
+      await sql`INSERT INTO logs_gateway2 (message) VALUES (${message})`;
+    }
   } else {
-    const logFile = table === 'logs_wa' ? LOG_FILE : (table === 'logs_wa_checkout' ? WA_CHECKOUT_LOG : path.join(DATA_DIR, 'cc_log.txt'));
+    const logFile = table === 'logs_wa' ? LOG_FILE : (table === 'logs_wa_checkout' ? WA_CHECKOUT_LOG : table === 'logs_gateway2' ? GATEWAY2_LOG_FILE : path.join(DATA_DIR, 'cc_log.txt'));
     fs.appendFileSync(logFile, `[${new Date().toISOString()}] ${message}\n`);
   }
 }
 
 async function getLogTailFromDB(table: string, limit = 50): Promise<string[]> {
-  const { rows } = await sql.unsafe(`SELECT message FROM ${table} ORDER BY timestamp DESC LIMIT ${limit}`);
-  return rows.map(r => r.message).reverse();
+  const { rows } = await (sql as any).unsafe(`SELECT message FROM ${table} ORDER BY timestamp DESC LIMIT ${limit}`);
+  return rows.map((r: any) => r.message).reverse();
 }
 
 async function clearTable(table: string) {
-  if (CLOUD_MODE) await sql.unsafe(`DELETE FROM ${table}`);
+  if (CLOUD_MODE) await (sql as any).unsafe(`DELETE FROM ${table}`);
 }
 
 async function bulkInsertCards(cards: string[]) {
@@ -243,8 +275,8 @@ async function bulkInsertPlates(plates: string[]) {
 
 async function upsertJson(table: string, data: any) {
   if (CLOUD_MODE) {
-    await sql`DELETE FROM ${sql.unsafe(table)}`;
-    await sql`INSERT INTO ${sql.unsafe(table)} (data) VALUES (${JSON.stringify(data)})`;
+    await sql`DELETE FROM ${(sql as any).unsafe(table)}`;
+    await sql`INSERT INTO ${(sql as any).unsafe(table)} (data) VALUES (${JSON.stringify(data)})`;
   }
 }
 
@@ -258,6 +290,48 @@ function cloudModeError(res: Response, action: string) {
 }
 
 // --- Helpers ---
+
+function parseGateway2ResultsFile() {
+  if (!fs.existsSync(GATEWAY2_RESULTS_FILE)) return [];
+  const content = fs.readFileSync(GATEWAY2_RESULTS_FILE, 'utf-8');
+  return content.split('\n')
+    .filter(line => line.trim() && !line.startsWith('#'))
+    .map(line => {
+      const parts = line.split('|');
+      if (parts.length >= 6) {
+        return {
+          card_number: parts[0],
+          mm: parts[1],
+          yy: parts[2],
+          cvv: parts[3],
+          status: parts[4],
+          screenshot_path: parts[5],
+          screenshot_url: parts[5] ? `/screenshots/gateway2/${parts[5]}` : null,
+          timestamp: parts[6] || new Date().toISOString(),
+        };
+      }
+      return null;
+    })
+    .filter(Boolean);
+}
+
+async function getGateway2Results() {
+  if (CLOUD_MODE) {
+    const { rows } = await sql`SELECT * FROM gateway2_results ORDER BY timestamp DESC`;
+    return rows.map((r: any) => ({
+      id: r.id,
+      card_number: r.card_number,
+      mm: r.mm,
+      yy: r.yy,
+      cvv: r.cvv,
+      status: r.status,
+      screenshot_path: r.screenshot_path,
+      screenshot_url: r.screenshot_path ? `/screenshots/gateway2/${r.screenshot_path}` : null,
+      timestamp: r.timestamp,
+    }));
+  }
+  return parseGateway2ResultsFile();
+}
 
 function parseResultsFile() {
   if (!fs.existsSync(RESULTS_FILE)) return [];
@@ -356,18 +430,27 @@ app.get('/api/logs/stream', async (req: Request, res: Response) => {
     'wa': 'logs_wa',
     'wa-checkout': 'logs_wa_checkout',
     'cc': 'logs_cc',
+    'gateway2': 'logs_gateway2',
   };
-  const pathMap: Record<string, string> = {
+const pathMap: Record<string, string> = {
     'wa': LOG_FILE,
     'wa-checkout': WA_CHECKOUT_LOG,
     'cc': path.join(DATA_DIR, 'cc_log.txt'),
+    'gateway2': GATEWAY2_LOG_FILE,
   };
 
   const table = tableMap[fileParam];
   const targetFile = pathMap[fileParam];
 
-  if (CLOUD_MODE && !table) return res.status(400).json({ error: 'Invalid file for cloud mode' });
-  if (!CLOUD_MODE && (!targetFile || !fs.existsSync(targetFile))) return res.status(400).json({ error: 'Invalid file' });
+  if (CLOUD_MODE && !table) {
+    console.log(`SSE ${fileParam} connected - Invalid file for cloud mode`);
+    return res.status(400).json({ error: 'Invalid file for cloud mode' });
+  }
+  if (!CLOUD_MODE && (!targetFile || !fs.existsSync(targetFile))) {
+    console.log(`SSE ${fileParam} connected - Creating missing log file: ${targetFile}`);
+    fs.writeFileSync(targetFile, '');
+  }
+  console.log(`SSE ${fileParam} connected`);
 
   // SSE headers
   res.writeHead(200, {
@@ -392,23 +475,68 @@ app.get('/api/logs/stream', async (req: Request, res: Response) => {
 
     req.on('close', () => clearInterval(interval));
   } else {
-    // Local tailing
+    const processLogLine = (rawLine: string) => {
+      const trimmed = rawLine.trim();
+      if (!trimmed) return null;
+
+      const timestampMatch = trimmed.match(/^\[(\d{2}:\d{2}:\d{2})\]/);
+      const content = timestampMatch ? trimmed.replace(/^\[\d{2}:\d{2}:\d{2}\]\s*/, '') : trimmed;
+
+      let level: 'info' | 'success' | 'warning' | 'error' | 'progress' = 'info';
+      if (content.includes('[red]') || content.includes('ERROR') || content.includes('Failed')) level = 'error';
+      else if (content.includes('[green]') || content.includes('SUCCESS')) level = 'success';
+      else if (content.includes('[yellow]') || content.includes('warning')) level = 'warning';
+      else if (content.includes('Starting') || content.includes('Processing')) level = 'progress';
+
+      const sanitized = content
+        .replace(/\b[A-Z0-9]{17}\b/g, 'VIN_MASKED')
+        .replace(/\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/g, 'EMAIL_MASKED')
+        .replace(/Saving screenshot to .*/, 'Screenshot saved');
+
+      return {
+        timestamp: timestampMatch?.[1] || '',
+        level,
+        content: sanitized,
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2)
+      };
+    };
+
     try {
       const content = fs.readFileSync(targetFile, 'utf-8');
-      const lines = content.split('\n').slice(-50).filter(l => l.trim());
-      lines.forEach(line => res.write(`data: ${JSON.stringify(line.trim())}\n\n`));
+      const rawLines = content.split('\n').slice(-50).filter(Boolean);
+      rawLines.slice(0, 30).forEach(line => {
+        const processed = processLogLine(line);
+        if (processed) res.write(`data: ${JSON.stringify(processed)}\n\n`);
+      });
     } catch {}
-    res.write(': Initial tail sent\n\n');
 
-    const watcher = fs.watchFile(targetFile, { interval: 1000 }, () => {
+    let lastSize = 0;
+    const onLogChange = () => {
       try {
-        const content = fs.readFileSync(targetFile, 'utf-8');
-        const lines = content.split('\n').slice(-1).filter(l => l.trim());
-        lines.forEach(line => res.write(`data: ${JSON.stringify(line)}\n\n`));
+        const stats = fs.statSync(targetFile);
+        if (stats.size > lastSize) {
+          const stream = fs.createReadStream(targetFile, { start: lastSize });
+          let buffer = '';
+          stream.on('data', (chunk) => { buffer += chunk; });
+          stream.on('end', () => {
+            buffer.split('\n').filter(Boolean).forEach(line => {
+              const processed = processLogLine(line);
+              if (processed) res.write(`data: ${JSON.stringify(processed)}\n\n`);
+            });
+          });
+          lastSize = stats.size;
+        }
       } catch {}
-    });
+    };
 
-    req.on('close', () => watcher.unref());
+    const watcher = fs.watchFile(targetFile, { interval: 1000 }, onLogChange) as any;
+    if (watcher && typeof watcher.setMaxListeners === 'function') {
+      watcher.setMaxListeners(100);
+    }
+
+    req.on('close', () => {
+      fs.unwatchFile(targetFile, onLogChange);
+    });
   }
 
   req.on('close', () => {
@@ -470,8 +598,8 @@ app.get('/api/results/wa', async (req: Request, res: Response) => {
 
 app.get('/api/analytics', async (req: Request, res: Response) => {
   const results = await getResults();
-  const successCount = results.filter(r => r.status === 'SUCCESS').length;
-  const failCount = results.filter(r => ['FAIL', 'ERROR_PREPAYMENT'].includes(r.status)).length;
+  const successCount = results.filter((r: any) => r && r.status === 'SUCCESS').length;
+  const failCount = results.filter((r: any) => r && ['FAIL', 'ERROR_PREPAYMENT'].includes(r.status)).length;
   const totalCount = results.length;
   const successRate = totalCount > 0 ? (successCount / totalCount * 100) : 0;
 
@@ -554,6 +682,135 @@ app.post('/api/processing/stop', (req: Request, res: Response) => {
   }
   ccCheckProcess = null;
   res.json({ success: false, message: 'Processing is not running' });
+});
+
+app.get('/api/gateway2/status', async (req: Request, res: Response) => {
+  const isRunning = isProcessAlive(gateway2Process);
+  const results = await getGateway2Results();
+  const remaining = await countCards();
+  res.json({
+    is_running: isRunning,
+    remaining_cards: remaining,
+    total_processed: results.length,
+  });
+});
+
+app.post('/api/gateway2/start', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2');
+  if (isProcessAlive(gateway2Process)) {
+    return res.json({ success: false, message: 'Gateway2 is already running' });
+  }
+  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'gateway2', 'check.ts');
+  try {
+    gateway2Process = spawn('npx', ['tsx', scriptPath], {
+      cwd: BASE_DIR,
+      detached: true,
+      stdio: 'ignore'
+    });
+    gateway2Process.unref();
+    res.json({ success: true, message: 'Gateway2 started', pid: gateway2Process.pid });
+  } catch (e: any) {
+    res.status(500).json({ success: false, message: e.message });
+  }
+});
+
+app.post('/api/gateway2/stop', (req: Request, res: Response) => {
+  if (isProcessAlive(gateway2Process)) {
+    killProcessGroup(gateway2Process);
+    gateway2Process = null;
+    return res.json({ success: true, message: 'Gateway2 stopped' });
+  }
+  gateway2Process = null;
+  res.json({ success: false, message: 'Gateway2 is not running' });
+});
+
+app.get('/api/gateway2/results', async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const allResults = await getGateway2Results();
+  const start = (page - 1) * limit;
+  const results = allResults.slice(start, start + limit);
+  res.json({
+    results,
+    total: allResults.length,
+    hasMore: start + limit < allResults.length
+  });
+});
+
+app.post('/api/gateway2/clear', async (req: Request, res: Response) => {
+  if (CLOUD_MODE) {
+    await clearTable('gateway2_results');
+    await clearTable('logs_gateway2');
+  } else {
+    if (fs.existsSync(GATEWAY2_RESULTS_FILE)) fs.writeFileSync(GATEWAY2_RESULTS_FILE, '');
+    if (fs.existsSync(GATEWAY2_LOG_FILE)) fs.writeFileSync(GATEWAY2_LOG_FILE, '');
+  }
+  res.json({ success: true, message: 'Gateway2 cleared' });
+});
+
+
+
+app.get('/api/gateway2/status', async (req: Request, res: Response) => {
+  const isRunning = isProcessAlive(gateway2Process);
+  const results = await getGateway2Results();
+  const remaining = await countCards();
+  res.json({
+    is_running: isRunning,
+    remaining_cards: remaining,
+    total_processed: results.length,
+  });
+});
+
+app.post('/api/gateway2/start', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2 Checker');
+  if (isProcessAlive(gateway2Process)) {
+    return res.json({ success: false, message: 'Gateway2 Check is already running' });
+  }
+  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'gateway2', 'check.ts');
+  try {
+    gateway2Process = spawn('npx', ['tsx', scriptPath], {
+      cwd: BASE_DIR,
+      detached: true,
+      stdio: 'ignore'
+    });
+    gateway2Process.unref();
+    res.json({ success: true, message: 'Gateway2 processing started', pid: gateway2Process.pid });
+  } catch (e: any) {
+    res.status(500).json({ success: false, message: `Failed to start: ${e.message}` });
+  }
+});
+
+app.post('/api/gateway2/stop', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2 Checker');
+  if (isProcessAlive(gateway2Process)) {
+    killProcessGroup(gateway2Process);
+    gateway2Process = null;
+    return res.json({ success: true, message: 'Gateway2 processing stopped' });
+  }
+  gateway2Process = null;
+  res.json({ success: false, message: 'Gateway2 processing is not running' });
+});
+
+app.get('/api/gateway2/results', async (req: Request, res: Response) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+  const allResults = await getGateway2Results();
+  const start = (page - 1) * limit;
+  const results = allResults.slice(start, start + limit);
+  res.json({
+    results,
+    total: allResults.length,
+    hasMore: start + limit < allResults.length
+  });
+});
+
+app.post('/api/gateway2/clear', async (req: Request, res: Response) => {
+  if (CLOUD_MODE) {
+    await clearTable('gateway2_results');
+  } else {
+    if (fs.existsSync(GATEWAY2_RESULTS_FILE)) fs.writeFileSync(GATEWAY2_RESULTS_FILE, '');
+  }
+  res.json({ success: true, message: 'Gateway2 results cleared' });
 });
 
 app.post('/api/results/clear', async (req: Request, res: Response) => {
@@ -814,12 +1071,12 @@ app.post('/api/wa-checkout/select-card', async (req: Request, res: Response) => 
   res.json({ success: true, message: 'Card selected for automation' });
 });
 
-app.listen(PORT as number, '0.0.0.0', () => {
-  console.log(`Server is running on http://0.0.0.0:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT} (all interfaces)`);
 });
 
-// Fallback for SPA routing
-if (fs.existsSync(DIST_DIR)) {
+// Fallback for SPA routing (DISABLED - path-to-regexp v8 doesn't support * wildcard)
+if (false) {
   app.get('*', (req, res, next) => {
     if (req.path.startsWith('/api') || req.path.startsWith('/screenshots')) {
       return next();
