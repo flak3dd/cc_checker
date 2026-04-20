@@ -1,0 +1,88 @@
+[2026-04-19T22:48:56.804Z] [INFO] STARTING MASTER STEALTH AUTOMATION PIPELINE (TypeScript)
+[2026-04-19T22:48:58.526Z] [INFO] Injecting anti-detection stealth scripts...
+[2026-04-19T22:48:58.530Z] [INFO] ==================================================
+[2026-04-19T22:48:58.530Z] [INFO] STARTING PHASE 1: STEALTH SEARCH ENGINE CRAWLER
+[2026-04-19T22:48:58.530Z] [INFO] ==================================================
+[2026-04-19T22:48:58.530Z] [INFO] Searching google for: site:wl.donorperfect.net inurl:weblink.aspx
+[2026-04-19T22:48:58.530Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T22:49:35.924Z] [INFO]   -> Found 1 valid DP links on this page.
+[2026-04-19T22:49:35.925Z] [INFO]   -> Sleeping for 24.67 seconds to mimic human reading...
+[2026-04-19T22:49:35.950Z] [INFO] Searching google for: site:wl.donorperfect.net inurl:FormSingleNM.aspx
+[2026-04-19T22:49:35.950Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T22:49:58.114Z] [INFO]   -> Found 1 valid DP links on this page.
+[2026-04-19T22:49:58.115Z] [INFO]   -> Sleeping for 25.81 seconds to mimic human reading...
+[2026-04-19T22:49:58.140Z] [INFO] Searching google for: "powered by donorperfect" donation
+[2026-04-19T22:49:58.140Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T22:50:20.309Z] [INFO]   -> Found 0 valid DP links on this page.
+[2026-04-19T22:50:20.310Z] [INFO]   -> Sleeping for 26.63 seconds to mimic human reading...
+[2026-04-19T22:50:20.336Z] [INFO] Searching bing for: site:wl.donorperfect.net inurl:weblink.aspx
+[2026-04-19T22:50:40.769Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T22:50:40.770Z] [INFO] Searching bing for: site:wl.donorperfect.net inurl:FormSingleNM.aspx
+[2026-04-19T22:50:59.787Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T22:50:59.790Z] [INFO] Searching bing for: "powered by donorperfect" donation
+[2026-04-19T22:51:18.560Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T22:51:18.561Z] [INFO] [PHASE 1 COMPLETE] Found 2 total targets to test.
+[2026-04-19T22:51:18.561Z] [INFO] 
+==================================================
+[2026-04-19T22:51:18.561Z] [INFO] STARTING PHASE 2: FORM AUTOMATION
+[2026-04-19T22:51:18.561Z] [INFO] ==================================================
+[2026-04-19T22:51:18.561Z] [INFO] 
+--- Processing Target: https://wl.donorperfect.net/weblink/weblink.aspx ---
+[2026-04-19T22:52:02.807Z] [INFO] -> Final Status: DEAD_LINK
+[2026-04-19T22:52:07.809Z] [INFO] 
+--- Processing Target: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?name=E359348&id=18&formid=185 ---
+[2026-04-19T22:52:46.895Z] [INFO] -> Final Status: DEAD_LINK
+[2026-04-19T22:52:51.896Z] [INFO] 
+[DONE] Master pipeline finished.
+[2026-04-19T22:58:40.912Z] [INFO] STARTING MASTER STEALTH AUTOMATION PIPELINE (TypeScript)
+[2026-04-19T22:58:41.430Z] [INFO] Injecting anti-detection stealth scripts...
+[2026-04-19T22:58:41.438Z] [INFO] ==================================================
+[2026-04-19T22:58:41.438Z] [INFO] STARTING PHASE 1: STEALTH SEARCH ENGINE CRAWLER
+[2026-04-19T22:58:41.439Z] [INFO] ==================================================
+[2026-04-19T22:58:41.439Z] [INFO] Searching google for: site:wl.donorperfect.net inurl:weblink.aspx
+[2026-04-19T22:58:41.439Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T22:59:13.007Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T22:59:13.007Z] [INFO] Searching google for: site:wl.donorperfect.net inurl:FormSingleNM.aspx
+[2026-04-19T22:59:13.007Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T22:59:42.210Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T22:59:42.211Z] [INFO] Searching google for: "powered by donorperfect" donation
+[2026-04-19T22:59:42.211Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T23:00:08.727Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:00:08.728Z] [INFO] Searching bing for: site:wl.donorperfect.net inurl:weblink.aspx
+[2026-04-19T23:00:26.142Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:00:26.143Z] [INFO] Searching bing for: site:wl.donorperfect.net inurl:FormSingleNM.aspx
+[2026-04-19T23:00:41.630Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:00:41.631Z] [INFO] Searching bing for: "powered by donorperfect" donation
+[2026-04-19T23:00:57.248Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:00:57.249Z] [INFO] [PHASE 1 COMPLETE] Found 0 total targets to test.
+[2026-04-19T23:00:57.249Z] [ERROR] No targets found. Exiting.
+[2026-04-19T23:01:57.623Z] [INFO] STARTING MASTER STEALTH AUTOMATION PIPELINE (TypeScript)
+[2026-04-19T23:01:57.832Z] [INFO] Injecting anti-detection stealth scripts...
+[2026-04-19T23:01:57.833Z] [INFO] ==================================================
+[2026-04-19T23:01:57.833Z] [INFO] STARTING PHASE 1: STEALTH SEARCH ENGINE CRAWLER
+[2026-04-19T23:01:57.833Z] [INFO] ==================================================
+[2026-04-19T23:01:57.833Z] [INFO] Searching google for: site:wl.donorperfect.net inurl:weblink.aspx
+[2026-04-19T23:01:57.833Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T23:01:58.162Z] [INFO] STARTING MASTER STEALTH AUTOMATION PIPELINE (TypeScript)
+[2026-04-19T23:07:45.211Z] [INFO] STARTING MASTER STEALTH AUTOMATION PIPELINE (TypeScript)
+[2026-04-19T23:07:45.703Z] [INFO] Injecting anti-detection stealth scripts...
+[2026-04-19T23:07:45.709Z] [INFO] ==================================================
+[2026-04-19T23:07:45.709Z] [INFO] STARTING PHASE 1: STEALTH SEARCH ENGINE CRAWLER
+[2026-04-19T23:07:45.709Z] [INFO] ==================================================
+[2026-04-19T23:07:45.710Z] [INFO] Searching google for: site:wl.donorperfect.net inurl:weblink.aspx
+[2026-04-19T23:07:45.710Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T23:08:16.928Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:08:16.929Z] [INFO] Searching google for: site:wl.donorperfect.net inurl:FormSingleNM.aspx
+[2026-04-19T23:08:16.929Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T23:08:45.503Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:08:45.504Z] [INFO] Searching google for: "powered by donorperfect" donation
+[2026-04-19T23:08:45.504Z] [INFO]   -> Navigating to Google Homepage first...
+[2026-04-19T23:09:11.246Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:09:11.247Z] [INFO] Searching bing for: site:wl.donorperfect.net inurl:weblink.aspx
+[2026-04-19T23:09:27.869Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:09:27.870Z] [INFO] Searching bing for: site:wl.donorperfect.net inurl:FormSingleNM.aspx
+[2026-04-19T23:09:43.843Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:09:43.844Z] [INFO] Searching bing for: "powered by donorperfect" donation
+[2026-04-19T23:09:59.150Z] [ERROR]   -> Timed out waiting for search results.
+[2026-04-19T23:09:59.151Z] [INFO] [PHASE 1 COMPLETE] Found 0 total targets to test.
+[2026-04-19T23:09:59.152Z] [ERROR] No targets found. Exiting.

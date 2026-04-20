@@ -1,24 +1,35 @@
-# Frontend (deployed separately or via Expo)
-frontend/
-# Automation scripts (run locally, not on Vercel)
-automation/
-# Backend data/logs/debug (too many files for Vercel)
+# Vercel Ignore Config
+
+# Node modules
+node_modules/
+
+# Expo / Mobile
+.expo/
+android/
+ios/
+dist/
+
+# Logs & Data
 data/
 logs/
-logs/**
-debug/
-debug/**
 screenshots/
-screenshots/**
+debug/
+*.log
+*.txt
+
+# Automation & Testing
+automation/
 playwright-report/
-playwright-report/**
 test-results/
-test-results/**
+.playwright-mcp/
+tests/
+
 # Local scripts
-start.sh
-automate.sh
-# Large dependencies
-node_modules/
-# Builds
-android/build/
-ios/build/
+*.sh
+
+# Zencoder / AI context
+.zencoder/
+.zenflow/
+markdowns/
+platform_dist/
+platform-vercel/

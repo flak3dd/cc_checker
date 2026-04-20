@@ -1,0 +1,172 @@
+[22:48:01] === CC Checker Session Started (TypeScript) ===
+[22:48:02] Starting: 2248
+[22:48:07] Form: VIN=6H80DER8XW4758620 EMAIL=user_vmr6acsx@outlook.com
+[22:48:08] Waiting for payment form...
+[22:48:09] Processing transaction...
+[22:48:09] Timeout waiting for result selectors, analyzing page as-is
+[22:48:15] Result: FAIL
+[22:48:15] Processed 2248 -> FAIL. 0 left.
+[22:48:15] === Session Finished ===
+[22:59:22] === CC Checker Session Started (TypeScript) ===
+[22:59:22] Starting: 2248
+[22:59:27] Form: VIN=6H84LA0S5UG040846 EMAIL=user_ox5r3qp5@outlook.com
+[22:59:27] Waiting for payment form...
+[22:59:28] Processing transaction...
+[22:59:28] Timeout waiting for result selectors, analyzing page as-is
+[22:59:34] Result: FAIL
+[22:59:34] Processed 2248 -> FAIL. 22 left.
+[22:59:37] Starting: 9442
+[22:59:41] Form: VIN=6H8HK95V0SK379711 EMAIL=user_d1ht5apt@outlook.com
+[22:59:42] Waiting for payment form...
+[22:59:43] Processing transaction...
+[22:59:43] Timeout waiting for result selectors, analyzing page as-is
+[22:59:49] Result: SUCCESS
+[22:59:49] Processed 9442 -> SUCCESS. 21 left.
+[22:59:52] Starting: 0248
+[22:59:57] Form: VIN=6H8ZBHUT5SB377208 EMAIL=user_xz82829q@outlook.com
+[22:59:57] Waiting for payment form...
+[22:59:58] Processing transaction...
+[22:59:58] Timeout waiting for result selectors, analyzing page as-is
+[23:00:04] Result: FAIL
+[23:00:04] Processed 0248 -> FAIL. 20 left.
+[23:00:07] Starting: 9407
+[23:00:15] Form: VIN=6H8VM9AH6UP159735 EMAIL=user_z7gxc1za@outlook.com
+[23:00:16] Waiting for payment form...
+[23:00:18] Processing transaction...
+[23:00:18] Timeout waiting for result selectors, analyzing page as-is
+[23:00:24] Result: FAIL
+[23:00:24] Processed 9407 -> FAIL. 19 left.
+[23:00:27] Starting: 7657
+[23:00:35] Form: VIN=6H8NB8SM1R1768012 EMAIL=user_8604637n@outlook.com
+[23:00:35] Waiting for payment form...
+[23:00:35] Processing transaction...
+[23:00:35] Timeout waiting for result selectors, analyzing page as-is
+[23:00:41] Result: SUCCESS
+[23:00:41] Processed 7657 -> SUCCESS. 18 left.
+[23:00:44] Starting: 9015
+[23:00:50] Form: VIN=6H8RZ21D7ZR416744 EMAIL=user_8fvs0t03@outlook.com
+[23:00:51] Waiting for payment form...
+[23:00:51] Processing transaction...
+[23:00:51] Timeout waiting for result selectors, analyzing page as-is
+[23:00:57] Result: FAIL
+[23:00:57] Processed 9015 -> FAIL. 17 left.
+[23:01:00] Starting: 3823
+[23:01:04] Form: VIN=6H80FUC50ZJ730849 EMAIL=user_kzxikg3h@outlook.com
+[23:01:05] Waiting for payment form...
+[23:01:05] Processing transaction...
+[23:01:05] Timeout waiting for result selectors, analyzing page as-is
+[23:01:11] Result: FAIL
+[23:01:11] Processed 3823 -> FAIL. 16 left.
+[23:01:14] Starting: 2137
+[23:01:20] Form: VIN=6H882MD69V3144350 EMAIL=user_ct4smdzx@outlook.com
+[23:01:20] Waiting for payment form...
+[23:01:21] Processing transaction...
+[23:01:21] Timeout waiting for result selectors, analyzing page as-is
+[23:01:27] Result: FAIL
+[23:01:27] Processed 2137 -> FAIL. 15 left.
+[23:01:30] Starting: 7651
+[23:01:36] Form: VIN=6H8HMHVE6S7120843 EMAIL=user_i6vg5w3f@outlook.com
+[23:01:36] Waiting for payment form...
+[23:01:37] Processing transaction...
+[23:01:37] Timeout waiting for result selectors, analyzing page as-is
+[23:01:43] Result: FAIL
+[23:01:43] Processed 7651 -> FAIL. 14 left.
+[23:01:46] Starting: 8539
+[23:01:51] Form: VIN=6H80H6LV1X7064679 EMAIL=user_avolflyd@outlook.com
+[23:01:51] Waiting for payment form...
+[23:01:52] Processing transaction...
+[23:01:52] Timeout waiting for result selectors, analyzing page as-is
+[23:01:58] Result: FAIL
+[23:01:58] Processed 8539 -> FAIL. 13 left.
+[23:02:01] Starting: 6892
+[23:02:06] Form: VIN=6H8JPBLF2Y8707612 EMAIL=user_7fq9fd6b@outlook.com
+[23:02:07] Waiting for payment form...
+[23:02:07] Processing transaction...
+[23:02:07] Timeout waiting for result selectors, analyzing page as-is
+[23:02:13] Result: FAIL
+[23:02:13] Processed 6892 -> FAIL. 12 left.
+[23:02:16] Starting: 4640
+[23:02:19] Form: VIN=6H85KB054W9793718 EMAIL=user_13zhmumy@outlook.com
+[23:02:20] Waiting for payment form...
+[23:02:20] Processing transaction...
+[23:02:20] Timeout waiting for result selectors, analyzing page as-is
+[23:02:26] Result: SUCCESS
+[23:02:26] Processed 4640 -> SUCCESS. 11 left.
+[23:02:29] Starting: 2248
+[23:02:33] Form: VIN=6H829NT18TT631324 EMAIL=user_sp0ybqs2@outlook.com
+[23:02:33] Waiting for payment form...
+[23:02:33] Processing transaction...
+[23:02:33] Timeout waiting for result selectors, analyzing page as-is
+[23:02:39] Result: FAIL
+[23:02:39] Processed 2248 -> FAIL. 10 left.
+[23:02:43] Starting: 6038
+[23:02:46] Form: VIN=6H82BGDS6ZD239999 EMAIL=user_gwgj3hcd@outlook.com
+[23:02:47] Waiting for payment form...
+[23:02:47] Processing transaction...
+[23:02:47] Timeout waiting for result selectors, analyzing page as-is
+[23:02:53] Result: FAIL
+[23:02:53] Processed 6038 -> FAIL. 9 left.
+[23:02:56] Starting: 7313
+[23:03:00] Form: VIN=6H8PB4WAXSF944534 EMAIL=user_1iap68lh@outlook.com
+[23:03:01] Waiting for payment form...
+[23:03:02] Processing transaction...
+[23:03:02] Timeout waiting for result selectors, analyzing page as-is
+[23:03:08] Result: FAIL
+[23:03:08] Processed 7313 -> FAIL. 8 left.
+[23:03:11] Starting: 3122
+[23:03:16] Form: VIN=6H8214LG9ZB101240 EMAIL=user_5b6ex5v1@outlook.com
+[23:03:16] Waiting for payment form...
+[23:03:16] Processing transaction...
+[23:03:16] Timeout waiting for result selectors, analyzing page as-is
+[23:03:22] Result: FAIL
+[23:03:22] Processed 3122 -> FAIL. 7 left.
+[23:03:26] Starting: 7643
+[23:03:30] Form: VIN=6H82CGGD6ZX107169 EMAIL=user_tzjkpp54@outlook.com
+[23:03:31] Waiting for payment form...
+[23:03:31] Processing transaction...
+[23:03:31] Timeout waiting for result selectors, analyzing page as-is
+[23:03:37] Result: FAIL
+[23:03:37] Processed 7643 -> FAIL. 6 left.
+[23:03:41] Starting: 2244
+[23:03:45] Form: VIN=6H8X1NKK9X5807010 EMAIL=user_4sx6t1up@outlook.com
+[23:03:45] Waiting for payment form...
+[23:03:46] Processing transaction...
+[23:03:46] Timeout waiting for result selectors, analyzing page as-is
+[23:03:52] Result: FAIL
+[23:03:52] Processed 2244 -> FAIL. 5 left.
+[23:03:55] Starting: 0448
+[23:04:00] Form: VIN=6H85K07Y7ZS751853 EMAIL=user_frjuxizi@outlook.com
+[23:04:00] Waiting for payment form...
+[23:04:01] Processing transaction...
+[23:04:01] Timeout waiting for result selectors, analyzing page as-is
+[23:04:07] Result: FAIL
+[23:04:07] Processed 0448 -> FAIL. 4 left.
+[23:04:10] Starting: 9148
+[23:04:14] Form: VIN=6H8GYDMB1TM111924 EMAIL=user_z0cpg517@outlook.com
+[23:04:15] Waiting for payment form...
+[23:04:15] Processing transaction...
+[23:04:15] Timeout waiting for result selectors, analyzing page as-is
+[23:04:21] Result: FAIL
+[23:04:21] Processed 9148 -> FAIL. 3 left.
+[23:04:24] Starting: 8666
+[23:04:30] Form: VIN=6H8SWSVJ6UG122086 EMAIL=user_rs2w5n83@outlook.com
+[23:04:30] Waiting for payment form...
+[23:04:31] Processing transaction...
+[23:04:31] Timeout waiting for result selectors, analyzing page as-is
+[23:04:37] Result: FAIL
+[23:04:37] Processed 8666 -> FAIL. 2 left.
+[23:04:40] Starting: 2913
+[23:04:44] Form: VIN=6H8KBD6MXUX343951 EMAIL=user_55a7xtie@outlook.com
+[23:04:44] Waiting for payment form...
+[23:04:45] Processing transaction...
+[23:04:45] Timeout waiting for result selectors, analyzing page as-is
+[23:04:51] Result: FAIL
+[23:04:51] Processed 2913 -> FAIL. 1 left.
+[23:04:54] Starting: 4119
+[23:04:59] Form: VIN=6H8DDH8ZXWZ790516 EMAIL=user_cfzjlrcp@outlook.com
+[23:04:59] Waiting for payment form...
+[23:05:00] Processing transaction...
+[23:05:00] Timeout waiting for result selectors, analyzing page as-is
+[23:05:06] Result: FAIL
+[23:05:06] Processed 4119 -> FAIL. 0 left.
+[23:05:06] === Session Finished ===

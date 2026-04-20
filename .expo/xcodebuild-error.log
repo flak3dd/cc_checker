@@ -1,8 +1,0 @@
-** BUILD FAILED **
-
-
-The following build commands failed:
-	SwiftCompile normal arm64 Compiling\ ExpoVideoView.swift,\ VideoViewModule.swift /Users/adminuser/vsc/cc_checker/node_modules/expo-av/ios/EXAV/ExpoVideoView.swift /Users/adminuser/vsc/cc_checker/node_modules/expo-av/ios/EXAV/Video/VideoViewModule.swift (in target 'EXAV' from project 'Pods')
-	CompileSwift normal arm64 (in target 'EXAV' from project 'Pods')
-	Building workspace ccchecker with scheme ccchecker and configuration Debug
-(3 failures)

@@ -1,0 +1,2825 @@
+[12:38:53] Cards file not found at /Users/adminuser/vsc/cc_checker/src/automation/gateway2/data/cards.txt. Please create it.
+[12:39:00] Cards file not found at /Users/adminuser/vsc/cc_checker/src/automation/gateway2/data/cards.txt. Please create it.
+[12:39:16] Cards file not found at /Users/adminuser/vsc/cc_checker/src/automation/gateway2/data/cards.txt. Please create it.
+[14:43:40] Cards file not found at /Users/adminuser/vsc/cc_checker/src/automation/gateway2/data/cards.txt. Please create it.
+[05:57:10] === DonorPerfect Automation Started (TS) ===
+[05:57:13] Starting Run 1: 2213
+[05:57:17] [+] Clicked Other Amount Radio
+[05:57:17] [+] Filled Other Amount Value
+[05:57:17] [+] Clicked One Time Donation
+[05:57:17] [+] Filled First Name
+[05:57:17] [+] Filled Last Name
+[05:57:17] [+] Filled Address
+[05:57:18] [+] Filled City
+[05:57:48] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#state_ucDDL')
+    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>
+  - attempting select option action
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+    - waiting 20ms
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+      - waiting 100ms
+    60 × waiting for element to be visible and enabled
+       - did not find some options
+     - retrying select option action
+       - waiting 500ms
+
+[05:58:09] [!] Failed Country (#country_ucDDL): page.selectOption: Target page, context or browser has been closed
+Call log:
+  - waiting for locator('#country_ucDDL')
+    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>
+  - attempting select option action
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+    - waiting 20ms
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+      - waiting 100ms
+    42 × waiting for element to be visible and enabled
+       - did not find some options
+     - retrying select option action
+       - waiting 500ms
+
+[05:58:09] [!] Failed Zip (#zip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[05:58:09] [!] Failed Email (#email_ucEmail): page.waitForSelector: Target page, context or browser has been closed
+[05:58:09] [-] Failed Tribute Yes (input[id="Part|421|is_tribute||N|is_tribute"]): page.waitForSelector: Target page, context or browser has been closed
+[05:58:09] [!] Failed Card Holder Name (#CardHolderName_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[05:58:09] [!] Failed Card Number (#CardAccountNum_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[05:58:09] [!] Failed Expiry Month (#ExpirationDate_ucExpirationMonth): page.waitForSelector: Target page, context or browser has been closed
+[05:58:09] [!] Failed Expiry Year (#ExpirationDate_ucExpirationYear): page.waitForSelector: Target page, context or browser has been closed
+[05:58:35] === DonorPerfect Automation Started (TS) ===
+[05:58:36] Starting Run 1: 2213
+[05:58:40] [+] Clicked Other Amount Radio
+[05:58:40] [+] Filled Other Amount Value
+[05:58:40] [+] Clicked One Time Donation
+[05:58:40] [+] Filled First Name
+[05:58:40] [+] Filled Last Name
+[05:58:40] [+] Filled Address
+[05:58:40] [+] Filled City
+[05:59:40] Error in Run 1: page.selectOption: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#state_ucDDL')
+    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>
+  - attempting select option action
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+    - waiting 20ms
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+      - waiting 100ms
+    60 × waiting for element to be visible and enabled
+       - did not find some options
+     - retrying select option action
+       - waiting 500ms
+
+[05:59:40] Progress: 1/61 (ERROR)
+[05:59:44] Starting Run 2: 7446
+[05:59:47] [+] Clicked Other Amount Radio
+[05:59:47] [+] Filled Other Amount Value
+[05:59:47] [+] Clicked One Time Donation
+[05:59:47] [+] Filled First Name
+[05:59:47] [+] Filled Last Name
+[05:59:47] [+] Filled Address
+[05:59:47] [+] Filled City
+[06:00:04] Error in Run 2: page.selectOption: Target page, context or browser has been closed
+[06:00:04] Progress: 2/61 (ERROR)
+[06:00:23] === DonorPerfect Automation Started (TS) ===
+[06:00:24] Starting Run 3: 4055
+[06:00:27] [+] Clicked Other Amount Radio
+[06:00:27] [+] Filled Other Amount Value
+[06:00:27] [+] Clicked One Time Donation
+[06:00:27] [+] Filled First Name
+[06:00:27] [+] Filled Last Name
+[06:00:27] [+] Filled Address
+[06:00:27] [+] Filled City
+[06:00:57] [!] State selection failed: page.selectOption: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#state_ucDDL')
+    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>
+  - attempting select option action
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+    - waiting 20ms
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+      - waiting 100ms
+    60 × waiting for element to be visible and enabled
+       - did not find some options
+     - retrying select option action
+       - waiting 500ms
+
+[06:01:27] [!] Country selection failed: page.selectOption: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#country_ucDDL')
+    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>
+  - attempting select option action
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+    - waiting 20ms
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+      - waiting 100ms
+    60 × waiting for element to be visible and enabled
+       - did not find some options
+     - retrying select option action
+       - waiting 500ms
+
+[06:01:27] [+] Filled Zip
+[06:01:27] [+] Filled Email
+[06:01:27] [+] Clicked Tribute Yes
+[06:01:27] [+] Filled Card Holder Name
+[06:01:27] [+] Filled Card Number
+[06:01:27] [+] Filled CVV
+[06:01:27] [+] Clicked Same as Above Checkbox
+[06:01:28] [+] Filled Billing Address
+[06:01:28] [+] Filled Billing City
+[06:01:58] [!] Billing state/country failed: page.selectOption: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator('#CardHolderState_ucDDL')
+    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>
+  - attempting select option action
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+    - waiting 20ms
+    2 × waiting for element to be visible and enabled
+      - did not find some options
+    - retrying select option action
+      - waiting 100ms
+    60 × waiting for element to be visible and enabled
+       - did not find some options
+     - retrying select option action
+       - waiting 500ms
+
+[06:01:58] [+] Filled Billing Zip
+[06:01:58] [+] Clicked Cover Costs Yes
+[06:02:08] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('input[value="Next"]') to be visible
+
+[06:02:18] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible
+
+[06:02:22] Error in Run 3: page.content: Target page, context or browser has been closed
+[06:04:05] === DonorPerfect Automation Started (TS) ===
+[06:04:07] Starting Run 3: 4055
+[06:04:10] [+] Clicked Other Amount Radio
+[06:04:10] [+] Filled Other Amount Value
+[06:04:10] [+] Clicked One Time Donation
+[06:04:10] [+] Filled First Name
+[06:04:10] [+] Filled Last Name
+[06:04:10] [+] Filled Address
+[06:04:10] [+] Filled City
+[06:04:10] [+] Selected State via JS: IL
+[06:04:10] [+] Selected Country via JS: US
+[06:04:10] [+] Filled Zip
+[06:04:10] [+] Filled Email
+[06:04:10] [+] Clicked Tribute Yes
+[06:04:10] [+] Filled Card Holder Name
+[06:04:10] [+] Filled Card Number
+[06:04:10] [+] Filled CVV
+[06:04:10] [+] Clicked Same as Above Checkbox
+[06:04:10] [+] Filled Billing Address
+[06:04:10] [+] Filled Billing City
+[06:04:10] [+] Filled Billing Zip
+[06:04:10] [+] Clicked Cover Costs Yes
+[06:04:20] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('input[value="Next"]') to be visible
+
+[06:04:30] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible
+
+[06:04:45] Result 3: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:04:45] Progress: 3/61 (SUCCESS)
+[06:04:50] Starting Run 4: 4285
+[06:04:53] [+] Clicked Other Amount Radio
+[06:04:53] [+] Filled Other Amount Value
+[06:04:53] [+] Clicked One Time Donation
+[06:04:53] [+] Filled First Name
+[06:04:53] [+] Filled Last Name
+[06:04:53] [+] Filled Address
+[06:04:53] [+] Filled City
+[06:04:53] [+] Selected State via JS: FL
+[06:04:53] [+] Selected Country via JS: US
+[06:04:53] [+] Filled Zip
+[06:04:53] [+] Filled Email
+[06:04:53] [+] Clicked Tribute Yes
+[06:04:53] [+] Filled Card Holder Name
+[06:04:53] [+] Filled Card Number
+[06:04:53] [+] Filled CVV
+[06:04:53] [+] Clicked Same as Above Checkbox
+[06:04:53] [+] Filled Billing Address
+[06:04:53] [+] Filled Billing City
+[06:04:53] [+] Filled Billing Zip
+[06:04:53] [+] Clicked Cover Costs Yes
+[06:05:03] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('input[value="Next"]') to be visible
+
+[06:05:13] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible
+
+[06:05:28] Result 4: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:05:28] Progress: 4/61 (SUCCESS)
+[06:05:32] Starting Run 5: 5476
+[06:05:35] [+] Clicked Other Amount Radio
+[06:05:35] [+] Filled Other Amount Value
+[06:05:35] [+] Clicked One Time Donation
+[06:05:35] [+] Filled First Name
+[06:05:35] [+] Filled Last Name
+[06:05:35] [+] Filled Address
+[06:05:35] [+] Filled City
+[06:05:35] [+] Selected State via JS: CA
+[06:05:35] [+] Selected Country via JS: US
+[06:05:35] [+] Filled Zip
+[06:05:35] [+] Filled Email
+[06:05:35] [+] Clicked Tribute Yes
+[06:05:35] [+] Filled Card Holder Name
+[06:05:35] [+] Filled Card Number
+[06:05:35] [+] Filled CVV
+[06:05:35] [+] Clicked Same as Above Checkbox
+[06:05:35] [+] Filled Billing Address
+[07:04:47] === DonorPerfect Automation Started (TS) ===
+[07:04:50] Starting Run 5: 5476
+[07:04:54] [+] Clicked Other Amount Radio
+[07:04:54] [+] Filled Other Amount Value
+[07:04:54] [+] Clicked One Time Donation
+[07:04:54] [+] Filled First Name
+[07:04:54] [+] Filled Last Name
+[07:04:54] [+] Filled Address
+[07:04:54] [+] Filled City
+[07:04:54] [+] Selected State via JS: CA
+[07:04:54] [+] Selected Country via JS: US
+[07:04:54] [+] Filled Zip
+[07:04:54] [+] Filled Email
+[07:04:54] [+] Clicked Tribute Yes
+[07:04:54] [+] Filled Card Holder Name
+[07:04:54] [+] Filled Card Number
+[07:04:54] [+] Filled CVV
+[07:04:54] [+] Clicked Same as Above Checkbox
+[07:04:54] [+] Filled Billing Address
+[07:04:54] [+] Filled Billing City
+[07:04:54] [+] Filled Billing Zip
+[07:04:54] [+] Clicked Cover Costs Yes
+[07:05:04] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:05:14] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:05:29] Result 5: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:05:29] Progress: 5/61 (SUCCESS)
+[07:05:33] Starting Run 6: 4036
+[07:05:33] Error in Run 6: page.goto: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "domcontentloaded"[22m
+
+[07:05:33] Critical Error: browserContext.close: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /Users/adminuser/Library/Caches/ms-playwright/chromium-1217/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --user-data-dir=/var/folders/99/rd7r6txn4qv5_htlx6mp7cwm0000gn/T/playwright_chromiumdev_profile-6CZwvI --remote-debugging-pipe --no-startup-window
+<launched> pid=16613
+[pid=16613][err] [16613:2198162:0416/070458.698696:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=16613][err] [16613:2198162:0416/070520.519657:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=16613] <gracefully close start>
+[pid=16613] <forcefully close>
+[pid=16613] <kill>
+[pid=16613] <will force kill>
+[07:08:48] === DonorPerfect Automation Started (TS) ===
+[07:08:50] Starting Run 6: 4036
+[07:08:53] [+] Clicked Other Amount Radio
+[07:08:53] [+] Filled Other Amount Value
+[07:08:53] [+] Clicked One Time Donation
+[07:08:53] [+] Filled First Name
+[07:08:54] [+] Filled Last Name
+[07:08:54] [+] Filled Address
+[07:08:54] [+] Filled City
+[07:08:54] [+] Selected State via JS: TX
+[07:08:54] [+] Selected Country via JS: US
+[07:08:54] [+] Filled Zip
+[07:08:54] [+] Filled Email
+[07:08:54] [+] Filled Card Holder Name
+[07:08:54] [+] Filled Card Number
+[07:08:54] [+] Filled CVV
+[07:08:54] [+] Clicked Same as Above Checkbox
+[07:08:54] [+] Filled Billing Address
+[07:08:54] [+] Filled Billing City
+[07:08:54] [+] Filled Billing Zip
+[07:08:54] [+] Clicked Cover Costs Yes
+[07:09:04] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:09:14] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:09:21] Error in Run 6: page.content: Target page, context or browser has been closed
+[07:09:21] Progress: 6/61 (ERROR)
+[07:10:23] === DonorPerfect Automation Started (TS) ===
+[07:10:24] Starting Run 7: 7752
+[07:10:27] [+] Clicked Other Amount Radio
+[07:10:27] [+] Filled Other Amount Value
+[07:10:27] [+] Clicked One Time Donation
+[07:10:27] [+] Filled First Name
+[07:10:27] [+] Filled Last Name
+[07:10:27] [+] Filled Address
+[07:10:27] [+] Filled City
+[07:10:27] [+] Selected State via JS: WA
+[07:10:27] [+] Selected Country via JS: US
+[07:10:27] [+] Filled Zip
+[07:10:27] [+] Filled Email
+[07:10:27] [+] Filled Card Holder Name
+[07:10:27] [+] Filled Card Number
+[07:10:28] [+] Filled CVV
+[07:10:28] [+] Clicked Same as Above Checkbox
+[07:10:28] [+] Filled Billing Address
+[07:10:28] [+] Filled Billing City
+[07:10:28] [+] Filled Billing Zip
+[07:10:28] [+] Clicked Cover Costs Yes
+[07:10:38] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:10:48] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:11:03] Result 7: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:11:03] Progress: 7/61 (SUCCESS)
+[07:11:07] Starting Run 8: 7673
+[07:11:10] [+] Clicked Other Amount Radio
+[07:11:10] [+] Filled Other Amount Value
+[07:11:10] [+] Clicked One Time Donation
+[07:11:10] [+] Filled First Name
+[07:11:10] [+] Filled Last Name
+[07:11:10] [+] Filled Address
+[07:11:10] [+] Filled City
+[07:11:10] [+] Selected State via JS: NY
+[07:11:10] [+] Selected Country via JS: US
+[07:11:10] [+] Filled Zip
+[07:11:10] [+] Filled Email
+[07:11:10] [+] Filled Card Holder Name
+[07:11:10] [+] Filled Card Number
+[07:11:10] [+] Filled CVV
+[07:11:10] [+] Clicked Same as Above Checkbox
+[07:11:10] [+] Filled Billing Address
+[07:11:10] [+] Filled Billing City
+[07:11:10] [+] Filled Billing Zip
+[07:11:10] [+] Clicked Cover Costs Yes
+[07:11:20] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:11:30] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:11:47] Error in Run 8: page.content: Unable to retrieve content because the page is navigating and changing the content.
+[07:11:47] Progress: 8/61 (ERROR)
+[07:11:51] Starting Run 9: 1901
+[07:11:54] [+] Clicked Other Amount Radio
+[07:11:54] [+] Filled Other Amount Value
+[07:11:54] [+] Clicked One Time Donation
+[07:11:55] [+] Filled First Name
+[07:11:55] [+] Filled Last Name
+[07:11:55] [+] Filled Address
+[07:11:55] [+] Filled City
+[07:11:55] [+] Selected State via JS: CA
+[07:11:55] [+] Selected Country via JS: US
+[07:11:55] [+] Filled Zip
+[07:11:55] [+] Filled Email
+[07:11:55] [+] Filled Card Holder Name
+[07:11:55] [+] Filled Card Number
+[07:11:55] [+] Filled CVV
+[07:11:55] [+] Clicked Same as Above Checkbox
+[07:11:55] [+] Filled Billing Address
+[07:11:55] [+] Filled Billing City
+[07:11:55] [+] Filled Billing Zip
+[07:11:55] [+] Clicked Cover Costs Yes
+[07:12:05] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+[2m    - waiting for" https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE" navigation to finish...[22m
+[2m    - navigated to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE"[22m
+
+[07:12:14] [+] Clicked Fallback Submit
+[07:12:29] Result 9: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormConfirmationSingleNM.aspx?formid=43
+[07:12:29] Progress: 9/61 (SUCCESS)
+[07:12:33] Starting Run 10: 4307
+[07:12:36] [+] Clicked Other Amount Radio
+[07:12:36] [+] Filled Other Amount Value
+[07:12:36] [+] Clicked One Time Donation
+[07:12:36] [+] Filled First Name
+[07:12:36] [+] Filled Last Name
+[07:12:36] [+] Filled Address
+[07:12:36] [+] Filled City
+[07:12:36] [+] Selected State via JS: IL
+[07:12:36] [+] Selected Country via JS: US
+[07:12:36] [+] Filled Zip
+[07:12:36] [+] Filled Email
+[07:12:36] [+] Filled Card Holder Name
+[07:12:36] [+] Filled Card Number
+[07:12:36] [+] Filled CVV
+[07:12:36] [+] Clicked Same as Above Checkbox
+[07:12:36] [+] Filled Billing Address
+[07:12:36] [+] Filled Billing City
+[07:12:36] [+] Filled Billing Zip
+[07:12:36] [+] Clicked Cover Costs Yes
+[07:12:46] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:12:56] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:13:11] Result 10: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:13:11] Progress: 10/61 (SUCCESS)
+[07:13:16] Starting Run 11: 3577
+[07:13:18] [+] Clicked Other Amount Radio
+[07:13:18] [+] Filled Other Amount Value
+[07:13:18] [+] Clicked One Time Donation
+[07:13:18] [+] Filled First Name
+[07:13:18] [+] Filled Last Name
+[07:13:18] [+] Filled Address
+[07:13:18] [+] Filled City
+[07:13:18] [+] Selected State via JS: FL
+[07:13:18] [+] Selected Country via JS: US
+[07:13:18] [+] Filled Zip
+[07:13:18] [+] Filled Email
+[07:13:18] [+] Filled Card Holder Name
+[07:13:18] [+] Filled Card Number
+[07:13:18] [+] Filled CVV
+[07:13:18] [+] Clicked Same as Above Checkbox
+[07:13:18] [+] Filled Billing Address
+[07:13:18] [+] Filled Billing City
+[07:13:18] [+] Filled Billing Zip
+[07:13:18] [+] Clicked Cover Costs Yes
+[07:13:19] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:13:19] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:13:19] Error in Run 11: page.content: Target page, context or browser has been closed
+[07:13:19] Progress: 11/61 (ERROR)
+[07:13:23] Starting Run 12: 3063
+[07:13:26] [+] Clicked Other Amount Radio
+[07:13:26] [+] Filled Other Amount Value
+[07:13:26] [+] Clicked One Time Donation
+[07:13:26] [+] Filled First Name
+[07:13:26] [+] Filled Last Name
+[07:13:26] [+] Filled Address
+[07:13:26] [+] Filled City
+[07:13:26] [+] Selected State via JS: CA
+[07:13:26] [+] Selected Country via JS: US
+[07:13:26] [+] Filled Zip
+[07:13:26] [+] Filled Email
+[07:13:26] [+] Filled Card Holder Name
+[07:13:26] [+] Filled Card Number
+[07:13:26] [+] Filled CVV
+[07:13:26] [+] Clicked Same as Above Checkbox
+[07:13:26] [+] Filled Billing Address
+[07:13:26] [+] Filled Billing City
+[07:13:26] [+] Filled Billing Zip
+[07:13:26] [+] Clicked Cover Costs Yes
+[07:13:36] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:13:36] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:13:36] Error in Run 12: page.content: Target page, context or browser has been closed
+[07:13:36] Progress: 12/61 (ERROR)
+[07:14:53] === DonorPerfect Automation Started (TS) ===
+[07:14:55] Starting Run 13: 3412
+[07:14:58] [+] Clicked Other Amount Radio
+[07:14:58] [+] Filled Other Amount Value
+[07:14:58] [+] Clicked One Time Donation
+[07:14:58] [+] Filled First Name
+[07:14:58] [+] Filled Last Name
+[07:14:58] [+] Filled Address
+[07:14:58] [+] Filled City
+[07:14:58] [+] Selected State via JS: TX
+[07:14:58] [+] Selected Country via JS: US
+[07:14:58] [+] Filled Zip
+[07:14:58] [+] Filled Email
+[07:14:58] [+] Filled Card Holder Name
+[07:14:58] [+] Filled Card Number
+[07:14:58] [+] Filled CVV
+[07:14:58] [+] Clicked Same as Above Checkbox
+[07:14:58] [+] Filled Billing Address
+[07:14:58] [+] Filled Billing City
+[07:14:58] [+] Filled Billing Zip
+[07:14:58] [+] Clicked Cover Costs Yes
+[07:15:09] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:15:19] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:15:34] Result 13: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:15:34] Progress: 13/61 (SUCCESS)
+[07:15:38] Starting Run 14: 6625
+[07:15:42] [+] Clicked Other Amount Radio
+[07:15:42] [+] Filled Other Amount Value
+[07:15:42] [+] Clicked One Time Donation
+[07:15:42] [+] Filled First Name
+[07:15:42] [+] Filled Last Name
+[07:15:42] [+] Filled Address
+[07:15:42] [+] Filled City
+[07:15:42] [+] Selected State via JS: WA
+[07:15:42] [+] Selected Country via JS: US
+[07:15:42] [+] Filled Zip
+[07:15:42] [+] Filled Email
+[07:15:42] [+] Filled Card Holder Name
+[07:15:42] [+] Filled Card Number
+[07:15:42] [+] Filled CVV
+[07:15:42] [+] Clicked Same as Above Checkbox
+[07:15:42] [+] Filled Billing Address
+[07:15:42] [+] Filled Billing City
+[07:15:42] [+] Filled Billing Zip
+[07:15:42] [+] Clicked Cover Costs Yes
+[07:15:52] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:16:02] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:16:17] Result 14: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:16:17] Progress: 14/61 (SUCCESS)
+[07:16:21] Starting Run 15: 6750
+[07:16:24] [+] Clicked Other Amount Radio
+[07:16:24] [+] Filled Other Amount Value
+[07:16:24] [+] Clicked One Time Donation
+[07:16:24] [+] Filled First Name
+[07:16:24] [+] Filled Last Name
+[07:16:24] [+] Filled Address
+[07:16:24] [+] Filled City
+[07:16:24] [+] Selected State via JS: NY
+[07:16:24] [+] Selected Country via JS: US
+[07:16:24] [+] Filled Zip
+[07:16:24] [+] Filled Email
+[07:16:24] [+] Filled Card Holder Name
+[07:16:24] [+] Filled Card Number
+[07:16:24] [+] Filled CVV
+[07:16:24] [+] Clicked Same as Above Checkbox
+[07:16:24] [+] Filled Billing Address
+[07:16:24] [+] Filled Billing City
+[07:16:24] [+] Filled Billing Zip
+[07:16:24] [+] Clicked Cover Costs Yes
+[07:16:34] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:16:44] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:17:00] Result 15: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:17:00] Progress: 15/61 (SUCCESS)
+[07:17:04] Starting Run 16: 5516
+[07:17:07] [+] Clicked Other Amount Radio
+[07:17:07] [+] Filled Other Amount Value
+[07:17:07] [+] Clicked One Time Donation
+[07:17:07] [+] Filled First Name
+[07:17:07] [+] Filled Last Name
+[07:17:07] [+] Filled Address
+[07:17:07] [+] Filled City
+[07:17:07] [+] Selected State via JS: CA
+[07:17:07] [+] Selected Country via JS: US
+[07:17:07] [+] Filled Zip
+[07:17:07] [+] Filled Email
+[07:17:07] [+] Filled Card Holder Name
+[07:17:07] [+] Filled Card Number
+[07:17:07] [+] Filled CVV
+[07:17:07] [+] Clicked Same as Above Checkbox
+[07:17:07] [+] Filled Billing Address
+[07:17:07] [+] Filled Billing City
+[07:17:07] [+] Filled Billing Zip
+[07:17:07] [+] Clicked Cover Costs Yes
+[07:17:17] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:17:27] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:17:42] Result 16: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:17:42] Progress: 16/61 (SUCCESS)
+[07:17:46] Starting Run 17: 9226
+[07:17:50] [+] Clicked Other Amount Radio
+[07:17:50] [+] Filled Other Amount Value
+[07:17:50] [+] Clicked One Time Donation
+[07:17:50] [+] Filled First Name
+[07:17:50] [+] Filled Last Name
+[07:17:50] [+] Filled Address
+[07:17:50] [+] Filled City
+[07:17:50] [+] Selected State via JS: IL
+[07:17:50] [+] Selected Country via JS: US
+[07:17:50] [+] Filled Zip
+[07:17:50] [+] Filled Email
+[07:17:50] [+] Filled Card Holder Name
+[07:17:50] [+] Filled Card Number
+[07:17:50] [+] Filled CVV
+[07:17:50] [+] Clicked Same as Above Checkbox
+[07:17:50] [+] Filled Billing Address
+[07:17:50] [+] Filled Billing City
+[07:17:50] [+] Filled Billing Zip
+[07:17:50] [+] Clicked Cover Costs Yes
+[07:18:00] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:18:10] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:18:25] Result 17: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:18:25] Progress: 17/61 (SUCCESS)
+[07:18:30] Starting Run 18: 8935
+[07:18:34] [+] Clicked Other Amount Radio
+[07:18:35] [+] Filled Other Amount Value
+[07:18:35] [+] Clicked One Time Donation
+[07:18:35] [+] Filled First Name
+[07:18:35] [+] Filled Last Name
+[07:18:35] [+] Filled Address
+[07:18:35] [+] Filled City
+[07:18:35] [+] Selected State via JS: FL
+[07:18:35] [+] Selected Country via JS: US
+[07:18:35] [+] Filled Zip
+[07:18:35] [+] Filled Email
+[07:18:35] [+] Filled Card Holder Name
+[07:18:35] [+] Filled Card Number
+[07:18:35] [+] Filled CVV
+[07:18:35] [+] Clicked Same as Above Checkbox
+[07:18:35] [+] Filled Billing Address
+[07:18:35] [+] Filled Billing City
+[07:18:35] [+] Filled Billing Zip
+[07:18:35] [+] Clicked Cover Costs Yes
+[07:18:45] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:18:55] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:19:10] Result 18: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:19:10] Progress: 18/61 (SUCCESS)
+[07:19:14] Starting Run 19: 3682
+[07:19:17] [+] Clicked Other Amount Radio
+[07:19:17] [+] Filled Other Amount Value
+[07:19:17] [+] Clicked One Time Donation
+[07:19:17] [+] Filled First Name
+[07:19:17] [+] Filled Last Name
+[07:19:17] [+] Filled Address
+[07:19:18] [+] Filled City
+[07:19:18] [+] Selected State via JS: CA
+[07:19:18] [+] Selected Country via JS: US
+[07:19:18] [+] Filled Zip
+[07:19:18] [+] Filled Email
+[07:19:18] [+] Filled Card Holder Name
+[07:19:18] [+] Filled Card Number
+[07:19:18] [+] Filled CVV
+[07:19:18] [+] Clicked Same as Above Checkbox
+[07:19:18] [+] Filled Billing Address
+[07:19:18] [+] Filled Billing City
+[07:19:18] [+] Filled Billing Zip
+[07:19:18] [+] Clicked Cover Costs Yes
+[07:19:28] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:19:38] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:19:53] Result 19: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:19:53] Progress: 19/61 (SUCCESS)
+[07:19:57] Starting Run 20: 3889
+[07:20:00] [+] Clicked Other Amount Radio
+[07:20:00] [+] Filled Other Amount Value
+[07:20:00] [+] Clicked One Time Donation
+[07:20:00] [+] Filled First Name
+[07:20:00] [+] Filled Last Name
+[07:20:00] [+] Filled Address
+[07:20:00] [+] Filled City
+[07:20:00] [+] Selected State via JS: TX
+[07:20:00] [+] Selected Country via JS: US
+[07:20:00] [+] Filled Zip
+[07:20:00] [+] Filled Email
+[07:20:00] [+] Filled Card Holder Name
+[07:20:00] [+] Filled Card Number
+[07:20:00] [+] Filled CVV
+[07:20:00] [+] Clicked Same as Above Checkbox
+[07:20:00] [+] Filled Billing Address
+[07:20:00] [+] Filled Billing City
+[07:20:00] [+] Filled Billing Zip
+[07:20:00] [+] Clicked Cover Costs Yes
+[07:20:10] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:20:20] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:20:35] Result 20: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:20:35] Progress: 20/61 (SUCCESS)
+[07:20:40] Starting Run 21: 2428
+[07:20:43] [+] Clicked Other Amount Radio
+[07:20:43] [+] Filled Other Amount Value
+[07:20:43] [+] Clicked One Time Donation
+[07:20:43] [+] Filled First Name
+[07:20:43] [+] Filled Last Name
+[07:20:43] [+] Filled Address
+[07:20:43] [+] Filled City
+[07:20:43] [+] Selected State via JS: WA
+[07:20:43] [+] Selected Country via JS: US
+[07:20:43] [+] Filled Zip
+[07:20:43] [+] Filled Email
+[07:20:43] [+] Filled Card Holder Name
+[07:20:43] [+] Filled Card Number
+[07:20:43] [+] Filled CVV
+[07:20:43] [+] Clicked Same as Above Checkbox
+[07:20:43] [+] Filled Billing Address
+[07:20:43] [+] Filled Billing City
+[07:20:43] [+] Filled Billing Zip
+[07:20:43] [+] Clicked Cover Costs Yes
+[07:20:53] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:21:03] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+[2m    - waiting for" https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE" navigation to finish...[22m
+[2m    - navigated to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE"[22m
+
+[07:21:19] Result 21: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:21:19] Progress: 21/61 (SUCCESS)
+[07:21:23] Starting Run 22: 0527
+[07:21:25] [+] Clicked Other Amount Radio
+[07:21:25] [+] Filled Other Amount Value
+[07:21:25] [+] Clicked One Time Donation
+[07:21:25] [+] Filled First Name
+[07:21:25] [+] Filled Last Name
+[07:21:25] [+] Filled Address
+[07:21:25] [+] Filled City
+[07:21:25] [+] Selected State via JS: NY
+[07:21:25] [+] Selected Country via JS: US
+[07:21:25] [+] Filled Zip
+[07:21:25] [+] Filled Email
+[07:21:25] [+] Filled Card Holder Name
+[07:21:25] [+] Filled Card Number
+[07:21:25] [+] Filled CVV
+[07:21:25] [+] Clicked Same as Above Checkbox
+[07:21:25] [+] Filled Billing Address
+[07:21:26] [+] Filled Billing City
+[07:21:26] [+] Filled Billing Zip
+[07:21:26] [+] Clicked Cover Costs Yes
+[07:21:36] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:21:46] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:22:01] Result 22: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:22:01] Progress: 22/61 (SUCCESS)
+[07:22:05] Starting Run 23: 8077
+[07:22:08] [+] Clicked Other Amount Radio
+[07:22:08] [+] Filled Other Amount Value
+[07:22:08] [+] Clicked One Time Donation
+[07:22:08] [+] Filled First Name
+[07:22:08] [+] Filled Last Name
+[07:22:08] [+] Filled Address
+[07:22:08] [+] Filled City
+[07:22:08] [+] Selected State via JS: CA
+[07:22:08] [+] Selected Country via JS: US
+[07:22:08] [+] Filled Zip
+[07:22:08] [+] Filled Email
+[07:22:08] [+] Filled Card Holder Name
+[07:22:08] [+] Filled Card Number
+[07:22:08] [+] Filled CVV
+[07:22:08] [+] Clicked Same as Above Checkbox
+[07:22:08] [+] Filled Billing Address
+[07:22:08] [+] Filled Billing City
+[07:22:08] [+] Filled Billing Zip
+[07:22:08] [+] Clicked Cover Costs Yes
+[07:22:18] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:22:28] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+[2m    - waiting for" https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE" navigation to finish...[22m
+[2m    - navigated to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE"[22m
+
+[07:22:43] Result 23: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:22:43] Progress: 23/61 (SUCCESS)
+[07:22:47] Starting Run 24: 2927
+[07:22:50] [+] Clicked Other Amount Radio
+[07:22:50] [+] Filled Other Amount Value
+[07:22:50] [+] Clicked One Time Donation
+[07:22:50] [+] Filled First Name
+[07:22:50] [+] Filled Last Name
+[07:22:50] [+] Filled Address
+[07:22:50] [+] Filled City
+[07:22:50] [+] Selected State via JS: IL
+[07:22:50] [+] Selected Country via JS: US
+[07:22:50] [+] Filled Zip
+[07:22:50] [+] Filled Email
+[07:22:50] [+] Filled Card Holder Name
+[07:22:50] [+] Filled Card Number
+[07:22:50] [+] Filled CVV
+[07:22:50] [+] Clicked Same as Above Checkbox
+[07:22:50] [+] Filled Billing Address
+[07:22:50] [+] Filled Billing City
+[07:22:50] [+] Filled Billing Zip
+[07:22:50] [+] Clicked Cover Costs Yes
+[07:23:00] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:23:10] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+[2m    - waiting for" https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE" navigation to finish...[22m
+[2m    - navigated to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE"[22m
+
+[07:23:26] Result 24: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:23:26] Progress: 24/61 (SUCCESS)
+[07:23:30] Starting Run 25: 0235
+[07:23:33] [+] Clicked Other Amount Radio
+[07:23:33] [+] Filled Other Amount Value
+[07:23:33] [+] Clicked One Time Donation
+[07:23:33] [+] Filled First Name
+[07:23:33] [+] Filled Last Name
+[07:23:33] [+] Filled Address
+[07:23:33] [+] Filled City
+[07:23:33] [+] Selected State via JS: FL
+[07:23:33] [+] Selected Country via JS: US
+[07:23:33] [+] Filled Zip
+[07:23:33] [+] Filled Email
+[07:23:33] [+] Filled Card Holder Name
+[07:23:33] [+] Filled Card Number
+[07:23:33] [+] Filled CVV
+[07:23:33] [+] Clicked Same as Above Checkbox
+[07:23:33] [+] Filled Billing Address
+[07:23:33] [+] Filled Billing City
+[07:23:33] [+] Filled Billing Zip
+[07:23:33] [+] Clicked Cover Costs Yes
+[07:23:37] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:23:37] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:23:37] Error in Run 25: page.content: Target page, context or browser has been closed
+[07:23:37] Progress: 25/61 (ERROR)
+[07:23:41] Starting Run 26: 0997
+[07:23:44] [+] Clicked Other Amount Radio
+[07:23:44] [+] Filled Other Amount Value
+[07:23:44] [+] Clicked One Time Donation
+[07:23:44] [+] Filled First Name
+[07:23:44] [+] Filled Last Name
+[07:23:44] [+] Filled Address
+[07:23:44] [+] Filled City
+[07:23:44] [+] Selected State via JS: CA
+[07:23:44] [+] Selected Country via JS: US
+[07:23:44] [+] Filled Zip
+[07:23:44] [+] Filled Email
+[07:23:44] [+] Filled Card Holder Name
+[07:23:44] [+] Filled Card Number
+[07:23:44] [+] Filled CVV
+[07:23:44] [+] Clicked Same as Above Checkbox
+[07:23:44] [+] Filled Billing Address
+[07:23:44] [+] Filled Billing City
+[07:23:44] [+] Filled Billing Zip
+[07:23:44] [+] Clicked Cover Costs Yes
+[07:23:52] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:23:52] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:23:52] Error in Run 26: page.content: Target page, context or browser has been closed
+[07:23:52] Progress: 26/61 (ERROR)
+[07:23:57] Starting Run 27: 8978
+[07:23:59] [+] Clicked Other Amount Radio
+[07:23:59] [+] Filled Other Amount Value
+[07:23:59] [+] Clicked One Time Donation
+[07:23:59] [+] Filled First Name
+[07:23:59] [+] Filled Last Name
+[07:23:59] [+] Filled Address
+[07:23:59] [+] Filled City
+[07:23:59] [+] Selected State via JS: TX
+[07:23:59] [+] Selected Country via JS: US
+[07:23:59] [+] Filled Zip
+[07:23:59] [+] Filled Email
+[07:23:59] [+] Filled Card Holder Name
+[07:23:59] [+] Filled Card Number
+[07:23:59] [+] Filled CVV
+[07:23:59] [+] Clicked Same as Above Checkbox
+[07:23:59] [+] Filled Billing Address
+[07:23:59] [+] Filled Billing City
+[07:23:59] [+] Filled Billing Zip
+[07:23:59] [+] Clicked Cover Costs Yes
+[07:24:09] [-] Failed Submit Button (input[value="Next"]): page.waitForSelector: Timeout 10000ms exceeded.
+Call log:
+[2m  - waiting for locator('input[value="Next"]') to be visible[22m
+
+[07:24:12] [-] Failed Fallback Submit (button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('button:has-text("Donate"), .btn-submit, input[type="submit"]') to be visible[22m
+
+[07:24:12] Error in Run 27: page.content: Target page, context or browser has been closed
+[07:24:12] Progress: 27/61 (ERROR)
+[07:25:30] === DonorPerfect Automation Started (TS) ===
+[07:25:31] Starting Run 28: 2336
+[07:25:34] [+] Clicked Other Amount Radio
+[07:25:34] [+] Filled Other Amount Value
+[07:25:34] [+] Clicked One Time Donation
+[07:25:34] [+] Filled First Name
+[07:44:58] === DonorPerfect Automation Started (TS) ===
+[07:45:00] Starting Run 28: 2336
+[07:45:04] [+] Clicked Other Amount Radio
+[07:45:04] [+] Filled Other Amount Value
+[07:45:04] [+] Clicked One Time Donation
+[07:45:04] [+] Filled First Name
+[07:45:04] [+] Filled Last Name
+[07:45:04] [+] Filled Address
+[07:45:04] [+] Filled City
+[07:45:04] [+] Selected State via JS: WA
+[07:45:04] [!] Country selection failed: page.evaluate: ReferenceError: import_config is not defined
+    at eval (eval at evaluate (:302:30), <anonymous>:1:72)
+    at UtilityScript.evaluate (<anonymous>:304:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[07:45:04] [+] Filled Zip
+[07:45:04] [+] Filled Email
+[07:45:04] [+] Filled Card Holder Name
+[07:45:04] [+] Filled Card Number
+[07:45:04] [+] Filled CVV
+[07:45:04] [+] Clicked Same as Above Checkbox
+[07:45:04] [+] Filled Billing Address
+[07:45:28] === DonorPerfect Automation Started (TS) ===
+[07:45:30] Starting Run 28: 2336
+[07:45:33] [+] Clicked Other Amount Radio
+[07:45:33] [+] Filled Other Amount Value
+[07:45:33] [+] Clicked One Time Donation
+[07:45:33] [+] Filled First Name
+[07:45:33] [+] Filled Last Name
+[07:45:33] [+] Filled Address
+[07:45:33] [+] Filled City
+[07:45:33] [+] Selected State via JS: WA
+[07:45:33] [+] Selected Country via JS: US
+[07:45:33] [+] Filled Zip
+[07:45:33] [+] Filled Email
+[07:45:33] [+] Filled Card Holder Name
+[07:45:33] [+] Filled Card Number
+[07:45:33] [+] Filled CVV
+[07:45:33] [+] Clicked Same as Above Checkbox
+[07:45:33] [+] Filled Billing Address
+[07:45:33] [+] Filled Billing City
+[07:45:33] [+] Filled Billing Zip
+[07:45:33] [+] Clicked Cover Costs Yes
+[07:45:33] [+] Pre-submit screenshot: pre_submit_28.png
+[07:45:34] [+] Clicked Submit Button
+[07:45:49] [+] Result screenshot: result_2336_1776289549227.png
+[07:45:49] Result 28: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:45:49] Progress: 28/61 (SUCCESS)
+[08:06:30] === DonorPerfect Automation Started (TS) ===
+[08:06:32] Starting Run 29: 6043
+[08:06:37] [+] Clicked Other Amount Radio
+[08:06:37] [+] Filled Other Amount Value
+[08:06:37] [+] Clicked One Time Donation
+[08:06:37] [+] Filled First Name
+[08:06:37] [+] Filled Last Name
+[08:06:37] [+] Filled Address
+[08:06:37] [+] Filled City
+[08:06:37] [+] Selected State via JS: NY
+[08:06:37] [+] Selected Country via JS: US
+[08:06:37] [+] Filled Zip
+[08:06:37] [+] Filled Email
+[08:06:37] [+] Filled Card Holder Name
+[08:06:37] [+] Filled Card Number
+[08:06:37] [+] Filled CVV
+[08:06:37] [+] Clicked Same as Above Checkbox
+[08:06:37] [+] Filled Billing Address
+[08:06:37] [+] Filled Billing City
+[08:06:37] [+] Filled Billing Zip
+[08:06:37] [+] Clicked Cover Costs Yes
+[08:06:37] [+] Pre-submit screenshot: pre_submit_29.png
+[08:06:37] [+] Clicked Submit Button
+[08:06:52] [+] Result screenshot: result_6043_1776290812360.png
+[08:06:52] Result 29: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[08:06:52] Progress: 29/61 (SUCCESS)
+[08:06:56] Starting Run 30: 3329
+[08:07:00] [+] Clicked Other Amount Radio
+[08:07:00] [+] Filled Other Amount Value
+[08:07:00] [+] Clicked One Time Donation
+[08:07:00] [+] Filled First Name
+[08:07:00] [+] Filled Last Name
+[08:07:00] [+] Filled Address
+[08:07:00] [+] Filled City
+[08:07:00] [+] Selected State via JS: CA
+[08:07:00] [+] Selected Country via JS: US
+[08:07:00] [+] Filled Zip
+[08:07:00] [+] Filled Email
+[08:07:00] [+] Filled Card Holder Name
+[08:07:00] [+] Filled Card Number
+[08:07:00] [+] Filled CVV
+[08:07:00] [+] Clicked Same as Above Checkbox
+[08:07:00] [+] Filled Billing Address
+[08:07:00] [+] Filled Billing City
+[08:07:00] [+] Filled Billing Zip
+[08:07:00] [+] Clicked Cover Costs Yes
+[08:07:00] [+] Pre-submit screenshot: pre_submit_30.png
+[08:07:00] [+] Clicked Submit Button
+[08:07:15] [+] Result screenshot: result_3329_1776290835292.png
+[08:07:15] Result 30: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[08:07:15] Progress: 30/61 (SUCCESS)
+[08:07:19] Starting Run 31: 8675
+[08:07:22] [+] Clicked Other Amount Radio
+[08:07:22] [+] Filled Other Amount Value
+[08:07:22] [+] Clicked One Time Donation
+[08:07:22] [+] Filled First Name
+[08:07:22] [+] Filled Last Name
+[08:07:22] [+] Filled Address
+[08:07:22] [+] Filled City
+[08:07:22] [+] Selected State via JS: IL
+[08:07:22] [+] Selected Country via JS: US
+[08:07:22] [+] Filled Zip
+[08:07:22] [+] Filled Email
+[08:07:22] [+] Filled Card Holder Name
+[08:07:22] [+] Filled Card Number
+[08:07:22] [+] Filled CVV
+[08:07:22] [+] Clicked Same as Above Checkbox
+[08:07:22] [+] Filled Billing Address
+[08:07:22] [+] Filled Billing City
+[08:07:22] [+] Filled Billing Zip
+[08:07:22] [+] Clicked Cover Costs Yes
+[08:07:22] [+] Pre-submit screenshot: pre_submit_31.png
+[08:07:22] [+] Clicked Submit Button
+[08:07:37] [+] Result screenshot: result_8675_1776290857296.png
+[08:07:37] Result 31: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[08:07:37] Progress: 31/61 (SUCCESS)
+[08:07:41] Starting Run 32: 1787
+[08:07:44] [+] Clicked Other Amount Radio
+[08:07:44] [+] Filled Other Amount Value
+[08:07:44] [+] Clicked One Time Donation
+[08:07:44] [+] Filled First Name
+[08:07:44] [+] Filled Last Name
+[08:07:44] [+] Filled Address
+[08:07:44] [+] Filled City
+[08:07:44] [+] Selected State via JS: FL
+[08:07:44] [+] Selected Country via JS: US
+[08:07:44] [+] Filled Zip
+[08:07:44] [+] Filled Email
+[08:07:44] [+] Filled Card Holder Name
+[08:07:44] [+] Filled Card Number
+[08:07:44] [+] Filled CVV
+[08:07:44] [+] Clicked Same as Above Checkbox
+[08:07:44] [+] Filled Billing Address
+[08:07:44] [+] Filled Billing City
+[08:07:44] [+] Filled Billing Zip
+[08:07:44] [+] Clicked Cover Costs Yes
+[08:07:44] [+] Pre-submit screenshot: pre_submit_32.png
+[08:07:44] [+] Clicked Submit Button
+[08:07:55] Error in Run 32: page.content: Target page, context or browser has been closed
+[08:07:55] Progress: 32/61 (ERROR)
+[08:07:59] Critical Error: browser.newContext: Target page, context or browser has been closed
+[14:26:42] === DonorPerfect Automation Started (TS) ===
+[14:26:44] Starting Run 33: 6784
+[14:26:49] [+] Clicked Other Amount Radio
+[14:26:49] [+] Filled Other Amount Value
+[14:26:49] [+] Clicked One Time Donation
+[14:26:49] [+] Filled First Name
+[14:26:49] [+] Filled Last Name
+[14:26:49] [+] Filled Address
+[14:26:49] [+] Filled City
+[14:26:49] [+] Selected State via JS: CA
+[14:26:49] [+] Selected Country via JS: US
+[14:26:49] [+] Filled Zip
+[14:26:49] [+] Filled Email
+[14:26:49] [+] Filled Card Holder Name
+[14:26:49] [+] Filled Card Number
+[14:26:49] [+] Filled CVV
+[14:26:49] [+] Clicked Same as Above Checkbox
+[14:26:49] [+] Filled Billing Address
+[14:26:50] [+] Filled Billing City
+[14:26:50] [+] Filled Billing Zip
+[14:26:50] [+] Clicked Cover Costs Yes
+[14:26:50] [+] Pre-submit screenshot: pre_submit_33.png
+[14:26:51] [+] Clicked Submit Button
+[14:27:06] [+] Result screenshot: result_6784_1776400026284.png
+[14:27:06] Result 33: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[14:27:06] Progress: 33/61 (SUCCESS)
+[14:27:10] Starting Run 34: 9227
+[14:27:14] [+] Clicked Other Amount Radio
+[14:27:14] [+] Filled Other Amount Value
+[14:27:14] [+] Clicked One Time Donation
+[14:27:14] [+] Filled First Name
+[14:27:14] [+] Filled Last Name
+[14:27:14] [+] Filled Address
+[14:27:14] [+] Filled City
+[14:27:14] [+] Selected State via JS: TX
+[14:27:14] [+] Selected Country via JS: US
+[14:27:14] [+] Filled Zip
+[14:27:14] [+] Filled Email
+[14:27:14] [+] Filled Card Holder Name
+[14:27:14] [+] Filled Card Number
+[14:27:14] [+] Filled CVV
+[14:27:14] [+] Clicked Same as Above Checkbox
+[14:27:14] [+] Filled Billing Address
+[14:27:14] [+] Filled Billing City
+[14:27:14] [+] Filled Billing Zip
+[14:27:14] [+] Clicked Cover Costs Yes
+[14:27:14] [+] Pre-submit screenshot: pre_submit_34.png
+[14:27:14] [+] Clicked Submit Button
+[14:27:27] Error in Run 34: page.content: Target page, context or browser has been closed
+[14:27:28] Progress: 34/61 (ERROR)
+[14:32:06] === DonorPerfect Automation Started (TS) ===
+[14:32:07] Starting Run 35: 9879
+[14:32:12] [+] Clicked Other Amount Radio
+[14:32:12] [+] Filled Other Amount Value
+[14:32:12] [+] Clicked One Time Donation
+[14:32:12] [+] Filled First Name
+[14:32:12] [+] Filled Last Name
+[14:32:12] [+] Filled Address
+[14:32:12] [+] Filled City
+[14:32:12] [+] Selected State via JS: WA
+[14:32:12] [+] Selected Country via JS: US
+[14:32:12] [+] Filled Zip
+[14:32:12] [+] Filled Email
+[14:32:12] [+] Filled Card Holder Name
+[14:32:12] [+] Filled Card Number
+[14:32:12] [+] Filled CVV
+[14:32:12] [+] Clicked Same as Above Checkbox
+[14:32:12] [+] Filled Billing Address
+[14:32:12] [+] Filled Billing City
+[14:32:12] [+] Filled Billing Zip
+[14:32:12] [+] Clicked Cover Costs Yes
+[14:32:12] [+] Pre-submit screenshot: pre_submit_35.png
+[14:32:13] [+] Clicked Submit Button
+[14:32:23] Error in Run 35: page.content: Target page, context or browser has been closed
+[14:32:23] Critical Error: browserContext.close: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /Users/adminuser/Library/Caches/ms-playwright/chromium-1217/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --user-data-dir=/var/folders/99/rd7r6txn4qv5_htlx6mp7cwm0000gn/T/playwright_chromiumdev_profile-PpFoHy --remote-debugging-pipe --no-startup-window
+<launched> pid=4046
+[pid=4046][err] [4046:6327457:0417/143216.939378:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=4046] <gracefully close start>
+[pid=4046] <forcefully close>
+[pid=4046] <kill>
+[pid=4046] <will force kill>
+[pid=4046][err] [4046:6327457:0417/143223.733325:ERROR:google_apis/gcm/engine/connection_factory_impl.cc:483] ConnectionHandler failed with net error: -2
+[06:48:42] === DonorPerfect Automation Started (TS) ===
+[06:48:45] Starting Run 35: 9879
+[06:48:50] [+] Clicked Other Amount Radio
+[06:48:50] [+] Filled Other Amount Value
+[06:48:50] [+] Clicked One Time Donation
+[06:48:50] [+] Filled First Name
+[06:48:50] [+] Filled Last Name
+[06:48:50] [+] Filled Address
+[06:48:50] [+] Filled City
+[06:48:50] [+] Selected State via JS: WA
+[06:48:50] [+] Selected Country via JS: US
+[06:48:50] [+] Filled Zip
+[06:48:50] [+] Filled Email
+[06:48:50] [+] Filled Card Holder Name
+[06:48:50] [+] Filled Card Number
+[06:48:50] [+] Filled CVV
+[06:48:50] [+] Clicked Same as Above Checkbox
+[06:48:50] [+] Filled Billing Address
+[06:48:50] [+] Filled Billing City
+[06:48:50] [+] Filled Billing Zip
+[06:48:50] [+] Clicked Cover Costs Yes
+[06:48:50] [+] Pre-submit screenshot: pre_submit_35.png
+[06:48:51] [+] Clicked Submit Button
+[06:49:10] [+] Result screenshot: result_9879_1776631749854.png
+[06:49:10] Result 35: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:49:10] Progress: 35/61 (SUCCESS)
+[06:49:14] Starting Run 36: 3390
+[06:49:18] [+] Clicked Other Amount Radio
+[06:49:18] [+] Filled Other Amount Value
+[06:49:18] [+] Clicked One Time Donation
+[06:49:18] [+] Filled First Name
+[06:49:18] [+] Filled Last Name
+[06:49:18] [+] Filled Address
+[06:49:18] [+] Filled City
+[06:49:18] [+] Selected State via JS: NY
+[06:49:18] [+] Selected Country via JS: US
+[06:49:18] [+] Filled Zip
+[06:49:18] [+] Filled Email
+[06:49:18] [+] Filled Card Holder Name
+[06:49:18] [+] Filled Card Number
+[06:49:18] [+] Filled CVV
+[06:49:18] [+] Clicked Same as Above Checkbox
+[06:49:18] [+] Filled Billing Address
+[06:49:18] [+] Filled Billing City
+[06:49:18] [+] Filled Billing Zip
+[06:49:18] [+] Clicked Cover Costs Yes
+[06:49:18] [+] Pre-submit screenshot: pre_submit_36.png
+[06:49:18] [+] Clicked Submit Button
+[06:49:36] [+] Result screenshot: result_3390_1776631776719.png
+[06:49:36] Result 36: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:49:36] Progress: 36/61 (SUCCESS)
+[06:49:41] Starting Run 37: 7230
+[06:49:45] [+] Clicked Other Amount Radio
+[06:49:45] [+] Filled Other Amount Value
+[06:49:45] [+] Clicked One Time Donation
+[06:49:45] [+] Filled First Name
+[06:49:45] [+] Filled Last Name
+[06:49:45] [+] Filled Address
+[06:49:45] [+] Filled City
+[06:49:45] [+] Selected State via JS: CA
+[06:49:45] [+] Selected Country via JS: US
+[06:49:45] [+] Filled Zip
+[06:49:45] [+] Filled Email
+[06:49:45] [+] Filled Card Holder Name
+[06:49:45] [+] Filled Card Number
+[06:49:45] [+] Filled CVV
+[06:49:45] [+] Clicked Same as Above Checkbox
+[06:49:45] [+] Filled Billing Address
+[06:49:45] [+] Filled Billing City
+[06:49:45] [+] Filled Billing Zip
+[06:49:45] [+] Clicked Cover Costs Yes
+[06:49:45] [+] Pre-submit screenshot: pre_submit_37.png
+[06:49:46] [+] Clicked Submit Button
+[06:50:04] [+] Result screenshot: result_7230_1776631804726.png
+[06:50:04] Result 37: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:50:04] Progress: 37/61 (SUCCESS)
+[06:50:09] Starting Run 38: 3502
+[06:50:13] [+] Clicked Other Amount Radio
+[06:50:13] [+] Filled Other Amount Value
+[06:50:13] [+] Clicked One Time Donation
+[06:50:13] [+] Filled First Name
+[06:50:13] [+] Filled Last Name
+[06:50:13] [+] Filled Address
+[06:50:13] [+] Filled City
+[06:50:13] [+] Selected State via JS: IL
+[06:50:13] [+] Selected Country via JS: US
+[06:50:13] [+] Filled Zip
+[06:50:13] [+] Filled Email
+[06:50:13] [+] Filled Card Holder Name
+[06:50:13] [+] Filled Card Number
+[06:50:13] [+] Filled CVV
+[06:50:13] [+] Clicked Same as Above Checkbox
+[06:50:13] [+] Filled Billing Address
+[06:50:13] [+] Filled Billing City
+[06:50:13] [+] Filled Billing Zip
+[06:50:13] [+] Clicked Cover Costs Yes
+[06:50:13] [+] Pre-submit screenshot: pre_submit_38.png
+[06:50:14] [+] Clicked Submit Button
+[06:50:33] [+] Result screenshot: result_3502_1776631832876.png
+[06:50:33] Result 38: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:50:33] Progress: 38/61 (SUCCESS)
+[06:50:37] Starting Run 39: 2301
+[06:50:41] [+] Clicked Other Amount Radio
+[06:50:41] [+] Filled Other Amount Value
+[06:50:41] [+] Clicked One Time Donation
+[06:50:41] [+] Filled First Name
+[06:50:41] [+] Filled Last Name
+[06:50:41] [+] Filled Address
+[06:50:41] [+] Filled City
+[06:50:41] [+] Selected State via JS: FL
+[06:50:41] [+] Selected Country via JS: US
+[06:50:41] [+] Filled Zip
+[06:50:41] [+] Filled Email
+[06:50:41] [+] Filled Card Holder Name
+[06:50:41] [+] Filled Card Number
+[06:50:41] [+] Filled CVV
+[06:50:41] [+] Clicked Same as Above Checkbox
+[06:50:41] [+] Filled Billing Address
+[06:50:42] [+] Filled Billing City
+[06:50:42] [+] Filled Billing Zip
+[06:50:42] [+] Clicked Cover Costs Yes
+[06:50:42] [+] Pre-submit screenshot: pre_submit_39.png
+[06:50:43] [+] Clicked Submit Button
+[06:50:46] Error in Run 39: page.content: Target page, context or browser has been closed
+[06:50:46] Progress: 39/61 (ERROR)
+[06:50:50] Starting Run 40: 2550
+[06:50:56] [+] Clicked Other Amount Radio
+[06:50:56] [+] Filled Other Amount Value
+[06:50:56] [+] Clicked One Time Donation
+[06:50:56] [+] Filled First Name
+[06:50:56] [+] Filled Last Name
+[06:50:56] [+] Filled Address
+[06:50:56] [+] Filled City
+[06:50:56] [+] Selected State via JS: CA
+[06:50:56] [+] Selected Country via JS: US
+[06:50:56] [+] Filled Zip
+[06:50:56] [+] Filled Email
+[06:50:56] [+] Filled Card Holder Name
+[06:50:56] [+] Filled Card Number
+[06:50:56] [+] Filled CVV
+[06:50:56] [+] Clicked Same as Above Checkbox
+[06:50:56] [+] Filled Billing Address
+[06:50:56] [+] Filled Billing City
+[06:50:56] [+] Filled Billing Zip
+[06:50:56] [+] Clicked Cover Costs Yes
+[06:50:58] [+] Pre-submit screenshot: pre_submit_40.png
+[06:50:59] [+] Clicked Submit Button
+[06:51:17] [+] Result screenshot: result_2550_1776631877451.png
+[06:51:17] Result 40: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:51:17] Progress: 40/61 (SUCCESS)
+[06:51:21] Starting Run 41: 2099
+[06:51:23] Error in Run 41: page.goto: Target page, context or browser has been closed
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "domcontentloaded"[22m
+
+[06:51:23] Progress: 41/61 (ERROR)
+[06:51:27] Starting Run 42: 5884
+[06:51:31] [+] Clicked Other Amount Radio
+[06:51:31] [+] Filled Other Amount Value
+[06:51:31] [+] Clicked One Time Donation
+[06:51:31] [+] Filled First Name
+[06:51:31] [+] Filled Last Name
+[06:51:31] [+] Filled Address
+[06:51:31] [+] Filled City
+[06:51:31] [+] Selected State via JS: WA
+[06:51:31] [+] Selected Country via JS: US
+[06:51:31] [+] Filled Zip
+[06:51:31] [+] Filled Email
+[06:51:31] [+] Filled Card Holder Name
+[06:51:31] [+] Filled Card Number
+[06:51:31] [+] Filled CVV
+[06:51:31] [+] Clicked Same as Above Checkbox
+[06:51:31] [+] Filled Billing Address
+[06:51:31] [+] Filled Billing City
+[06:51:31] [+] Filled Billing Zip
+[06:51:31] [+] Clicked Cover Costs Yes
+[06:51:31] [+] Pre-submit screenshot: pre_submit_42.png
+[06:51:32] [+] Clicked Submit Button
+[06:51:50] [+] Result screenshot: result_5884_1776631910607.png
+[06:51:50] Result 42: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:51:50] Progress: 42/61 (SUCCESS)
+[06:51:55] Starting Run 43: 6180
+[06:51:59] [+] Clicked Other Amount Radio
+[06:51:59] [+] Filled Other Amount Value
+[06:51:59] [+] Clicked One Time Donation
+[06:51:59] [+] Filled First Name
+[06:51:59] [+] Filled Last Name
+[06:51:59] [+] Filled Address
+[06:51:59] [+] Filled City
+[06:51:59] [+] Selected State via JS: NY
+[06:51:59] [+] Selected Country via JS: US
+[06:51:59] [+] Filled Zip
+[06:51:59] [+] Filled Email
+[06:51:59] [+] Filled Card Holder Name
+[06:51:59] [+] Filled Card Number
+[06:51:59] [+] Filled CVV
+[06:51:59] [+] Clicked Same as Above Checkbox
+[06:51:59] [+] Filled Billing Address
+[06:51:59] [+] Filled Billing City
+[06:51:59] [+] Filled Billing Zip
+[06:51:59] [+] Clicked Cover Costs Yes
+[06:51:59] [+] Pre-submit screenshot: pre_submit_43.png
+[06:52:01] [+] Clicked Submit Button
+[06:52:17] Error in Run 43: page.content: Target page, context or browser has been closed
+[06:52:17] Progress: 43/61 (ERROR)
+[06:52:22] Starting Run 44: 5851
+[06:52:26] [+] Clicked Other Amount Radio
+[06:52:26] [+] Filled Other Amount Value
+[06:52:26] [+] Clicked One Time Donation
+[06:52:26] [+] Filled First Name
+[06:52:26] [+] Filled Last Name
+[06:52:26] [+] Filled Address
+[06:52:26] [+] Filled City
+[06:52:26] [+] Selected State via JS: CA
+[06:52:26] [+] Selected Country via JS: US
+[06:52:26] [+] Filled Zip
+[06:52:27] [+] Filled Email
+[06:52:27] [+] Filled Card Holder Name
+[06:52:27] [+] Filled Card Number
+[06:52:27] [+] Filled CVV
+[06:52:27] [+] Clicked Same as Above Checkbox
+[06:52:27] [+] Filled Billing Address
+[06:52:27] [+] Filled Billing City
+[06:52:27] [+] Filled Billing Zip
+[06:52:27] [+] Clicked Cover Costs Yes
+[06:52:27] [+] Pre-submit screenshot: pre_submit_44.png
+[06:52:28] [+] Clicked Submit Button
+[06:52:46] [+] Result screenshot: result_5851_1776631966436.png
+[06:52:46] Result 44: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:52:46] Progress: 44/61 (SUCCESS)
+[06:52:50] Starting Run 45: 0510
+[06:52:54] [+] Clicked Other Amount Radio
+[06:52:54] [+] Filled Other Amount Value
+[06:52:54] [+] Clicked One Time Donation
+[06:52:54] [+] Filled First Name
+[06:52:54] [+] Filled Last Name
+[06:52:54] [+] Filled Address
+[06:52:54] [+] Filled City
+[06:52:54] [+] Selected State via JS: IL
+[06:52:54] [+] Selected Country via JS: US
+[06:52:54] [+] Filled Zip
+[06:52:54] [+] Filled Email
+[06:52:54] [+] Filled Card Holder Name
+[06:52:54] [+] Filled Card Number
+[06:52:54] [+] Filled CVV
+[06:52:54] [+] Clicked Same as Above Checkbox
+[06:52:54] [+] Filled Billing Address
+[06:52:54] [+] Filled Billing City
+[06:52:54] [+] Filled Billing Zip
+[06:52:54] [+] Clicked Cover Costs Yes
+[06:52:54] [+] Pre-submit screenshot: pre_submit_45.png
+[06:52:56] [+] Clicked Submit Button
+[06:53:14] [+] Result screenshot: result_0510_1776631994158.png
+[06:53:14] Result 45: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:53:14] Progress: 45/61 (SUCCESS)
+[06:53:19] Starting Run 46: 0908
+[06:53:23] [+] Clicked Other Amount Radio
+[06:53:23] [+] Filled Other Amount Value
+[06:53:23] [+] Clicked One Time Donation
+[06:53:23] [+] Filled First Name
+[06:53:23] [+] Filled Last Name
+[06:53:23] [+] Filled Address
+[06:53:23] [+] Filled City
+[06:53:23] [+] Selected State via JS: FL
+[06:53:23] [+] Selected Country via JS: US
+[06:53:23] [+] Filled Zip
+[06:53:23] [+] Filled Email
+[06:53:23] [+] Filled Card Holder Name
+[06:53:23] [+] Filled Card Number
+[06:53:23] [+] Filled CVV
+[06:53:23] [+] Clicked Same as Above Checkbox
+[06:53:23] [+] Filled Billing Address
+[06:53:23] [+] Filled Billing City
+[06:53:23] [+] Filled Billing Zip
+[06:53:23] [+] Clicked Cover Costs Yes
+[06:53:23] [+] Pre-submit screenshot: pre_submit_46.png
+[06:53:24] [+] Clicked Submit Button
+[06:53:42] [+] Result screenshot: result_0908_1776632022716.png
+[06:53:42] Result 46: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:53:42] Progress: 46/61 (SUCCESS)
+[06:53:47] Starting Run 47: 2724
+[06:53:51] [+] Clicked Other Amount Radio
+[06:53:51] [+] Filled Other Amount Value
+[06:53:51] [+] Clicked One Time Donation
+[06:53:51] [+] Filled First Name
+[06:53:51] [+] Filled Last Name
+[06:53:51] [+] Filled Address
+[06:53:51] [+] Filled City
+[06:53:51] [+] Selected State via JS: CA
+[06:53:51] [+] Selected Country via JS: US
+[06:53:51] [+] Filled Zip
+[06:53:51] [+] Filled Email
+[06:53:51] [+] Filled Card Holder Name
+[06:53:51] [+] Filled Card Number
+[06:53:51] [+] Filled CVV
+[06:53:51] [+] Clicked Same as Above Checkbox
+[06:53:51] [+] Filled Billing Address
+[06:53:51] [+] Filled Billing City
+[06:53:51] [+] Filled Billing Zip
+[06:53:51] [+] Clicked Cover Costs Yes
+[06:53:51] [+] Pre-submit screenshot: pre_submit_47.png
+[06:53:52] [+] Clicked Submit Button
+[06:54:11] [+] Result screenshot: result_2724_1776632050997.png
+[06:54:11] Result 47: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:54:11] Progress: 47/61 (SUCCESS)
+[06:54:15] Starting Run 48: 2264
+[06:54:19] [+] Clicked Other Amount Radio
+[06:54:19] [+] Filled Other Amount Value
+[06:54:19] [+] Clicked One Time Donation
+[06:54:19] [+] Filled First Name
+[06:54:19] [+] Filled Last Name
+[06:54:19] [+] Filled Address
+[06:54:19] [+] Filled City
+[06:54:19] [+] Selected State via JS: TX
+[06:54:19] [+] Selected Country via JS: US
+[06:54:19] [+] Filled Zip
+[06:54:19] [+] Filled Email
+[06:54:19] [+] Filled Card Holder Name
+[06:54:19] [+] Filled Card Number
+[06:54:19] [+] Filled CVV
+[06:54:19] [+] Clicked Same as Above Checkbox
+[06:54:19] [+] Filled Billing Address
+[06:54:19] [+] Filled Billing City
+[06:54:19] [+] Filled Billing Zip
+[06:54:19] [+] Clicked Cover Costs Yes
+[06:54:19] [+] Pre-submit screenshot: pre_submit_48.png
+[06:54:21] [+] Clicked Submit Button
+[06:54:39] [+] Result screenshot: result_2264_1776632079314.png
+[06:54:39] Result 48: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:54:39] Progress: 48/61 (SUCCESS)
+[06:54:43] Starting Run 49: 0018
+[06:54:49] [+] Clicked Other Amount Radio
+[06:54:49] [+] Filled Other Amount Value
+[06:54:49] [+] Clicked One Time Donation
+[06:54:49] [+] Filled First Name
+[06:54:49] [+] Filled Last Name
+[06:54:49] [+] Filled Address
+[06:54:49] [+] Filled City
+[06:54:49] [+] Selected State via JS: WA
+[06:54:49] [+] Selected Country via JS: US
+[06:54:49] [+] Filled Zip
+[06:54:49] [+] Filled Email
+[06:54:49] [+] Filled Card Holder Name
+[06:54:49] [+] Filled Card Number
+[06:54:50] [+] Filled CVV
+[06:54:50] [+] Clicked Same as Above Checkbox
+[06:54:50] [+] Filled Billing Address
+[06:54:50] [+] Filled Billing City
+[06:54:50] [+] Filled Billing Zip
+[06:54:50] [+] Clicked Cover Costs Yes
+[06:54:50] [+] Pre-submit screenshot: pre_submit_49.png
+[06:54:51] [+] Clicked Submit Button
+[06:55:09] [+] Result screenshot: result_0018_1776632109459.png
+[06:55:09] Result 49: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:55:09] Progress: 49/61 (SUCCESS)
+[06:55:13] Starting Run 50: 5355
+[06:55:17] [+] Clicked Other Amount Radio
+[06:55:17] [+] Filled Other Amount Value
+[06:55:17] [+] Clicked One Time Donation
+[06:55:17] [+] Filled First Name
+[06:55:17] [+] Filled Last Name
+[06:55:17] [+] Filled Address
+[06:55:17] [+] Filled City
+[06:55:17] [+] Selected State via JS: NY
+[06:55:17] [+] Selected Country via JS: US
+[06:55:17] [+] Filled Zip
+[06:55:17] [+] Filled Email
+[06:55:17] [+] Filled Card Holder Name
+[06:55:17] [+] Filled Card Number
+[06:55:17] [+] Filled CVV
+[06:55:17] [+] Clicked Same as Above Checkbox
+[06:55:17] [+] Filled Billing Address
+[06:55:17] [+] Filled Billing City
+[06:55:17] [+] Filled Billing Zip
+[06:55:17] [+] Clicked Cover Costs Yes
+[06:55:17] [+] Pre-submit screenshot: pre_submit_50.png
+[06:55:19] [+] Clicked Submit Button
+[06:55:37] [+] Result screenshot: result_5355_1776632137259.png
+[06:55:37] Result 50: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:55:37] Progress: 50/61 (SUCCESS)
+[06:55:41] Starting Run 51: 2116
+[06:55:45] [+] Clicked Other Amount Radio
+[06:55:45] [+] Filled Other Amount Value
+[06:55:45] [+] Clicked One Time Donation
+[06:55:45] [+] Filled First Name
+[06:55:45] [+] Filled Last Name
+[06:55:45] [+] Filled Address
+[06:55:45] [+] Filled City
+[06:55:45] [+] Selected State via JS: CA
+[06:55:45] [+] Selected Country via JS: US
+[06:55:45] [+] Filled Zip
+[06:55:45] [+] Filled Email
+[06:55:45] [+] Filled Card Holder Name
+[06:55:45] [+] Filled Card Number
+[06:55:45] [+] Filled CVV
+[06:55:45] [+] Clicked Same as Above Checkbox
+[06:55:45] [+] Filled Billing Address
+[06:55:45] [+] Filled Billing City
+[06:55:45] [+] Filled Billing Zip
+[06:55:45] [+] Clicked Cover Costs Yes
+[06:55:45] [+] Pre-submit screenshot: pre_submit_51.png
+[06:55:47] [+] Clicked Submit Button
+[06:56:05] [+] Result screenshot: result_2116_1776632165047.png
+[06:56:05] Result 51: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:56:05] Progress: 51/61 (SUCCESS)
+[06:56:09] Starting Run 52: 9466
+[06:56:13] [+] Clicked Other Amount Radio
+[06:56:13] [+] Filled Other Amount Value
+[06:56:13] [+] Clicked One Time Donation
+[06:56:13] [+] Filled First Name
+[06:56:13] [+] Filled Last Name
+[06:56:13] [+] Filled Address
+[06:56:13] [+] Filled City
+[06:56:13] [+] Selected State via JS: IL
+[06:56:13] [+] Selected Country via JS: US
+[06:56:13] [+] Filled Zip
+[06:56:13] [+] Filled Email
+[06:56:13] [+] Filled Card Holder Name
+[06:56:13] [+] Filled Card Number
+[06:56:13] [+] Filled CVV
+[06:56:13] [+] Clicked Same as Above Checkbox
+[06:56:13] [+] Filled Billing Address
+[06:56:13] [+] Filled Billing City
+[06:56:13] [+] Filled Billing Zip
+[06:56:13] [+] Clicked Cover Costs Yes
+[06:56:13] [+] Pre-submit screenshot: pre_submit_52.png
+[06:56:14] [+] Clicked Submit Button
+[06:56:33] [+] Result screenshot: result_9466_1776632192913.png
+[06:56:33] Result 52: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:56:33] Progress: 52/61 (SUCCESS)
+[06:56:37] Starting Run 53: 4187
+[06:56:42] [+] Clicked Other Amount Radio
+[06:56:42] [+] Filled Other Amount Value
+[06:56:42] [+] Clicked One Time Donation
+[06:56:42] [+] Filled First Name
+[06:56:42] [+] Filled Last Name
+[06:56:42] [+] Filled Address
+[06:56:42] [+] Filled City
+[06:56:42] [+] Selected State via JS: FL
+[06:56:42] [+] Selected Country via JS: US
+[06:56:42] [+] Filled Zip
+[06:56:42] [+] Filled Email
+[06:56:42] [+] Filled Card Holder Name
+[06:56:42] [+] Filled Card Number
+[06:56:42] [+] Filled CVV
+[06:56:42] [+] Clicked Same as Above Checkbox
+[06:56:42] [+] Filled Billing Address
+[06:56:42] [+] Filled Billing City
+[06:56:42] [+] Filled Billing Zip
+[06:56:42] [+] Clicked Cover Costs Yes
+[06:56:42] [+] Pre-submit screenshot: pre_submit_53.png
+[06:56:43] [+] Clicked Submit Button
+[06:57:02] [+] Result screenshot: result_4187_1776632221894.png
+[06:57:02] Result 53: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:57:02] Progress: 53/61 (SUCCESS)
+[06:57:06] Starting Run 54: 7774
+[06:57:10] [+] Clicked Other Amount Radio
+[06:57:10] [+] Filled Other Amount Value
+[06:57:10] [+] Clicked One Time Donation
+[06:57:10] [+] Filled First Name
+[06:57:10] [+] Filled Last Name
+[06:57:10] [+] Filled Address
+[06:57:10] [+] Filled City
+[06:57:10] [+] Selected State via JS: CA
+[06:57:10] [+] Selected Country via JS: US
+[06:57:10] [+] Filled Zip
+[06:57:10] [+] Filled Email
+[06:57:10] [+] Filled Card Holder Name
+[06:57:10] [+] Filled Card Number
+[06:57:10] [+] Filled CVV
+[06:57:10] [+] Clicked Same as Above Checkbox
+[06:57:10] [+] Filled Billing Address
+[06:57:10] [+] Filled Billing City
+[06:57:10] [+] Filled Billing Zip
+[06:57:10] [+] Clicked Cover Costs Yes
+[06:57:10] [+] Pre-submit screenshot: pre_submit_54.png
+[06:57:12] [+] Clicked Submit Button
+[06:57:30] [+] Result screenshot: result_7774_1776632250252.png
+[06:57:30] Result 54: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:57:30] Progress: 54/61 (SUCCESS)
+[06:57:34] Starting Run 55: 9840
+[06:57:39] [+] Clicked Other Amount Radio
+[06:57:39] [+] Filled Other Amount Value
+[06:57:39] [+] Clicked One Time Donation
+[06:57:39] [+] Filled First Name
+[06:57:39] [+] Filled Last Name
+[06:57:39] [+] Filled Address
+[06:57:39] [+] Filled City
+[06:57:39] [+] Selected State via JS: TX
+[06:57:39] [+] Selected Country via JS: US
+[06:57:39] [+] Filled Zip
+[06:57:39] [+] Filled Email
+[06:57:39] [+] Filled Card Holder Name
+[06:57:39] [+] Filled Card Number
+[06:57:39] [+] Filled CVV
+[06:57:39] [+] Clicked Same as Above Checkbox
+[06:57:39] [+] Filled Billing Address
+[06:57:39] [+] Filled Billing City
+[06:57:39] [+] Filled Billing Zip
+[06:57:39] [+] Clicked Cover Costs Yes
+[06:57:39] [+] Pre-submit screenshot: pre_submit_55.png
+[06:57:41] [+] Clicked Submit Button
+[06:57:59] [+] Result screenshot: result_9840_1776632279049.png
+[06:57:59] Result 55: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:57:59] Progress: 55/61 (SUCCESS)
+[06:58:03] Starting Run 56: 2726
+[06:58:07] [+] Clicked Other Amount Radio
+[06:58:07] [+] Filled Other Amount Value
+[06:58:07] [+] Clicked One Time Donation
+[06:58:07] [+] Filled First Name
+[06:58:07] [+] Filled Last Name
+[06:58:07] [+] Filled Address
+[06:58:07] [+] Filled City
+[06:58:07] [+] Selected State via JS: WA
+[06:58:07] [+] Selected Country via JS: US
+[06:58:08] [+] Filled Zip
+[06:58:08] [+] Filled Email
+[06:58:08] [+] Filled Card Holder Name
+[06:58:08] [+] Filled Card Number
+[06:58:08] [+] Filled CVV
+[06:58:08] [+] Clicked Same as Above Checkbox
+[06:58:08] [+] Filled Billing Address
+[06:58:08] [+] Filled Billing City
+[06:58:08] [+] Filled Billing Zip
+[06:58:08] [+] Clicked Cover Costs Yes
+[06:58:08] [+] Pre-submit screenshot: pre_submit_56.png
+[06:58:09] [+] Clicked Submit Button
+[06:58:27] [+] Result screenshot: result_2726_1776632307352.png
+[06:58:27] Result 56: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:58:27] Progress: 56/61 (SUCCESS)
+[06:58:31] Starting Run 57: 0373
+[06:58:35] [+] Clicked Other Amount Radio
+[06:58:35] [+] Filled Other Amount Value
+[06:58:35] [+] Clicked One Time Donation
+[06:58:35] [+] Filled First Name
+[06:58:35] [+] Filled Last Name
+[06:58:35] [+] Filled Address
+[06:58:35] [+] Filled City
+[06:58:35] [+] Selected State via JS: NY
+[06:58:35] [+] Selected Country via JS: US
+[06:58:35] [+] Filled Zip
+[06:58:35] [+] Filled Email
+[06:58:35] [+] Filled Card Holder Name
+[06:58:35] [+] Filled Card Number
+[06:58:36] [+] Filled CVV
+[06:58:36] [+] Clicked Same as Above Checkbox
+[06:58:36] [+] Filled Billing Address
+[06:58:36] [+] Filled Billing City
+[06:58:36] [+] Filled Billing Zip
+[06:58:36] [+] Clicked Cover Costs Yes
+[06:58:36] [+] Pre-submit screenshot: pre_submit_57.png
+[06:58:37] [+] Clicked Submit Button
+[06:58:55] [+] Result screenshot: result_0373_1776632335374.png
+[06:58:55] Result 57: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:58:55] Progress: 57/61 (SUCCESS)
+[06:58:59] Starting Run 58: 3948
+[06:59:04] [+] Clicked Other Amount Radio
+[06:59:04] [+] Filled Other Amount Value
+[06:59:04] [+] Clicked One Time Donation
+[06:59:04] [+] Filled First Name
+[06:59:04] [+] Filled Last Name
+[06:59:04] [+] Filled Address
+[06:59:04] [+] Filled City
+[06:59:04] [+] Selected State via JS: CA
+[06:59:04] [+] Selected Country via JS: US
+[06:59:04] [+] Filled Zip
+[06:59:04] [+] Filled Email
+[06:59:04] [+] Filled Card Holder Name
+[06:59:04] [+] Filled Card Number
+[06:59:04] [+] Filled CVV
+[06:59:04] [+] Clicked Same as Above Checkbox
+[06:59:04] [+] Filled Billing Address
+[06:59:04] [+] Filled Billing City
+[06:59:04] [+] Filled Billing Zip
+[06:59:04] [+] Clicked Cover Costs Yes
+[06:59:04] [+] Pre-submit screenshot: pre_submit_58.png
+[06:59:06] [+] Clicked Submit Button
+[06:59:24] [+] Result screenshot: result_3948_1776632364057.png
+[06:59:24] Result 58: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:59:24] Progress: 58/61 (SUCCESS)
+[06:59:28] Starting Run 59: 7685
+[06:59:32] [+] Clicked Other Amount Radio
+[06:59:32] [+] Filled Other Amount Value
+[06:59:32] [+] Clicked One Time Donation
+[06:59:32] [+] Filled First Name
+[06:59:32] [+] Filled Last Name
+[06:59:32] [+] Filled Address
+[06:59:32] [+] Filled City
+[06:59:32] [+] Selected State via JS: IL
+[06:59:32] [+] Selected Country via JS: US
+[06:59:32] [+] Filled Zip
+[06:59:32] [+] Filled Email
+[06:59:32] [+] Filled Card Holder Name
+[06:59:32] [+] Filled Card Number
+[06:59:32] [+] Filled CVV
+[06:59:32] [+] Clicked Same as Above Checkbox
+[06:59:32] [+] Filled Billing Address
+[06:59:32] [+] Filled Billing City
+[06:59:32] [+] Filled Billing Zip
+[06:59:32] [+] Clicked Cover Costs Yes
+[06:59:32] [+] Pre-submit screenshot: pre_submit_59.png
+[06:59:33] [+] Clicked Submit Button
+[06:59:51] [+] Result screenshot: result_7685_1776632391597.png
+[06:59:51] Result 59: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[06:59:51] Progress: 59/61 (SUCCESS)
+[06:59:55] Starting Run 60: 4403
+[07:00:00] [+] Clicked Other Amount Radio
+[07:00:00] [+] Filled Other Amount Value
+[07:00:00] [+] Clicked One Time Donation
+[07:00:00] [+] Filled First Name
+[07:00:00] [+] Filled Last Name
+[07:00:00] [+] Filled Address
+[07:00:00] [+] Filled City
+[07:00:00] [+] Selected State via JS: FL
+[07:00:00] [+] Selected Country via JS: US
+[07:00:00] [+] Filled Zip
+[07:00:00] [+] Filled Email
+[07:00:00] [+] Filled Card Holder Name
+[07:00:00] [+] Filled Card Number
+[07:00:00] [+] Filled CVV
+[07:00:00] [+] Clicked Same as Above Checkbox
+[07:00:00] [+] Filled Billing Address
+[07:00:00] [+] Filled Billing City
+[07:00:00] [+] Filled Billing Zip
+[07:00:00] [+] Clicked Cover Costs Yes
+[07:00:00] [+] Pre-submit screenshot: pre_submit_60.png
+[07:00:01] [+] Clicked Submit Button
+[07:00:04] Error in Run 60: page.content: Target page, context or browser has been closed
+[07:00:04] Progress: 60/61 (ERROR)
+[07:00:08] Starting Run 61: 8739
+[07:00:13] [+] Clicked Other Amount Radio
+[07:00:13] [+] Filled Other Amount Value
+[07:00:13] [+] Clicked One Time Donation
+[07:00:13] [+] Filled First Name
+[07:00:13] [+] Filled Last Name
+[07:00:13] [+] Filled Address
+[07:00:13] [+] Filled City
+[07:00:13] [+] Selected State via JS: CA
+[07:00:13] [+] Selected Country via JS: US
+[07:00:13] [+] Filled Zip
+[07:00:13] [+] Filled Email
+[07:00:13] [+] Filled Card Holder Name
+[07:00:13] [+] Filled Card Number
+[07:00:13] [+] Filled CVV
+[07:00:13] [+] Clicked Same as Above Checkbox
+[07:00:13] [+] Filled Billing Address
+[07:00:13] [+] Filled Billing City
+[07:00:13] [+] Filled Billing Zip
+[07:00:13] [+] Clicked Cover Costs Yes
+[07:00:13] [+] Pre-submit screenshot: pre_submit_61.png
+[07:00:14] [+] Clicked Submit Button
+[07:00:32] [+] Result screenshot: result_8739_1776632432579.png
+[07:00:32] Result 61: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:00:32] Progress: 61/61 (SUCCESS)
+[07:00:32] === Session Finished ===
+[07:09:53] === DonorPerfect Automation Started (TS) ===
+[07:09:55] Starting Run 1: 2213
+[07:09:59] [+] Clicked Other Amount Radio
+[07:09:59] [+] Filled Other Amount Value
+[07:09:59] [+] Clicked One Time Donation
+[07:09:59] [+] Filled First Name
+[07:09:59] [+] Filled Last Name
+[07:09:59] [+] Filled Address
+[07:09:59] [+] Filled City
+[07:11:00] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:12:00] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:12:00] [+] Filled Zip
+[07:12:00] [+] Filled Email
+[07:12:00] [+] Filled Card Holder Name
+[07:12:00] [+] Filled Card Number
+[07:12:00] [+] Selected Expiry Month (by value): 02
+[07:12:00] [+] Selected Expiry Year (by value): 32
+[07:12:00] [+] Filled CVV
+[07:12:00] [+] Clicked Same as Above Checkbox
+[07:12:00] [+] Filled Billing Address
+[07:12:00] [+] Filled Billing City
+[07:13:00] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:14:00] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:14:00] [+] Filled Billing Zip
+[07:14:00] [+] Clicked Cover Costs Yes
+[07:14:00] [+] Pre-submit screenshot: pre_submit_1.png
+[07:14:02] [+] Clicked Submit Button
+[07:14:02] [+] Submission performed, waiting for result (up to 60s)...
+[07:14:06] [+] Result screenshot: result_2213_1776633246511.png
+[07:14:06] Result 1: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:14:06] Progress: 1/61 (SUCCESS)
+[07:14:11] Starting Run 2: 7446
+[07:14:16] [+] Clicked Other Amount Radio
+[07:14:16] [+] Filled Other Amount Value
+[07:14:16] [+] Clicked One Time Donation
+[07:14:16] [+] Filled First Name
+[07:14:16] [+] Filled Last Name
+[07:14:16] [+] Filled Address
+[07:14:16] [+] Filled City
+[07:15:10] [!] Failed State (#state_ucDDL): page.selectOption: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    47 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:15:10] [!] Failed Country (#country_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Zip (#zip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Email (#email_ucEmail): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Card Holder Name (#CardHolderName_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Card Number (#CardAccountNum_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Expiry Month (#ExpirationDate_ucExpirationMonth): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Expiry Year (#ExpirationDate_ucExpirationYear): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed CVV (#CVV2_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [-] Failed Same as Above Checkbox (#SetInfo): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Billing Address (#CardHolderAddress_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Billing City (#CardHolderCity_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Billing State (#CardHolderState_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Failed Billing Zip (#CardHolderZip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [-] Failed Cover Costs Yes (#ucRblOptionalContribution_0): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [!] Pre-submit screenshot failed: page.screenshot: Target page, context or browser has been closed
+[07:15:10] [-] Failed Submit Button (#btnConfirm12345): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [-] Failed Fallback Submit (input[value="Next"], button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:15:10] [+] Submission performed, waiting for result (up to 60s)...
+[07:15:10] Error in Run 2: page.content: Target page, context or browser has been closed
+[07:15:10] Progress: 2/61 (ERROR)
+[07:15:14] Starting Run 3: 4055
+[07:15:18] [+] Clicked Other Amount Radio
+[07:15:18] [+] Filled Other Amount Value
+[07:15:18] [+] Clicked One Time Donation
+[07:15:18] [+] Filled First Name
+[07:15:18] [+] Filled Last Name
+[07:15:18] [+] Filled Address
+[07:15:18] [+] Filled City
+[07:16:18] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:17:18] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:17:18] [+] Filled Zip
+[07:17:18] [+] Filled Email
+[07:17:18] [+] Filled Card Holder Name
+[07:17:18] [+] Filled Card Number
+[07:17:18] [+] Selected Expiry Month (by value): 02
+[07:17:18] [+] Selected Expiry Year (by value): 30
+[07:17:18] [+] Filled CVV
+[07:17:18] [+] Clicked Same as Above Checkbox
+[07:17:18] [+] Filled Billing Address
+[07:17:18] [+] Filled Billing City
+[07:18:18] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:19:18] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:19:18] [+] Filled Billing Zip
+[07:19:19] [+] Clicked Cover Costs Yes
+[07:19:19] [+] Pre-submit screenshot: pre_submit_3.png
+[07:19:20] [+] Clicked Submit Button
+[07:19:20] [+] Submission performed, waiting for result (up to 60s)...
+[07:19:25] [+] Result screenshot: result_4055_1776633565741.png
+[07:19:25] Result 3: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:19:25] Progress: 3/61 (SUCCESS)
+[07:19:30] Starting Run 4: 4285
+[07:19:34] [+] Clicked Other Amount Radio
+[07:19:34] [+] Filled Other Amount Value
+[07:19:34] [+] Clicked One Time Donation
+[07:19:34] [+] Filled First Name
+[07:19:34] [+] Filled Last Name
+[07:19:34] [+] Filled Address
+[07:19:34] [+] Filled City
+[07:20:34] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:21:34] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:21:34] [+] Filled Zip
+[07:21:34] [+] Filled Email
+[07:21:34] [+] Filled Card Holder Name
+[07:21:34] [+] Filled Card Number
+[07:21:34] [+] Selected Expiry Month (by value): 10
+[07:21:34] [+] Selected Expiry Year (by value): 29
+[07:21:34] [+] Filled CVV
+[07:21:34] [+] Clicked Same as Above Checkbox
+[07:21:34] [+] Filled Billing Address
+[07:21:34] [+] Filled Billing City
+[07:22:34] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:23:34] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:23:34] [+] Filled Billing Zip
+[07:23:34] [+] Clicked Cover Costs Yes
+[07:23:34] [+] Pre-submit screenshot: pre_submit_4.png
+[07:23:36] [+] Clicked Submit Button
+[07:23:36] [+] Submission performed, waiting for result (up to 60s)...
+[07:23:40] [+] Result screenshot: result_4285_1776633820172.png
+[07:23:40] Result 4: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:23:40] Progress: 4/61 (SUCCESS)
+[07:23:44] Starting Run 5: 5476
+[07:23:50] [+] Clicked Other Amount Radio
+[07:23:50] [+] Filled Other Amount Value
+[07:23:50] [+] Clicked One Time Donation
+[07:23:50] [+] Filled First Name
+[07:23:50] [+] Filled Last Name
+[07:23:50] [+] Filled Address
+[07:23:50] [+] Filled City
+[07:24:50] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:25:50] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    59 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:25:50] [+] Filled Zip
+[07:25:50] [+] Filled Email
+[07:25:50] [+] Filled Card Holder Name
+[07:25:50] [+] Filled Card Number
+[07:25:50] [+] Selected Expiry Month (by value): 08
+[07:25:50] [+] Selected Expiry Year (by value): 29
+[07:25:50] [+] Filled CVV
+[07:25:50] [+] Clicked Same as Above Checkbox
+[07:25:50] [+] Filled Billing Address
+[07:25:50] [+] Filled Billing City
+[07:26:50] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:27:50] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:27:50] [+] Filled Billing Zip
+[07:27:51] [+] Clicked Cover Costs Yes
+[07:27:51] [+] Pre-submit screenshot: pre_submit_5.png
+[07:27:53] [+] Clicked Submit Button
+[07:27:53] [+] Submission performed, waiting for result (up to 60s)...
+[07:27:57] [+] Result screenshot: result_5476_1776634077430.png
+[07:27:57] Result 5: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:27:57] Progress: 5/61 (SUCCESS)
+[07:28:01] Starting Run 6: 4036
+[07:28:06] [+] Clicked Other Amount Radio
+[07:28:06] [+] Filled Other Amount Value
+[07:28:06] [+] Clicked One Time Donation
+[07:28:06] [+] Filled First Name
+[07:28:06] [+] Filled Last Name
+[07:28:06] [+] Filled Address
+[07:28:06] [+] Filled City
+[07:29:06] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:30:06] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:30:06] [+] Filled Zip
+[07:30:06] [+] Filled Email
+[07:30:06] [+] Filled Card Holder Name
+[07:30:06] [+] Filled Card Number
+[07:30:06] [+] Selected Expiry Month (by value): 04
+[07:30:06] [+] Selected Expiry Year (by value): 29
+[07:30:06] [+] Filled CVV
+[07:30:06] [+] Clicked Same as Above Checkbox
+[07:30:06] [+] Filled Billing Address
+[07:30:06] [+] Filled Billing City
+[07:31:06] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    59 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:32:06] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:32:06] [+] Filled Billing Zip
+[07:32:06] [+] Clicked Cover Costs Yes
+[07:32:07] [+] Pre-submit screenshot: pre_submit_6.png
+[07:32:08] [+] Clicked Submit Button
+[07:32:08] [+] Submission performed, waiting for result (up to 60s)...
+[07:32:12] [+] Result screenshot: result_4036_1776634332794.png
+[07:32:12] Result 6: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:32:12] Progress: 6/61 (SUCCESS)
+[07:32:17] Starting Run 7: 7752
+[07:32:19] Error in Run 7: page.goto: Navigation to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE" is interrupted by another navigation to "about:blank"
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "domcontentloaded"[22m
+
+[07:32:19] Progress: 7/61 (ERROR)
+[07:32:23] Starting Run 8: 7673
+[07:32:27] [+] Clicked Other Amount Radio
+[07:32:27] [+] Filled Other Amount Value
+[07:32:27] [+] Clicked One Time Donation
+[07:32:27] [+] Filled First Name
+[07:32:27] [+] Filled Last Name
+[07:32:27] [+] Filled Address
+[07:32:27] [+] Filled City
+[07:33:27] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:34:27] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:34:27] [+] Filled Zip
+[07:34:27] [+] Filled Email
+[07:34:27] [+] Filled Card Holder Name
+[07:34:27] [+] Filled Card Number
+[07:34:27] [+] Selected Expiry Month (by value): 10
+[07:34:27] [+] Selected Expiry Year (by value): 28
+[07:34:27] [+] Filled CVV
+[07:34:27] [+] Clicked Same as Above Checkbox
+[07:34:27] [+] Filled Billing Address
+[07:34:27] [+] Filled Billing City
+[07:35:27] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:36:27] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:36:27] [+] Filled Billing Zip
+[07:36:27] [+] Clicked Cover Costs Yes
+[07:36:27] [+] Pre-submit screenshot: pre_submit_8.png
+[07:36:29] [+] Clicked Submit Button
+[07:36:29] [+] Submission performed, waiting for result (up to 60s)...
+[07:36:34] [+] Result screenshot: result_7673_1776634593900.png
+[07:36:34] Result 8: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:36:34] Progress: 8/61 (SUCCESS)
+[07:36:38] Starting Run 9: 1901
+[07:36:42] [+] Clicked Other Amount Radio
+[07:36:42] [+] Filled Other Amount Value
+[07:36:42] [+] Clicked One Time Donation
+[07:36:42] [+] Filled First Name
+[07:36:42] [+] Filled Last Name
+[07:36:42] [+] Filled Address
+[07:36:42] [+] Filled City
+[07:37:42] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:38:42] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:38:42] [+] Filled Zip
+[07:38:42] [+] Filled Email
+[07:38:42] [+] Filled Card Holder Name
+[07:38:42] [+] Filled Card Number
+[07:38:42] [+] Selected Expiry Month (by value): 06
+[07:38:42] [+] Selected Expiry Year (by value): 28
+[07:38:42] [+] Filled CVV
+[07:38:42] [+] Clicked Same as Above Checkbox
+[07:38:42] [+] Filled Billing Address
+[07:38:42] [+] Filled Billing City
+[07:39:43] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:40:43] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:40:43] [+] Filled Billing Zip
+[07:40:43] [+] Clicked Cover Costs Yes
+[07:40:43] [+] Pre-submit screenshot: pre_submit_9.png
+[07:40:44] [+] Clicked Submit Button
+[07:40:44] [+] Submission performed, waiting for result (up to 60s)...
+[07:40:49] [+] Result screenshot: result_1901_1776634849378.png
+[07:40:49] Result 9: SUCCESS - URL: https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE
+[07:40:49] Progress: 9/61 (SUCCESS)
+[07:40:53] Starting Run 10: 4307
+[07:40:58] [+] Clicked Other Amount Radio
+[07:40:58] [+] Filled Other Amount Value
+[07:40:58] [+] Clicked One Time Donation
+[07:40:58] [+] Filled First Name
+[07:40:58] [+] Filled Last Name
+[07:40:58] [+] Filled Address
+[07:40:58] [+] Filled City
+[07:41:58] [!] Failed State (#state_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#state_ucDDL')[22m
+[2m    - locator resolved to <select id="state_ucDDL" name="state:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:42:58] [!] Failed Country (#country_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#country_ucDDL')[22m
+[2m    - locator resolved to <select id="country_ucDDL" name="country:ucDDL" class="form-control">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:42:58] [+] Filled Zip
+[07:42:58] [+] Filled Email
+[07:42:58] [+] Filled Card Holder Name
+[07:42:58] [+] Filled Card Number
+[07:42:58] [+] Selected Expiry Month (by value): 06
+[07:42:58] [+] Selected Expiry Year (by value): 28
+[07:42:58] [+] Filled CVV
+[07:42:58] [+] Clicked Same as Above Checkbox
+[07:42:58] [+] Filled Billing Address
+[07:42:58] [+] Filled Billing City
+[07:43:58] [!] Failed Billing State (#CardHolderState_ucDDL): page.selectOption: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('#CardHolderState_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderState_ucDDL" name="CardHolderState:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    60 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:44:51] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.selectOption: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('#CardHolderCountry_ucDDL')[22m
+[2m    - locator resolved to <select class="form-control" id="CardHolderCountry_ucDDL" name="CardHolderCountry:ucDDL">…</select>[22m
+[2m  - attempting select option action[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m    - waiting 20ms[22m
+[2m    2 × waiting for element to be visible and enabled[22m
+[2m      - did not find some options[22m
+[2m    - retrying select option action[22m
+[2m      - waiting 100ms[22m
+[2m    46 × waiting for element to be visible and enabled[22m
+[2m       - did not find some options[22m
+[2m     - retrying select option action[22m
+[2m       - waiting 500ms[22m
+
+[07:44:51] [!] Failed Billing Zip (#CardHolderZip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:44:51] [-] Failed Cover Costs Yes (#ucRblOptionalContribution_0): page.waitForSelector: Target page, context or browser has been closed
+[07:44:51] [!] Pre-submit screenshot failed: page.screenshot: Target page, context or browser has been closed
+[07:44:51] [-] Failed Submit Button (#btnConfirm12345): page.waitForSelector: Target page, context or browser has been closed
+[07:44:51] [-] Failed Fallback Submit (input[value="Next"], button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:44:51] [+] Submission performed, waiting for result (up to 60s)...
+[07:44:51] Error in Run 10: page.content: Target page, context or browser has been closed
+[07:44:51] Progress: 10/61 (ERROR)
+[07:44:56] Starting Run 11: 3577
+[07:45:01] [+] Clicked Other Amount Radio
+[07:45:01] [+] Filled Other Amount Value
+[07:45:01] [+] Clicked One Time Donation
+[07:45:01] [+] Filled First Name
+[07:45:01] [+] Filled Last Name
+[07:45:01] [+] Filled Address
+[07:45:01] [+] Filled City
+[07:45:30] [!] Failed State (#state_ucDDL): page.selectOption: Target page, context or browser has been closed
+[07:45:30] [!] Failed Country (#country_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Zip (#zip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Email (#email_ucEmail): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Card Holder Name (#CardHolderName_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Card Number (#CardAccountNum_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Expiry Month (#ExpirationDate_ucExpirationMonth): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Expiry Year (#ExpirationDate_ucExpirationYear): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed CVV (#CVV2_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [-] Failed Same as Above Checkbox (#SetInfo): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Billing Address (#CardHolderAddress_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Billing City (#CardHolderCity_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Billing State (#CardHolderState_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Failed Billing Zip (#CardHolderZip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [-] Failed Cover Costs Yes (#ucRblOptionalContribution_0): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [!] Pre-submit screenshot failed: page.screenshot: Target page, context or browser has been closed
+[07:45:30] [-] Failed Submit Button (#btnConfirm12345): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [-] Failed Fallback Submit (input[value="Next"], button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:45:30] [+] Submission performed, waiting for result (up to 60s)...
+[07:45:30] Error in Run 11: page.content: Target page, context or browser has been closed
+[07:45:30] Critical Error: browserContext.close: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /Users/adminuser/Library/Caches/ms-playwright/chromium-1217/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --user-data-dir=/var/folders/99/rd7r6txn4qv5_htlx6mp7cwm0000gn/T/playwright_chromiumdev_profile-7isI2d --remote-debugging-pipe --no-startup-window
+<launched> pid=62675
+[pid=62675][err] [62675:14450914:0420/071002.952513:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=62675][err] [62675:14450914:0420/071026.342058:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=62675][err] [62675:14450914:0420/071112.899960:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=62675][err] [62675:14450914:0420/071312.236104:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=62675][err] [62675:14450914:0420/071608.286488:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=62675][err] [62675:14450914:0420/072224.435114:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=62675][err] [62675:14450862:0420/074455.953213:ERROR:chrome/browser/ui/views/user_education/impl/browser_user_education_interface_impl.cc:178] Attempting to show IPH IPH_ExtensionsZeroStatePromo before browser initialization complete; IPH will not be shown.
+[pid=62675] <gracefully close start>
+[pid=62675] <forcefully close>
+[pid=62675] <kill>
+[pid=62675] <will force kill>
+[07:45:52] === DonorPerfect Automation Started (TS) ===
+[07:45:55] Starting Run 11: 3577
+[07:46:03] [+] Clicked Other Amount Radio
+[07:46:04] [+] Filled Other Amount Value
+[07:46:04] [+] Clicked One Time Donation
+[07:46:04] [+] Filled First Name
+[07:46:04] [+] Filled Last Name
+[07:46:04] [+] Filled Address
+[07:46:04] [+] Filled City
+[07:46:34] [!] Standard select failed for State, trying JS fallback...
+[07:46:34] [+] Selected State (via JS fallback): FL
+[07:47:04] [!] Standard select failed for Country, trying JS fallback...
+[07:47:04] [+] Selected Country (via JS fallback): US
+[07:47:04] [+] Filled Zip
+[07:47:04] [+] Filled Email
+[07:47:04] [+] Filled Card Holder Name
+[07:47:04] [+] Filled Card Number
+[07:47:04] [+] Selected Expiry Month: 04
+[07:47:04] [+] Selected Expiry Year: 28
+[07:47:04] [+] Filled CVV
+[07:47:04] [+] Clicked Same as Above Checkbox
+[07:47:04] [+] Filled Billing Address
+[07:47:04] [+] Filled Billing City
+[07:47:34] [!] Standard select failed for Billing State, trying JS fallback...
+[07:47:36] [!] Failed Billing State (#CardHolderState_ucDDL): page.evaluate: Execution context was destroyed, most likely because of a navigation
+[07:48:07] [!] Standard select failed for Billing Country, trying JS fallback...
+[07:48:07] [+] Selected Billing Country (via JS fallback): US
+[07:48:07] [+] Filled Billing Zip
+[07:48:07] [+] Clicked Cover Costs Yes
+[07:48:07] [+] Pre-submit screenshot: pre_submit_11.png
+[07:48:07] [ ] Attempting submission...
+[07:48:09] [+] Clicked Submit Button
+[07:48:09] [+] Submission performed, waiting for result (up to 60s)...
+[07:48:39] [!] Timeout/Error waiting for result selector: page.waitForSelector: Target page, context or browser has been closed
+Call log:
+[2m  - waiting for locator('text=/thank you/i, text=/error/i, text=/declined/i, text=/success/i, text=/confirmed/i, text=/failed/i, text=/processor/i') to be visible[22m
+
+[07:48:39] [!] Cannot determine result: Page was closed.
+[07:48:39] Progress: 11/61 (ERROR_CLOSED)
+[07:48:45] Starting Run 12: 3063
+[07:48:52] [+] Clicked Other Amount Radio
+[07:48:53] [+] Filled Other Amount Value
+[07:48:53] [+] Clicked One Time Donation
+[07:48:53] [+] Filled First Name
+[07:48:53] [+] Filled Last Name
+[07:48:53] [+] Filled Address
+[07:48:53] [+] Filled City
+[07:48:57] [!] Standard select failed for State, trying JS fallback...
+[07:48:57] [!] Failed State (#state_ucDDL): page.evaluate: Target page, context or browser has been closed
+[07:48:57] [!] Failed Country (#country_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Zip (#zip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Email (#email_ucEmail): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Card Holder Name (#CardHolderName_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Card Number (#CardAccountNum_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Expiry Month (#ExpirationDate_ucExpirationMonth): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Expiry Year (#ExpirationDate_ucExpirationYear): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed CVV (#CVV2_ucNumericTxt): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [-] Failed Same as Above Checkbox (#SetInfo): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Billing Address (#CardHolderAddress_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Billing City (#CardHolderCity_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Billing State (#CardHolderState_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Billing Country (#CardHolderCountry_ucDDL): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Failed Billing Zip (#CardHolderZip_ucTxtBox): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [-] Failed Cover Costs Yes (#ucRblOptionalContribution_0): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Pre-submit screenshot failed: page.screenshot: Target page, context or browser has been closed
+[07:48:57] [ ] Attempting submission...
+[07:48:57] [-] Failed Submit Button (input[value="Next"], #btnConfirm12345): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [!] Primary submit failed, trying fallback...
+[07:48:57] [-] Failed Fallback Submit (input[value="Next"], button:has-text("Donate"), .btn-submit, input[type="submit"]): page.waitForSelector: Target page, context or browser has been closed
+[07:48:57] [+] Submission performed, waiting for result (up to 60s)...
+[07:48:57] [!] Result detection interrupted: Page closed immediately after submission
+[07:48:57] [!] Cannot determine result: Page was closed.
+[07:48:57] [!] Context cleanup failed: browserContext.close: Target page, context or browser has been closed
+Browser logs:
+
+<launching> /Users/adminuser/Library/Caches/ms-playwright/chromium-1217/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --enable-automation --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --no-sandbox --user-data-dir=/var/folders/99/rd7r6txn4qv5_htlx6mp7cwm0000gn/T/playwright_chromiumdev_profile-WMJGfk --remote-debugging-pipe --no-startup-window
+<launched> pid=44368
+[pid=44368][err] [44368:14640802:0420/074853.096001:ERROR:google_apis/gcm/engine/registration_request.cc:291] Registration response error message: DEPRECATED_ENDPOINT
+[pid=44368] <gracefully close start>
+[07:48:57] Progress: 12/61 (ERROR_CLOSED)
+[07:49:00] === DonorPerfect Automation Started (TS) ===
+[07:49:01] Starting Run 13: 3412
+[07:49:02] Error in Run 13: page.goto: net::ERR_ABORTED; maybe frame was detached?
+Call log:
+[2m  - navigating to "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE", waiting until "domcontentloaded"[22m
+
