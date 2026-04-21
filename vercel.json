@@ -6,6 +6,7 @@
       "maxDuration": 30
     }
   },
+  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/api/(.*)",
