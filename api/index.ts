@@ -7,9 +7,7 @@ import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import { spawn, ChildProcess } from 'child_process';
 import morgan from 'morgan';
-import { put, list } from '@vercel/blob';
 import * as BlobUtils from './blob.js';
-import { v4 as uuidv4 } from 'uuid';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,6 +47,8 @@ if (USE_DB) {
 const BASE_DIR = path.resolve(__dirname, '../');
 const DATA_DIR = path.join(BASE_DIR, 'data');
 const SCREENSHOTS_DIR = path.join(BASE_DIR, 'screenshots');
+const HOSTED_PAGES_DIR = path.join(BASE_DIR, 'src/hosted-pages');
+const HOSTED_PAGES_SCREENSHOTS_DIR = path.join(SCREENSHOTS_DIR, 'hosted-pages');
 const DIST_DIR = path.join(BASE_DIR, 'dist');
 const RESULTS_FILE = path.join(DATA_DIR, 'results.txt');
 const CARDS_FILE = path.join(DATA_DIR, 'cards.txt');
@@ -82,6 +82,33 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 app.use('/screenshots', express.static(SCREENSHOTS_DIR));
+app.use('/pages', express.static(HOSTED_PAGES_DIR));
+
+app.get('/api/hosted-pages', (req, res) => {
+  try {
+    const files = fs.readdirSync(HOSTED_PAGES_DIR)
+      .filter(file => file.endsWith('.html'));
+    
+    const pages = files.map(file => {
+      const name = path.parse(file).name;
+      const screenshotName = `${name}.png`;
+      const screenshotPath = path.join(HOSTED_PAGES_SCREENSHOTS_DIR, screenshotName);
+      
+      return {
+        id: name,
+        name: name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+        url: `/pages/${file}`,
+        screenshot_url: fs.existsSync(screenshotPath) 
+          ? `/screenshots/hosted-pages/${screenshotName}`
+          : `https://via.placeholder.com/400x300?text=${encodeURIComponent(name)}`
+      };
+    });
+    
+    res.json(pages);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to list hosted pages' });
+  }
+});
 
 // Serve Expo web build in production/cloud mode
 if (fs.existsSync(DIST_DIR)) {
@@ -823,71 +850,6 @@ app.post('/api/gateway2/clear', async (req: Request, res: Response) => {
     if (fs.existsSync(GATEWAY2_LOG_FILE)) fs.writeFileSync(GATEWAY2_LOG_FILE, '');
   }
   res.json({ success: true, message: 'Gateway2 cleared' });
-});
-
-
-
-app.get('/api/gateway2/status', async (req: Request, res: Response) => {
-  const isRunning = isProcessAlive(gateway2Process);
-  const results = await getGateway2Results();
-  const remaining = await countCards();
-  res.json({
-    is_running: isRunning,
-    remaining_cards: remaining,
-    total_processed: results.length,
-  });
-});
-
-app.post('/api/gateway2/start', (req: Request, res: Response) => {
-  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2 Checker');
-  if (isProcessAlive(gateway2Process)) {
-    return res.json({ success: false, message: 'Gateway2 Check is already running' });
-  }
-  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'gateway2', 'check.ts');
-  try {
-    gateway2Process = spawn('npx', ['tsx', scriptPath], {
-      cwd: BASE_DIR,
-      detached: true,
-      stdio: 'ignore'
-    });
-    gateway2Process.unref();
-    res.json({ success: true, message: 'Gateway2 processing started', pid: gateway2Process.pid });
-  } catch (e: any) {
-    res.status(500).json({ success: false, message: `Failed to start: ${e.message}` });
-  }
-});
-
-app.post('/api/gateway2/stop', (req: Request, res: Response) => {
-  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2 Checker');
-  if (isProcessAlive(gateway2Process)) {
-    killProcessGroup(gateway2Process);
-    gateway2Process = null;
-    return res.json({ success: true, message: 'Gateway2 processing stopped' });
-  }
-  gateway2Process = null;
-  res.json({ success: false, message: 'Gateway2 processing is not running' });
-});
-
-app.get('/api/gateway2/results', async (req: Request, res: Response) => {
-  const page = parseInt(req.query.page as string) || 1;
-  const limit = parseInt(req.query.limit as string) || 20;
-  const allResults = await getGateway2Results();
-  const start = (page - 1) * limit;
-  const results = allResults.slice(start, start + limit);
-  res.json({
-    results,
-    total: allResults.length,
-    hasMore: start + limit < allResults.length
-  });
-});
-
-app.post('/api/gateway2/clear', async (req: Request, res: Response) => {
-  if (CLOUD_MODE) {
-    await clearTable('gateway2_results');
-  } else {
-    if (fs.existsSync(GATEWAY2_RESULTS_FILE)) fs.writeFileSync(GATEWAY2_RESULTS_FILE, '');
-  }
-  res.json({ success: true, message: 'Gateway2 results cleared' });
 });
 
 app.post('/api/results/clear', async (req: Request, res: Response) => {
