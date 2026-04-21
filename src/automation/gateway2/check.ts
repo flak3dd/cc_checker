@@ -5,10 +5,12 @@ import { fileURLToPath } from 'url';
 import { config } from './config';
 
 // --- Configuration & Paths ---
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// @ts-ignore
+const __filename_resolved = typeof __filename !== 'undefined' ? __filename : fileURLToPath(import.meta.url);
+// @ts-ignore
+const __dirname_resolved = typeof __dirname !== 'undefined' ? __dirname : path.dirname(__filename_resolved);
 
-const ROOT_DIR = __dirname;
+const ROOT_DIR = __dirname_resolved;
 const DATA_DIR = path.join(ROOT_DIR, 'data');
 const SCREENSHOTS_DIR = path.join(ROOT_DIR, 'screenshots', 'gateway2');
 const LOG_FILE = path.join(DATA_DIR, 'gateway2_log.txt');
@@ -17,19 +19,27 @@ const CARDS_FILE = path.join(DATA_DIR, 'cards.txt');
 const PROGRESS_FILE = path.join(DATA_DIR, 'gateway2_progress.txt');
 
 // Ensure directories exist
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-if (!fs.existsSync(SCREENSHOTS_DIR)) fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
+export function ensureDirs() {
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+    if (!fs.existsSync(SCREENSHOTS_DIR)) fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
+}
+
+if (typeof process !== 'undefined' && process.argv[1] === __filename_resolved) {
+    ensureDirs();
+}
 
 // --- Helper Functions ---
 
-function logToFile(msg: string): void {
+export function logToFile(msg: string): void {
     const timestamp = new Date().toLocaleTimeString('en-GB', { hour12: false });
     const formatted = `[${timestamp}] ${msg}`;
     console.log(formatted);
-    fs.appendFileSync(LOG_FILE, formatted + "\n");
+    if (fs.existsSync(DATA_DIR)) {
+        fs.appendFileSync(LOG_FILE, formatted + "\n");
+    }
 }
 
-async function safeFill(page: Page, selector: string, value: string, fieldName: string): Promise<boolean> {
+export async function safeFill(page: Page, selector: string, value: string, fieldName: string): Promise<boolean> {
     try {
         await page.waitForSelector(selector, { timeout: config.timeouts.waitForSelector });
         // Ensure field is cleared before filling
@@ -43,7 +53,7 @@ async function safeFill(page: Page, selector: string, value: string, fieldName: 
     }
 }
 
-async function safeSelect(page: Page, selector: string, value: string, fieldName: string): Promise<boolean> {
+export async function safeSelect(page: Page, selector: string, value: string, fieldName: string): Promise<boolean> {
     try {
         await page.waitForSelector(selector, { state: 'visible', timeout: config.timeouts.waitForSelector });
         
@@ -105,7 +115,7 @@ async function safeSelect(page: Page, selector: string, value: string, fieldName
     }
 }
 
-async function safeClick(page: Page, selector: string, buttonName: string): Promise<boolean> {
+export async function safeClick(page: Page, selector: string, buttonName: string): Promise<boolean> {
     try {
         await page.waitForSelector(selector, { timeout: config.timeouts.waitForClick });
         await page.click(selector, { force: true });
@@ -220,7 +230,7 @@ const TEST_DONORS = [
     }
 ];
 
-async function processForm(page: Page, cardLine: string, donor: any, index: number): Promise<string> {
+export async function processForm(page: Page, cardLine: string, donor: any, index: number): Promise<string> {
     const parts = cardLine.split('|');
     if (parts.length < 3) return "SKIP";
 
@@ -484,6 +494,8 @@ async function main() {
     logToFile("=== Session Finished ===");
 }
 
-main().catch(err => {
-    logToFile(`Critical Error: ${err.message}`);
-});
+if (typeof process !== 'undefined' && process.argv[1] === __filename_resolved) {
+    main().catch(err => {
+        logToFile(`Critical Error: ${err.message}`);
+    });
+}

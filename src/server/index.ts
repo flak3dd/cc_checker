@@ -62,6 +62,7 @@ const WA_PENDING_PAYMENT_FILE = path.join(DATA_DIR, 'wa_pending_payment.json');
 const WA_SELECTED_CARD_FILE = path.join(DATA_DIR, 'wa_selected_card.json');
 const WA_CHECKOUT_TERM_FILE = path.join(DATA_DIR, 'wa_checkout_term.json');
 const GATEWAY2_LOG_FILE = path.join(DATA_DIR, 'gateway2_log.txt');
+const GATEWAY2_CRAWL_LOG_FILE = path.join(DATA_DIR, 'gateway2_crawl_log.txt');
 const GATEWAY2_RESULTS_FILE = path.join(DATA_DIR, 'gateway2_results.txt');
 
 // Ensure directories exist
@@ -122,6 +123,7 @@ let ccCheckProcess: ChildProcess | null = null;
 let plateCheckProcess: ChildProcess | null = null;
 let plateCheckoutProcess: ChildProcess | null = null;
 let gateway2Process: ChildProcess | null = null;
+let gateway2CrawlProcess: ChildProcess | null = null;
 
 // Clean up any stale state files from previous runs on startup
 const STALE_FILES = [
@@ -248,7 +250,7 @@ async function getCheckoutTerm(): Promise<number> {
   try { return JSON.parse(fs.readFileSync(WA_CHECKOUT_TERM_FILE, 'utf-8')).term; } catch { return 12; }
 }
 
-async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc' | 'logs_gateway2', message: string) {
+async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc' | 'logs_gateway2' | 'logs_gateway2_crawl', message: string) {
   if (CLOUD_MODE) {
     if (table === 'logs_wa') {
       await sql`INSERT INTO logs_wa (message) VALUES (${message})`;
@@ -258,9 +260,15 @@ async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc' | 'l
       await sql`INSERT INTO logs_cc (message) VALUES (${message})`;
     } else if (table === 'logs_gateway2') {
       await sql`INSERT INTO logs_gateway2 (message) VALUES (${message})`;
+    } else if (table === 'logs_gateway2_crawl') {
+      await sql`INSERT INTO logs_gateway2_crawl (message) VALUES (${message})`;
     }
   } else {
-    const logFile = table === 'logs_wa' ? LOG_FILE : (table === 'logs_wa_checkout' ? WA_CHECKOUT_LOG : table === 'logs_gateway2' ? GATEWAY2_LOG_FILE : path.join(DATA_DIR, 'cc_log.txt'));
+    const logFile = table === 'logs_wa' ? LOG_FILE : 
+                   table === 'logs_wa_checkout' ? WA_CHECKOUT_LOG : 
+                   table === 'logs_gateway2' ? GATEWAY2_LOG_FILE :
+                   table === 'logs_gateway2_crawl' ? GATEWAY2_CRAWL_LOG_FILE :
+                   path.join(DATA_DIR, 'cc_log.txt');
     fs.appendFileSync(logFile, `[${new Date().toISOString()}] ${message}\n`);
   }
 }
@@ -454,12 +462,14 @@ app.get('/api/logs/stream', async (req: Request, res: Response) => {
     'wa-checkout': 'logs_wa_checkout',
     'cc': 'logs_cc',
     'gateway2': 'logs_gateway2',
+    'gateway2-crawl': 'logs_gateway2_crawl',
   };
-const pathMap: Record<string, string> = {
+  const pathMap: Record<string, string> = {
     'wa': LOG_FILE,
     'wa-checkout': WA_CHECKOUT_LOG,
     'cc': path.join(DATA_DIR, 'cc_log.txt'),
     'gateway2': GATEWAY2_LOG_FILE,
+    'gateway2-crawl': GATEWAY2_CRAWL_LOG_FILE,
   };
 
   const table = tableMap[fileParam];
@@ -795,7 +805,41 @@ app.post('/api/gateway2/clear', async (req: Request, res: Response) => {
   res.json({ success: true, message: 'Gateway2 cleared' });
 });
 
+// Gateway2 Crawl Endpoints
+app.get('/api/gateway2/crawl/status', async (req: Request, res: Response) => {
+  const isRunning = isProcessAlive(gateway2CrawlProcess);
+  res.json({ is_running: isRunning });
+});
 
+app.post('/api/gateway2/crawl/start', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2 Crawler');
+  if (isProcessAlive(gateway2CrawlProcess)) {
+    return res.json({ success: false, message: 'Gateway2 Crawl is already running' });
+  }
+  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'gateway2', 'crawl.ts');
+  try {
+    gateway2CrawlProcess = spawn('npx', ['tsx', scriptPath], {
+      cwd: BASE_DIR,
+      detached: true,
+      stdio: 'ignore'
+    });
+    gateway2CrawlProcess.unref();
+    res.json({ success: true, message: 'Gateway2 Crawl started', pid: gateway2CrawlProcess.pid });
+  } catch (e: any) {
+    res.status(500).json({ success: false, message: `Failed to start: ${e.message}` });
+  }
+});
+
+app.post('/api/gateway2/crawl/stop', (req: Request, res: Response) => {
+  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2 Crawler');
+  if (isProcessAlive(gateway2CrawlProcess)) {
+    killProcessGroup(gateway2CrawlProcess);
+    gateway2CrawlProcess = null;
+    return res.json({ success: true, message: 'Gateway2 Crawl stopped' });
+  }
+  gateway2CrawlProcess = null;
+  res.json({ success: false, message: 'Gateway2 Crawl is not running' });
+});
 
 app.get('/api/gateway2/status', async (req: Request, res: Response) => {
   const isRunning = isProcessAlive(gateway2Process);

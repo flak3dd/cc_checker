@@ -3,16 +3,25 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const ROOT_DIR = path.resolve(__dirname, '../../../');
+// @ts-ignore
+const __filename_resolved = typeof __filename !== 'undefined' ? __filename : fileURLToPath(import.meta.url);
+// @ts-ignore
+const __dirname_resolved = typeof __dirname !== 'undefined' ? __dirname : path.dirname(__filename_resolved);
+
+const ROOT_DIR = path.resolve(__dirname_resolved, '../../../');
 const DATA_DIR = path.join(ROOT_DIR, 'data');
 const LOG_FILE = path.join(DATA_DIR, 'gateway2_crawl_log.txt');
 const TARGET_URLS_FILE = path.join(DATA_DIR, 'found_urls.txt');
 
 // Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
+export function ensureDataDir() {
+    if (!fs.existsSync(DATA_DIR)) {
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+}
+
+if (typeof process !== 'undefined' && process.argv[1] === __filename_resolved) {
+    ensureDataDir();
 }
 
 // ==========================================
@@ -45,7 +54,7 @@ export interface Config {
 // CONFIGURATION
 // ==========================================
 export const CONFIG: Config = {
-    mode: 'checker', // 'discovery' or 'checker'
+    mode: 'discovery', // 'discovery' or 'checker' - defaults to discovery for server spawn
     engines: {
         google: "https://www.google.com/search?q={query}&num=20",
         bing: "https://www.bing.com/search?q={query}&count=20"

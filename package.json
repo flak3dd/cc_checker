@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
+    "test": "npx mocha",
     "dev": "bash start.sh",
     "start": "npx tsx api/index.ts",
     "android": "expo run:android",

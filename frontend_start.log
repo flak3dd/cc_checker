@@ -12,5 +12,93 @@ To clear this warning, run:
 
 Waiting on http://localhost:8085
 Logs for your project will appear below.
-Web Bundled 480ms node_modules/expo-router/entry.js (1424 modules)
+Web Bundled 1167ms node_modules/expo-router/entry.js (1391 modules)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 71ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+| expo-router/babel is deprecated in favor of babel-preset-expo in SDK 50. To fix the issue, remove "expo-router/babel" from "plugins" in your babel.config.js file.
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 71ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 91ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Unable to resolve "@/hooks/useThemeColor" from "src/mobile/components/PageMargins.tsx"
+[0m [90m 1 |[39m [36mimport[39m { [33mView[39m[33m,[39m [33mViewStyle[39m[33m,[39m [33mStyleProp[39m } [36mfrom[39m [32m'react-native'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { useThemeColor } [36mfrom[39m [32m'@/hooks/useThemeColor'[39m[33m;[39m [90m// adjust path as needed[39m
+ [90m   |[39m                                [31m[1m^[22m[39m
+ [90m 3 |[39m [36mimport[39m { spacing } [36mfrom[39m [32m'@/theme/spacing'[39m[33m;[39m [90m// adjust path as needed[39m
+ [90m 4 |[39m
+ [90m 5 |[39m type [33mPageMarginsProps[39m [33m=[39m {[0m
+
+Import stack:
+
+ src/mobile/components/PageMargins.tsx
+ | import "@/hooks/useThemeColor"
+
+ src/mobile/app/_layout.tsx
+ | import "@/components/PageMargins"
+
+ src/mobile/app (require.context)
+
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 120ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 77ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 269ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 43ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 82ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Unable to resolve "react-native-paper/lib/typescript/styles/themes/v2/colors" from "src/mobile/components/PageMargins.tsx"
+[0m [90m 4 |[39m [36mimport[39m { useThemeColor } [36mfrom[39m [32m'@/hooks/use-theme-color'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { spacing } [36mfrom[39m [32m'@/constants/theme'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { black } [36mfrom[39m [32m'react-native-paper/lib/typescript/styles/themes/v2/colors'[39m[33m;[39m
+ [90m   |[39m                        [31m[1m^[22m[39m
+ [90m 7 |[39m
+ [90m 8 |[39m type [33mPageMarginsProps[39m [33m=[39m {
+ [90m 9 |[39m   style[33m?[39m[33m:[39m [33mStyleProp[39m[33m<[39m[33mViewStyle[39m[33m>[39m[33m;[39m[0m
+
+Import stack:
+
+ src/mobile/components/PageMargins.tsx
+ | import "react-native-paper/lib/typescript/styles/themes/v2/colors"
+
+ src/mobile/app/_layout.tsx
+ | import "@/components/PageMargins"
+
+ src/mobile/app (require.context)
+
+Web Bundling failed 13ms node_modules/expo-router/entry.js (1 module)
+Unable to resolve "react-native-paper/lib/typescript/styles/themes/v2/colors" from "src/mobile/components/PageMargins.tsx"
+[0m [90m 4 |[39m [36mimport[39m { useThemeColor } [36mfrom[39m [32m'@/hooks/use-theme-color'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { spacing } [36mfrom[39m [32m'@/constants/theme'[39m[33m;[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { black } [36mfrom[39m [32m'react-native-paper/lib/typescript/styles/themes/v2/colors'[39m[33m;[39m
+ [90m   |[39m                        [31m[1m^[22m[39m
+ [90m 7 |[39m
+ [90m 8 |[39m type [33mPageMarginsProps[39m [33m=[39m {
+ [90m 9 |[39m   style[33m?[39m[33m:[39m [33mStyleProp[39m[33m<[39m[33mViewStyle[39m[33m>[39m[33m;[39m[0m
+
+Import stack:
+
+ src/mobile/components/PageMargins.tsx
+ | import "react-native-paper/lib/typescript/styles/themes/v2/colors"
+
+ src/mobile/app/_layout.tsx
+ | import "@/components/PageMargins"
+
+ src/mobile/app (require.context)
+
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 82ms node_modules/expo-router/entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+Web node_modules/expo-router/entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 175ms node_modules/expo-router/entry.js (1 module)
  LOG  [web] Logs will appear in the browser console

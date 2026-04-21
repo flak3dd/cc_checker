@@ -141,17 +141,14 @@ export const HeroStats: React.FC<HeroStatsProps> = ({
         <View style={styles.heroDivider} />
 
         <View style={styles.heroRight}>
-          <TimeBarChart
-            data={analytics?.time_buckets?.map((b: any) => ({
-              timestamp: b.timestamp,
-              value: b.success,
-              label: new Date(b.timestamp).toLocaleTimeString('en-US', { 
-                hour: 'numeric', 
-                minute: '2-digit' 
-              }),
-            })) || []}
-            color={colors.success}
-            maxBars={8}
+<PieChart
+            data={[
+              { label: 'Success', value: passCount, color: colors.success },
+              { label: 'Fail', value: failCount, color: colors.danger },
+              { label: 'Unknown', value: totalChecked - passCount - failCount, color: colors.textMuted },
+            ]}
+            size={80}
+            showLegend={false}
           />
 
           {/* Stats summary */}
