@@ -24,6 +24,16 @@ export async function getBlobText(key: string): Promise<string | null> {
   }
 }
 
+export async function getBlobUrl(key: string): Promise<string | null> {
+  try {
+    const b = await list({ prefix: key, limit: 1 });
+    const blob = b.blobs.find(b => b.pathname === key) || b.blobs[0];
+    return blob ? blob.url : null;
+  } catch {
+    return null;
+  }
+}
+
 export async function listBlobKeys(prefix: string): Promise<string[]> {
   const blobs = await list({ prefix });
   return blobs.blobs.map(b => b.pathname);

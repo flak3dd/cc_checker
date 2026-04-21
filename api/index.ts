@@ -43,6 +43,94 @@ if (USE_DB) {
   sql = undefined;
 }
 
+// Database Initialization
+async function initDb() {
+  if (!sql) return;
+  try {
+    // wa_hits table
+    await sql`CREATE TABLE IF NOT EXISTS wa_hits (
+      id SERIAL PRIMARY KEY,
+      plate TEXT,
+      status TEXT,
+      screenshot_path TEXT,
+      timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    )`;
+
+    // wa_checkout_results table
+    await sql`CREATE TABLE IF NOT EXISTS wa_checkout_results (
+      id SERIAL PRIMARY KEY,
+      plate TEXT,
+      status TEXT,
+      amount TEXT,
+      reference TEXT,
+      timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    )`;
+
+    // Logs tables
+    const logTables = ['logs_wa', 'logs_wa_checkout', 'logs_cc', 'logs_gateway2'];
+    for (const table of logTables) {
+      await sql.unsafe(`CREATE TABLE IF NOT EXISTS ${table} (
+        id SERIAL PRIMARY KEY,
+        message TEXT,
+        timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+      )`);
+    }
+
+    // gateway2_results
+    await sql`CREATE TABLE IF NOT EXISTS gateway2_results (
+      id SERIAL PRIMARY KEY,
+      card_number TEXT,
+      mm TEXT,
+      yy TEXT,
+      cvv TEXT,
+      status TEXT,
+      screenshot_path TEXT,
+      timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+    )`;
+
+    // json state tables
+    const stateTables = ['pending_payment', 'selected_card', 'checkout_term'];
+    for (const table of stateTables) {
+       // use a single row for state
+       if (table === 'checkout_term') {
+         await sql.unsafe(`CREATE TABLE IF NOT EXISTS ${table} (
+           id SERIAL PRIMARY KEY,
+           term INTEGER,
+           updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+         )`);
+       } else {
+         await sql.unsafe(`CREATE TABLE IF NOT EXISTS ${table} (
+           id SERIAL PRIMARY KEY,
+           data JSONB,
+           updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+         )`);
+       }
+    }
+
+    // plates and cards for queueing
+    await sql`CREATE TABLE IF NOT EXISTS plates (
+      id SERIAL PRIMARY KEY,
+      plate TEXT UNIQUE
+    )`;
+
+    await sql`CREATE TABLE IF NOT EXISTS cards (
+      id SERIAL PRIMARY KEY,
+      card_number TEXT,
+      mm TEXT,
+      yy TEXT,
+      cvv TEXT
+    )`;
+
+    console.log('Database initialized successfully');
+  } catch (error) {
+    console.error('Database initialization failed:', error);
+  }
+}
+
+if (USE_DB) {
+  initDb();
+}
+
 // Paths
 const BASE_DIR = path.resolve(__dirname, '../');
 const DATA_DIR = path.join(BASE_DIR, 'data');
@@ -81,6 +169,55 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(morgan('dev'));
+
+// Custom screenshot handler for Vercel Blob support
+app.get('/screenshots/:folder/:filename', async (req, res) => {
+  const { folder, filename } = req.params;
+  const localPath = path.join(SCREENSHOTS_DIR, folder, filename);
+
+  if (fs.existsSync(localPath)) {
+    return res.sendFile(localPath);
+  }
+
+  if (CLOUD_MODE) {
+    try {
+      const blobPath = `screenshots/${folder}/${filename}`;
+      const url = await BlobUtils.getBlobUrl(blobPath);
+      if (url) {
+        return res.redirect(url);
+      }
+    } catch (e) {
+      console.error('Error fetching screenshot from blob:', e);
+    }
+  }
+
+  res.status(404).send('Screenshot not found');
+});
+
+// For top-level screenshots
+app.get('/screenshots/:filename', async (req, res) => {
+  const { filename } = req.params;
+  const localPath = path.join(SCREENSHOTS_DIR, filename);
+
+  if (fs.existsSync(localPath)) {
+    return res.sendFile(localPath);
+  }
+
+  if (CLOUD_MODE) {
+    try {
+      const blobPath = `screenshots/${filename}`;
+      const url = await BlobUtils.getBlobUrl(blobPath);
+      if (url) {
+        return res.redirect(url);
+      }
+    } catch (e) {
+      console.error('Error fetching screenshot from blob:', e);
+    }
+  }
+
+  res.status(404).send('Screenshot not found');
+});
+
 app.use('/screenshots', express.static(SCREENSHOTS_DIR));
 app.use('/pages', express.static(HOSTED_PAGES_DIR));
 
