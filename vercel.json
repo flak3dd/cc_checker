@@ -6,18 +6,22 @@
       "maxDuration": 30
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/api/(.*)",
+      "destination": "/api/index.ts"
     },
     {
-      "src": "/screenshots/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/screenshots/(.*)",
+      "destination": "/api/index.ts"
     },
     {
-      "src": "/pages/(.*)",
-      "dest": "/api/index.ts"
+      "source": "/pages/(.*)",
+      "destination": "/api/index.ts"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

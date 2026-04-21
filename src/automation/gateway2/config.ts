@@ -1,7 +1,7 @@
 export const config = {
     form: {
         url: "https://wl.donorperfect.net/weblink/FormSingleNM.aspx?formId=45&id=4&name=E348891QE",
-        amount: "5",
+        amount: "5"
     },
     selectors: {
         firstName: '#first_name_ucTxtBox',
@@ -24,8 +24,6 @@ export const config = {
         billingCountry: '#CardHolderCountry_ucDDL',
         billingZip: '#CardHolderZip_ucTxtBox',
         coverCosts: '#ucRblOptionalContribution_0',
-        paymentSection: '#section_cc',
-        paymentErrorContainer: '#\\32',
         otherAmountRadio: 'input[id*="GPOtherAmountRbl"]',
         otherAmountInput: 'input[id*="GPOtherAmountTxt"]',
         oneTimeGift: 'input[id*="rdoGiftPledgeType_0"]',

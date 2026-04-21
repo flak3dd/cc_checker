@@ -7,9 +7,7 @@ import * as fs from 'fs';
 import { fileURLToPath } from 'url';
 import { spawn, ChildProcess } from 'child_process';
 import morgan from 'morgan';
-import { put, list } from '@vercel/blob';
 import * as BlobUtils from './blob.js';
-import { v4 as uuidv4 } from 'uuid';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,6 +47,8 @@ if (USE_DB) {
 const BASE_DIR = path.resolve(__dirname, '../../');
 const DATA_DIR = path.join(BASE_DIR, 'data');
 const SCREENSHOTS_DIR = path.join(BASE_DIR, 'screenshots');
+const HOSTED_PAGES_DIR = path.join(BASE_DIR, 'src/hosted-pages');
+const HOSTED_PAGES_SCREENSHOTS_DIR = path.join(SCREENSHOTS_DIR, 'hosted-pages');
 const DIST_DIR = path.join(BASE_DIR, 'dist');
 const RESULTS_FILE = path.join(DATA_DIR, 'results.txt');
 const CARDS_FILE = path.join(DATA_DIR, 'cards.txt');
@@ -62,12 +62,13 @@ const WA_PENDING_PAYMENT_FILE = path.join(DATA_DIR, 'wa_pending_payment.json');
 const WA_SELECTED_CARD_FILE = path.join(DATA_DIR, 'wa_selected_card.json');
 const WA_CHECKOUT_TERM_FILE = path.join(DATA_DIR, 'wa_checkout_term.json');
 const GATEWAY2_LOG_FILE = path.join(DATA_DIR, 'gateway2_log.txt');
-const GATEWAY2_CRAWL_LOG_FILE = path.join(DATA_DIR, 'gateway2_crawl_log.txt');
 const GATEWAY2_RESULTS_FILE = path.join(DATA_DIR, 'gateway2_results.txt');
 
 // Ensure directories exist
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(SCREENSHOTS_DIR)) fs.mkdirSync(SCREENSHOTS_DIR, { recursive: true });
+if (!fs.existsSync(HOSTED_PAGES_SCREENSHOTS_DIR)) fs.mkdirSync(HOSTED_PAGES_SCREENSHOTS_DIR, { recursive: true });
+if (!fs.existsSync(HOSTED_PAGES_DIR)) fs.mkdirSync(HOSTED_PAGES_DIR, { recursive: true });
 
 // No schema init for Blob
 
@@ -81,6 +82,33 @@ app.use(cors({
 app.use(express.json());
 app.use(morgan('dev'));
 app.use('/screenshots', express.static(SCREENSHOTS_DIR));
+app.use('/pages', express.static(HOSTED_PAGES_DIR));
+
+app.get('/api/hosted-pages', (req, res) => {
+  try {
+    const files = fs.readdirSync(HOSTED_PAGES_DIR)
+      .filter(file => file.endsWith('.html'));
+    
+    const pages = files.map(file => {
+      const name = path.parse(file).name;
+      const screenshotName = `${name}.png`;
+      const screenshotPath = path.join(HOSTED_PAGES_SCREENSHOTS_DIR, screenshotName);
+      
+      return {
+        id: name,
+        name: name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+        url: `/pages/${file}`,
+        screenshot_url: fs.existsSync(screenshotPath) 
+          ? `/screenshots/hosted-pages/${screenshotName}`
+          : `https://via.placeholder.com/400x300?text=${encodeURIComponent(name)}`
+      };
+    });
+    
+    res.json(pages);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to list hosted pages' });
+  }
+});
 
 // Serve Expo web build in production/cloud mode
 if (fs.existsSync(DIST_DIR)) {
@@ -94,7 +122,6 @@ let ccCheckProcess: ChildProcess | null = null;
 let plateCheckProcess: ChildProcess | null = null;
 let plateCheckoutProcess: ChildProcess | null = null;
 let gateway2Process: ChildProcess | null = null;
-let gateway2CrawlProcess: ChildProcess | null = null;
 
 // Clean up any stale state files from previous runs on startup
 const STALE_FILES = [
@@ -221,7 +248,7 @@ async function getCheckoutTerm(): Promise<number> {
   try { return JSON.parse(fs.readFileSync(WA_CHECKOUT_TERM_FILE, 'utf-8')).term; } catch { return 12; }
 }
 
-async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc' | 'logs_gateway2' | 'logs_gateway2_crawl', message: string) {
+async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc' | 'logs_gateway2', message: string) {
   if (CLOUD_MODE) {
     if (table === 'logs_wa') {
       await sql`INSERT INTO logs_wa (message) VALUES (${message})`;
@@ -231,11 +258,9 @@ async function logMessage(table: 'logs_wa' | 'logs_wa_checkout' | 'logs_cc' | 'l
       await sql`INSERT INTO logs_cc (message) VALUES (${message})`;
     } else if (table === 'logs_gateway2') {
       await sql`INSERT INTO logs_gateway2 (message) VALUES (${message})`;
-    } else if (table === 'logs_gateway2_crawl') {
-      await sql`INSERT INTO logs_gateway2_crawl (message) VALUES (${message})`;
     }
   } else {
-    const logFile = table === 'logs_wa' ? LOG_FILE : (table === 'logs_wa_checkout' ? WA_CHECKOUT_LOG : table === 'logs_gateway2' ? GATEWAY2_LOG_FILE : table === 'logs_gateway2_crawl' ? GATEWAY2_CRAWL_LOG_FILE : path.join(DATA_DIR, 'cc_log.txt'));
+    const logFile = table === 'logs_wa' ? LOG_FILE : (table === 'logs_wa_checkout' ? WA_CHECKOUT_LOG : table === 'logs_gateway2' ? GATEWAY2_LOG_FILE : path.join(DATA_DIR, 'cc_log.txt'));
     fs.appendFileSync(logFile, `[${new Date().toISOString()}] ${message}\n`);
   }
 }
@@ -429,16 +454,12 @@ app.get('/api/logs/stream', async (req: Request, res: Response) => {
     'wa-checkout': 'logs_wa_checkout',
     'cc': 'logs_cc',
     'gateway2': 'logs_gateway2',
-    'gateway2-crawl': 'logs_gateway2_crawl',
-    'results': 'logs_results',
   };
 const pathMap: Record<string, string> = {
     'wa': LOG_FILE,
     'wa-checkout': WA_CHECKOUT_LOG,
     'cc': path.join(DATA_DIR, 'cc_log.txt'),
     'gateway2': GATEWAY2_LOG_FILE,
-    'gateway2-crawl': GATEWAY2_CRAWL_LOG_FILE,
-    'results': RESULTS_FILE,
   };
 
   const table = tableMap[fileParam];
@@ -448,13 +469,7 @@ const pathMap: Record<string, string> = {
     console.log(`SSE ${fileParam} connected - Invalid file for cloud mode`);
     return res.status(400).json({ error: 'Invalid file for cloud mode' });
   }
-
-  if (!CLOUD_MODE && (!targetFile || targetFile === 'undefined')) {
-    console.log(`SSE ${fileParam} connected - Invalid log file requested (targetFile is ${targetFile})`);
-    return res.status(400).json({ error: 'Invalid log file' });
-  }
-
-  if (!CLOUD_MODE && !fs.existsSync(targetFile)) {
+  if (!CLOUD_MODE && (!targetFile || !fs.existsSync(targetFile))) {
     console.log(`SSE ${fileParam} connected - Creating missing log file: ${targetFile}`);
     fs.writeFileSync(targetFile, '');
   }
@@ -754,42 +769,6 @@ app.post('/api/gateway2/stop', (req: Request, res: Response) => {
   }
   gateway2Process = null;
   res.json({ success: false, message: 'Gateway2 is not running' });
-});
-
-app.get('/api/gateway2/crawl/status', async (req: Request, res: Response) => {
-  const isRunning = isProcessAlive(gateway2CrawlProcess);
-  res.json({
-    is_running: isRunning,
-  });
-});
-
-app.post('/api/gateway2/crawl/start', (req: Request, res: Response) => {
-  if (DISABLE_AUTOMATION) return cloudModeError(res, 'Gateway2 Crawler');
-  if (isProcessAlive(gateway2CrawlProcess)) {
-    return res.json({ success: false, message: 'Gateway2 Crawler is already running' });
-  }
-  const scriptPath = path.join(BASE_DIR, 'src', 'automation', 'gateway2', 'crawl.ts');
-  try {
-    gateway2CrawlProcess = spawn('npx', ['tsx', scriptPath], {
-      cwd: BASE_DIR,
-      detached: true,
-      stdio: 'ignore'
-    });
-    gateway2CrawlProcess.unref();
-    res.json({ success: true, message: 'Gateway2 Crawler started', pid: gateway2CrawlProcess.pid });
-  } catch (e: any) {
-    res.status(500).json({ success: false, message: e.message });
-  }
-});
-
-app.post('/api/gateway2/crawl/stop', (req: Request, res: Response) => {
-  if (isProcessAlive(gateway2CrawlProcess)) {
-    killProcessGroup(gateway2CrawlProcess);
-    gateway2CrawlProcess = null;
-    return res.json({ success: true, message: 'Gateway2 Crawler stopped' });
-  }
-  gateway2CrawlProcess = null;
-  res.json({ success: false, message: 'Gateway2 Crawler is not running' });
 });
 
 app.get('/api/gateway2/results', async (req: Request, res: Response) => {

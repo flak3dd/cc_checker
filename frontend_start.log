@@ -12,5 +12,5 @@ To clear this warning, run:
 
 Waiting on http://localhost:8085
 Logs for your project will appear below.
-Web Bundled 510ms node_modules/expo-router/entry.js (1372 modules)
+Web Bundled 480ms node_modules/expo-router/entry.js (1424 modules)
  LOG  [web] Logs will appear in the browser console
